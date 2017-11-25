@@ -1,0 +1,681 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="axis" xml:space="preserve">
+    <value>Axis</value>
+  </data>
+  <data name="brand" xml:space="preserve">
+    <value>Brand</value>
+  </data>
+  <data name="catalog_title" xml:space="preserve">
+    <value>Lumag Catalogue</value>
+  </data>
+  <data name="catalog_title_cv" xml:space="preserve">
+    <value>CATALOGUE OF BRAKE LININGS AND BRAKE PADS FOR COMMERCIAL VEHICLES</value>
+  </data>
+  <data name="close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="copyright" xml:space="preserve">
+    <value>All rights reserved.</value>
+  </data>
+  <data name="cross_number" xml:space="preserve">
+    <value>Cross number</value>
+  </data>
+  <data name="description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="design_execution_by" xml:space="preserve">
+    <value>Design and execution by</value>
+  </data>
+  <data name="details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="diameter" xml:space="preserve">
+    <value>⌀</value>
+  </data>
+  <data name="dimensions" xml:space="preserve">
+    <value>Dimensions</value>
+  </data>
+  <data name="disc" xml:space="preserve">
+    <value>Disc</value>
+  </data>
+  <data name="disc_no" xml:space="preserve">
+    <value>Disc No</value>
+  </data>
+  <data name="downloadpdf" xml:space="preserve">
+    <value>Download the PDF Catalogue</value>
+  </data>
+  <data name="download_for_android" xml:space="preserve">
+    <value>Download application for Android</value>
+  </data>
+  <data name="download_for_ios" xml:space="preserve">
+    <value>Download application for  iOS</value>
+  </data>
+  <data name="download_for_wp" xml:space="preserve">
+    <value>Download application for Windows Phone</value>
+  </data>
+  <data name="enter_brand" xml:space="preserve">
+    <value>Brand</value>
+  </data>
+  <data name="enter_diameter" xml:space="preserve">
+    <value>Diameter</value>
+  </data>
+  <data name="enter_filter" xml:space="preserve">
+    <value>Enter filter</value>
+  </data>
+  <data name="enter_height" xml:space="preserve">
+    <value>Height</value>
+  </data>
+  <data name="enter_model" xml:space="preserve">
+    <value>Model</value>
+  </data>
+  <data name="enter_rivets" xml:space="preserve">
+    <value>Rivets</value>
+  </data>
+  <data name="enter_serie" xml:space="preserve">
+    <value>Serie</value>
+  </data>
+  <data name="enter_text_search" xml:space="preserve">
+    <value>Enter a number from another system here</value>
+  </data>
+  <data name="enter_wva" xml:space="preserve">
+    <value>WVA</value>
+  </data>
+  <data name="enter_year" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="front" xml:space="preserve">
+    <value>Front</value>
+  </data>
+  <data name="front_rear" xml:space="preserve">
+    <value>F/R</value>
+  </data>
+  <data name="go_website" xml:space="preserve">
+    <value>Go to website</value>
+  </data>
+  <data name="h" xml:space="preserve">
+    <value>H</value>
+  </data>
+  <data name="height" xml:space="preserve">
+    <value>Height</value>
+  </data>
+  <data name="jaw" xml:space="preserve">
+    <value>Shoe</value>
+  </data>
+  <data name="km" xml:space="preserve">
+    <value>KM</value>
+  </data>
+  <data name="kw" xml:space="preserve">
+    <value>KW</value>
+  </data>
+  <data name="lumag_no" xml:space="preserve">
+    <value>Lumag No.</value>
+  </data>
+  <data name="mobile_catalog" xml:space="preserve">
+    <value>online catalogs available in your phone</value>
+  </data>
+  <data name="model" xml:space="preserve">
+    <value>Model</value>
+  </data>
+  <data name="mounting_kit_instruction" xml:space="preserve">
+    <value>* Mounting kit 01TK540001 must be installed</value>
+  </data>
+  <data name="oe" xml:space="preserve">
+    <value>OE</value>
+  </data>
+  <data name="of" xml:space="preserve">
+    <value>of</value>
+  </data>
+  <data name="pad" xml:space="preserve">
+    <value>Pad</value>
+  </data>
+  <data name="pad_no" xml:space="preserve">
+    <value>Pad No</value>
+  </data>
+  <data name="page" xml:space="preserve">
+    <value>Page</value>
+  </data>
+  <data name="power" xml:space="preserve">
+    <value>Power</value>
+  </data>
+  <data name="qtt" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="rear" xml:space="preserve">
+    <value>Rear</value>
+  </data>
+  <data name="remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="rivets" xml:space="preserve">
+    <value>Rivets</value>
+  </data>
+  <data name="rivets_qtt" xml:space="preserve">
+    <value>Rivets quantity</value>
+  </data>
+  <data name="rivets_total" xml:space="preserve">
+    <value>Rivets total</value>
+  </data>
+  <data name="search" xml:space="preserve">
+    <value>Enter Lumag number / cross</value>
+  </data>
+  <data name="searchapp" xml:space="preserve">
+    <value>Search by application</value>
+  </data>
+  <data name="searchbtn" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="searchdet" xml:space="preserve">
+    <value>Search by details</value>
+  </data>
+  <data name="serie" xml:space="preserve">
+    <value>Serie</value>
+  </data>
+  <data name="set_no" xml:space="preserve">
+    <value>Set No</value>
+  </data>
+  <data name="size" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="stroke" xml:space="preserve">
+    <value>Stroke</value>
+  </data>
+  <data name="system" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="t" xml:space="preserve">
+    <value>T</value>
+  </data>
+  <data name="type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="w" xml:space="preserve">
+    <value>W</value>
+  </data>
+  <data name="wedge" xml:space="preserve">
+    <value>Wedge</value>
+  </data>
+  <data name="width" xml:space="preserve">
+    <value>Width</value>
+  </data>
+  <data name="wva" xml:space="preserve">
+    <value>WVA</value>
+  </data>
+  <data name="year" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="years" xml:space="preserve">
+    <value>Years of production</value>
+  </data>
+  <data name="up" xml:space="preserve">
+    <value>PAGE UP</value>
+  </data>
+  <data name="filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="modalsearch" xml:space="preserve">
+    <value>Type to search in list</value>
+  </data>
+  <data name="brakesystem" xml:space="preserve">
+    <value>Brake system</value>
+  </data>
+  <data name="career" xml:space="preserve">
+    <value>Career</value>
+  </data>
+  <data name="catalog" xml:space="preserve">
+    <value>catalogue</value>
+  </data>
+  <data name="coll" xml:space="preserve">
+    <value>Collaboration with FEMFM and TUV</value>
+  </data>
+  <data name="collandcareer" xml:space="preserve">
+    <value>Career</value>
+  </data>
+  <data name="company" xml:space="preserve">
+    <value>Company</value>
+  </data>
+  <data name="contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="csr" xml:space="preserve">
+    <value>CSR</value>
+  </data>
+  <data name="customer" xml:space="preserve">
+    <value>Customer service Department</value>
+  </data>
+  <data name="eu" xml:space="preserve">
+    <value>EU funds</value>
+  </data>
+  <data name="goback" xml:space="preserve">
+    <value>Go back</value>
+  </data>
+  <data name="history" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="methods" xml:space="preserve">
+    <value>Management methods</value>
+  </data>
+  <data name="news" xml:space="preserve">
+    <value>News</value>
+  </data>
+  <data name="offer" xml:space="preserve">
+    <value>Offer</value>
+  </data>
+  <data name="office" xml:space="preserve">
+    <value>Office</value>
+  </data>
+  <data name="ourprod" xml:space="preserve">
+    <value>Our products</value>
+  </data>
+  <data name="poland" xml:space="preserve">
+    <value>Poland</value>
+  </data>
+  <data name="qualityprod" xml:space="preserve">
+    <value>Product quality</value>
+  </data>
+  <data name="range" xml:space="preserve">
+    <value>Range of operations</value>
+  </data>
+  <data name="reception" xml:space="preserve">
+    <value>Main reception</value>
+  </data>
+  <data name="searching" xml:space="preserve">
+    <value>Searching</value>
+  </data>
+  <data name="supp" xml:space="preserve">
+    <value>Suppliers</value>
+  </data>
+  <data name="tech" xml:space="preserve">
+    <value>Technology and development</value>
+  </data>
+  <data name="thickness" xml:space="preserve">
+    <value>Thickness</value>
+  </data>
+  <data name="uk" xml:space="preserve">
+    <value>United Kingdom</value>
+  </data>
+  <data name="values" xml:space="preserve">
+    <value>Our values</value>
+  </data>
+  <data name="applyfil" xml:space="preserve">
+    <value>Apply a search filter to see results</value>
+  </data>
+  <data name="baseserie" xml:space="preserve">
+    <value>Base serie</value>
+  </data>
+  <data name="choosebrand" xml:space="preserve">
+    <value>Choose brand </value>
+  </data>
+  <data name="currently" xml:space="preserve">
+    <value>Currently there are</value>
+  </data>
+  <data name="filterby" xml:space="preserve">
+    <value>Filter by</value>
+  </data>
+  <data name="indb" xml:space="preserve">
+    <value>items in the database.</value>
+  </data>
+  <data name="options" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="trailer" xml:space="preserve">
+    <value>TRAILER, SEMITRAILER</value>
+  </data>
+  <data name="choosemodel" xml:space="preserve">
+    <value>Choose model </value>
+  </data>
+  <data name="chooseserie" xml:space="preserve">
+    <value>Choose serie </value>
+  </data>
+  <data name="nopdf" xml:space="preserve">
+    <value>There is no PDF yet.</value>
+  </data>
+  <data name="noRecordsFound" xml:space="preserve">
+    <value>No records found in the database.</value>
+  </data>
+  <data name="cleanFilters" xml:space="preserve">
+    <value>Clean filters</value>
+  </data>
+  <data name="searchByCrosses" xml:space="preserve">
+    <value>Cross reference search</value>
+  </data>
+  <data name="cross" xml:space="preserve">
+    <value>Number from another manufacturer</value>
+  </data>
+  <data name="drumdiameter" xml:space="preserve">
+    <value>Drum diameter</value>
+  </data>
+  <data name="add_product" xml:space="preserve">
+    <value>Add product</value>
+  </data>
+  <data name="create_new_cross" xml:space="preserve">
+    <value>Create new cross</value>
+  </data>
+  <data name="create_new_prod" xml:space="preserve">
+    <value>Create new product</value>
+  </data>
+  <data name="crosses" xml:space="preserve">
+    <value>Crosses</value>
+  </data>
+  <data name="date_from" xml:space="preserve">
+    <value>Date From</value>
+  </data>
+  <data name="date_to" xml:space="preserve">
+    <value>Date To</value>
+  </data>
+  <data name="delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="drumdiameter1" xml:space="preserve">
+    <value>Drum diameter</value>
+  </data>
+  <data name="edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="exportToCSV" xml:space="preserve">
+    <value>Export to CSV</value>
+  </data>
+  <data name="products" xml:space="preserve">
+    <value>Products</value>
+  </data>
+  <data name="wva_desc" xml:space="preserve">
+    <value>WVA description</value>
+  </data>
+  <data name="wva_det" xml:space="preserve">
+    <value>WVA details</value>
+  </data>
+  <data name="wva_det_qty" xml:space="preserve">
+    <value>WVA details quantity</value>
+  </data>
+  <data name="account_settings" xml:space="preserve">
+    <value>Change your account settings</value>
+  </data>
+  <data name="change_password" xml:space="preserve">
+    <value>Change Password Form</value>
+  </data>
+  <data name="change_password_button" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="cross_brand_name" xml:space="preserve">
+    <value>Cross brand name</value>
+  </data>
+  <data name="cross_brand_number" xml:space="preserve">
+    <value>Cross brand number</value>
+  </data>
+  <data name="delete_confirm" xml:space="preserve">
+    <value>Are you sure you want to delete this?</value>
+  </data>
+  <data name="password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="users" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="back_to_list" xml:space="preserve">
+    <value>Back to List</value>
+  </data>
+  <data name="confirm_password" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="create_user" xml:space="preserve">
+    <value>Create new user</value>
+  </data>
+  <data name="new_password" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="old_password" xml:space="preserve">
+    <value>Old passowrd</value>
+  </data>
+  <data name="save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="want_delete" xml:space="preserve">
+    <value>Are you sure you want to delete this?</value>
+  </data>
+  <data name="choose" xml:space="preserve">
+    <value>Choose</value>
+  </data>
+  <data name="add_photo" xml:space="preserve">
+    <value>Add photo</value>
+  </data>
+  <data name="product_name" xml:space="preserve">
+    <value>Produkt</value>
+  </data>
+  <data name="upload" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="add_new_photo" xml:space="preserve">
+    <value>Add new photo</value>
+  </data>
+  <data name="choose_name" xml:space="preserve">
+    <value>Choose name of product</value>
+  </data>
+  <data name="choose_type" xml:space="preserve">
+    <value>Choose type of photo</value>
+  </data>
+  <data name="go_to_list" xml:space="preserve">
+    <value>Go to list of pictures</value>
+  </data>
+  <data name="list_of_pictures" xml:space="preserve">
+    <value>List of pictures</value>
+  </data>
+  <data name="pict_of_components" xml:space="preserve">
+    <value>Picture of components</value>
+  </data>
+  <data name="pict_of_components_with_box" xml:space="preserve">
+    <value>Picture of component with box</value>
+  </data>
+  <data name="rivets_qtt_in_kit" xml:space="preserve">
+    <value>Rivets quantity in kit</value>
+  </data>
+  <data name="schema" xml:space="preserve">
+    <value>Schema</value>
+  </data>
+  <data name="rivets_qtt_for_product" xml:space="preserve">
+    <value>Rivets quantity for product</value>
+  </data>
+  <data name="application" xml:space="preserve">
+    <value>Application</value>
+  </data>
+  <data name="back_to_indicators" xml:space="preserve">
+    <value>Back to table</value>
+  </data>
+  <data name="indicators" xml:space="preserve">
+    <value>Indicators</value>
+  </data>
+  <data name="length" xml:space="preserve">
+    <value>Length [mm]</value>
+  </data>
+  <data name="qtt_in_kit" xml:space="preserve">
+    <value>Quantity in kit</value>
+  </data>
+  <data name="brake_lining" xml:space="preserve">
+    <value>Brake lining</value>
+  </data>
+  <data name="brake_pad" xml:space="preserve">
+    <value>Brake pad</value>
+  </data>
+  <data name="choose_lumag" xml:space="preserve">
+    <value>Choose Lumag No for product</value>
+  </data>
+  <data name="choose_wva" xml:space="preserve">
+    <value>Choose WVA number for product</value>
+  </data>
+  <data name="create_a_new_account" xml:space="preserve">
+    <value>Create a new account.</value>
+  </data>
+  <data name="log_in" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="log_in_btn" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="passwords_do_not_match" xml:space="preserve">
+    <value>The password and confirmation password do not match.</value>
+  </data>
+  <data name="photo_of_components" xml:space="preserve">
+    <value>Photo of components (choose Lumag No.)</value>
+  </data>
+  <data name="photo_of_kit" xml:space="preserve">
+    <value>Photo of components and kit (choose Lumag No.)</value>
+  </data>
+  <data name="register_btn" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="registration" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="remember_me" xml:space="preserve">
+    <value>Remember me?</value>
+  </data>
+  <data name="schema_lumag" xml:space="preserve">
+    <value>Schema (choose Lumag No.)</value>
+  </data>
+  <data name="schema_wva" xml:space="preserve">
+    <value>Schema (choose WVA number)</value>
+  </data>
+  <data name="use_account_to_log_in" xml:space="preserve">
+    <value>Use a local account to log in.</value>
+  </data>
+  <data name="download_xls_products" xml:space="preserve">
+    <value>Export products data to XLS</value>
+  </data>
+  <data name="date_from_format" xml:space="preserve">
+    <value>Date from (DD-MM-YYYY)</value>
+  </data>
+  <data name="date_to_format" xml:space="preserve">
+    <value>Date to (DD-MM-YYYY)</value>
+  </data>
+  <data name="download_xls_cross" xml:space="preserve">
+    <value>Export crosses to XLS</value>
+  </data>
+  <data name="pictures" xml:space="preserve">
+    <value>Pictures</value>
+  </data>
+  <data name="wear_indicator" xml:space="preserve">
+    <value>Wear indicator for brake pad</value>
+  </data>
+</root>

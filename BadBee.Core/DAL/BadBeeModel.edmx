@@ -1,0 +1,570 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BadBeeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BadBee">
+          <Key>
+            <PropertyRef Name="BadBeeId" />
+          </Key>
+          <Property Name="BadBeeId" Type="int" Nullable="false" />
+          <Property Name="BadBeeNo" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="WvaId" Type="int" />
+          <Property Name="SystemId" Type="int" />
+          <Property Name="DimensionId" Type="int" />
+          <Property Name="FR" Type="nvarchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Brand">
+          <Key>
+            <PropertyRef Name="BrandId" />
+          </Key>
+          <Property Name="BrandId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dimension">
+          <Key>
+            <PropertyRef Name="DimensionId" />
+          </Key>
+          <Property Name="DimensionId" Type="int" Nullable="false" />
+          <Property Name="Width" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Heigth" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Length" Type="decimal" Precision="5" Scale="2" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ModelId" Type="int" Nullable="false" />
+          <Property Name="BadBeeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Model">
+          <Key>
+            <PropertyRef Name="ModelId" />
+          </Key>
+          <Property Name="ModelId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SerieId" Type="int" Nullable="false" />
+          <Property Name="YearId" Type="int" />
+        </EntityType>
+        <EntityType Name="Serie">
+          <Key>
+            <PropertyRef Name="SerieId" />
+          </Key>
+          <Property Name="SerieId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="BrandId" Type="int" />
+        </EntityType>
+        <EntityType Name="Systems">
+          <Key>
+            <PropertyRef Name="SystemId" />
+          </Key>
+          <Property Name="SystemId" Type="int" Nullable="false" />
+          <Property Name="Abbreviation" Type="nvarchar" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Wva">
+          <Key>
+            <PropertyRef Name="WvaId" />
+          </Key>
+          <Property Name="WvaId" Type="int" Nullable="false" />
+          <Property Name="WvaNo" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Year">
+          <Key>
+            <PropertyRef Name="YearId" />
+          </Key>
+          <Property Name="YearId" Type="int" Nullable="false" />
+          <Property Name="DateFrom" Type="date" />
+          <Property Name="DateTo" Type="date" />
+        </EntityType>
+        <Association Name="FK_BadBee_Dimension">
+          <End Role="Dimension" Type="Self.Dimension" Multiplicity="0..1" />
+          <End Role="BadBee" Type="Self.BadBee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dimension">
+              <PropertyRef Name="DimensionId" />
+            </Principal>
+            <Dependent Role="BadBee">
+              <PropertyRef Name="DimensionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BadBee_System">
+          <End Role="Systems" Type="Self.Systems" Multiplicity="0..1" />
+          <End Role="BadBee" Type="Self.BadBee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Systems">
+              <PropertyRef Name="SystemId" />
+            </Principal>
+            <Dependent Role="BadBee">
+              <PropertyRef Name="SystemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BadBee_Wva">
+          <End Role="Wva" Type="Self.Wva" Multiplicity="0..1" />
+          <End Role="BadBee" Type="Self.BadBee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wva">
+              <PropertyRef Name="WvaId" />
+            </Principal>
+            <Dependent Role="BadBee">
+              <PropertyRef Name="WvaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_BadBee">
+          <End Role="BadBee" Type="Self.BadBee" Multiplicity="1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BadBee">
+              <PropertyRef Name="BadBeeId" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="BadBeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_Model">
+          <End Role="Model" Type="Self.Model" Multiplicity="1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Model">
+              <PropertyRef Name="ModelId" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="ModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Model_Serie">
+          <End Role="Serie" Type="Self.Serie" Multiplicity="1" />
+          <End Role="Model" Type="Self.Model" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Serie">
+              <PropertyRef Name="SerieId" />
+            </Principal>
+            <Dependent Role="Model">
+              <PropertyRef Name="SerieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Model_Year">
+          <End Role="Year" Type="Self.Year" Multiplicity="0..1" />
+          <End Role="Model" Type="Self.Model" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Year">
+              <PropertyRef Name="YearId" />
+            </Principal>
+            <Dependent Role="Model">
+              <PropertyRef Name="YearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Serie_Brand">
+          <End Role="Brand" Type="Self.Brand" Multiplicity="0..1" />
+          <End Role="Serie" Type="Self.Serie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand">
+              <PropertyRef Name="BrandId" />
+            </Principal>
+            <Dependent Role="Serie">
+              <PropertyRef Name="BrandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BadBeeModelStoreContainer">
+          <EntitySet Name="BadBee" EntityType="Self.BadBee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dimension" EntityType="Self.Dimension" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Item" EntityType="Self.Item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Model" EntityType="Self.Model" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Serie" EntityType="Self.Serie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Systems" EntityType="Self.Systems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wva" EntityType="Self.Wva" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Year" EntityType="Self.Year" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BadBee_Dimension" Association="Self.FK_BadBee_Dimension">
+            <End Role="Dimension" EntitySet="Dimension" />
+            <End Role="BadBee" EntitySet="BadBee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BadBee_System" Association="Self.FK_BadBee_System">
+            <End Role="Systems" EntitySet="Systems" />
+            <End Role="BadBee" EntitySet="BadBee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BadBee_Wva" Association="Self.FK_BadBee_Wva">
+            <End Role="Wva" EntitySet="Wva" />
+            <End Role="BadBee" EntitySet="BadBee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_BadBee" Association="Self.FK_Item_BadBee">
+            <End Role="BadBee" EntitySet="BadBee" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_Model" Association="Self.FK_Item_Model">
+            <End Role="Model" EntitySet="Model" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Model_Serie" Association="Self.FK_Model_Serie">
+            <End Role="Serie" EntitySet="Serie" />
+            <End Role="Model" EntitySet="Model" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Model_Year" Association="Self.FK_Model_Year">
+            <End Role="Year" EntitySet="Year" />
+            <End Role="Model" EntitySet="Model" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Serie_Brand" Association="Self.FK_Serie_Brand">
+            <End Role="Brand" EntitySet="Brand" />
+            <End Role="Serie" EntitySet="Serie" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BadBeeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BadBee">
+          <Key>
+            <PropertyRef Name="BadBeeId" />
+          </Key>
+          <Property Name="BadBeeId" Type="Int32" Nullable="false" />
+          <Property Name="BadBeeNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="WvaId" Type="Int32" />
+          <Property Name="SystemId" Type="Int32" />
+          <Property Name="DimensionId" Type="Int32" />
+          <Property Name="FR" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Dimension" Relationship="Self.FK_BadBee_Dimension" FromRole="BadBee" ToRole="Dimension" />
+          <NavigationProperty Name="Systems" Relationship="Self.FK_BadBee_System" FromRole="BadBee" ToRole="Systems" />
+          <NavigationProperty Name="Wva" Relationship="Self.FK_BadBee_Wva" FromRole="BadBee" ToRole="Wva" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_Item_BadBee" FromRole="BadBee" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="Brand">
+          <Key>
+            <PropertyRef Name="BrandId" />
+          </Key>
+          <Property Name="BrandId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Serie" Relationship="Self.FK_Serie_Brand" FromRole="Brand" ToRole="Serie" />
+        </EntityType>
+        <EntityType Name="Dimension">
+          <Key>
+            <PropertyRef Name="DimensionId" />
+          </Key>
+          <Property Name="DimensionId" Type="Int32" Nullable="false" />
+          <Property Name="Width" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Heigth" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Length" Type="Decimal" Precision="5" Scale="2" />
+          <NavigationProperty Name="BadBee" Relationship="Self.FK_BadBee_Dimension" FromRole="Dimension" ToRole="BadBee" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ModelId" Type="Int32" Nullable="false" />
+          <Property Name="BadBeeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BadBee" Relationship="Self.FK_Item_BadBee" FromRole="Item" ToRole="BadBee" />
+          <NavigationProperty Name="Model" Relationship="Self.FK_Item_Model" FromRole="Item" ToRole="Model" />
+        </EntityType>
+        <EntityType Name="Model">
+          <Key>
+            <PropertyRef Name="ModelId" />
+          </Key>
+          <Property Name="ModelId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SerieId" Type="Int32" Nullable="false" />
+          <Property Name="YearId" Type="Int32" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_Item_Model" FromRole="Model" ToRole="Item" />
+          <NavigationProperty Name="Serie" Relationship="Self.FK_Model_Serie" FromRole="Model" ToRole="Serie" />
+          <NavigationProperty Name="Year" Relationship="Self.FK_Model_Year" FromRole="Model" ToRole="Year" />
+        </EntityType>
+        <EntityType Name="Serie">
+          <Key>
+            <PropertyRef Name="SerieId" />
+          </Key>
+          <Property Name="SerieId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BrandId" Type="Int32" />
+          <NavigationProperty Name="Brand" Relationship="Self.FK_Serie_Brand" FromRole="Serie" ToRole="Brand" />
+          <NavigationProperty Name="Model" Relationship="Self.FK_Model_Serie" FromRole="Serie" ToRole="Model" />
+        </EntityType>
+        <EntityType Name="Systems">
+          <Key>
+            <PropertyRef Name="SystemId" />
+          </Key>
+          <Property Name="SystemId" Type="Int32" Nullable="false" />
+          <Property Name="Abbreviation" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="BadBee" Relationship="Self.FK_BadBee_System" FromRole="Systems" ToRole="BadBee" />
+        </EntityType>
+        <EntityType Name="Wva">
+          <Key>
+            <PropertyRef Name="WvaId" />
+          </Key>
+          <Property Name="WvaId" Type="Int32" Nullable="false" />
+          <Property Name="WvaNo" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BadBee" Relationship="Self.FK_BadBee_Wva" FromRole="Wva" ToRole="BadBee" />
+        </EntityType>
+        <EntityType Name="Year">
+          <Key>
+            <PropertyRef Name="YearId" />
+          </Key>
+          <Property Name="YearId" Type="Int32" Nullable="false" />
+          <Property Name="DateFrom" Type="DateTime" Precision="0" />
+          <Property Name="DateTo" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Model" Relationship="Self.FK_Model_Year" FromRole="Year" ToRole="Model" />
+        </EntityType>
+        <Association Name="FK_BadBee_Dimension">
+          <End Role="Dimension" Type="Self.Dimension" Multiplicity="0..1" />
+          <End Role="BadBee" Type="Self.BadBee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dimension">
+              <PropertyRef Name="DimensionId" />
+            </Principal>
+            <Dependent Role="BadBee">
+              <PropertyRef Name="DimensionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BadBee_System">
+          <End Role="Systems" Type="Self.Systems" Multiplicity="0..1" />
+          <End Role="BadBee" Type="Self.BadBee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Systems">
+              <PropertyRef Name="SystemId" />
+            </Principal>
+            <Dependent Role="BadBee">
+              <PropertyRef Name="SystemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BadBee_Wva">
+          <End Role="Wva" Type="Self.Wva" Multiplicity="0..1" />
+          <End Role="BadBee" Type="Self.BadBee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wva">
+              <PropertyRef Name="WvaId" />
+            </Principal>
+            <Dependent Role="BadBee">
+              <PropertyRef Name="WvaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_BadBee">
+          <End Role="BadBee" Type="Self.BadBee" Multiplicity="1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BadBee">
+              <PropertyRef Name="BadBeeId" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="BadBeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Serie_Brand">
+          <End Role="Brand" Type="Self.Brand" Multiplicity="0..1" />
+          <End Role="Serie" Type="Self.Serie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand">
+              <PropertyRef Name="BrandId" />
+            </Principal>
+            <Dependent Role="Serie">
+              <PropertyRef Name="BrandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_Model">
+          <End Role="Model" Type="Self.Model" Multiplicity="1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Model">
+              <PropertyRef Name="ModelId" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="ModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Model_Serie">
+          <End Role="Serie" Type="Self.Serie" Multiplicity="1" />
+          <End Role="Model" Type="Self.Model" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Serie">
+              <PropertyRef Name="SerieId" />
+            </Principal>
+            <Dependent Role="Model">
+              <PropertyRef Name="SerieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Model_Year">
+          <End Role="Year" Type="Self.Year" Multiplicity="0..1" />
+          <End Role="Model" Type="Self.Model" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Year">
+              <PropertyRef Name="YearId" />
+            </Principal>
+            <Dependent Role="Model">
+              <PropertyRef Name="YearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BadBeeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BadBee" EntityType="Self.BadBee" />
+          <EntitySet Name="Brand" EntityType="Self.Brand" />
+          <EntitySet Name="Dimension" EntityType="Self.Dimension" />
+          <EntitySet Name="Item" EntityType="Self.Item" />
+          <EntitySet Name="Model" EntityType="Self.Model" />
+          <EntitySet Name="Serie" EntityType="Self.Serie" />
+          <EntitySet Name="Systems" EntityType="Self.Systems" />
+          <EntitySet Name="Wva" EntityType="Self.Wva" />
+          <EntitySet Name="Year" EntityType="Self.Year" />
+          <AssociationSet Name="FK_BadBee_Dimension" Association="Self.FK_BadBee_Dimension">
+            <End Role="Dimension" EntitySet="Dimension" />
+            <End Role="BadBee" EntitySet="BadBee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BadBee_System" Association="Self.FK_BadBee_System">
+            <End Role="Systems" EntitySet="Systems" />
+            <End Role="BadBee" EntitySet="BadBee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BadBee_Wva" Association="Self.FK_BadBee_Wva">
+            <End Role="Wva" EntitySet="Wva" />
+            <End Role="BadBee" EntitySet="BadBee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_BadBee" Association="Self.FK_Item_BadBee">
+            <End Role="BadBee" EntitySet="BadBee" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Serie_Brand" Association="Self.FK_Serie_Brand">
+            <End Role="Brand" EntitySet="Brand" />
+            <End Role="Serie" EntitySet="Serie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_Model" Association="Self.FK_Item_Model">
+            <End Role="Model" EntitySet="Model" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Model_Serie" Association="Self.FK_Model_Serie">
+            <End Role="Serie" EntitySet="Serie" />
+            <End Role="Model" EntitySet="Model" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Model_Year" Association="Self.FK_Model_Year">
+            <End Role="Year" EntitySet="Year" />
+            <End Role="Model" EntitySet="Model" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BadBeeModelStoreContainer" CdmEntityContainer="BadBeeEntities">
+          <EntitySetMapping Name="BadBee">
+            <EntityTypeMapping TypeName="BadBeeModel.BadBee">
+              <MappingFragment StoreEntitySet="BadBee">
+                <ScalarProperty Name="BadBeeId" ColumnName="BadBeeId" />
+                <ScalarProperty Name="BadBeeNo" ColumnName="BadBeeNo" />
+                <ScalarProperty Name="WvaId" ColumnName="WvaId" />
+                <ScalarProperty Name="SystemId" ColumnName="SystemId" />
+                <ScalarProperty Name="DimensionId" ColumnName="DimensionId" />
+                <ScalarProperty Name="FR" ColumnName="FR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Brand">
+            <EntityTypeMapping TypeName="BadBeeModel.Brand">
+              <MappingFragment StoreEntitySet="Brand">
+                <ScalarProperty Name="BrandId" ColumnName="BrandId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dimension">
+            <EntityTypeMapping TypeName="BadBeeModel.Dimension">
+              <MappingFragment StoreEntitySet="Dimension">
+                <ScalarProperty Name="DimensionId" ColumnName="DimensionId" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Heigth" ColumnName="Heigth" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Item">
+            <EntityTypeMapping TypeName="BadBeeModel.Item">
+              <MappingFragment StoreEntitySet="Item">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ModelId" ColumnName="ModelId" />
+                <ScalarProperty Name="BadBeeId" ColumnName="BadBeeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Model">
+            <EntityTypeMapping TypeName="BadBeeModel.Model">
+              <MappingFragment StoreEntitySet="Model">
+                <ScalarProperty Name="ModelId" ColumnName="ModelId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SerieId" ColumnName="SerieId" />
+                <ScalarProperty Name="YearId" ColumnName="YearId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Serie">
+            <EntityTypeMapping TypeName="BadBeeModel.Serie">
+              <MappingFragment StoreEntitySet="Serie">
+                <ScalarProperty Name="SerieId" ColumnName="SerieId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BrandId" ColumnName="BrandId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Systems">
+            <EntityTypeMapping TypeName="BadBeeModel.Systems">
+              <MappingFragment StoreEntitySet="Systems">
+                <ScalarProperty Name="SystemId" ColumnName="SystemId" />
+                <ScalarProperty Name="Abbreviation" ColumnName="Abbreviation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wva">
+            <EntityTypeMapping TypeName="BadBeeModel.Wva">
+              <MappingFragment StoreEntitySet="Wva">
+                <ScalarProperty Name="WvaId" ColumnName="WvaId" />
+                <ScalarProperty Name="WvaNo" ColumnName="WvaNo" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Year">
+            <EntityTypeMapping TypeName="BadBeeModel.Year">
+              <MappingFragment StoreEntitySet="Year">
+                <ScalarProperty Name="YearId" ColumnName="YearId" />
+                <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
+                <ScalarProperty Name="DateTo" ColumnName="DateTo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
