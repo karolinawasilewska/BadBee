@@ -80,6 +80,15 @@
     <Compile Include="DAL\Year.cs">
       <DependentUpon>BadBeeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CatalogContentTableHeader.cs" />
+    <Compile Include="Models\CvlItem.cs" />
+    <Compile Include="Models\GlobalVars.cs" />
+    <Compile Include="Models\LumagFilter.cs" />
+    <Compile Include="Models\ModalFilters.cs" />
+    <Compile Include="Models\SearchCache.cs" />
+    <Compile Include="MyResources\Resources.Designer.cs" />
+    <Compile Include="MyResources\Resources.pl.Designer.cs" />
+    <Compile Include="Partials\ItemsDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -123,6 +132,10 @@
       <DependentUpon>BadBeeModel.edmx</DependentUpon>
       <LastGenOutput>BadBeeModel.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MyResources\Resources.pl.resx" />
+    <EmbeddedResource Include="MyResources\Resources.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

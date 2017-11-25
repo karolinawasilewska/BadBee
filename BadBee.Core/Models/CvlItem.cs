@@ -1,21 +1,16 @@
-﻿using System;
+﻿using BadBee.Core.MyResources;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using Lumag.Core.MyResources;
 
-namespace Lumag.Core.DAL
+namespace BadBee.Core.Models
 {
-    [MetadataType(typeof(ItemsDbMetadata))]
-    public partial class ItemsDb
+    [Serializable]
+    public class CvlItem
     {
-       // public string ModelName { get; set; }
-    }
-
-    internal class ItemsDbMetadata
-    {
+        public int Id { get; set; }
         [Display(Name = "brand", ResourceType = typeof(Resources))]
         public string Brand { get; set; }
         [Display(Name = "type", ResourceType = typeof(Resources))]
@@ -28,6 +23,10 @@ namespace Lumag.Core.DAL
         public string Kw { get; set; }
         [Display(Name = "km", ResourceType = typeof(Resources))]
         public string Km { get; set; }
+
+        [Display(Name = "year", ResourceType = typeof(Resources))]
+        public string Years { get; set; }
+
         [Display(Name = "date_from", ResourceType = typeof(Resources))]
         public Nullable<System.DateTime> DateFrom { get; set; }
         [Display(Name = "date_to", ResourceType = typeof(Resources))]
@@ -42,9 +41,10 @@ namespace Lumag.Core.DAL
         public string WvaDetailsQty { get; set; }
         [Display(Name = "wva_det", ResourceType = typeof(Resources))]
         public string WvaDetails { get; set; }
-        [Display(Name = "lumag_no", ResourceType = typeof(Resources))]
-        public string LumagNumber { get; set; }
-        
+        [Display(Name = "BadBee_no", ResourceType = typeof(Resources))]
+        public string BadBeeNumber { get; set; }
+        [Display(Name = "size", ResourceType = typeof(Resources))]
+        public string Size { get; set; }
         [Display(Name = "height", ResourceType = typeof(Resources))]
         public string Height { get; set; }
         [Display(Name = "width", ResourceType = typeof(Resources))]
@@ -61,6 +61,9 @@ namespace Lumag.Core.DAL
         public string RivetsQuantity { get; set; }
         [Display(Name = "rivets", ResourceType = typeof(Resources))]
         public string RivetsType { get; set; }
-        public string ProductType { get; set; }
+        public string Product { get; set; }
+       // public string RivetsQuantity { get; set; }
     }
+
+
 }

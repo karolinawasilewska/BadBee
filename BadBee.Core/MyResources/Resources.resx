@@ -127,7 +127,7 @@
     <value>Brand</value>
   </data>
   <data name="catalog_title" xml:space="preserve">
-    <value>Lumag Catalogue</value>
+    <value>BadBee Catalogue</value>
   </data>
   <data name="catalog_title_cv" xml:space="preserve">
     <value>CATALOGUE OF BRAKE LININGS AND BRAKE PADS FOR COMMERCIAL VEHICLES</value>
@@ -228,8 +228,8 @@
   <data name="kw" xml:space="preserve">
     <value>KW</value>
   </data>
-  <data name="lumag_no" xml:space="preserve">
-    <value>Lumag No.</value>
+  <data name="BadBee_no" xml:space="preserve">
+    <value>BadBee No.</value>
   </data>
   <data name="mobile_catalog" xml:space="preserve">
     <value>online catalogs available in your phone</value>
@@ -277,7 +277,7 @@
     <value>Rivets total</value>
   </data>
   <data name="search" xml:space="preserve">
-    <value>Enter Lumag number / cross</value>
+    <value>Enter BadBee number / cross</value>
   </data>
   <data name="searchapp" xml:space="preserve">
     <value>Search by application</value>
@@ -618,8 +618,8 @@
   <data name="brake_pad" xml:space="preserve">
     <value>Brake pad</value>
   </data>
-  <data name="choose_lumag" xml:space="preserve">
-    <value>Choose Lumag No for product</value>
+  <data name="choose_BadBee" xml:space="preserve">
+    <value>Choose BadBee No for product</value>
   </data>
   <data name="choose_wva" xml:space="preserve">
     <value>Choose WVA number for product</value>
@@ -637,10 +637,10 @@
     <value>The password and confirmation password do not match.</value>
   </data>
   <data name="photo_of_components" xml:space="preserve">
-    <value>Photo of components (choose Lumag No.)</value>
+    <value>Photo of components (choose BadBee No.)</value>
   </data>
   <data name="photo_of_kit" xml:space="preserve">
-    <value>Photo of components and kit (choose Lumag No.)</value>
+    <value>Photo of components and kit (choose BadBee No.)</value>
   </data>
   <data name="register_btn" xml:space="preserve">
     <value>Register</value>
@@ -651,8 +651,8 @@
   <data name="remember_me" xml:space="preserve">
     <value>Remember me?</value>
   </data>
-  <data name="schema_lumag" xml:space="preserve">
-    <value>Schema (choose Lumag No.)</value>
+  <data name="schema_BadBee" xml:space="preserve">
+    <value>Schema (choose BadBee No.)</value>
   </data>
   <data name="schema_wva" xml:space="preserve">
     <value>Schema (choose WVA number)</value>

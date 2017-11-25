@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Lumag.Core.Models
+namespace BadBee.Core.Models
 {
-    public class LumagFilter
+    public class BadBeeFilter
     {
 
         public bool IsFilterEmpty
@@ -13,7 +13,7 @@ namespace Lumag.Core.Models
             get
             {
                 return string.IsNullOrEmpty(this.Brands) && string.IsNullOrEmpty(this.Series) && string.IsNullOrEmpty(this.Models)
-                    && string.IsNullOrEmpty(this.DateYears) && string.IsNullOrEmpty(this.LumagNumbers) && string.IsNullOrEmpty(this.Wvas)
+                    && string.IsNullOrEmpty(this.DateYears) && string.IsNullOrEmpty(this.BadBeeNumbers) && string.IsNullOrEmpty(this.Wvas)
                     && string.IsNullOrEmpty(this.WvaDetails2) && string.IsNullOrEmpty(this.DrumDiameters) && string.IsNullOrEmpty(this.Rivets)
                     && string.IsNullOrEmpty(this.Widths) && string.IsNullOrEmpty(this.Heights) && string.IsNullOrEmpty(this.Thicknesses)
                     && string.IsNullOrEmpty(this.Systems) && string.IsNullOrEmpty(this.PhraseFilter);
@@ -25,7 +25,7 @@ namespace Lumag.Core.Models
             get
             {
                 string key = this.Brands + ";" + this.Series + ";" + this.Models
-                    + ";" + this.DateYears + ";" + this.LumagNumbers + ";" + this.Wvas
+                    + ";" + this.DateYears + ";" + this.BadBeeNumbers + ";" + this.Wvas
                     + ";" + this.WvaDetails2 + ";" + this.DrumDiameters + ";" + this.Rivets
                     + ";" + this.Widths + ";" + this.Heights + ";" + this.Thicknesses
                     + ";" + this.Systems + ";" + this.PhraseFilter;
@@ -116,18 +116,18 @@ namespace Lumag.Core.Models
         }
         public List<string> DateYearsList { get; private set; }
 
-        public string LumagNumbers
+        public string BadBeeNumbers
         {
             get
             {
-                return ReadList(LumagNumbersList);
+                return ReadList(BadBeeNumbersList);
             }
             set
             {
-                LumagNumbersList = FillList(LumagNumbersList, value);
+                BadBeeNumbersList = FillList(BadBeeNumbersList, value);
             }
         }
-        public List<string> LumagNumbersList { get;  set; }
+        public List<string> BadBeeNumbersList { get;  set; }
 
         public string Wvas
         {
@@ -253,7 +253,7 @@ namespace Lumag.Core.Models
         public bool SeriesSelected { get { return IsFilterSelected(this.Series); } }
         public bool ModelsSelected { get { return IsFilterSelected(this.Models); } }
         public bool DateYearsSelected { get { return IsFilterSelected(this.DateYears); } }
-        public bool LumagNumbersSelected { get { return IsFilterSelected(this.LumagNumbers); } }
+        public bool BadBeeNumbersSelected { get { return IsFilterSelected(this.BadBeeNumbers); } }
         public bool WvasSelected { get { return IsFilterSelected(this.Wvas); } }
         public bool WvaDetails2Selected { get { return IsFilterSelected(this.WvaDetails2); } }
         public bool RivetsSelected { get { return IsFilterSelected(this.Rivets); } }

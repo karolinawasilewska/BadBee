@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Lumag.Core.MyResources {
+namespace BadBee.Core.MyResources {
     using System;
     
     
@@ -19,7 +19,7 @@ namespace Lumag.Core.MyResources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -39,7 +39,7 @@ namespace Lumag.Core.MyResources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Lumag.Core.MyResources.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BadBee.Core.MyResources.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -214,7 +214,7 @@ namespace Lumag.Core.MyResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Lumag Catalogue.
+        ///   Looks up a localized string similar to BadBee Catalogue.
         /// </summary>
         public static string catalog_title {
             get {
@@ -259,11 +259,11 @@ namespace Lumag.Core.MyResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Choose Lumag No for product.
+        ///   Looks up a localized string similar to Choose BadBee No for product.
         /// </summary>
-        public static string choose_lumag {
+        public static string choose_BadBee {
             get {
-                return ResourceManager.GetString("choose_lumag", resourceCulture);
+                return ResourceManager.GetString("choose_BadBee", resourceCulture);
             }
         }
         
@@ -988,11 +988,11 @@ namespace Lumag.Core.MyResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Lumag No..
+        ///   Looks up a localized string similar to BadBee No..
         /// </summary>
-        public static string lumag_no {
+        public static string BadBee_no {
             get {
-                return ResourceManager.GetString("lumag_no", resourceCulture);
+                return ResourceManager.GetString("BadBee_no", resourceCulture);
             }
         }
         
@@ -1186,7 +1186,7 @@ namespace Lumag.Core.MyResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Photo of components (choose Lumag No.).
+        ///   Looks up a localized string similar to Photo of components (choose BadBee No.).
         /// </summary>
         public static string photo_of_components {
             get {
@@ -1195,7 +1195,7 @@ namespace Lumag.Core.MyResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Photo of components and kit (choose Lumag No.).
+        ///   Looks up a localized string similar to Photo of components and kit (choose BadBee No.).
         /// </summary>
         public static string photo_of_kit {
             get {
@@ -1420,11 +1420,11 @@ namespace Lumag.Core.MyResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Schema (choose Lumag No.).
+        ///   Looks up a localized string similar to Schema (choose BadBee No.).
         /// </summary>
-        public static string schema_lumag {
+        public static string schema_BadBee {
             get {
-                return ResourceManager.GetString("schema_lumag", resourceCulture);
+                return ResourceManager.GetString("schema_BadBee", resourceCulture);
             }
         }
         
@@ -1438,7 +1438,7 @@ namespace Lumag.Core.MyResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter Lumag number / cross.
+        ///   Looks up a localized string similar to Enter BadBee number / cross.
         /// </summary>
         public static string search {
             get {

@@ -7,16 +7,16 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace Lumag.Core.Models
+namespace BadBee.Core.Models
 {
     public static class GlobalVars
     {
         public static Dictionary<Type, object> DictionaryCache { get; set; }
-        public static Dictionary<string, LumagFilter> Filters { get; set; }
+        public static Dictionary<string, BadBeeFilter> Filters { get; set; }
         public static Dictionary<string, SearchCache> SearchCaches { get; set; }
         public static bool AdvSession { get; set; }
 
-        public static LumagFilter LumagFilter
+        public static BadBeeFilter BadBeeFilter
         {
             get
             {
@@ -29,7 +29,7 @@ namespace Lumag.Core.Models
 
                         if (Filters == null)
                         {
-                            Filters = new Dictionary<string, LumagFilter>();
+                            Filters = new Dictionary<string, BadBeeFilter>();
                         }
 
                         if (Filters.ContainsKey(sId))
@@ -37,16 +37,16 @@ namespace Lumag.Core.Models
                             return Filters[sId];
                         }
 
-                        return new LumagFilter();
+                        return new BadBeeFilter();
                     }
 
-                    return new LumagFilter();
+                    return new BadBeeFilter();
                 }
                 else
                 {
-                    LumagFilter filter = HttpContext.Current.Session["LumagFilter"] as LumagFilter;
+                    BadBeeFilter filter = HttpContext.Current.Session["BadBeeFilter"] as BadBeeFilter;
                     if (filter == null)
-                        return new LumagFilter();
+                        return new BadBeeFilter();
                     else
                         return filter;
                 }
@@ -62,7 +62,7 @@ namespace Lumag.Core.Models
 
                         if (Filters == null)
                         {
-                            Filters = new Dictionary<string, LumagFilter>();
+                            Filters = new Dictionary<string, BadBeeFilter>();
                         }
 
                         if (Filters.ContainsKey(sId))
@@ -77,7 +77,7 @@ namespace Lumag.Core.Models
                 }
                 else
                 {
-                    HttpContext.Current.Session["LumagFilter"] = value;
+                    HttpContext.Current.Session["BadBeeFilter"] = value;
                 }
             }
         }

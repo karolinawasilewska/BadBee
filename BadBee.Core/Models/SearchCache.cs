@@ -1,10 +1,10 @@
-﻿using Lumag.Core.DAL;
+﻿using BadBee.Core.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Lumag.Core.Models
+namespace BadBee.Core.Models
 {
     public class SearchCache
     {

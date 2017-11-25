@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lumag.Core
+namespace BadBee.Core
 {
     public class Class1
     {

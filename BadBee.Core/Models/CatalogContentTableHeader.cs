@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace Lumag.Core.Models
+namespace BadBee.Core.Models
 {
-   public class ModalFilters
+    public class CatalogContentTableHeader
     {
         public string ID { get; set; }
         public string DataTarget { get; set; }
@@ -23,12 +22,11 @@ namespace Lumag.Core.Models
         public int? Index { get; set; }
     }
 
-    //public enum CatalogContentTableHeaderType
-    //{
-    //    TopEmpty,
-    //    TopFilter,
-    //    DetailsEmpty,
-    //    DetailsFilter
-    //}
+    public enum CatalogContentTableHeaderType
+    {
+        TopEmpty,
+        TopFilter,
+        DetailsEmpty,
+        DetailsFilter
+    }
 }
-

@@ -1,42 +1,79 @@
-﻿<!DOCTYPE html>
+﻿@using Lumag.Core.MyResources;
+@using System.Web.Optimization;
+@using Lumag.Core.Models;
+<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Products catalog">
+    <meta name="author" content="MPED Sp. z o.o.">
+    <title>@Resources.catalog_title_cv</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&subset=latin,latin-ext" rel="stylesheet">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    @{
+        Html.RenderPartial("NavView");
+    }
+    <div class="container" style="margin-bottom:50px; min-height: 425px;">
+        <div class="row">
+            <div style="height: 80px;float:left;width:100%;">
+                <center><h3>@Resources.catalog_title</h3></center>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+        </div>
+        @{
+            Html.RenderPartial("TabsView");
+        }
+        <div class="searchcross" id="crossBtn" data-toggle="modal" data-target="#crossFilterModal" onclick="showCrosses();" style="display:none;"></div>
+        <div id="catalogMainView">
+            @{
+                Html.RenderPartial("AjaxLoaderView");
+            }
+            <div id="catalogContent" class="row">
+                @RenderBody()
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+    @{
+        Html.RenderPartial("FooterView");
+    }
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    @if (!GlobalVars.BrowserIsMobile())
+    {
+
+        <div id="normal_modals">
+            @{
+                Html.RenderPartial("ModalsView");
+            }
+        </div>
+                }
+                else
+                {
+
+                    <div id="simple_modals">
+                        @{
+                            Html.RenderPartial("SimpleModalsView");
+                        }
+                    </div>
+                            }
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-1.4.4.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.printElement.js"></script>
+    <script type="text/javascript" src="~/Scripts/lumag_catalog.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    @{
+        Html.RenderPartial("CoreJsView");
+    }
+
 </body>
+
 </html>

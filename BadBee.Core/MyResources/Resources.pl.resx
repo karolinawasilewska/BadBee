@@ -127,7 +127,7 @@
     <value>Marka</value>
   </data>
   <data name="catalog_title" xml:space="preserve">
-    <value>Katalog Lumag</value>
+    <value>Katalog BadBee</value>
   </data>
   <data name="catalog_title_cv" xml:space="preserve">
     <value>KATALOG OKŁADZIN I KLOCKÓW HAMULCOWYCH DLA SAMOCHODÓW CIĘŻAROWYCH</value>
@@ -228,8 +228,8 @@
   <data name="kw" xml:space="preserve">
     <value>KW</value>
   </data>
-  <data name="lumag_no" xml:space="preserve">
-    <value>Lumag No.</value>
+  <data name="BadBee_no" xml:space="preserve">
+    <value>BadBee No.</value>
   </data>
   <data name="mobile_catalog" xml:space="preserve">
     <value>Katalogi online dostępne w Twoim telefonie</value>
@@ -277,7 +277,7 @@
     <value>Ilość nitów</value>
   </data>
   <data name="search" xml:space="preserve">
-    <value>Wpisz numer Lumag / cross</value>
+    <value>Wpisz numer BadBee / cross</value>
   </data>
   <data name="searchapp" xml:space="preserve">
     <value>Wyszukiwanie po zastosowaniu</value>
@@ -618,8 +618,8 @@
   <data name="brake_pad" xml:space="preserve">
     <value>Klocek hamulcowy</value>
   </data>
-  <data name="choose_lumag" xml:space="preserve">
-    <value>Wybierz numer Lumag produktu</value>
+  <data name="choose_BadBee" xml:space="preserve">
+    <value>Wybierz numer BadBee produktu</value>
   </data>
   <data name="choose_wva" xml:space="preserve">
     <value>Wybierz numer WVA produktu</value>
@@ -651,8 +651,8 @@
   <data name="remember_me" xml:space="preserve">
     <value>Zapamiętać hasło?</value>
   </data>
-  <data name="schema_lumag" xml:space="preserve">
-    <value>Schemat (wybierz numer Lumag)</value>
+  <data name="schema_BadBee" xml:space="preserve">
+    <value>Schemat (wybierz numer BadBee)</value>
   </data>
   <data name="schema_wva" xml:space="preserve">
     <value>Schemat (wybierz numer WVA)</value>
