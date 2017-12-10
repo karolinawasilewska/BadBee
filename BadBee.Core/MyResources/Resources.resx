@@ -277,7 +277,7 @@
     <value>Rivets total</value>
   </data>
   <data name="search" xml:space="preserve">
-    <value>Enter BadBee number / cross</value>
+    <value>Enter brand, model or BadBee number</value>
   </data>
   <data name="searchapp" xml:space="preserve">
     <value>Search by application</value>
@@ -677,5 +677,8 @@
   </data>
   <data name="wear_indicator" xml:space="preserve">
     <value>Wear indicator for brake pad</value>
+  </data>
+  <data name="rights" xml:space="preserve">
+    <value>All rights reserved. Created by</value>
   </data>
 </root>

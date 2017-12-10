@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BadBeeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BadBeeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BadBee">
           <Key>
             <PropertyRef Name="BadBeeId" />
@@ -15,6 +15,7 @@
           <Property Name="SystemId" Type="int" />
           <Property Name="DimensionId" Type="int" />
           <Property Name="FR" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="PictureId" Type="int" />
         </EntityType>
         <EntityType Name="Brand">
           <Key>
@@ -29,8 +30,8 @@
           </Key>
           <Property Name="DimensionId" Type="int" Nullable="false" />
           <Property Name="Width" Type="decimal" Precision="5" Scale="2" />
-          <Property Name="Heigth" Type="decimal" Precision="5" Scale="2" />
-          <Property Name="Length" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Height" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Thickness" Type="decimal" Precision="5" Scale="2" />
         </EntityType>
         <EntityType Name="Item">
           <Key>
@@ -48,6 +49,15 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="SerieId" Type="int" Nullable="false" />
           <Property Name="YearId" Type="int" />
+        </EntityType>
+        <EntityType Name="Picture">
+          <Key>
+            <PropertyRef Name="PictureId" />
+          </Key>
+          <Property Name="PictureId" Type="int" Nullable="false" />
+          <Property Name="Picure1" Type="nvarchar" MaxLength="20" />
+          <Property Name="Picture2" Type="nvarchar" MaxLength="20" />
+          <Property Name="Picture3" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="Serie">
           <Key>
@@ -80,6 +90,11 @@
           <Property Name="DateFrom" Type="date" />
           <Property Name="DateTo" Type="date" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'BadBee.dbo.KeywordsView' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="KeywordsView">
+          <Property Name="Keyword" Type="nvarchar" MaxLength="50" />
+        </EntityType>-->
         <Association Name="FK_BadBee_Dimension">
           <End Role="Dimension" Type="Self.Dimension" Multiplicity="0..1" />
           <End Role="BadBee" Type="Self.BadBee" Multiplicity="*" />
@@ -89,6 +104,18 @@
             </Principal>
             <Dependent Role="BadBee">
               <PropertyRef Name="DimensionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BadBee_Picture">
+          <End Role="Picture" Type="Self.Picture" Multiplicity="0..1" />
+          <End Role="BadBee" Type="Self.BadBee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Picture">
+              <PropertyRef Name="PictureId" />
+            </Principal>
+            <Dependent Role="BadBee">
+              <PropertyRef Name="PictureId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -176,18 +203,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetKeywords" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="KeywordPart" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="BadBeeModelStoreContainer">
           <EntitySet Name="BadBee" EntityType="Self.BadBee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dimension" EntityType="Self.Dimension" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Item" EntityType="Self.Item" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Model" EntityType="Self.Model" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Picture" EntityType="Self.Picture" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Serie" EntityType="Self.Serie" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Systems" EntityType="Self.Systems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wva" EntityType="Self.Wva" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Year" EntityType="Self.Year" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_BadBee_Dimension" Association="Self.FK_BadBee_Dimension">
             <End Role="Dimension" EntitySet="Dimension" />
+            <End Role="BadBee" EntitySet="BadBee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BadBee_Picture" Association="Self.FK_BadBee_Picture">
+            <End Role="Picture" EntitySet="Picture" />
             <End Role="BadBee" EntitySet="BadBee" />
           </AssociationSet>
           <AssociationSet Name="FK_BadBee_System" Association="Self.FK_BadBee_System">
@@ -219,8 +254,7 @@
             <End Role="Serie" EntitySet="Serie" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BadBeeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -234,10 +268,12 @@
           <Property Name="SystemId" Type="Int32" />
           <Property Name="DimensionId" Type="Int32" />
           <Property Name="FR" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Dimension" Relationship="Self.FK_BadBee_Dimension" FromRole="BadBee" ToRole="Dimension" />
           <NavigationProperty Name="Systems" Relationship="Self.FK_BadBee_System" FromRole="BadBee" ToRole="Systems" />
           <NavigationProperty Name="Wva" Relationship="Self.FK_BadBee_Wva" FromRole="BadBee" ToRole="Wva" />
           <NavigationProperty Name="Item" Relationship="Self.FK_Item_BadBee" FromRole="BadBee" ToRole="Item" />
+          <Property Name="PictureId" Type="Int32" />
+          <NavigationProperty Name="Picture" Relationship="BadBeeModel.FK_BadBee_Picture" FromRole="BadBee" ToRole="Picture" />
+          <NavigationProperty Name="Dimension" Relationship="BadBeeModel.FK_BadBee_Dimension" FromRole="BadBee" ToRole="Dimension" />
         </EntityType>
         <EntityType Name="Brand">
           <Key>
@@ -246,16 +282,6 @@
           <Property Name="BrandId" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Serie" Relationship="Self.FK_Serie_Brand" FromRole="Brand" ToRole="Serie" />
-        </EntityType>
-        <EntityType Name="Dimension">
-          <Key>
-            <PropertyRef Name="DimensionId" />
-          </Key>
-          <Property Name="DimensionId" Type="Int32" Nullable="false" />
-          <Property Name="Width" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="Heigth" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="Length" Type="Decimal" Precision="5" Scale="2" />
-          <NavigationProperty Name="BadBee" Relationship="Self.FK_BadBee_Dimension" FromRole="Dimension" ToRole="BadBee" />
         </EntityType>
         <EntityType Name="Item">
           <Key>
@@ -315,18 +341,6 @@
           <Property Name="DateTo" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Model" Relationship="Self.FK_Model_Year" FromRole="Year" ToRole="Model" />
         </EntityType>
-        <Association Name="FK_BadBee_Dimension">
-          <End Role="Dimension" Type="Self.Dimension" Multiplicity="0..1" />
-          <End Role="BadBee" Type="Self.BadBee" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Dimension">
-              <PropertyRef Name="DimensionId" />
-            </Principal>
-            <Dependent Role="BadBee">
-              <PropertyRef Name="DimensionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_BadBee_System">
           <End Role="Systems" Type="Self.Systems" Multiplicity="0..1" />
           <End Role="BadBee" Type="Self.BadBee" Multiplicity="*" />
@@ -414,17 +428,12 @@
         <EntityContainer Name="BadBeeEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BadBee" EntityType="Self.BadBee" />
           <EntitySet Name="Brand" EntityType="Self.Brand" />
-          <EntitySet Name="Dimension" EntityType="Self.Dimension" />
           <EntitySet Name="Item" EntityType="Self.Item" />
           <EntitySet Name="Model" EntityType="Self.Model" />
           <EntitySet Name="Serie" EntityType="Self.Serie" />
           <EntitySet Name="Systems" EntityType="Self.Systems" />
           <EntitySet Name="Wva" EntityType="Self.Wva" />
           <EntitySet Name="Year" EntityType="Self.Year" />
-          <AssociationSet Name="FK_BadBee_Dimension" Association="Self.FK_BadBee_Dimension">
-            <End Role="Dimension" EntitySet="Dimension" />
-            <End Role="BadBee" EntitySet="BadBee" />
-          </AssociationSet>
           <AssociationSet Name="FK_BadBee_System" Association="Self.FK_BadBee_System">
             <End Role="Systems" EntitySet="Systems" />
             <End Role="BadBee" EntitySet="BadBee" />
@@ -453,7 +462,64 @@
             <End Role="Year" EntitySet="Year" />
             <End Role="Model" EntitySet="Model" />
           </AssociationSet>
+          <EntitySet Name="Picture" EntityType="BadBeeModel.Picture" />
+          <AssociationSet Name="FK_BadBee_Picture" Association="BadBeeModel.FK_BadBee_Picture">
+            <End Role="Picture" EntitySet="Picture" />
+            <End Role="BadBee" EntitySet="BadBee" />
+          </AssociationSet>
+          <EntitySet Name="Dimension" EntityType="BadBeeModel.Dimension" />
+          <AssociationSet Name="FK_BadBee_Dimension" Association="BadBeeModel.FK_BadBee_Dimension">
+            <End Role="Dimension" EntitySet="Dimension" />
+            <End Role="BadBee" EntitySet="BadBee" />
+          </AssociationSet>
+          <FunctionImport Name="GetKeywords" ReturnType="Collection(String)">
+            <Parameter Name="KeywordPart" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
+        <EntityType Name="Picture">
+          <Key>
+            <PropertyRef Name="PictureId" />
+          </Key>
+          <Property Name="PictureId" Type="Int32" Nullable="false" />
+          <Property Name="Picure1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Picture2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Picture3" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BadBee" Relationship="BadBeeModel.FK_BadBee_Picture" FromRole="Picture" ToRole="BadBee" />
+        </EntityType>
+        <Association Name="FK_BadBee_Picture">
+          <End Type="BadBeeModel.Picture" Role="Picture" Multiplicity="0..1" />
+          <End Type="BadBeeModel.BadBee" Role="BadBee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Picture">
+              <PropertyRef Name="PictureId" />
+            </Principal>
+            <Dependent Role="BadBee">
+              <PropertyRef Name="PictureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Dimension">
+          <Key>
+            <PropertyRef Name="DimensionId" />
+          </Key>
+          <Property Name="DimensionId" Type="Int32" Nullable="false" />
+          <Property Name="Width" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Height" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Thickness" Type="Decimal" Precision="5" Scale="2" />
+          <NavigationProperty Name="BadBee" Relationship="BadBeeModel.FK_BadBee_Dimension" FromRole="Dimension" ToRole="BadBee" />
+        </EntityType>
+        <Association Name="FK_BadBee_Dimension">
+          <End Type="BadBeeModel.Dimension" Role="Dimension" Multiplicity="0..1" />
+          <End Type="BadBeeModel.BadBee" Role="BadBee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dimension">
+              <PropertyRef Name="DimensionId" />
+            </Principal>
+            <Dependent Role="BadBee">
+              <PropertyRef Name="DimensionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -463,6 +529,7 @@
           <EntitySetMapping Name="BadBee">
             <EntityTypeMapping TypeName="BadBeeModel.BadBee">
               <MappingFragment StoreEntitySet="BadBee">
+                <ScalarProperty Name="PictureId" ColumnName="PictureId" />
                 <ScalarProperty Name="BadBeeId" ColumnName="BadBeeId" />
                 <ScalarProperty Name="BadBeeNo" ColumnName="BadBeeNo" />
                 <ScalarProperty Name="WvaId" ColumnName="WvaId" />
@@ -477,16 +544,6 @@
               <MappingFragment StoreEntitySet="Brand">
                 <ScalarProperty Name="BrandId" ColumnName="BrandId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Dimension">
-            <EntityTypeMapping TypeName="BadBeeModel.Dimension">
-              <MappingFragment StoreEntitySet="Dimension">
-                <ScalarProperty Name="DimensionId" ColumnName="DimensionId" />
-                <ScalarProperty Name="Width" ColumnName="Width" />
-                <ScalarProperty Name="Heigth" ColumnName="Heigth" />
-                <ScalarProperty Name="Length" ColumnName="Length" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -544,6 +601,27 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Picture">
+            <EntityTypeMapping TypeName="BadBeeModel.Picture">
+              <MappingFragment StoreEntitySet="Picture">
+                <ScalarProperty Name="Picture3" ColumnName="Picture3" />
+                <ScalarProperty Name="Picture2" ColumnName="Picture2" />
+                <ScalarProperty Name="Picure1" ColumnName="Picure1" />
+                <ScalarProperty Name="PictureId" ColumnName="PictureId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dimension">
+            <EntityTypeMapping TypeName="BadBeeModel.Dimension">
+              <MappingFragment StoreEntitySet="Dimension">
+                <ScalarProperty Name="Thickness" ColumnName="Thickness" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="DimensionId" ColumnName="DimensionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetKeywords" FunctionName="BadBeeModel.Store.GetKeywords" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

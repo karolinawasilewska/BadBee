@@ -1,0 +1,12 @@
+﻿@using BadBee.Core.MyResources;
+<div class="row" style="position:relative;">
+    <div class="searchapp"><a onclick="cleanBadBeeFilter('@Url.Action("Index", "Search")')" href="#" title="@Resources.searchapp">@Resources.searchapp</a></div>
+    <div class="searchdet"><a onclick="cleanBadBeeFilter('@Url.Action("Index", "Default")');" href="#" title="@Resources.searchdet">@Resources.searchdet</a></div>
+    
+    <div class="downloadpdf" title="@Resources.downloadpdf" onclick="downloadPdf()" style="cursor:pointer">@Resources.downloadpdf</div>
+    @if (Request.Url.AbsoluteUri.Contains("Default"))
+            {
+        <div class="clearfilters"><a onclick="cleanBadBeeFilter('@Url.Action("Index", "Default")');" href="#" title="@Resources.cleanFilters">@Resources.cleanFilters</a></div>
+    }
+</div>
+

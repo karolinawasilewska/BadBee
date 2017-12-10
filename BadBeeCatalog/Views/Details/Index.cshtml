@@ -1,0 +1,140 @@
+﻿@using BadBeeCatalog.Models;
+@using BadBee.Core.MyResources;
+@model DetailsModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery.fancybox.js"></script>
+<link rel="stylesheet" href="~/Scripts/jquery.fancybox.css" type="text/css" media="screen" />
+<html>
+<body>
+    <div class="col-xs-12 colContent">
+        <div id="catalogPrintable">
+            <div class="back">
+                <span><</span> <a href="/Default">@Resources.goback</a>
+            </div>
+            <div class="details_container">
+                <div class="schema">
+                    <a class="fancybox"  rel="gallery1" href="~/Images/Pictures/@Model.Pictures[0]">
+                            <img id="mainPicture" src="~/Images/Pictures/@Model.Pictures[0]" alt="" />
+                    </a>
+                       
+                    @for (int i = 0; i < Model.Pictures.Length; i++)
+                    {
+                        //if (i == 0)
+                       // {
+                          //  <a class="fancybox" rel="gallery1" href="~/Images/Pictures/@Model.Pictures[0]">
+                           //     <img src="~/Images/Pictures/@Model.Pictures[0]" alt="" />
+                         //   </a>
+                       // }
+                      //  else
+                      //  {
+                            <div class="miniatures" onclick="replacePicture('/Images/Pictures/@Model.Pictures[i]')">
+                                <a class="no_fancybox" >
+                                    <img src="~/Images/Pictures/@Model.Pictures[i]" alt="" />
+                                </a>
+                            </div>
+                      //  }
+                    }
+                </div>
+                <div class="desc">
+
+
+
+                    <table class="table table-striped tableDetails">
+                        <tbody id="catalogTableDetails">
+                            @if (!string.IsNullOrEmpty(Model.BadBeeNumber))
+                            {
+                                <tr class="detdesc"><td>@Resources.badBee_no: </td><td class="detval" style="border-right:0 !important;">@Model.BadBeeNumber</td> </tr> }
+                            @if (!string.IsNullOrEmpty(Model.Brand))
+                            {
+                                <tr class="detdesc"><td>@Resources.brand: </td><td class="detval" style="border-right:0 !important;">@Model.Brand</td></tr>}
+                            @if (!string.IsNullOrEmpty(Model.Serie))
+                            {
+                                <tr class="detdesc"><td>@Resources.serie: </td><td class="detval" style="border-right:0 !important;">@Model.Serie</td></tr>}
+                            @if (!string.IsNullOrEmpty(Model.Models))
+                            {
+                                <tr class="detdesc"><td>@Resources.model: </td><td class="detval" style="border-right:0 !important;">@Model.Models</td></tr>}
+                            @if (!string.IsNullOrEmpty(Model.Kw))
+                            {
+                                <tr class="detdesc"><td>@Resources.kw: </td><td class="detval" style="border-right:0 !important;">@Model.Kw</td> </tr> }
+                            @if (!string.IsNullOrEmpty(Model.Km))
+                            {
+                                <tr class="detdesc"><td>@Resources.km: </td><td class="detval" style="border-right:0 !important;">@Model.Km</td></tr>}
+                            @if (!string.IsNullOrEmpty(Model.Years))
+                            {
+                                <tr class="detdesc"><td>@Resources.years: </td><td class="detval" style="border-right:0 !important;">@Model.Years</td></tr>}
+                            @if (!string.IsNullOrEmpty(Model.Fr))
+                            {
+                                <tr class="detdesc"><td>@Resources.front_rear: </td><td class="detval" style="border-right:0 !important;">@Model.Fr</td></tr>}
+                            @if (!string.IsNullOrEmpty(Model.WvaDesc))
+                            {
+                                <tr class="detdesc"><td>@Resources.description: </td><td class="detval" style="border-right:0 !important;">@Model.WvaDesc</td> </tr> }
+                            @if (!string.IsNullOrEmpty(Model.Wva))
+                            {
+                                <tr class="detdesc"><td>@Resources.wva </td><td class="detval" style="border-right:0 !important;">@Model.Wva</td></tr>}
+                            @if (!string.IsNullOrEmpty(Model.WvaDetailsQty))
+                            {
+                                <tr class="detdesc"><td>@Resources.details </td><td class="detval" style="border-right:0 !important;">@Model.WvaDetailsQty x @Model.WvaDetails</td></tr>}
+                            @if (!string.IsNullOrEmpty(Model.Height))
+                            {
+                                <tr class="detdesc"><td>@Resources.height [mm]: </td><td class="detval" style="border-right:0 !important;">@Model.Height</td></tr>}
+                            @if (!string.IsNullOrEmpty(Model.Width))
+                            {
+                                <tr class="detdesc"><td>@Resources.width [mm]: </td><td class="detval" style="border-right:0 !important;">@Model.Width</td></tr>}
+                            @if (!string.IsNullOrEmpty(Model.Thickness))
+                            {
+                                <tr class="detdesc"><td>@Resources.thickness [mm]: </td><td class="detval" style="border-right:0 !important;">@Model.Thickness</td></tr>}
+
+                            @if (!string.IsNullOrEmpty(Model.Wedge))
+                            {
+                                <tr class="detdesc"><td>@Resources.wedge: </td><td class="detval" style="border-right:0 !important;">@Model.Wedge</td></tr>}
+                            @if (!string.IsNullOrEmpty(Model.DrumDiameter))
+                            {
+                                <tr class="detdesc"><td>@Resources.drumdiameter [mm]: </td><td class="detval" style="border-right:0 !important;">@Model.DrumDiameter</td></tr>}
+
+                            @if (!string.IsNullOrEmpty(Model.System))
+                            {
+                                <tr class="detdesc"><td>@Resources.brakesystem: </td><td class="detval" style="border-right:0 !important;">@Model.System</td> </tr> }
+                            @if (!string.IsNullOrEmpty(Model.RivetsQuantity))
+                            {
+                                <tr class="detdesc"><td>@Resources.rivets_qtt: </td><td class="detval" style="border-right:0 !important;">@Model.RivetsQuantity</td> </tr> }
+                            @if (!string.IsNullOrEmpty(Model.RivetsType))
+                            {
+                                <tr class="detdesc"><td>@Resources.rivets: </td><td class="detval" style="border-right:0 !important;">@Model.RivetsType</td> </tr>
+                            }
+
+                        </tbody>
+                        </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        jQuery(function ($) { 
+
+            $("a[rel=gallery1]").fancybox({
+                'transitionIn': 'none',
+                'transitionOut': 'none',
+                'titlePosition': 'over',
+                'cyclic': true,
+                'titleFormat': function (title, currentArray, currentIndex, currentOpts) {
+                    return '<span id="fancybox-title-over">Image ' + (currentIndex + 1) + ' / ' + currentArray.length + ' ' + title + '</span>';
+                }
+            });
+        });
+
+        function replacePicture(path) {
+            //alert(path);
+            document.getElementById('mainPicture').src = path;
+            $('.fancybox').attr('href', path);
+        }
+
+    </script>
+</body>
+</html>

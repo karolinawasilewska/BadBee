@@ -22,8 +22,8 @@ namespace BadBee.Core.DAL
     
         public int DimensionId { get; set; }
         public Nullable<decimal> Width { get; set; }
-        public Nullable<decimal> Heigth { get; set; }
-        public Nullable<decimal> Length { get; set; }
+        public Nullable<decimal> Height { get; set; }
+        public Nullable<decimal> Thickness { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BadBee> BadBee { get; set; }

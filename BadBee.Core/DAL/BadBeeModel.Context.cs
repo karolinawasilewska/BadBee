@@ -12,6 +12,8 @@ namespace BadBee.Core.DAL
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class BadBeeEntities : DbContext
     {
@@ -27,12 +29,22 @@ namespace BadBee.Core.DAL
     
         public virtual DbSet<BadBee> BadBee { get; set; }
         public virtual DbSet<Brand> Brand { get; set; }
-        public virtual DbSet<Dimension> Dimension { get; set; }
         public virtual DbSet<Item> Item { get; set; }
         public virtual DbSet<Model> Model { get; set; }
         public virtual DbSet<Serie> Serie { get; set; }
         public virtual DbSet<Systems> Systems { get; set; }
         public virtual DbSet<Wva> Wva { get; set; }
         public virtual DbSet<Year> Year { get; set; }
+        public virtual DbSet<Picture> Picture { get; set; }
+        public virtual DbSet<Dimension> Dimension { get; set; }
+    
+        public virtual ObjectResult<string> GetKeywords(string keywordPart)
+        {
+            var keywordPartParameter = keywordPart != null ?
+                new ObjectParameter("KeywordPart", keywordPart) :
+                new ObjectParameter("KeywordPart", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("GetKeywords", keywordPartParameter);
+        }
     }
 }

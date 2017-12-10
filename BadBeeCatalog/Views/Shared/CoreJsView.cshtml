@@ -1,0 +1,501 @@
+﻿@using BadBee.Core.MyResources;
+<script type="text/javascript">
+    function initPage() {
+
+        console.log("-- page init --");
+
+        if (document.cookie == "Language=en") {
+            $(".eng_h").css("background", "rgb(255, 255, 255)");
+            $(".eng_h>a").css("color", "black");
+            $(".pol_h").css("background", "#badbee");
+            $(".pol_h>a").css("color", "white");
+            $("#eng_down>a").css("color", "#5e5e5e")
+            $("#pol_down>a").css("color", "#ffffff")
+        }
+        if (document.cookie == "Language=pl") {
+            $(".pol_h").css("background", "rgb(255, 255, 255)");
+            $(".eng_h>a").css("color", "white");
+            $(".eng_h").css("background", "#badbee");
+            $(".pol_h>a").css("color", "black");
+            $("#eng_down>a").css("color", "#ffffff")
+            $("#pol_down>a").css("color", "#5e5e5e")
+        }
+
+        //Click event to scroll to top
+        $('.up-button').click(function () {
+            $('html, body').animate({ scrollTop: 0 }, 100);
+            return false;
+        });
+        console.log(window.location.pathname);
+        if (window.location.pathname == "/Default") {
+            $('.clearfilters').show();
+            $('.searchapp').css("background-color", "#666666");
+            $('.searchcross').css("background-color", "#666666");
+            $('.indicators').css("background-color", "#666666");
+            $('.searchdet').css("background-color", "#badbee");
+            $('.downloadpdf').css("background-color", "#666666");
+        }
+        if (window.location.pathname == "/Search/Crosses") {
+            document.getElementById("s-title").textContent = "@Resources.choosebrand";
+            $('.searchapp').css("background-color", "#666666");
+            $('.searchcross').css("background-color", "#badbee");
+            $('.indicators').css("background-color", "#666666");
+            $('.searchdet').css("background-color", "#666666");
+            $('.downloadpdf').css("background-color", "#666666");
+            $('.clearfilters').hide();
+        }
+        if (window.location.pathname == "/Details") {
+            $('.searchapp').css("background-color", "#666666");
+            $('.searchcross').css("background-color", "#666666");
+            $('.searchdet').css("background-color", "#666666");
+            $('.indicators').css("background-color", "#666666");
+            $('.downloadpdf').css("background-color", "#666666");
+            $('.clearfilters').hide();
+        }
+        if (window.location.pathname == "/Indicators") {
+            $('.searchapp').css("background-color", "#666666");
+            $('.searchcross').css("background-color", "#666666");
+            $('.searchdet').css("background-color", "#666666");
+            $('.indicators').css("background-color", "#badbee");
+            $('.downloadpdf').css("background-color", "#666666");
+            $('.clearfilters').hide();
+        }
+        if (window.location.pathname == "/") {
+            $('.searchapp').css("background-color", "#badbee");
+            $('.searchcross').css("background-color", "#666666");
+            $('.searchdet').css("background-color", "#666666");
+            $('.indicators').css("background-color", "#666666");
+            $('.downloadpdf').css("background-color", "#666666");
+            $('.clearfilters').hide();
+        }
+        if (window.location.pathname == "/") {
+            if (window.location.href.indexOf("serie") > -1) {
+                document.getElementById("s-title").textContent = "@Resources.choosemodel";
+            }
+            else if (window.location.href.indexOf("brand") > -1) {
+                document.getElementById("s-title").textContent = "@Resources.chooseserie";
+            }
+            else if (document.location.pathname == "/") {
+                document.getElementById("s-title").textContent = "@Resources.choosebrand";
+            }
+        }
+
+        if (window.location.href.indexOf('Default') !== -1) {
+
+            reloadContent();
+
+            // Event on lose focus for filters
+            $("#brandFilter").on('input', function () {
+                clearTimeout(timeout);
+                var value = $(this).val();
+                timeout = setTimeout(function () { applyFilter(value, "#brands"); }, timeoutValue);
+            });
+            $("#serieFilter").on('input', function () {
+                clearTimeout(timeout);
+                var value = $(this).val();
+                timeout = setTimeout(function () { applyFilter(value, "#serie"); }, timeoutValue);
+            });
+            $("#modelFilter").on('input', function () {
+                clearTimeout(timeout);
+                var value = $(this).val();
+                timeout = setTimeout(function () { applyFilter(value, "#model"); }, timeoutValue);
+            });
+            $("#yearsFilter").on('input', function () {
+                clearTimeout(timeout);
+                var value = $(this).val();
+                timeout = setTimeout(function () { applyFilter(value, "#year"); }, timeoutValue);
+            });
+            $("#badBeeFilter").on('input', function () {
+                clearTimeout(timeout);
+                var value = $(this).val();
+                timeout = setTimeout(function () { applyFilter(value, "#badBee"); }, timeoutValue);
+            });
+            $("#wvaFilter").on('input', function () {
+                clearTimeout(timeout);
+                var value = $(this).val();
+                timeout = setTimeout(function () { applyFilter(value, "#wvas"); }, timeoutValue);
+            });
+            $("#wvadetFilter").on('input', function () {
+                clearTimeout(timeout);
+                var value = $(this).val();
+                timeout = setTimeout(function () { applyFilter(value, "#wvadet"); }, timeoutValue);
+            });
+            $("#widthFilter").on('input', function () {
+                clearTimeout(timeout);
+                var value = $(this).val();
+                timeout = setTimeout(function () { applyFilter(value, "#width1"); }, timeoutValue);
+            });
+            $("#heightFilter").on('input', function () {
+                clearTimeout(timeout);
+                var value = $(this).val();
+                timeout = setTimeout(function () { applyFilter(value, "#heights"); }, timeoutValue);
+            });
+            $("#thicknessFilter").on('input', function () {
+                clearTimeout(timeout);
+                var value = $(this).val();
+                timeout = setTimeout(function () { applyFilter(value, "#thickness1"); }, timeoutValue);
+            });
+            $("#diameterFilter").on('input', function () {
+                clearTimeout(timeout);
+                var value = $(this).val();
+                timeout = setTimeout(function () { applyFilter(value, "#diameter"); }, timeoutValue);
+            });
+            $("#rivetsFilter").on('input', function () {
+                clearTimeout(timeout);
+                var value = $(this).val();
+                timeout = setTimeout(function () { applyFilter(value, "#rivet"); }, timeoutValue);
+            });
+            $("#systemFilter").on('input', function () {
+                clearTimeout(timeout);
+                var value = $(this).val();
+                timeout = setTimeout(function () { applyFilter(value, "#system"); }, timeoutValue);
+            });
+            $("#crossFilter").on('input', function () {
+                clearTimeout(timeout);
+                var value = $(this).val();
+                timeout = setTimeout(function () { applyFilter(value, "#cross"); }, timeoutValue);
+            });
+        }
+    }
+
+    function getKeywords() {
+        var postData = {
+            keywordPart: $('#search_inp').val()
+        };
+        $.post('@Url.Action("GetKeywords", "Default")', postData, function (data) {
+            $("#keywordsContainer").html(data);
+        });
+    }
+
+
+    function showCrosses() {
+        createFatFilter();
+        $.post('@Url.Action("GetCrossesList", "Default")', fatFilterObj, function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+            }
+            $("#cross").html(items.join(' '));
+        });
+    }
+    function showBrands() {
+        $.post('@Url.Action("GetBrandsListCh", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text == "--") {
+                    data[i].Text = "others"
+                }
+                items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+            }
+            $("#brands2").html(items.join(' '));
+        });
+        $.post('@Url.Action("GetBrandsList", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text == "--") {
+                    data[i].Text = "others"
+                }
+            //    alert("<div class=\"checkbox\"><input type= \"checkbox\" name =\"brands\" value= \"" + data[i].Value + "\" id= \"" + data[i].Value + "Checkbox\" class=\"styled\" /><label for=\"" + data[i].Value + "Checkbox\" >" + data[i].Text + "</label>");
+
+                items.push("<div class=\"checkbox\"><input type= \"checkbox\" name =\"brands\" value= \"" + data[i].Value + "\" id= \"" + data[i].Value + "Checkbox\" class=\"styled\" /><label for=\"" + data[i].Value + "Checkbox\" >" + data[i].Text + "</label>");
+                 //</div >" + data[i].Value + "/>" + data[i].Text);
+            }
+            $("#brands").html(items.join(' '));
+            console.log($("#brands").html(items.join(' ')));
+        });
+    }
+    function showSeries() {
+        $.post('@Url.Action("GetSeriesListCh", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text == "--") {
+                    data[i].Text = "others"
+                }
+                items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+            }
+            $("#serie2").html(items.join(' '));
+        })
+        $.post('@Url.Action("GetSeriesList", "Default")', function (data) {
+            var items = [];
+            items.push("<option selected disabled hidden> @Resources.choose </option>");
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text == "--") {
+                    data[i].Text = "others"
+                }
+                if (data[i].Text != "") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#serie").html(items.join(' '));
+
+            removeDuplicates("serie", "serie2")
+            //sortList("#serie");
+        })
+
+    }
+
+    function showModels() {
+        $.post('@Url.Action("GetModelsListCh", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text == "") {
+                    data[i].Text = "others"
+                }
+                items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+            }
+            $("#model2").html(items.join(' '));
+        })
+        $.post('@Url.Action("GetModelsList", "Default")',  function (data) {
+            var items = [];
+            items.push("<option selected disabled hidden> @Resources.choose </option>");
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text == "") {
+                    data[i].Text = "others"
+                }
+                if (data[i].Text != "          ") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#model").html(items.join(' '));
+
+            removeDuplicates("model", "model2")
+           // sortList("#model");
+        })
+
+    }
+    function showBadBee() {
+        $.post('@Url.Action("GetBadBeeListCh", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+
+                items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+            }
+
+            $("#badBee2").html(items.join(' '));
+        })
+        $.post('@Url.Action("GetBadBeesList", "Default")', function (data) {
+            var items = [];
+            items.push("<option selected disabled hidden> @Resources.choose </option>");
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Value!="0") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+
+            $("#badBee").html(items.join(' '));
+
+              //  sortList("#badBee");
+
+            removeDuplicates("badBee", "badBee2")
+        })
+    }
+    function showWva() {
+        $.post('@Url.Action("GetWvaListCh", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+
+                items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+            }
+            $("#wvas2").html(items.join(' '));
+        })
+        $.post('@Url.Action("GetWvaList", "Default")', function (data) {
+            var items = [];
+            items.push("<option selected disabled hidden> @Resources.choose </option>");
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Value != "0") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#wvas").html(items.join(' '));
+        //    sortList("#wvas");
+            removeDuplicates("wvas", "wvas2")
+        })
+
+    }
+    function showWvaDet() {
+        $.post('@Url.Action("GetWvaDetListCh", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+
+                items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+            }
+            $("#wvadet2").html(items.join(' '));
+        })
+        $.post('@Url.Action("GetWvaDetList", "Default")', function (data) {
+            var items = [];
+            items.push("<option selected disabled hidden> @Resources.choose </option>");
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Value != "0") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#wvadet").html(items.join(' '));
+         //   sortList("#wvadet");
+            removeDuplicates("wvadet", "wvadet2")
+        })
+    }
+
+    function showYears() {
+
+        $.post('@Url.Action("GetYearsListCh", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+
+                items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+            }
+            $("#year2").html(items.join(' '));
+        })
+        $.post('@Url.Action("GetYearsList", "Default")', function (data) {
+            var items = [];
+            items.push("<option selected disabled hidden> @Resources.choose </option>");
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Value!="0" ) {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#year").html(items.join(' '));
+          //  sortList("#year");
+            removeDuplicates("year", "year2")
+        })
+    }
+    function showHeights() {
+        $.post('@Url.Action("GetHeightsListCh", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+
+                items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+
+            }
+            $("#heights2").html(items.join(' '));
+        })
+        $.post('@Url.Action("GetHeightsList", "Default")', function (data) {
+            var items = [];
+            items.push("<option selected disabled hidden> @Resources.choose </option>");
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Value != "0") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#heights").html(items.join(' '));
+            sortList("#heights");
+            removeDuplicates("heights", "heights2")
+        })
+    }
+
+    function showWidths() {
+        $.post('@Url.Action("GetWidthsListCh", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+
+                items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+            }
+            $("#width2").html(items.join(' '));
+        })
+        $.post('@Url.Action("GetWidthsList", "Default")', function (data) {
+            var items = [];
+            items.push("<option selected disabled hidden> @Resources.choose </option>");
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Value != "0") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#width1").html(items.join(' '));
+            sortList("#width1");
+            removeDuplicates("width1", "width2")
+        })
+    }
+    function showThicknesses() {
+        $.post('@Url.Action("GetThicknessesListCh", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+
+                items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+            }
+            $("#thickness2").html(items.join(' '));
+        })
+        $.post('@Url.Action("GetThicknessesList", "Default")', function (data) {
+            var items = [];
+            items.push("<option selected disabled hidden> @Resources.choose </option>");
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Value != "0") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#thickness1").html(items.join(' '));
+            sortList("#thickness1");
+            removeDuplicates("thickness1", "thickness2")
+        })
+    }
+    function showDrumDiameters() {
+        $.post('@Url.Action("GetDrumDiametersListCh", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+
+                items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+            }
+            $("#diameter2").html(items.join(' '));
+        })
+        $.post('@Url.Action("GetDrumDiametersList", "Default")', function (data) {
+            var items = [];
+            items.push("<option selected disabled hidden> @Resources.choose </option>");
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Value != "0") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#diameter").html(items.join(' '));
+         //   sortList("#diameter");
+            removeDuplicates("diameter", "diameter2")
+        })
+    }
+    function showSystems() {
+        $.post('@Url.Action("GetSystemsListCh", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+
+                items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+            }
+            $("#system2").html(items.join(' '));
+        })
+        $.post('@Url.Action("GetSystemsList", "Default")', function (data) {
+            var items = [];
+            items.push("<option selected disabled hidden> @Resources.choose </option>");
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Value != "0") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#system").html(items.join(' '));
+            removeDuplicates("system", "system2")
+        })
+    }
+    function showRivetTypes() {
+        $.post('@Url.Action("GetRivetListCh", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+
+                items.push("<option value=" + data[i].Value.replace("               ", "") + ">" + data[i].Text + "</option>");
+            }
+            $("#rivet2").html(items.join(' '));
+        })
+        $.post('@Url.Action("GetRivetTypesList", "Default")', function (data) {
+            var items = [];
+            items.push("<option selected disabled hidden> @Resources.choose </option>");
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Value != "0") {
+                    items.push("<option value=" + data[i].Value.replace(/ /g, "") + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#rivet").html(items.join(' '));
+         //   sortList("#rivet");
+            removeDuplicates("rivet", "rivet2");
+        })
+    }
+
+    var reloadContentUrl = '@Url.Action("CatalogContent", "Default")';
+
+    function downloadPdf() {
+        alert("@Resources.nopdf");
+    }
+
+</script>

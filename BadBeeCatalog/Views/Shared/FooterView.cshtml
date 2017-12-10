@@ -1,0 +1,49 @@
+﻿@using BadBee.Core.MyResources;
+<div class="footer-container" style="height:initial; ">
+    <footer id="footer">
+        <div class="container" style="background-color:#181818;">
+           <div>
+                <div class="footer-item-container">
+                    <div class="footer-title">
+                        <a>@Resources.searching</a>
+                    </div>
+                    <div class="footer-search">
+                        <input id="search_inp_f" type="text" placeholder="@Resources.search" />
+                        <button type="button" class="search" id="search_btn_f" onclick="typePhrase('#search_inp_f', '#search_btn_f')">@Resources.searchbtn</button>
+                    </div>
+                    <div class="footer-title">
+                        <a>@Resources.catalog</a>
+                    </div>
+                    <div class="footer-text">
+                        <ul>
+                            <li><a onclick="downloadPdf()" style="cursor:pointer">@Resources.downloadpdf</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="footer-container container-footer-border-big">
+            <div class="container container-footer-border" style="background-color:#181818;">
+                <div class="row" id="footer-down">
+                    <div class="languages">
+                        <span class="polish_d" id="polish_down">
+                            <label class="pol_d" id="pol_down">
+                                <a href="@Url.Action("ChangeCulture", "Search", new { lang = "pl", returnUrl = Request.RawUrl })" title="Polski (Polish)">PL</a>
+                            </label>
+                        </span>
+                        <span class="english_d" id="english_down">
+                            <label class="eng_d" id="eng_down">
+                                <a href="@Url.Action("ChangeCulture", "Search", new { lang = "en", returnUrl = Request.RawUrl })" title="English (English)">EN</a>
+                            </label>
+                        </span>
+                    </div>
+                    <p>Copyright © @DateTime.Now.Year by <a href="http://badBee.pl/">BadBee Sp. z o.o.</a> All rights reserved. Created by <b>Karolina Wasilewska</b> </p>
+                    <div class="up">
+                        <a href="#" class="up-button">@Resources.up </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>

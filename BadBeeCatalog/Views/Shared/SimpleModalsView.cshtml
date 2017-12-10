@@ -1,0 +1,931 @@
+﻿
+@using BadBee.Core.MyResources;
+
+<!-- Modal BadBeeNumbers-->
+<div class="modal fade" id="badBeeFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*   <img src="/Images/buttons/button1.png">*@
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.BadBee_no</p>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        @*<input type="text" class="form-control filter" id="badBeeFilter" style="max-width:none;" placeholder="@Resources.enter_filter">*@
+                        <select size="1" style="height:auto;" id="badBee" class="form-control" ondblclick="applybadBeesFilter()">
+                            @*<option disabled selected value="-1"> -- select an option -- </option>*@
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default btn-apply" onclick="applybadBeesFilter()">@Resources.filter</a>
+                <a class="btn btn-default btn-remove" onclick="removebadBeesFilter()">@Resources.remove</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Brands-->
+<div class="modal fade" id="brandFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*   <img src="/Images/buttons/button1.png">*@
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.brand</p>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                       @* <input type="text" class="form-control filter" id="brandFilter" style="max-width:none;" placeholder="@Resources.enter_filter">*@
+                        <select size="1" style="height:auto;" id="brands" class="form-control" ondblclick="applyBrandFilter()"></select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default btn-apply" onclick="applyBrandFilter()">@Resources.filter</a>
+                <a class="btn btn-default btn-remove" onclick="removeBrandFilter()">@Resources.remove</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Series-->
+<div class="modal fade" id="serieFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*   <img src="/Images/buttons/button1.png">*@
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.serie</p>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        @*<input type="text" class="form-control filter" id="serieFilter" style="max-width:none;" placeholder="@Resources.enter_filter">*@
+                        <select size="1" style="height:auto;" id="serie" class="form-control" ondblclick="applySerieFilter()"></select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default btn-apply" onclick="applySerieFilter()">@Resources.filter</a>
+                <a class="btn btn-default btn-remove" onclick="removeSerieFilter()">@Resources.remove</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Models-->
+<div class="modal fade" id="modelFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*   <img src="/Images/buttons/button1.png">*@
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.model</p>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                      @*  <input type="text" class="form-control filter" id="modelFilter" style="max-width:none;" placeholder="@Resources.enter_filter">*@
+                        <select size="1" style="height:auto;" id="model" class="form-control" ondblclick="applyModelFilter()"></select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default btn-apply" onclick="applyModelFilter()">@Resources.filter</a>
+                <a class="btn btn-default btn-remove" onclick="removeModelFilter()">@Resources.remove</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Years-->
+<div class="modal fade" id="yearsFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*   <img src="/Images/buttons/button1.png">*@
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.year</p>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        @*<input type="text" class="form-control filter" id="yearsFilter" style="max-width:none;" placeholder="@Resources.enter_filter">*@
+                        <select size="1" style="height:auto;" id="year" class="form-control" ondblclick="applyYearsFilter()"></select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default btn-apply" onclick="applyYearsFilter()">@Resources.filter</a>
+                <a class="btn btn-default btn-remove" onclick="removeYearsFilter()">@Resources.remove</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal WVAS-->
+<div class="modal fade" id="wvaFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*   <img src="/Images/buttons/button1.png">*@
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.wva</p>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        @*<input type="text" class="form-control filter" id="wvaFilter" style="max-width:none;" placeholder="@Resources.enter_filter">*@
+                        <select size="1" style="height:auto;" id="wvas" class="form-control" ondblclick="applyWvaFilter()"></select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default btn-apply" onclick="applyWvaFilter()">@Resources.filter</a>
+                <a class="btn btn-default btn-remove" onclick="removeWvaFilter()">@Resources.remove</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal WvaDetails-->
+<div class="modal fade" id="wvaDetFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*   <img src="/Images/buttons/button1.png">*@
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.wva_det</p>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                       @* <input type="text" class="form-control filter" id="wvadetFilter" style="max-width:none;" placeholder="@Resources.enter_filter">*@
+                        <select size="1" style="height:auto;" id="wvadet" class="form-control" ondblclick="applyWvaDetailsFilter()"></select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default btn-apply" onclick="applyWvaDetailsFilter()">@Resources.filter</a>
+                <a class="btn btn-default btn-remove" onclick="removeWvaDetailsFilter()">@Resources.remove</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Height-->
+<div class="modal fade" id="heightFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*   <img src="/Images/buttons/button1.png">*@
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.height</p>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        @*<input type="text" class="form-control filter" id="heightFilter" style="max-width:none;" placeholder="@Resources.enter_filter">*@
+                        <select size="1" style="height:auto;" id="heights" class="form-control" ondblclick="applyHeightsFilter()"></select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default btn-apply" onclick="applyHeightsFilter()">@Resources.filter</a>
+                <a class="btn btn-default btn-remove" onclick="removeHeightsFilter()">@Resources.remove</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Width-->
+<div class="modal fade" id="widthFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*   <img src="/Images/buttons/button1.png">*@
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.width</p>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        @*<input type="text" class="form-control filter" id="widthFilter" style="max-width:none;" placeholder="@Resources.enter_filter">*@
+                        <select size="1" style="height:auto;" id="width1" class="form-control" ondblclick="applyWidthsFilter()"></select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default btn-apply" onclick="applyWidthsFilter()">@Resources.filter</a>
+                <a class="btn btn-default btn-remove" onclick="removeWidthsFilter()">@Resources.remove</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Thickness-->
+<div class="modal fade" id="thicknessFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*   <img src="/Images/buttons/button1.png">*@
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.thickness</p>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        @*<input type="text" class="form-control filter" id="thicknessFilter" style="max-width:none;" placeholder="@Resources.enter_filter">*@
+                        <select size="1" style="height:auto;" id="thickness1" class="form-control" ondblclick="applyThicknessesFilter()"></select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default btn-apply" onclick="applyThicknessesFilter()">@Resources.filter</a>
+                <a class="btn btn-default btn-remove" onclick="removeThicknessesFilter()">@Resources.remove</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal DrumDiameter-->
+<div class="modal fade" id="diameterFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*   <img src="/Images/buttons/button1.png">*@
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.drumdiameter</p>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                       @* <input type="text" class="form-control filter" id="diameterFilter" style="max-width:none;" placeholder="@Resources.enter_filter">*@
+                        <select size="1" style="height:auto;" id="diameter" class="form-control" ondblclick="applyDrumDiameterFilter()"></select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default btn-apply" onclick="applyDrumDiameterFilter()">@Resources.filter</a>
+                <a class="btn btn-default btn-remove" onclick="removeDrumDiameterFilter()">@Resources.remove</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal System-->
+<div class="modal fade" id="systemFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*   <img src="/Images/buttons/button1.png">*@
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.system</p>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                       @* <input type="text" class="form-control filter" id="systemFilter" style="max-width:none;" placeholder="@Resources.enter_filter">*@
+                        <select size="1" style="height:auto;" id="system" class="form-control" ondblclick="applySystemsFilter()"></select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default btn-apply" onclick="applySystemsFilter()">@Resources.filter</a>
+                <a class="btn btn-default btn-remove" onclick="removeSystemsFilter()">@Resources.remove</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Rivets-->
+<div class="modal fade" id="rivetFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*   <img src="/Images/buttons/button1.png">*@
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.rivets</p>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                       @* <input type="text" class="form-control filter" id="rivetsFilter" style="max-width:none;" placeholder="@Resources.enter_filter">*@
+                        <select size="1" style="height:auto;" id="rivet" class="form-control" ondblclick="applyRivetsFilter()"></select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default btn-apply" onclick="applyRivetsFilter()">@Resources.filter</a>
+                <a class="btn btn-default btn-remove" onclick="removeRivetsFilter()">@Resources.remove</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    var j = $.noConflict(true);
+
+    var brandsFilter = null;
+    var seriesFilter = null;
+    var modelsFilter = null;
+    var yearsFilter = null;
+    var badBeesFilter = null;
+    var wvasFilter = null;
+    var wvaDetsFilter = null;
+    var diametersFilter = null;
+    var rivetsFilter = null;
+    var dimensionsFilter = null;
+    var widthsFilter = null;
+    var heightsFilter = null;
+    var thicknessesFilter = null;
+    var systemsFilter = null;
+    var phraseFilter = null;
+    var status = null;
+    var crossNameFilter =null;
+    var crossNumbersFilter= null;
+    var job = null;
+    var totalCount = 0;
+    var fatFilterObj = null;
+    var page = "1";
+
+    $(function () {
+        console.log("site ready.")
+
+        reloadContent();
+
+    });
+    function registerPagingEvent() {
+        $(".pagination").on("click", "li>a", function (e) {
+            e.preventDefault();
+
+            page = $(this).attr("href");
+            page = page.substring(1);
+
+            reloadContent();
+        });
+    }
+
+    function cleanBadBeeFilter(url) {
+        console.log("-- clean filter start --");
+        $.post('/Product/CleanFilter', function (data) {
+            window.location = url;
+            console.log("-- clean filter end --");
+        });
+    }
+    function enableSeriesMod() {
+        if (!$.isEmptyObject(brandsFilter)) {
+            $("#seriesmod").css("cursor", "pointer");
+            $("#modelsmod").css("cursor", "pointer");
+            $("#seriesmod").attr("data-toggle", "modal");
+            $("#modelsmod").attr("data-toggle", "modal");
+        }
+    }
+
+    //Brand functions
+    function showBrands() {
+        $.post('@Url.Action("GetBrandsList", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text == "--") {
+                    data[i].Text = "others"
+                }
+                items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+            }
+            $("#brands").html(items.join(' '));
+        });
+    }
+    function applyBrandFilter() {
+        var brandSelected = $("#brands").val();
+
+        if (brandSelected == "-1") { brandsFilter = null; }
+        else { brandsFilter = brandSelected; }
+        status = "filter";
+
+        page = "1";
+        reloadContent();
+        $('#brandFilter').val('');
+        $("#brandFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#brandFilterModal').modal('hide');
+    }
+    function removeBrandFilter() {
+        brandsFilter = null;
+
+        page = "1";
+        reloadContent();
+        $("#brandFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#brandFilterModal').modal('hide');
+    }
+
+    //Serie functions
+    function showSeries() {
+        $.post('@Url.Action("GetSeriesList", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text != "") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#serie").html(items.join(' '));
+        });
+    }
+
+    function applySerieFilter() {
+        var serieSelected = $("#serie").val();
+
+        if (serieSelected == "-1") { seriesFilter = null; }
+        else { seriesFilter = serieSelected; }
+        status = "filter";
+
+        page = "1";
+        reloadContent();
+        $('#serieFilter').val('');
+        $("#serieFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#serieFilterModal').modal('hide');
+    }
+    function removeSerieFilter() {
+        seriesFilter = null;
+
+        page = "1";
+        reloadContent();
+        $("#serieFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#serieFilterModal').modal('hide');
+    }
+
+    //Model functions
+    function showModels() {
+        $.post('@Url.Action("GetModelsList", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text != "") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#model").html(items.join(' '));
+        });
+    }
+
+    function applyModelFilter() {
+        var modelSelected = $("#model").val();
+
+        if (modelSelected == "-1") { modelsFilter = null; }
+        else { modelsFilter = modelSelected; }
+        status = "filter";
+
+        page = "1";
+        reloadContent();
+        $('#modelFilter').val('');
+        $("#modelFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#modelFilterModal').modal('hide');
+    }
+    function removeModelFilter() {
+        modelsFilter = null;
+
+        page = "1";
+        reloadContent();
+        $("#modelFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#modelFilterModal').modal('hide');
+    }
+    //BadBeeNumbers functions
+    function showBadBee() {
+        $.post('@Url.Action("GetBadBeesList", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text!="") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#badBee").html(items.join(' '));
+        });
+    }
+    function applybadBeesFilter() {
+        var badBeeSelected = $("#badBee").val();
+
+        if (badBeeSelected == "-1") { badBeesFilter = null; }
+        else { badBeesFilter = badBeeSelected; }
+        status = "filter";
+
+        page = "1";
+        reloadContent();
+        $("#badBeeFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#badBeeFilterModal').modal('hide');
+    }
+    function removebadBeesFilter() {
+        badBeesFilter = null;
+
+        page = "1";
+        reloadContent();
+        $('#badBeeFilter').val('');
+        $("#badBeeFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#badBeeFilterModal').modal('hide');
+    }
+    //Years functions
+    function showYears() {
+        $.post('@Url.Action("GetYearsList", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text != "") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#year").html(items.join(' '));
+        });
+    }
+    function applyYearsFilter() {
+        var yearSelected = $("#year").val();
+
+        if (yearSelected == "-1") { yearsFilter = null; }
+        else { yearsFilter = yearSelected; }
+        status = "filter";
+
+        page = "1";
+        reloadContent();
+        $('#yearsFilter').val('');
+        $("#yearsFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#yearsFilterModal').modal('hide');
+    }
+    function removeYearsFilter() {
+        yearsFilter = null;
+
+        page = "1";
+        reloadContent();
+        $("#yearsFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#yearsFilterModal').modal('hide');
+    }
+    //Wva functions
+    function showWva() {
+        $.post('@Url.Action("GetWvaList", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text != "") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#wvas").html(items.join(' '));
+        });
+    }
+    function applyWvaFilter() {
+        var wvaSelected = $("#wvas").val();
+
+        if (wvaSelected == "-1") { wvasFilter = null; }
+        else { wvasFilter = wvaSelected; }
+        status = "filter";
+
+        page = "1";
+        reloadContent();
+        $('#wvaFilter').val('');
+        $("#wvaFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#wvaFilterModal').modal('hide');
+    }
+    function removeWvaFilter() {
+        wvasFilter = null;
+
+        page = "1";
+        reloadContent();
+        $("#wvaFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#wvaFilterModal').modal('hide');
+    }
+
+    //WvaDet functions
+    function showWvaDet() {
+        $.post('@Url.Action("GetWvaDetList", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text != "") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#wvadet").html(items.join(' '));
+        });
+    }
+    function applyWvaDetailsFilter() {
+        var wvaSelected = $("#wvadet").val();
+
+        if (wvaSelected == "-1") { wvaDetsFilter = null; }
+        else { wvaDetsFilter = wvaSelected; }
+        status = "filter";
+
+        page = "1";
+        reloadContent();
+        $('#wvadetFilter').val('');
+        $("#wvaDetFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#wvaDetFilterModal').modal('hide');
+    }
+    function removeWvaDetailsFilter() {
+        wvaDetsFilter = null;
+
+        page = "1";
+        reloadContent();
+        $("#wvaDetFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#wvaDetFilterModal').modal('hide');
+    }
+
+
+    //Heights functions
+    function showHeights() {
+        $.post('@Url.Action("GetHeightsList", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text != "") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#heights").html(items.join(' '));
+        });
+    }
+    function applyHeightsFilter() {
+        var selected = $("#heights").val();
+
+        if (selected == "-1") { heightsFilter = null; }
+        else { heightsFilter = selected; }
+        status = "filter";
+
+        page = "1";
+        reloadContent();
+        $('#heightFilter').val('');
+        $("#heightFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#heightFilterModal').modal('hide');
+    }
+    function removeHeightsFilter() {
+        heightsFilter = null;
+
+        page = "1";
+        reloadContent();
+        $("#heightFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#heightFilterModal').modal('hide');
+    }
+
+    //Widths functions
+    function showWidths() {
+        $.post('@Url.Action("GetWidthsList", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text != "") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#width1").html(items.join(' '));
+        });
+    }
+    function applyWidthsFilter() {
+        var selected = $("#width1").val();
+
+        if (selected == "-1") { widthsFilter = null; }
+        else { widthsFilter = selected; }
+        status = "filter";
+
+        page = "1";
+        reloadContent();
+        $('#widthFilter').val('');
+        $("#widthFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#widthFilterModal').modal('hide');
+    }
+    function removeWidthsFilter() {
+        widthsFilter = null;
+
+        page = "1";
+        reloadContent();
+        $("#widthFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#widthFilterModal').modal('hide');
+    }
+
+    //Thickness functions
+    function showThicknesses() {
+        $.post('@Url.Action("GetThicknessesList", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text != "") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#thickness1").html(items.join(' '));
+        });
+    }
+    function applyThicknessesFilter() {
+        var selected = $("#thickness1").val();
+
+        if (selected == "-1") { thicknessesFilter = null; }
+        else { thicknessesFilter = selected; }
+        status = "filter";
+
+        page = "1";
+        reloadContent();
+        $('#thicknessFilter').val('');
+        $("#thicknessFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#thicknessFilterModal').modal('hide');
+    }
+    function removeThicknessesFilter() {
+        thicknessesFilter = null;
+
+        page = "1";
+        reloadContent();
+        $("#thicknessFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#thicknessFilterModal').modal('hide');
+    }
+
+    //DrumDiameters functions
+    function showDrumDiameters() {
+        $.post('@Url.Action("GetDrumDiametersList", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text != "") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#diameter").html(items.join(' '));
+        });
+    }
+    function applyDrumDiameterFilter() {
+        var selected = $("#diameter").val();
+
+        if (selected == "-1") { diametersFilter = null; }
+        else { diametersFilter = selected; }
+        status = "filter";
+
+        page = "1";
+        reloadContent();
+        $('#diameterFilter').val('');
+        $("#diameterFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#diameterFilterModal').modal('hide');
+    }
+    function removeDrumDiameterFilter() {
+        diametersFilter = null;
+
+        page = "1";
+        reloadContent();
+        $("#diameterFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#diameterFilterModal').modal('hide');
+    }
+
+    //System functions
+    function showSystems() {
+        $.post('@Url.Action("GetSystemsList", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text != "") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#system").html(items.join(' '));
+        });
+    }
+    function applySystemsFilter() {
+        var selected = $("#system").val();
+
+        if (selected == "-1") { systemsFilter = null; }
+        else { systemsFilter = selected; }
+        status = "filter";
+
+        page = "1";
+        reloadContent();
+        $('#systemFilter').val('');
+        $("#systemFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#systemFilterModal').modal('hide');
+    }
+    function removeSystemsFilter() {
+        systemsFilter = null;
+
+        page = "1";
+        reloadContent();
+        $("#systemFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#systemFilterModal').modal('hide');
+    }
+
+    //Rivets functions
+    function showRivetTypes() {
+        $.post('@Url.Action("GetRivetTypesList", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text != "") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#rivet").html(items.join(' '));
+        });
+    }
+    function applyRivetsFilter() {
+        var selected = $("#rivet").val();
+
+        if (selected == "-1") { rivetsFilter = null; }
+        else { rivetsFilter = selected; }
+        status = "filter";
+
+        page = "1";
+        reloadContent();
+        $('#rivetsFilter').val('');
+        $("#rivetFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#rivetFilterModal').modal('hide');
+    }
+    function removeRivetsFilter() {
+        rivetsFilter = null;
+
+        page = "1";
+        reloadContent();
+        $("#rivetFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#rivetFilterModal').modal('hide');
+    }
+
+    function createFatFilter() {
+        fatFilterObj = {
+            "page": page,
+            "Brands": brandsFilter,
+            "Series": seriesFilter,
+            "Models": modelsFilter,
+            "DateYears": yearsFilter,
+            "BadBeeNumbers": badBeesFilter,
+            "Wvas": wvasFilter,
+            "WvaDetails2": wvaDetsFilter,
+            "Rivets": rivetsFilter,
+            "Widths": widthsFilter,
+            "Heights": heightsFilter,
+            "Thicknesses": thicknessesFilter,
+            "DrumDiameters": diametersFilter,
+            "Systems": systemsFilter,
+
+
+        };
+    }
+    function reloadContent(callback) {
+
+        if (isFilterEmpty()) {
+            status = null;
+        }
+
+        showProgressBar();
+        setLeftRightButtonsPosition();
+
+
+        createFatFilter();
+
+        eventsDisabled = true;
+        $.post(reloadContentUrl, fatFilterObj, function (data) {
+
+            $('#ajaxLoading').hide();
+            $('#mainAjaxLoaderImg').css("display", "none");
+            $('#mainAjaxLoader').hide();
+            $('.footer-container').show();
+            $('#catalogContent').html(data).promise().done(function () {
+                enableSeriesMod();
+                var noRecordsFound = document.getElementById('noRecordsFound');
+                console.log(noRecordsFound);
+                if (noRecordsFound != null) {
+                    status = null;
+                    phraseFilter = null;
+                    crossNameFilter = null;
+                    $('#emptyCat').hide();
+                    $('#catalogTable').hide();
+                    $('#page-nav').hide();
+                }
+                else {
+                    //setCarsImagePosition();
+                    if (status == 'filter') {
+                        $('#catalogTable').show();
+                        $('#emptyCat').hide();
+                        $('#page-nav').show();
+                        crossNameFilter = null;
+                        registerPagingEvent();
+                        if (phraseFilter != null && phraseFilter != "") {
+                            phraseFilter = null;
+                        }
+                        getBadBeeFilter(false);
+                    }
+                    else {
+                        crossNameFilter = null;
+                        $('#catalogTable').hide();
+                        $('#emptyCat').show();
+                        $('#page-nav').hide();
+                    }
+                }
+
+                setLeftRightButtonsPosition();
+
+                eventsDisabled = false;
+
+                if (callback) {
+                    callback();
+                }
+            });
+        });
+    }
+</script>

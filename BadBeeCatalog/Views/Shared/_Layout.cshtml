@@ -1,22 +1,27 @@
-﻿@using Lumag.Core.MyResources;
+﻿@using BadBee.Core.MyResources;
 @using System.Web.Optimization;
-@using Lumag.Core.Models;
+@using BadBee.Core.Models;
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Products catalog">
-    <meta name="author" content="MPED Sp. z o.o.">
+    <meta name="author" content="Karolina Wasilewska">
     <title>@Resources.catalog_title_cv</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&subset=latin,latin-ext" rel="stylesheet">
     <link href="~/Content/bootstrap.min.css" rel="stylesheet">
     <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/awesome-bootstrap-checkbox.css" rel="stylesheet" />
+ @*   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">*@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+    
 </head>
 <body>
+
+   
+
     @{
         Html.RenderPartial("NavView");
     }
@@ -33,7 +38,7 @@
         <div id="catalogMainView">
             @{
                 Html.RenderPartial("AjaxLoaderView");
-            }
+            }            
             <div id="catalogContent" class="row">
                 @RenderBody()
             </div>
@@ -46,28 +51,28 @@
     @if (!GlobalVars.BrowserIsMobile())
     {
 
-        <div id="normal_modals">
-            @{
-                Html.RenderPartial("ModalsView");
+    <div id="normal_modals">
+        @{
+            Html.RenderPartial("ModalsView");
+        }
+    </div>
             }
-        </div>
-                }
-                else
-                {
+            else
+            {
 
-                    <div id="simple_modals">
-                        @{
-                            Html.RenderPartial("SimpleModalsView");
-                        }
-                    </div>
-                            }
+    <div id="simple_modals">
+        @{
+            Html.RenderPartial("SimpleModalsView");
+        }
+    </div>
+            }
 
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script type="text/javascript" src="~/Scripts/jquery-1.4.4.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="~/Scripts/jquery.printElement.js"></script>
-    <script type="text/javascript" src="~/Scripts/lumag_catalog.js"></script>
+    <script type="text/javascript" src="~/Scripts/badBee_catalog.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
 
     @{

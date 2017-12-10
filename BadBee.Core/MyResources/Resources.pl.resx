@@ -277,10 +277,10 @@
     <value>Ilość nitów</value>
   </data>
   <data name="search" xml:space="preserve">
-    <value>Wpisz numer BadBee / cross</value>
+    <value>Wpisz markę, model lub numer BadBee</value>
   </data>
   <data name="searchapp" xml:space="preserve">
-    <value>Wyszukiwanie po zastosowaniu</value>
+    <value>Wyszukiwanie pojazdu</value>
   </data>
   <data name="searchbtn" xml:space="preserve">
     <value>Wyszukaj</value>
@@ -679,5 +679,8 @@
   </data>
   <data name="wear_indicator" xml:space="preserve">
     <value>Czujnik klocka</value>
+  </data>
+  <data name="rights" xml:space="preserve">
+    <value>Wszelkie prawa zastrzeżone. Wykonane przez</value>
   </data>
 </root>

@@ -1,0 +1,60 @@
+﻿@using Lumag.Core.MyResources;
+
+@model IEnumerable<Lumag.Core.DAL.Indicators>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-xs-12 colContent">
+    <div id="catalogPrintable">
+        <table class="table table-striped">
+            <thead class="indicators_table_head">
+                <tr id="indicators_table_head">
+                    <th>
+                        @Html.DisplayNameFor(model => model.LumagNo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Length)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Application)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Quantity)
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="catalogTable" class="catalog_table">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                          @*  @Html.DisplayFor(modelItem => item.LumagNo)*@
+                            <span onclick="window.location='@Url.Action("Details", "Indicators", new { id = item.Id })'" title=""
+                                  style="cursor:pointer; text-decoration:none; color: #d52027">@Html.Raw(item.LumagNo)</span>
+                        </td>
+                        <td>
+                          <text>@Resources.wear_indicator </text> 
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Length)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Application)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        </div>
+    </div>
+

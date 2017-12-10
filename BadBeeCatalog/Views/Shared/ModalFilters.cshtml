@@ -1,0 +1,562 @@
+﻿@using BadBee.Core.MyResources;
+@model BadBee.Core.Models.ModalFilters
+
+<div class="clearfilters"><a onclick="cleanBadBeeFilter('@Url.Action("Index", "Product")');" href="#" title="@Resources.cleanFilters">@Resources.cleanFilters</a></div>
+
+@{
+    Html.RenderPartial("ModalsView");
+}
+
+<script>
+
+    var j = $.noConflict(true);
+
+    var brandsFilter = null;
+    var seriesFilter = null;
+    var modelsFilter = null;
+    var yearsFilter = null;
+    var badBeesFilter = null;
+    var wvasFilter = null;
+    var wvaDetsFilter = null;
+    var diametersFilter = null;
+    var rivetsFilter = null;
+    var dimensionsFilter = null;
+    var widthsFilter = null;
+    var heightsFilter = null;
+    var thicknessesFilter = null;
+    var systemsFilter = null;
+    var phraseFilter = null;
+    var status = null;
+    var crossNameFilter =null;
+    var crossNumbersFilter= null;
+    var job = null;
+    var totalCount = 0;
+    var fatFilterObj = null;
+    var page = "1";
+
+    $(function () {
+        console.log("site ready.")
+
+        reloadContent();
+
+    });
+    function registerPagingEvent() {
+        $(".pagination").on("click", "li>a", function (e) {
+            e.preventDefault();
+
+            page = $(this).attr("href");
+            page = page.substring(1);
+
+            reloadContent();
+        });
+    }
+
+    function cleanBadBeeFilter(url) {
+        console.log("-- clean filter start --");
+        $.post('/Product/CleanFilter', function (data) {
+            window.location = url;
+            console.log("-- clean filter end --");
+        });
+    }
+    function enableSeriesMod() {
+        if (!$.isEmptyObject(brandsFilter)) {
+            $("#seriesmod").css("cursor", "pointer");
+            $("#modelsmod").css("cursor", "pointer");
+            $("#seriesmod").attr("data-toggle", "modal");
+            $("#modelsmod").attr("data-toggle", "modal");
+        }
+    }
+
+    //Brand functions
+    function showBrands() {
+        alert("hello");
+        $.post('@Url.Action("GetBrandsList", "Product")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text == "--") {
+                    data[i].Text = "others"
+                }
+                alert("<div class=\"checkbox\"><input type= \"checkbox\" name =\"brands\" value= " + data[i].Value + " id= " + data[i].Value + "Checkbox\" class=\"styled\" /><label for=" + data[i].Value + "Checkbox\" >" + data[i].Text + "</label>");
+
+                items.push("<div class=\"checkbox\"><input type= \"checkbox\" name =\"brands\" value= " + data[i].Value + " id= " + data[i].Value + "Checkbox\" class=\"styled\" /><label for=" + data[i].Value + "Checkbox\" >"+ data[i].Text+"</label>");
+                 //</div >" + data[i].Value + "/>" + data[i].Text);
+            }
+        });
+           
+
+    function applyBrandFilter() {
+        var brandSelected = $("#brand").val();
+
+        if (brandSelected == "-1") { brandsFilter = null; }
+        else { brandsFilter = brandSelected; }
+
+        page = "1";
+        reloadContent();
+        $('#brandFilter').val('');
+        $("#brandFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#brandFilterModal').modal('hide');
+    }
+    function removeBrandFilter() {
+        brandsFilter = null;
+
+        page = "1";
+        reloadContent();
+        $("#brandFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#brandFilterModal').modal('hide');
+    }
+
+    //Serie functions
+    function showSeries() {
+        $.post('@Url.Action("GetSeriesList", "Product")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text != "") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#serie").html(items.join(' '));
+        });
+    }
+
+    function applySerieFilter() {
+        var serieSelected = $("#serie").val();
+
+        if (serieSelected == "-1") { seriesFilter = null; }
+        else { seriesFilter = serieSelected; }
+
+        page = "1";
+        reloadContent();
+        $('#serieFilter').val('');
+        $("#serieFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#serieFilterModal').modal('hide');
+    }
+    function removeSerieFilter() {
+        seriesFilter = null;
+
+        page = "1";
+        reloadContent();
+        $("#serieFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#serieFilterModal').modal('hide');
+    }
+
+    //Model functions
+    function showModels() {
+        $.post('@Url.Action("GetModelsList", "Product")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text != "") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#model").html(items.join(' '));
+        });
+    }
+
+    function applyModelFilter() {
+        var modelSelected = $("#model").val();
+
+        if (modelSelected == "-1") { modelsFilter = null; }
+        else { modelsFilter = modelSelected; }
+
+        page = "1";
+        reloadContent();
+        $('#modelFilter').val('');
+        $("#modelFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#modelFilterModal').modal('hide');
+    }
+    function removeModelFilter() {
+        modelsFilter = null;
+
+        page = "1";
+        reloadContent();
+        $("#modelFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#modelFilterModal').modal('hide');
+    }
+    //BadBeeNumbers functions
+    function showBadBee() {
+        $.post('@Url.Action("GetBadBeesList", "Product")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text!="") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#badBee").html(items.join(' '));
+        });
+    }
+    function applyBadBeeFilter() {
+        var badBeeSelected = $("#badBee").val();
+
+        if (badBeeSelected == "-1") { badBeesFilter = null; }
+        else { badBeesFilter = badBeeSelected; }
+
+        page = "1";
+        reloadContent();
+        $('#badBeeFilter').val('');
+        $("#badBeeFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#badBeeFilterModal').modal('hide');
+    }
+    function removeBadBeeFilter() {
+        badBeesFilter = null;
+
+        page = "1";
+        reloadContent();
+        $("#badBeeFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#badBeeFilterModal').modal('hide');
+    }
+    //Years functions
+    function showYears() {
+        $.post('@Url.Action("GetYearsList", "Product")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text != "") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#years").html(items.join(' '));
+        });
+    }
+    function applyYearsFilter() {
+        var yearSelected = $("#years").val();
+
+        if (yearSelected == "-1") { yearsFilter = null; }
+        else { yearsFilter = yearSelected; }
+
+        page = "1";
+        reloadContent();
+        $('#yearsFilter').val('');
+        $("#yearsFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#yearsFilterModal').modal('hide');
+    }
+    function removeYearsFilter() {
+        yearsFilter = null;
+
+        page = "1";
+        reloadContent();
+        $("#yearsFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#yearsFilterModal').modal('hide');
+    }
+    //Wva functions
+    function showWva() {
+        $.post('@Url.Action("GetWvaList", "Product")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text != "") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#wva").html(items.join(' '));
+        });
+    }
+    function applyWvaFilter() {
+        var wvaSelected = $("#wva").val();
+
+        if (wvaSelected == "-1") { wvasFilter = null; }
+        else { wvasFilter = wvaSelected; }
+
+        page = "1";
+        reloadContent();
+        $('#wvaFilter').val('');
+        $("#wvaFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#wvaFilterModal').modal('hide');
+    }
+    function removeWvaFilter() {
+        wvasFilter = null;
+
+        page = "1";
+        reloadContent();
+        $("#wvaFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#wvaFilterModal').modal('hide');
+    }
+
+    //WvaDet functions
+    function showWvaDet() {
+        $.post('@Url.Action("GetWvaDetList", "Product")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text != "") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#wvadetails").html(items.join(' '));
+        });
+    }
+    function applyWvaDetailsFilter() {
+        var wvaSelected = $("#wvadetails").val();
+
+        if (wvaSelected == "-1") { wvaDetsFilter = null; }
+        else { wvaDetsFilter = wvaSelected; }
+
+        page = "1";
+        reloadContent();
+        $('#wvadetFilter').val('');
+        $("#wvaDetFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#wvaDetFilterModal').modal('hide');
+    }
+    function removeWvaDetailsFilter() {
+        wvaDetsFilter = null;
+
+        page = "1";
+        reloadContent();
+        $("#wvaDetFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#wvaDetFilterModal').modal('hide');
+    }
+
+
+    //Heights functions
+    function showHeights() {
+        $.post('@Url.Action("GetHeightsList", "Product")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text != "") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#height").html(items.join(' '));
+        });
+    }
+    function applyHeightsFilter() {
+        var selected = $("#height").val();
+
+        if (selected == "-1") { heightsFilter = null; }
+        else { heightsFilter = selected; }
+
+        page = "1";
+        reloadContent();
+        $('#heightFilter').val('');
+        $("#heightFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#heightFilterModal').modal('hide');
+    }
+    function removeHeightsFilter() {
+        heightsFilter = null;
+
+        page = "1";
+        reloadContent();
+        $("#heightFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#heightFilterModal').modal('hide');
+    }
+
+    //Widths functions
+    function showWidths() {
+        $.post('@Url.Action("GetWidthsList", "Product")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text != "") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#width").html(items.join(' '));
+        });
+    }
+    function applyWidthsFilter() {
+        var selected = $("#width").val();
+
+        if (selected == "-1") { widthsFilter = null; }
+        else { widthsFilter = selected; }
+
+        page = "1";
+        reloadContent();
+        $('#widthFilter').val('');
+        $("#widthFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#widthFilterModal').modal('hide');
+    }
+    function removeWidthsFilter() {
+        widthsFilter = null;
+
+        page = "1";
+        reloadContent();
+        $("#widthFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#widthFilterModal').modal('hide');
+    }
+
+    //Thickness functions
+    function showThicknesses() {
+        $.post('@Url.Action("GetThicknessesList", "Product")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text != "") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#thickness").html(items.join(' '));
+        });
+    }
+    function applyThicknessesFilter() {
+        var selected = $("#thickness").val();
+
+        if (selected == "-1") { thicknessesFilter = null; }
+        else { thicknessesFilter = selected; }
+
+        page = "1";
+        reloadContent();
+        $('#thicknessFilter').val('');
+        $("#thicknessFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#thicknessFilterModal').modal('hide');
+    }
+    function removeThicknessesFilter() {
+        thicknessesFilter = null;
+
+        page = "1";
+        reloadContent();
+        $("#thicknessFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#thicknessFilterModal').modal('hide');
+    }
+
+    //DrumDiameters functions
+    function showDrumDiameters() {
+        $.post('@Url.Action("GetDrumDiametersList", "Product")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text != "") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#drum").html(items.join(' '));
+        });
+    }
+    function applyDrumDiameterFilter() {
+        var selected = $("#drum").val();
+
+        if (selected == "-1") { diametersFilter = null; }
+        else { diametersFilter = selected; }
+
+        page = "1";
+        reloadContent();
+        $('#diameterFilter').val('');
+        $("#diameterFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#diameterFilterModal').modal('hide');
+    }
+    function removeDrumDiameterFilter() {
+        diametersFilter = null;
+
+        page = "1";
+        reloadContent();
+        $("#diameterFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#diameterFilterModal').modal('hide');
+    }
+
+    //System functions
+    function showSystems() {
+        $.post('@Url.Action("GetSystemsList", "Product")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text != "") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#sys").html(items.join(' '));
+        });
+    }
+    function applySystemsFilter() {
+        var selected = $("#sys").val();
+
+        if (selected == "-1") { systemsFilter = null; }
+        else { systemsFilter = selected; }
+
+        page = "1";
+        reloadContent();
+        $('#systemFilter').val('');
+        $("#systemFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();sh
+        $('#systemFilterModal').modal('hide');
+    }
+    function removeSystemsFilter() {
+        systemsFilter = null;
+
+        page = "1";
+        reloadContent();
+        $("#systemFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#systemFilterModal').modal('hide');
+    }
+
+    //Rivets functions
+    function showRivetTypes() {
+        $.post('@Url.Action("GetRivetTypesList", "Product")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text != "") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#riv").html(items.join(' '));
+        });
+    }
+    function applyRivetsFilter() {
+        var selected = $("#riv").val();
+
+        if (selected == "-1") { rivetsFilter = null; }
+        else { rivetsFilter = selected; }
+
+        page = "1";
+        reloadContent();
+        $('#rivetsFilter').val('');
+        $("#rivetFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#rivetFilterModal').modal('hide');
+    }
+    function removeRivetsFilter() {
+        rivetsFilter = null;
+
+        page = "1";
+        reloadContent();
+        $("#rivetFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#rivetFilterModal').modal('hide');
+    }
+
+    function createFatFilter() {
+        fatFilterObj = {
+            "page": page,
+            "Brands": brandsFilter,
+            "Series": seriesFilter,
+            "Models": modelsFilter,
+            "DateYears": yearsFilter,
+            "BadBeeNumbers": badBeesFilter,
+            "Wvas": wvasFilter,
+            "WvaDetails2": wvaDetsFilter,
+            "Rivets": rivetsFilter,
+            "Widths": widthsFilter,
+            "Heights": heightsFilter,
+            "Thicknesses": thicknessesFilter,
+            "DrumDiameters": diametersFilter,
+            "Systems": systemsFilter,
+
+
+        };
+    }
+    function reloadContent(callback) {
+
+
+        createFatFilter();
+        $.post('@Url.Action("CatalogContent", "Product")', fatFilterObj, function (data) {
+            $('#catalogContent').html(data).promise().done(function () {
+                enableSeriesMod()
+                registerPagingEvent()
+            });
+        })
+    }
+
+</script>

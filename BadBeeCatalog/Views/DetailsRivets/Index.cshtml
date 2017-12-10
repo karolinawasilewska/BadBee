@@ -1,0 +1,62 @@
+﻿@using Lumag.CatalogCVL_MVC.Models;
+@using Lumag.Core.MyResources;
+
+@model DetailsRivetsModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.fancybox.js"></script>
+    <link rel="stylesheet" href="~/Scripts/jquery.fancybox.css" type="text/css" media="screen" />*@
+<html>
+<body>
+    <div class="col-xs-12 colContent">
+        <div id="catalogPrintable">
+            <div class="back">
+                <span><</span> <a href="/Default">@Resources.goback</a>
+            </div>
+            <div class="details_container">
+                <div class="schema_rivets">
+
+                    <img src="~/Images/rivet.jpg" />
+                </div>
+                <div class="desc">
+
+
+
+                    <table class="table table-striped tableDetails">
+                        <tbody id="catalogTableDetails">
+                           
+                            @if (!string.IsNullOrEmpty(Model.RivetType))
+                            {
+                                <tr class="detdesc"><td>@Resources.description: </td><td class="detval" style="border-right:0 !important;">@Model.RivetType</td> </tr>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.RivetName))
+                            {
+                                <tr class="detdesc"><td>@Resources.lumag_no: </td><td class="detval" style="border-right:0 !important;">@Model.RivetName</td> </tr>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.RivetDimensions))
+                            {
+                                <tr class="detdesc"><td>@Resources.dimensions: </td><td class="detval" style="border-right:0 !important;">@Model.RivetDimensions</td> </tr> }
+                           
+                            @if (!string.IsNullOrEmpty(Model.Quantity))
+                            {
+                                <tr class="detdesc"><td>@Resources.rivets_qtt_in_kit: </td><td class="detval" style="border-right:0 !important;">@Model.Quantity</td> </tr>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.QuantityForProduct))
+                            {
+                                <tr class="detdesc"><td>@Resources.rivets_qtt_for_product: </td><td class="detval" style="border-right:0 !important;">@Model.QuantityForProduct</td> </tr>
+                            }
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

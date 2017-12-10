@@ -1,0 +1,11 @@
+﻿@model BadBeeCatalog.Models.GetKeywordsModel
+@if (Model.Keywords.Count > 0)
+{
+<ul class="list-unstyled" style="list-style-type: none;margin:10px !important;font-size:14px;">
+        @foreach (var item in Model.Keywords)
+        {
+            <li><a onclick="selectKeyword('@item')" href="#">@item</a></li>
+        }
+    </ul>
+}
+

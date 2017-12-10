@@ -1,0 +1,147 @@
+﻿@using BadBeeCatalog;
+@using BadBeeCatalog.Models;
+@using BadBee.Core.Models;
+@using PagedList.Mvc;
+@using BadBee.Core.MyResources;
+@model BadBeeCatalog.Models.CatalogContent
+
+
+@{
+    string prevBadBee = "";
+    string prevWva = "";
+    string prevSystem = "";
+    string prevBrand = "";
+    string prevSerie = "";
+    string prevModel = "";
+    string prevKm = "";
+    string prevKw = "";
+    string prevSet = "";
+    string prevRow = "";
+    string ifEmpty = "";
+}
+
+<div class="col-xs-12 colContent">
+    <div id="catalogPrintable">        
+        <table class="table table-striped">
+            <thead>
+                <tr class="header-grey" style="white-space: nowrap">
+                    @for (int i = 0; i < Model.TopHeaderItems.Count; i++)
+                    {
+                        Model.TopHeaderItems[i].Index = i;
+                        Html.RenderPartial("CatalogContentTableHeader", Model.TopHeaderItems[i]);
+                    }
+                </tr>
+                <tr class="header-dark" style="white-space: nowrap">
+                    @foreach (var item in Model.DetailsHeaderItems)
+                    {
+                        Html.RenderPartial("CatalogContentTableHeader", item);
+                    }
+                </tr>
+            </thead>           
+
+
+            <tbody id="catalogTable" class="catalog_table" style="display:none;">
+                @foreach (CvlItem item in Model.Items)
+                {
+                    //if (!prevRow.Equals(item.Brand + item.Serie + item.Model + item.Km + item.Kw + item.Years + item.Fr + item.WvaDesc + item.Wva +
+                    //    item.WvaDetailsQty + item.WvaDetails + item.Height + item.Width + item.Thickness + item.Wedge + item.DrumDiameter +
+                    //    item.BrakeSystem + item.RivetsQuantity + item.RivetsType))
+                    //{
+                    //    prevRow = item.Brand + item.Serie + item.Model + item.Km + item.Kw + item.Years + item.Fr + item.WvaDesc + item.Wva +
+                    //    item.WvaDetailsQty + item.WvaDetails + item.Height + item.Width + item.Thickness + item.Wedge + item.DrumDiameter +
+                    //    item.BrakeSystem + item.RivetsQuantity + item.RivetsType;
+
+
+                    if (!String.IsNullOrEmpty(item.BadBeeNumber) || !String.IsNullOrEmpty(item.Wva)|| !String.IsNullOrEmpty(item.BrakeSystem))
+                    {
+
+                        if (!prevSet.Equals(item.Brand + item.Serie + item.Model + item.Kw + item.Km + item.Fr /*+ item.Years */+ item.WvaDesc + item.Wva))
+                        {
+                            prevSet = item.Brand + item.Serie + item.Model + item.Kw + item.Km + item.Fr /*+ item.Years*/ + item.WvaDesc + item.Wva;
+                        }
+                        else
+                        {
+                            ifEmpty = item.WvaDetailsQty + item.WvaDetails + item.Height + item.Width + item.Wedge + item.DrumDiameter +
+                     item.RivetsQuantity + item.RivetsType;
+                            if (!string.IsNullOrEmpty(ifEmpty)) {
+                                item.BadBeeNumber = "";
+                                item.Wva = "";
+                                item.BrakeSystem = "";
+                                item.Brand = "";
+                                item.Serie = "";
+                                item.Model = "";
+                                item.Km = "";
+                                item.Kw = "";
+                                item.Fr = "";
+                                item.Years = "";
+                                item.WvaDesc = "";
+
+                            }
+                        }
+                        //}
+                    }
+
+                    <tr>
+                        <td class="badBeenr" id="badBeenr">
+                            <span onclick="window.location='@Url.Action("Index", "Details", new { id = item.Id, date = item.Years })'" title="" 
+                                                                style="cursor:pointer; text-decoration:none; color: #badbee">@Html.Raw(item.BadBeeNumber)</span></td>
+                        <td class="brand">@Html.Raw(item.Brand)</td>
+                        <td class="serie">@Html.Raw(item.Serie)</td>
+                        <td class="model">@Html.Raw(item.Model)</td>
+                        <td class="kw">@Html.Raw(item.Kw)</td>
+                        <td class="km">@Html.Raw(item.Km)</td>
+                        <td class="years" id="years">@Html.Raw(item.Years)</td>
+                        <td class="fr">@Html.Raw(item.Fr)</td> 
+                        <td class="wvadesc">@Html.Raw(item.WvaDesc)</td>
+                        <td class="wva">
+                            <span onclick="window.location='@Url.Action("Index", "Details", new { id = item.Id, date = item.Years })'" title=""
+                                  style="cursor:pointer; text-decoration:none; color: #badbee">@Html.Raw(item.Wva)
+                            </span>
+                        </td>
+                        <td class="wvadetqty">@Html.Raw(item.WvaDetailsQty)</td>
+                        <td class="wvadet">@Html.Raw(item.WvaDetails)</td>
+                        <td class="height">@Html.Raw(item.Height)</td>
+                        <td class="width">@Html.Raw(item.Width)</td>
+                        <td class="thickness">@Html.Raw(item.Thickness)</td>
+                        <td class="wedge">@Html.Raw(item.Wedge)</td>
+                        <td class="drumdiameter">@Html.Raw(item.DrumDiameter)</td>
+                        <td class="system">@Html.Raw(item.BrakeSystem)</td>
+                        <td class="rivetsqty">@Html.Raw(item.RivetsQuantity)</td>
+                        <td class="rivetstype" style="border-right:0 !important;">
+                            <span onclick="window.location='@Url.Action("Index", "DetailsRivets",
+ new { rivetst = item.RivetsType, rivetsqty = item.RivetsQuantity })'" title="" style="cursor:pointer; text-decoration:none; color: #badbee">
+
+                                @Html.Raw(item.RivetsType)
+                            </span>
+                        </td>
+                    </tr>
+                  
+                }
+            </tbody>
+        </table>  
+
+        @if (Model.Items.Count == 0)
+                        {
+            <div class="empty_cat" id="noRecordsFound">
+                <div class="empty_cat_desc">
+                    <p class="empty_cat_title"> @Resources.noRecordsFound </p>
+                </div>
+            </div>
+        }
+        <div class="empty_cat"  @*style="display:none;"*@ id="emptyCat">
+            <div class="empty_cat_desc">
+                <p class="empty_cat_title"> @Resources.currently <b class="big_red">@BadBee.Core.Providers.ListProvider.GetAllRecordsCount()</b> @Resources.indb </p>
+                <p class="empty_cat_subtitle">@Resources.applyfil</p>
+            </div>
+        </div>
+    </div>
+    <div class="page-nav" id="page-nav">
+        @Html.PagedListPager(Model.Items, page => "#" + page.ToString())
+    </div>
+</div>
+
+<script>
+    showCrossFilterModelWindow();
+    setLeftRightButtonsPosition();
+</script>
+   

@@ -1,0 +1,34 @@
+﻿@using BadBee.Core.MyResources;
+@if (Request.QueryString["brand"] != null)
+{
+    <div class="breadcrumbs-container">
+
+        @if (Request.QueryString["serie"] != null)
+        {
+            <span><</span> <a class="breadcrumbs-text" href='@Url.Action("Index", "Search", new { brand = Request.QueryString["brand"], brandName = Request.QueryString["brandName"] })'>Wstecz</a>
+            <span>|</span> <a class="breadcrumbs-text" href='@Url.Action("Index", "Search", new { brand = Request.QueryString["brand"], brandName = Request.QueryString["brandName"] })'>@Request.QueryString["brandName"]</a>
+            <span>|</span>
+
+            if (!string.IsNullOrEmpty(Request.QueryString["serieName"]))
+            {
+                if (Request.QueryString["serieName"] == "Przyczepa, naczepa / Trailer, semitrailer")
+                {
+                    <span class="breadcrumbs-text">@Resources.trailer</span>
+                }
+                else
+                {
+                    <span class="breadcrumbs-text">@Request.QueryString["serieName"]</span>
+                }
+            }
+            else
+            {
+                <span class="breadcrumbs-text">@Resources.baseserie</span>
+            }
+        }
+        else
+        {
+            <span><</span> <a class="breadcrumbs-text" href='@Url.Action("Index", "Search")'>Wstecz</a>
+            <span>|</span> <span class="breadcrumbs-text">@Request.QueryString["brandName"]</span>
+        }
+    </div>
+}
