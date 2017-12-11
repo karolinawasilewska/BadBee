@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BadBeeCatalog", "BadBeeCata
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BadBee.Core", "BadBee.Core\BadBee.Core.csproj", "{1F74AEA8-830B-442A-A56E-8718B3E6219A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BadBeeAdminPanel", "BadBeeAdminPanel\BadBeeAdminPanel.csproj", "{86BED5B4-0B00-49CA-8324-B4BA904A646C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{1F74AEA8-830B-442A-A56E-8718B3E6219A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F74AEA8-830B-442A-A56E-8718B3E6219A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F74AEA8-830B-442A-A56E-8718B3E6219A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86BED5B4-0B00-49CA-8324-B4BA904A646C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86BED5B4-0B00-49CA-8324-B4BA904A646C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86BED5B4-0B00-49CA-8324-B4BA904A646C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86BED5B4-0B00-49CA-8324-B4BA904A646C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
