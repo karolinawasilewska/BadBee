@@ -266,7 +266,9 @@ namespace BadBee.Core.Providers
                 GlobalVars.DictionaryCache.Add(typeof(DAL.BadBee), db.BadBee.OrderBy(q => q.BadBeeNo).ToList());
                 GlobalVars.DictionaryCache.Add(typeof(Wva), db.Wva.OrderBy(q => q.WvaNo).ToList());
                 GlobalVars.DictionaryCache.Add(typeof(Systems), db.Systems.OrderBy(q => q.Abbreviation).ToList());
-                GlobalVars.DictionaryCache.Add(typeof(Dimension), db.Dimension.OrderBy(q => q.Height).ToList());
+                GlobalVars.DictionaryCache.Add(typeof(Width), db.Width.OrderBy(q => q.Width1).ToList());
+                GlobalVars.DictionaryCache.Add(typeof(Height), db.Height.OrderBy(q => q.Height1).ToList());
+                GlobalVars.DictionaryCache.Add(typeof(Thickness), db.Thickness.OrderBy(q => q.Thickness1).ToList());
                 GlobalVars.DictionaryCache.Add(typeof(Year), db.Year.OrderBy(q => q.DateFrom).ToList());
                }
         }
@@ -299,18 +301,18 @@ namespace BadBee.Core.Providers
         {
             return GetChList<Systems>().Where(q => filter.SystemsList.Contains(q.SystemId.ToString())).ToList();
         }
-        public List<Dimension> GetWidthsListCh(BadBeeFilter filter)
+        public List<Width> GetWidthsListCh(BadBeeFilter filter)
         {
-            return GetChList<Dimension>().Where(q => filter.WidthsList.Contains(q.DimensionId.ToString())).ToList();
+            return GetChList<Width>().Where(q => filter.WidthsList.Contains(q.WidthId.ToString())).ToList();
         }
-        //public List<Thicknesses> GetThicknessesListCh(BadBeeFilter filter)
-        //{
-        //    return GetChList<Thicknesses>().Where(q => filter.ThicknessesList.Contains(q.Id.ToString())).ToList();
-        //}
-        //public List<Heights> GetHeightsListCh(BadBeeFilter filter)
-        //{
-        //    return GetChList<Heights>().Where(q => filter.HeightsList.Contains(q.Id.ToString())).ToList();
-        //}
+        public List<Thickness> GetThicknessesListCh(BadBeeFilter filter)
+        {
+            return GetChList<Thickness>().Where(q => filter.ThicknessesList.Contains(q.ThicknessId.ToString())).ToList();
+        }
+        public List<Height> GetHeightsListCh(BadBeeFilter filter)
+        {
+            return GetChList<Height>().Where(q => filter.HeightsList.Contains(q.HeightId.ToString())).ToList();
+        }
         public List<Year> GetYearsListCh(BadBeeFilter filter)
         {
             return GetChList<Year>().Where(q => filter.DateYearsList.Contains(q.YearId.ToString())).ToList();
@@ -504,15 +506,15 @@ namespace BadBee.Core.Providers
         //        return distinctRowsById.OrderBy(q => q.Name).ToList();
         //    }
         }
-        //public List<Heights> GetHeightsList(BadBeeFilter filter)
-        //{
+        public List<Height> GetHeightsList(BadBeeFilter filter)
+        {
         //    if (string.IsNullOrEmpty(filter.CrossNumbers) && string.IsNullOrEmpty(filter.Brands) && string.IsNullOrEmpty(filter.Series) && string.IsNullOrEmpty(filter.Models)
         //            && string.IsNullOrEmpty(filter.DateYears) && string.IsNullOrEmpty(filter.BadBeeNumbers) && string.IsNullOrEmpty(filter.Wvas)
         //            && string.IsNullOrEmpty(filter.WvaDetails2) && string.IsNullOrEmpty(filter.DrumDiameters) && string.IsNullOrEmpty(filter.Rivets)
         //            && string.IsNullOrEmpty(filter.Widths)/* && string.IsNullOrEmpty(filter.Heights) */&& string.IsNullOrEmpty(filter.Thicknesses)
         //            && string.IsNullOrEmpty(filter.Systems) /*&& string.IsNullOrEmpty(filter.PhraseFilter)*/)
         //    {
-        //        return GetChList<Heights>();
+               return GetChList<Height>();
         //    }
         //    else
         //    {
@@ -523,108 +525,108 @@ namespace BadBee.Core.Providers
 
         //        return distinctRowsById.OrderBy(q => q.Name).ToList();
         //    }
-        //}
-        //public List<Widths> GetWidthsList(BadBeeFilter filter)
-        //{
-        //    if (string.IsNullOrEmpty(filter.CrossNumbers) && string.IsNullOrEmpty(filter.Brands) && string.IsNullOrEmpty(filter.Series) && string.IsNullOrEmpty(filter.Models)
-        //            && string.IsNullOrEmpty(filter.DateYears) && string.IsNullOrEmpty(filter.BadBeeNumbers) && string.IsNullOrEmpty(filter.Wvas)
-        //            && string.IsNullOrEmpty(filter.WvaDetails2) && string.IsNullOrEmpty(filter.DrumDiameters) && string.IsNullOrEmpty(filter.Rivets)
-        //            /*&& string.IsNullOrEmpty(filter.Widths)*/ && string.IsNullOrEmpty(filter.Heights) && string.IsNullOrEmpty(filter.Thicknesses)
-        //            && string.IsNullOrEmpty(filter.Systems) /*&& string.IsNullOrEmpty(filter.PhraseFilter)*/)
-        //    {
-        //        return GetChList<Widths>();
-        //    }
-        //    else
-        //    {
-        //        var items = GetList(filter, false, false, false, false, false, true, false, false, false, false, false, false, false);
-        //        var list = items.ToList();
-        //        var lum = list.Select(item => new Widths { Id = item.WidthId ?? default(int), Name = item.Width.TrimEnd() }).ToList();
-        //        var distinctRowsById = lum.Select(i => i.Id).Distinct().Select(i => lum.First(o => o.Id == i)).ToList();
+        }
+        public List<Width> GetWidthsList(BadBeeFilter filter)
+        {
+            //    if (string.IsNullOrEmpty(filter.CrossNumbers) && string.IsNullOrEmpty(filter.Brands) && string.IsNullOrEmpty(filter.Series) && string.IsNullOrEmpty(filter.Models)
+            //            && string.IsNullOrEmpty(filter.DateYears) && string.IsNullOrEmpty(filter.BadBeeNumbers) && string.IsNullOrEmpty(filter.Wvas)
+            //            && string.IsNullOrEmpty(filter.WvaDetails2) && string.IsNullOrEmpty(filter.DrumDiameters) && string.IsNullOrEmpty(filter.Rivets)
+            //            /*&& string.IsNullOrEmpty(filter.Widths)*/ && string.IsNullOrEmpty(filter.Heights) && string.IsNullOrEmpty(filter.Thicknesses)
+            //            && string.IsNullOrEmpty(filter.Systems) /*&& string.IsNullOrEmpty(filter.PhraseFilter)*/)
+            //    {
+                    return GetChList<Width>();
+            //    }
+            //    else
+            //    {
+            //        var items = GetList(filter, false, false, false, false, false, true, false, false, false, false, false, false, false);
+            //        var list = items.ToList();
+            //        var lum = list.Select(item => new Widths { Id = item.WidthId ?? default(int), Name = item.Width.TrimEnd() }).ToList();
+            //        var distinctRowsById = lum.Select(i => i.Id).Distinct().Select(i => lum.First(o => o.Id == i)).ToList();
 
-        //        return distinctRowsById.OrderBy(q => q.Name).ToList();
-        //    }
-        //}
-        //public List<Thicknesses> GetThicknessesList(BadBeeFilter filter)
-        //{
-        //    if (string.IsNullOrEmpty(filter.CrossNumbers) && string.IsNullOrEmpty(filter.Brands) && string.IsNullOrEmpty(filter.Series) && string.IsNullOrEmpty(filter.Models)
-        //            && string.IsNullOrEmpty(filter.DateYears) && string.IsNullOrEmpty(filter.BadBeeNumbers) && string.IsNullOrEmpty(filter.Wvas)
-        //            && string.IsNullOrEmpty(filter.WvaDetails2) && string.IsNullOrEmpty(filter.DrumDiameters) && string.IsNullOrEmpty(filter.Rivets)
-        //            && string.IsNullOrEmpty(filter.Widths) && string.IsNullOrEmpty(filter.Heights) /*&& string.IsNullOrEmpty(filter.Thicknesses)*/
-        //            && string.IsNullOrEmpty(filter.Systems) /*&& string.IsNullOrEmpty(filter.PhraseFilter)*/)
-        //    {
-        //        return GetChList<Thicknesses>();
-        //    }
-        //    else
-        //    {
-        //        var items = GetList(filter, false, false, false, false, false, false, true, false, false, false, false, false, false);
-        //        var list = items.ToList();
-        //        var lum = list.Select(item => new Thicknesses { Id = item.ThicknessId ?? default(int), Name = item.Thickness.TrimEnd() }).ToList();
-        //        var distinctRowsById = lum.Select(i => i.Id).Distinct().Select(i => lum.First(o => o.Id == i)).ToList();
+            //        return distinctRowsById.OrderBy(q => q.Name).ToList();
+            //    }
+            }
+            public List<Thickness> GetThicknessesList(BadBeeFilter filter)
+            {
+            //    if (string.IsNullOrEmpty(filter.CrossNumbers) && string.IsNullOrEmpty(filter.Brands) && string.IsNullOrEmpty(filter.Series) && string.IsNullOrEmpty(filter.Models)
+            //            && string.IsNullOrEmpty(filter.DateYears) && string.IsNullOrEmpty(filter.BadBeeNumbers) && string.IsNullOrEmpty(filter.Wvas)
+            //            && string.IsNullOrEmpty(filter.WvaDetails2) && string.IsNullOrEmpty(filter.DrumDiameters) && string.IsNullOrEmpty(filter.Rivets)
+            //            && string.IsNullOrEmpty(filter.Widths) && string.IsNullOrEmpty(filter.Heights) /*&& string.IsNullOrEmpty(filter.Thicknesses)*/
+            //            && string.IsNullOrEmpty(filter.Systems) /*&& string.IsNullOrEmpty(filter.PhraseFilter)*/)
+            //    {
+                    return GetChList<Thickness>();
+            //    }
+            //    else
+            //    {
+            //        var items = GetList(filter, false, false, false, false, false, false, true, false, false, false, false, false, false);
+            //        var list = items.ToList();
+            //        var lum = list.Select(item => new Thicknesses { Id = item.ThicknessId ?? default(int), Name = item.Thickness.TrimEnd() }).ToList();
+            //        var distinctRowsById = lum.Select(i => i.Id).Distinct().Select(i => lum.First(o => o.Id == i)).ToList();
 
-        //        return distinctRowsById.OrderBy(q => q.Name).ToList();
-        //    }
-        //}
-        //public List<DrumDiameters> GetDrumDiametersList(BadBeeFilter filter)
-        //{
-        //    if (string.IsNullOrEmpty(filter.CrossNumbers) && string.IsNullOrEmpty(filter.Brands) && string.IsNullOrEmpty(filter.Series) && string.IsNullOrEmpty(filter.Models)
-        //            && string.IsNullOrEmpty(filter.DateYears) && string.IsNullOrEmpty(filter.BadBeeNumbers) && string.IsNullOrEmpty(filter.Wvas)
-        //            && string.IsNullOrEmpty(filter.WvaDetails2) /*&& string.IsNullOrEmpty(filter.DrumDiameters)*/ && string.IsNullOrEmpty(filter.Rivets)
-        //            && string.IsNullOrEmpty(filter.Widths) && string.IsNullOrEmpty(filter.Heights) && string.IsNullOrEmpty(filter.Thicknesses)
-        //            && string.IsNullOrEmpty(filter.Systems)/* && string.IsNullOrEmpty(filter.PhraseFilter)*/)
-        //    {
-        //        return GetChList<DrumDiameters>();
-        //    }
-        //    else
-        //    {
-        //        var items = GetList(filter, false, false, false, true, false, false, false, false, false, false, false, false, false);
-        //        var list = items.ToList();
-        //        var lum = list.Select(item => new DrumDiameters { Id = item.DrumDiameterId ?? default(int), Name = item.DrumDiameter.TrimEnd() }).ToList();
-        //        var distinctRowsById = lum.Select(i => i.Id).Distinct().Select(i => lum.First(o => o.Id == i)).ToList();
+            //        return distinctRowsById.OrderBy(q => q.Name).ToList();
+            //    }
+            }
+            //public List<DrumDiameters> GetDrumDiametersList(BadBeeFilter filter)
+            //{
+            //    if (string.IsNullOrEmpty(filter.CrossNumbers) && string.IsNullOrEmpty(filter.Brands) && string.IsNullOrEmpty(filter.Series) && string.IsNullOrEmpty(filter.Models)
+            //            && string.IsNullOrEmpty(filter.DateYears) && string.IsNullOrEmpty(filter.BadBeeNumbers) && string.IsNullOrEmpty(filter.Wvas)
+            //            && string.IsNullOrEmpty(filter.WvaDetails2) /*&& string.IsNullOrEmpty(filter.DrumDiameters)*/ && string.IsNullOrEmpty(filter.Rivets)
+            //            && string.IsNullOrEmpty(filter.Widths) && string.IsNullOrEmpty(filter.Heights) && string.IsNullOrEmpty(filter.Thicknesses)
+            //            && string.IsNullOrEmpty(filter.Systems)/* && string.IsNullOrEmpty(filter.PhraseFilter)*/)
+            //    {
+            //        return GetChList<DrumDiameters>();
+            //    }
+            //    else
+            //    {
+            //        var items = GetList(filter, false, false, false, true, false, false, false, false, false, false, false, false, false);
+            //        var list = items.ToList();
+            //        var lum = list.Select(item => new DrumDiameters { Id = item.DrumDiameterId ?? default(int), Name = item.DrumDiameter.TrimEnd() }).ToList();
+            //        var distinctRowsById = lum.Select(i => i.Id).Distinct().Select(i => lum.First(o => o.Id == i)).ToList();
 
-        //        return distinctRowsById.OrderBy(q => q.Name).ToList();
-        //    }
-        //}
-        //public List<Systems> GetSystemsList(BadBeeFilter filter)
-        //{
-        //    if (string.IsNullOrEmpty(filter.CrossNumbers) && string.IsNullOrEmpty(filter.Brands) && string.IsNullOrEmpty(filter.Series) && string.IsNullOrEmpty(filter.Models)
-        //            && string.IsNullOrEmpty(filter.DateYears) && string.IsNullOrEmpty(filter.BadBeeNumbers) && string.IsNullOrEmpty(filter.Wvas)
-        //            && string.IsNullOrEmpty(filter.WvaDetails2) && string.IsNullOrEmpty(filter.DrumDiameters) && string.IsNullOrEmpty(filter.Rivets)
-        //            && string.IsNullOrEmpty(filter.Widths) && string.IsNullOrEmpty(filter.Heights) && string.IsNullOrEmpty(filter.Thicknesses)
-        //            /*&& string.IsNullOrEmpty(filter.Systems)*/ /*&& string.IsNullOrEmpty(filter.PhraseFilter)*/)
-        //    {
-        //        return GetChList<Systems>();
-        //    }
-        //    else
-        //    {
-        //        var items = GetList(filter, false, false, false, false, false, false, false, true, false, false, false, false, false);
-        //        var list = items.ToList();
-        //        var lum = list.Select(item => new Systems { Id = item.SystemId ?? default(int), Name = item.BrakeSystem.TrimEnd() }).ToList();
-        //        var distinctRowsById = lum.Select(i => i.Id).Distinct().Select(i => lum.First(o => o.Id == i)).ToList();
+            //        return distinctRowsById.OrderBy(q => q.Name).ToList();
+            //    }
+            //}
+            public List<Systems> GetSystemsList(BadBeeFilter filter)
+            {
+            //    if (string.IsNullOrEmpty(filter.CrossNumbers) && string.IsNullOrEmpty(filter.Brands) && string.IsNullOrEmpty(filter.Series) && string.IsNullOrEmpty(filter.Models)
+            //            && string.IsNullOrEmpty(filter.DateYears) && string.IsNullOrEmpty(filter.BadBeeNumbers) && string.IsNullOrEmpty(filter.Wvas)
+            //            && string.IsNullOrEmpty(filter.WvaDetails2) && string.IsNullOrEmpty(filter.DrumDiameters) && string.IsNullOrEmpty(filter.Rivets)
+            //            && string.IsNullOrEmpty(filter.Widths) && string.IsNullOrEmpty(filter.Heights) && string.IsNullOrEmpty(filter.Thicknesses)
+            //            /*&& string.IsNullOrEmpty(filter.Systems)*/ /*&& string.IsNullOrEmpty(filter.PhraseFilter)*/)
+            //    {
+                    return GetChList<Systems>();
+            //    }
+            //    else
+            //    {
+            //        var items = GetList(filter, false, false, false, false, false, false, false, true, false, false, false, false, false);
+            //        var list = items.ToList();
+            //        var lum = list.Select(item => new Systems { Id = item.SystemId ?? default(int), Name = item.BrakeSystem.TrimEnd() }).ToList();
+            //        var distinctRowsById = lum.Select(i => i.Id).Distinct().Select(i => lum.First(o => o.Id == i)).ToList();
 
-        //        return distinctRowsById.OrderBy(q => q.Name).ToList();
-        //    }
-        //}
-        //public List<RivetTypes> GetRivetTypesList(BadBeeFilter filter)
-        //{
-        //    if (string.IsNullOrEmpty(filter.CrossNumbers) && string.IsNullOrEmpty(filter.Brands) && string.IsNullOrEmpty(filter.Series) && string.IsNullOrEmpty(filter.Models)
-        //            && string.IsNullOrEmpty(filter.DateYears) && string.IsNullOrEmpty(filter.BadBeeNumbers) && string.IsNullOrEmpty(filter.Wvas)
-        //            && string.IsNullOrEmpty(filter.WvaDetails2) && string.IsNullOrEmpty(filter.DrumDiameters) /*&& string.IsNullOrEmpty(filter.Rivets)*/
-        //            && string.IsNullOrEmpty(filter.Widths) && string.IsNullOrEmpty(filter.Heights) && string.IsNullOrEmpty(filter.Thicknesses)
-        //            && string.IsNullOrEmpty(filter.Systems)/* && string.IsNullOrEmpty(filter.PhraseFilter)*/)
-        //    {
-        //        return GetChList<RivetTypes>().OrderBy(q => q.Id).ToList();
-        //    }
-        //    else
-        //    {
-        //        var items = GetList(filter, false, false, false, false, false, false, false, false, true, false, false, false, false);
-        //        var list = items.ToList();
-        //        var lum = list.Select(item => new RivetTypes { Id = item.RivetTypeId ?? default(int), Name = item.RivetsType.TrimEnd() }).ToList();
-        //        var distinctRowsById = lum.Select(i => i.Id).Distinct().Select(i => lum.First(o => o.Id == i)).ToList();
+            //        return distinctRowsById.OrderBy(q => q.Name).ToList();
+            //    }
+            }
+            //public List<RivetTypes> GetRivetTypesList(BadBeeFilter filter)
+            //{
+            //    if (string.IsNullOrEmpty(filter.CrossNumbers) && string.IsNullOrEmpty(filter.Brands) && string.IsNullOrEmpty(filter.Series) && string.IsNullOrEmpty(filter.Models)
+            //            && string.IsNullOrEmpty(filter.DateYears) && string.IsNullOrEmpty(filter.BadBeeNumbers) && string.IsNullOrEmpty(filter.Wvas)
+            //            && string.IsNullOrEmpty(filter.WvaDetails2) && string.IsNullOrEmpty(filter.DrumDiameters) /*&& string.IsNullOrEmpty(filter.Rivets)*/
+            //            && string.IsNullOrEmpty(filter.Widths) && string.IsNullOrEmpty(filter.Heights) && string.IsNullOrEmpty(filter.Thicknesses)
+            //            && string.IsNullOrEmpty(filter.Systems)/* && string.IsNullOrEmpty(filter.PhraseFilter)*/)
+            //    {
+            //        return GetChList<RivetTypes>().OrderBy(q => q.Id).ToList();
+            //    }
+            //    else
+            //    {
+            //        var items = GetList(filter, false, false, false, false, false, false, false, false, true, false, false, false, false);
+            //        var list = items.ToList();
+            //        var lum = list.Select(item => new RivetTypes { Id = item.RivetTypeId ?? default(int), Name = item.RivetsType.TrimEnd() }).ToList();
+            //        var distinctRowsById = lum.Select(i => i.Id).Distinct().Select(i => lum.First(o => o.Id == i)).ToList();
 
-        //        return distinctRowsById.OrderBy(q => q.Name).ToList();
-        //    }
-        //}
-        public List<Serie> GetSeriesList(BadBeeFilter filter)
+            //        return distinctRowsById.OrderBy(q => q.Name).ToList();
+            //    }
+            //}
+            public List<Serie> GetSeriesList(BadBeeFilter filter)
         {
             //if (string.IsNullOrEmpty(filter.CrossNumbers) && string.IsNullOrEmpty(filter.Brands) /*&& string.IsNullOrEmpty(filter.Series)*/ && string.IsNullOrEmpty(filter.Models)
             //        && string.IsNullOrEmpty(filter.DateYears) && string.IsNullOrEmpty(filter.BadBeeNumbers) && string.IsNullOrEmpty(filter.Wvas)

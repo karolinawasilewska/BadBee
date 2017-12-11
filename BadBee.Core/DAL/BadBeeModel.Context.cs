@@ -37,6 +37,9 @@ namespace BadBee.Core.DAL
         public virtual DbSet<Year> Year { get; set; }
         public virtual DbSet<Picture> Picture { get; set; }
         public virtual DbSet<Dimension> Dimension { get; set; }
+        public virtual DbSet<Height> Height { get; set; }
+        public virtual DbSet<Thickness> Thickness { get; set; }
+        public virtual DbSet<Width> Width { get; set; }
     
         public virtual ObjectResult<string> GetKeywords(string keywordPart)
         {

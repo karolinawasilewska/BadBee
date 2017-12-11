@@ -12,23 +12,18 @@ namespace BadBee.Core.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Dimension
+    public partial class Thickness
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Dimension()
+        public Thickness()
         {
-            this.BadBee = new HashSet<BadBee>();
+            this.Dimension = new HashSet<Dimension>();
         }
     
-        public int DimensionId { get; set; }
-        public Nullable<int> WidthId { get; set; }
-        public Nullable<int> HeightId { get; set; }
-        public Nullable<int> ThicknessId { get; set; }
+        public int ThicknessId { get; set; }
+        public Nullable<decimal> Thickness1 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BadBee> BadBee { get; set; }
-        public virtual Height Height { get; set; }
-        public virtual Thickness Thickness { get; set; }
-        public virtual Width Width { get; set; }
+        public virtual ICollection<Dimension> Dimension { get; set; }
     }
 }

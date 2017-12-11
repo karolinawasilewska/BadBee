@@ -257,35 +257,35 @@ namespace BadBee.Core.Providers
 
         public bool HasHeightsFilterAnyElements()
         {
-            List<Dimension> hei = new List<Dimension>();
+            List<Height> hei = new List<Height>();
             using (ListProvider provider = new ListProvider())
             {
-                hei = provider.GetWidthsListCh(GlobalVars.BadBeeFilter);
+                hei = provider.GetHeightsListCh(GlobalVars.BadBeeFilter);
                 hei.AddRange(provider.GetHeightsList(GlobalVars.BadBeeFilter));
             }
-            return hei.Where(q => q.DimensionId != 0).Count() > 0;
+            return hei.Where(q => q.HeightId != 0).Count() > 0;
         }
 
         public bool HasWidthsFilterAnyElements()
         {
-            List<Dimension> wid = new List<Dimension>();
+            List<Width> wid = new List<Width>();
             using (ListProvider provider = new ListProvider())
             {
                 wid = provider.GetWidthsListCh(GlobalVars.BadBeeFilter);
                 wid.AddRange(provider.GetWidthsList(GlobalVars.BadBeeFilter));
             }
-            return wid.Where(q => q.DimensionId != 0).Count() > 0;
+            return wid.Where(q => q.WidthId != 0).Count() > 0;
         }
 
         public bool HasThicknessesFilterAnyElements()
         {
-            List<Dimension> thick = new List<Dimension>();
+            List<Thickness> thick = new List<Thickness>();
             using (ListProvider provider = new ListProvider())
             {
-                thick = provider.GetWidthsListCh(GlobalVars.BadBeeFilter);
+                thick = provider.GetThicknessesListCh(GlobalVars.BadBeeFilter);
                 thick.AddRange(provider.GetThicknessesList(GlobalVars.BadBeeFilter));
             }
-            return thick.Where(q => q.DimensionId != 0).Count() > 0;
+            return thick.Where(q => q.ThicknessId != 0).Count() > 0;
         }
 
         public bool HasSystemsFilterAnyElements()

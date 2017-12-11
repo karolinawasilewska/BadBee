@@ -29,9 +29,16 @@
             <PropertyRef Name="DimensionId" />
           </Key>
           <Property Name="DimensionId" Type="int" Nullable="false" />
-          <Property Name="Width" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="WidthId" Type="int" />
+          <Property Name="HeightId" Type="int" />
+          <Property Name="ThicknessId" Type="int" />
+        </EntityType>
+        <EntityType Name="Height">
+          <Key>
+            <PropertyRef Name="HeightId" />
+          </Key>
+          <Property Name="HeightId" Type="int" Nullable="false" />
           <Property Name="Height" Type="decimal" Precision="5" Scale="2" />
-          <Property Name="Thickness" Type="decimal" Precision="5" Scale="2" />
         </EntityType>
         <EntityType Name="Item">
           <Key>
@@ -74,6 +81,20 @@
           <Property Name="SystemId" Type="int" Nullable="false" />
           <Property Name="Abbreviation" Type="nvarchar" MaxLength="3" Nullable="false" />
         </EntityType>
+        <EntityType Name="Thickness">
+          <Key>
+            <PropertyRef Name="ThicknessId" />
+          </Key>
+          <Property Name="ThicknessId" Type="int" Nullable="false" />
+          <Property Name="Thickness" Type="decimal" Precision="5" Scale="2" />
+        </EntityType>
+        <EntityType Name="Width">
+          <Key>
+            <PropertyRef Name="WidthId" />
+          </Key>
+          <Property Name="WidthId" Type="int" Nullable="false" />
+          <Property Name="Width" Type="decimal" Precision="5" Scale="2" />
+        </EntityType>
         <EntityType Name="Wva">
           <Key>
             <PropertyRef Name="WvaId" />
@@ -90,11 +111,6 @@
           <Property Name="DateFrom" Type="date" />
           <Property Name="DateTo" Type="date" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'BadBee.dbo.KeywordsView' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="KeywordsView">
-          <Property Name="Keyword" Type="nvarchar" MaxLength="50" />
-        </EntityType>-->
         <Association Name="FK_BadBee_Dimension">
           <End Role="Dimension" Type="Self.Dimension" Multiplicity="0..1" />
           <End Role="BadBee" Type="Self.BadBee" Multiplicity="*" />
@@ -140,6 +156,42 @@ warning 6013: The table/view 'BadBee.dbo.KeywordsView' does not have a primary k
             </Principal>
             <Dependent Role="BadBee">
               <PropertyRef Name="WvaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dimension_Height">
+          <End Role="Height" Type="Self.Height" Multiplicity="0..1" />
+          <End Role="Dimension" Type="Self.Dimension" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Height">
+              <PropertyRef Name="HeightId" />
+            </Principal>
+            <Dependent Role="Dimension">
+              <PropertyRef Name="HeightId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dimension_Thickness">
+          <End Role="Thickness" Type="Self.Thickness" Multiplicity="0..1" />
+          <End Role="Dimension" Type="Self.Dimension" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Thickness">
+              <PropertyRef Name="ThicknessId" />
+            </Principal>
+            <Dependent Role="Dimension">
+              <PropertyRef Name="ThicknessId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dimension_Width">
+          <End Role="Width" Type="Self.Width" Multiplicity="0..1" />
+          <End Role="Dimension" Type="Self.Dimension" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Width">
+              <PropertyRef Name="WidthId" />
+            </Principal>
+            <Dependent Role="Dimension">
+              <PropertyRef Name="WidthId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -210,11 +262,14 @@ warning 6013: The table/view 'BadBee.dbo.KeywordsView' does not have a primary k
           <EntitySet Name="BadBee" EntityType="Self.BadBee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dimension" EntityType="Self.Dimension" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Height" EntityType="Self.Height" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Item" EntityType="Self.Item" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Model" EntityType="Self.Model" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Picture" EntityType="Self.Picture" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Serie" EntityType="Self.Serie" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Systems" EntityType="Self.Systems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Thickness" EntityType="Self.Thickness" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Width" EntityType="Self.Width" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wva" EntityType="Self.Wva" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Year" EntityType="Self.Year" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_BadBee_Dimension" Association="Self.FK_BadBee_Dimension">
@@ -232,6 +287,18 @@ warning 6013: The table/view 'BadBee.dbo.KeywordsView' does not have a primary k
           <AssociationSet Name="FK_BadBee_Wva" Association="Self.FK_BadBee_Wva">
             <End Role="Wva" EntitySet="Wva" />
             <End Role="BadBee" EntitySet="BadBee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dimension_Height" Association="Self.FK_Dimension_Height">
+            <End Role="Height" EntitySet="Height" />
+            <End Role="Dimension" EntitySet="Dimension" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dimension_Thickness" Association="Self.FK_Dimension_Thickness">
+            <End Role="Thickness" EntitySet="Thickness" />
+            <End Role="Dimension" EntitySet="Dimension" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dimension_Width" Association="Self.FK_Dimension_Width">
+            <End Role="Width" EntitySet="Width" />
+            <End Role="Dimension" EntitySet="Dimension" />
           </AssociationSet>
           <AssociationSet Name="FK_Item_BadBee" Association="Self.FK_Item_BadBee">
             <End Role="BadBee" EntitySet="BadBee" />
@@ -467,14 +534,29 @@ warning 6013: The table/view 'BadBee.dbo.KeywordsView' does not have a primary k
             <End Role="Picture" EntitySet="Picture" />
             <End Role="BadBee" EntitySet="BadBee" />
           </AssociationSet>
+          <FunctionImport Name="GetKeywords" ReturnType="Collection(String)">
+          <Parameter Name="KeywordPart" Mode="In" Type="String" />
+          </FunctionImport>
           <EntitySet Name="Dimension" EntityType="BadBeeModel.Dimension" />
+          <EntitySet Name="Height" EntityType="BadBeeModel.Height" />
+          <EntitySet Name="Thickness" EntityType="BadBeeModel.Thickness" />
+          <EntitySet Name="Width" EntityType="BadBeeModel.Width" />
           <AssociationSet Name="FK_BadBee_Dimension" Association="BadBeeModel.FK_BadBee_Dimension">
             <End Role="Dimension" EntitySet="Dimension" />
             <End Role="BadBee" EntitySet="BadBee" />
           </AssociationSet>
-          <FunctionImport Name="GetKeywords" ReturnType="Collection(String)">
-            <Parameter Name="KeywordPart" Mode="In" Type="String" />
-          </FunctionImport>
+          <AssociationSet Name="FK_Dimension_Height" Association="BadBeeModel.FK_Dimension_Height">
+            <End Role="Height" EntitySet="Height" />
+            <End Role="Dimension" EntitySet="Dimension" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dimension_Thickness" Association="BadBeeModel.FK_Dimension_Thickness">
+            <End Role="Thickness" EntitySet="Thickness" />
+            <End Role="Dimension" EntitySet="Dimension" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dimension_Width" Association="BadBeeModel.FK_Dimension_Width">
+            <End Role="Width" EntitySet="Width" />
+            <End Role="Dimension" EntitySet="Dimension" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Picture">
           <Key>
@@ -503,10 +585,37 @@ warning 6013: The table/view 'BadBee.dbo.KeywordsView' does not have a primary k
             <PropertyRef Name="DimensionId" />
           </Key>
           <Property Name="DimensionId" Type="Int32" Nullable="false" />
-          <Property Name="Width" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="Height" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="Thickness" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="WidthId" Type="Int32" />
+          <Property Name="HeightId" Type="Int32" />
+          <Property Name="ThicknessId" Type="Int32" />
           <NavigationProperty Name="BadBee" Relationship="BadBeeModel.FK_BadBee_Dimension" FromRole="Dimension" ToRole="BadBee" />
+          <NavigationProperty Name="Height" Relationship="BadBeeModel.FK_Dimension_Height" FromRole="Dimension" ToRole="Height" />
+          <NavigationProperty Name="Thickness" Relationship="BadBeeModel.FK_Dimension_Thickness" FromRole="Dimension" ToRole="Thickness" />
+          <NavigationProperty Name="Width" Relationship="BadBeeModel.FK_Dimension_Width" FromRole="Dimension" ToRole="Width" />
+        </EntityType>
+        <EntityType Name="Height">
+          <Key>
+            <PropertyRef Name="HeightId" />
+          </Key>
+          <Property Name="HeightId" Type="Int32" Nullable="false" />
+          <Property Name="Height1" Type="Decimal" Precision="5" Scale="2" />
+          <NavigationProperty Name="Dimension" Relationship="BadBeeModel.FK_Dimension_Height" FromRole="Height" ToRole="Dimension" />
+        </EntityType>
+        <EntityType Name="Thickness">
+          <Key>
+            <PropertyRef Name="ThicknessId" />
+          </Key>
+          <Property Name="ThicknessId" Type="Int32" Nullable="false" />
+          <Property Name="Thickness1" Type="Decimal" Precision="5" Scale="2" />
+          <NavigationProperty Name="Dimension" Relationship="BadBeeModel.FK_Dimension_Thickness" FromRole="Thickness" ToRole="Dimension" />
+        </EntityType>
+        <EntityType Name="Width">
+          <Key>
+            <PropertyRef Name="WidthId" />
+          </Key>
+          <Property Name="WidthId" Type="Int32" Nullable="false" />
+          <Property Name="Width1" Type="Decimal" Precision="5" Scale="2" />
+          <NavigationProperty Name="Dimension" Relationship="BadBeeModel.FK_Dimension_Width" FromRole="Width" ToRole="Dimension" />
         </EntityType>
         <Association Name="FK_BadBee_Dimension">
           <End Type="BadBeeModel.Dimension" Role="Dimension" Multiplicity="0..1" />
@@ -517,6 +626,42 @@ warning 6013: The table/view 'BadBee.dbo.KeywordsView' does not have a primary k
             </Principal>
             <Dependent Role="BadBee">
               <PropertyRef Name="DimensionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dimension_Height">
+          <End Type="BadBeeModel.Height" Role="Height" Multiplicity="0..1" />
+          <End Type="BadBeeModel.Dimension" Role="Dimension" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Height">
+              <PropertyRef Name="HeightId" />
+            </Principal>
+            <Dependent Role="Dimension">
+              <PropertyRef Name="HeightId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dimension_Thickness">
+          <End Type="BadBeeModel.Thickness" Role="Thickness" Multiplicity="0..1" />
+          <End Type="BadBeeModel.Dimension" Role="Dimension" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Thickness">
+              <PropertyRef Name="ThicknessId" />
+            </Principal>
+            <Dependent Role="Dimension">
+              <PropertyRef Name="ThicknessId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dimension_Width">
+          <End Type="BadBeeModel.Width" Role="Width" Multiplicity="0..1" />
+          <End Type="BadBeeModel.Dimension" Role="Dimension" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Width">
+              <PropertyRef Name="WidthId" />
+            </Principal>
+            <Dependent Role="Dimension">
+              <PropertyRef Name="WidthId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -611,17 +756,41 @@ warning 6013: The table/view 'BadBee.dbo.KeywordsView' does not have a primary k
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetKeywords" FunctionName="BadBeeModel.Store.GetKeywords" />
           <EntitySetMapping Name="Dimension">
             <EntityTypeMapping TypeName="BadBeeModel.Dimension">
               <MappingFragment StoreEntitySet="Dimension">
-                <ScalarProperty Name="Thickness" ColumnName="Thickness" />
-                <ScalarProperty Name="Height" ColumnName="Height" />
-                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="ThicknessId" ColumnName="ThicknessId" />
+                <ScalarProperty Name="HeightId" ColumnName="HeightId" />
+                <ScalarProperty Name="WidthId" ColumnName="WidthId" />
                 <ScalarProperty Name="DimensionId" ColumnName="DimensionId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="GetKeywords" FunctionName="BadBeeModel.Store.GetKeywords" />
+          <EntitySetMapping Name="Height">
+            <EntityTypeMapping TypeName="BadBeeModel.Height">
+              <MappingFragment StoreEntitySet="Height">
+                <ScalarProperty Name="Height1" ColumnName="Height" />
+                <ScalarProperty Name="HeightId" ColumnName="HeightId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Thickness">
+            <EntityTypeMapping TypeName="BadBeeModel.Thickness">
+              <MappingFragment StoreEntitySet="Thickness">
+                <ScalarProperty Name="Thickness1" ColumnName="Thickness" />
+                <ScalarProperty Name="ThicknessId" ColumnName="ThicknessId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Width">
+            <EntityTypeMapping TypeName="BadBeeModel.Width">
+              <MappingFragment StoreEntitySet="Width">
+                <ScalarProperty Name="Width1" ColumnName="Width" />
+                <ScalarProperty Name="WidthId" ColumnName="WidthId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
