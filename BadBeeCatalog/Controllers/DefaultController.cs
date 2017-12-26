@@ -160,13 +160,13 @@ namespace BadBeeCatalog.Controllers
         }
 
         //POST: /Default/GetKeywords
-        //public ActionResult GetKeywords(string keywordPart)
-        //{
-        //    using (ListProvider provider = new ListProvider())
-        //    {
-        //        return PartialView(new GetKeywordsModel() { Keywords = provider.GetKeywords(keywordPart) });
-        //    }
-        //}
+        public ActionResult GetKeywords(string keywordPart)
+        {
+            using (ListProvider provider = new ListProvider())
+            {
+                return PartialView(new GetKeywordsModel() { Keywords = provider.GetKeywords(keywordPart) });
+            }
+        }
 
         //POST: /Default/GetFilter
         public JsonResult GetFilter()
@@ -207,7 +207,7 @@ namespace BadBeeCatalog.Controllers
             List<Year> year = new List<Year>();
             using (ListProvider provider = new ListProvider())
             {
-               // year = provider.GetYearsListCh(filter);
+                year = provider.GetYearsListCh(filter);
             }
             return Json(new SelectList(year, "Id", "Name"), JsonRequestBehavior.AllowGet);
             }
@@ -225,10 +225,13 @@ namespace BadBeeCatalog.Controllers
             List<Year> years = new List<Year>();
             using (ListProvider provider = new ListProvider())
             {
-              //  years = provider.GetYearsList(GlobalVars.BadBeeFilter);
+                years = provider.GetYearsList(GlobalVars.BadBeeFilter);
             }
-
-            return Json(new SelectList(years, "Id", "Name"), JsonRequestBehavior.AllowGet);
+                //List<string> yearsFrom = years.Select(q => q.DateFrom.Value.Year.ToString()).ToList();
+                //List<string> yearsTo = years.Select(q => q.DateTo.Value.Year.ToString()).ToList();
+                //List<string> yarsList = yearsFrom.Union(yearsTo).ToList();
+                var yearsList = years.Select(q => q.DateFrom).ToList().Union(years.Select(q => q.DateTo)).Distinct();
+            return Json(new SelectList(yearsList, "Id", "Name"), JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -717,6 +720,36 @@ namespace BadBeeCatalog.Controllers
                 log.Error(ex);
                 throw ex;
             }
+        }
+        
+        [HttpPost]
+        public ActionResult Contact(Message message)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    using(BadBeeEntities entity = new BadBeeEntities())
+                    {
+                        Message mes = new Message();
+                        mes.Content = message.Content;
+                        mes.InsertDate = DateTime.Now;
+                        mes.IsRead = false;
+                        mes.MessageFrom = message.MessageFrom;
+                        mes.Name = message.Name;
+
+                        entity.Message.Add(mes);
+                        entity.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                throw ex;
+            }
+
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
     }
 }

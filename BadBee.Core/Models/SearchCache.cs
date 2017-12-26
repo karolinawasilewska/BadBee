@@ -8,7 +8,7 @@ namespace BadBee.Core.Models
 {
     public class SearchCache
     {
-        public List<ItemsDb> GetListResult { get; set; }
+        public List<Item> GetListResult { get; set; }
         public string SearchKey { get; set; }
     }
 }

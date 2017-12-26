@@ -45,7 +45,7 @@
         </div>
     </div>
     @{
-        Html.RenderPartial("FooterView");
+        Html.RenderPartial("FooterView", new ViewDataDictionary());
     }
 
     @if (!GlobalVars.BrowserIsMobile())

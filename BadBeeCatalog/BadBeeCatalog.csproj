@@ -187,6 +187,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Image\arrowLeftButton.png" />
+    <Content Include="Image\arrowRightButton.png" />
     <Content Include="Image\BadBeeLogo.png" />
     <Content Include="Image\fiter.png" />
     <Content Include="Image\fiterselected.png" />
@@ -242,6 +244,7 @@
     <Content Include="Views\Details\Index.cshtml" />
     <Content Include="Views\Search\BreadcrumbsView.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Shared\ContactView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

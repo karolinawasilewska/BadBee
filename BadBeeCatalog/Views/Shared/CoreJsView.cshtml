@@ -195,11 +195,7 @@
                 if (data[i].Text == "--") {
                     data[i].Text = "others"
                 }
-            //    alert("<div class=\"checkbox\"><input type= \"checkbox\" name =\"brands\" value= \"" + data[i].Value + "\" id= \"" + data[i].Value + "Checkbox\" class=\"styled\" /><label for=\"" + data[i].Value + "Checkbox\" >" + data[i].Text + "</label>");
-
-                items.push("<div class=\"checkbox\"><input type= \"checkbox\" name =\"brands\" value= \"" + data[i].Value + "\" id= \"" + data[i].Value + "Checkbox\" class=\"styled\" /><label for=\"" + data[i].Value + "Checkbox\" >" + data[i].Text + "</label>");
-                 //</div >" + data[i].Value + "/>" + data[i].Text);
-            }
+                items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>"); }
             $("#brands").html(items.join(' '));
             console.log($("#brands").html(items.join(' ')));
         });

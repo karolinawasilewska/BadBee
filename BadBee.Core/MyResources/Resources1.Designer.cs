@@ -19,7 +19,7 @@ namespace BadBee.Core.MyResources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -147,6 +147,15 @@ namespace BadBee.Core.MyResources {
         public static string back_to_list {
             get {
                 return ResourceManager.GetString("back_to_list", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BadBee No..
+        /// </summary>
+        public static string BadBee_no {
+            get {
+                return ResourceManager.GetString("BadBee_no", resourceCulture);
             }
         }
         
@@ -331,6 +340,15 @@ namespace BadBee.Core.MyResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear.
+        /// </summary>
+        public static string clear {
+            get {
+                return ResourceManager.GetString("clear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Close.
         /// </summary>
         public static string close {
@@ -381,6 +399,15 @@ namespace BadBee.Core.MyResources {
         public static string contact {
             get {
                 return ResourceManager.GetString("contact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message content.
+        /// </summary>
+        public static string content {
+            get {
+                return ResourceManager.GetString("content", resourceCulture);
             }
         }
         
@@ -709,6 +736,15 @@ namespace BadBee.Core.MyResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to E-mail.
+        /// </summary>
+        public static string email {
+            get {
+                return ResourceManager.GetString("email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Brand.
         /// </summary>
         public static string enter_brand {
@@ -988,15 +1024,6 @@ namespace BadBee.Core.MyResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to BadBee No..
-        /// </summary>
-        public static string BadBee_no {
-            get {
-                return ResourceManager.GetString("BadBee_no", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Management methods.
         /// </summary>
         public static string methods {
@@ -1038,6 +1065,15 @@ namespace BadBee.Core.MyResources {
         public static string mounting_kit_instruction {
             get {
                 return ResourceManager.GetString("mounting_kit_instruction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your name.
+        /// </summary>
+        public static string name {
+            get {
+                return ResourceManager.GetString("name", resourceCulture);
             }
         }
         
@@ -1357,6 +1393,15 @@ namespace BadBee.Core.MyResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All rights reserved. Created by.
+        /// </summary>
+        public static string rights {
+            get {
+                return ResourceManager.GetString("rights", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rivets.
         /// </summary>
         public static string rivets {
@@ -1438,7 +1483,7 @@ namespace BadBee.Core.MyResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter BadBee number / cross.
+        ///   Looks up a localized string similar to Enter brand, model or BadBee number.
         /// </summary>
         public static string search {
             get {
@@ -1488,6 +1533,15 @@ namespace BadBee.Core.MyResources {
         public static string searching {
             get {
                 return ResourceManager.GetString("searching", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send.
+        /// </summary>
+        public static string send {
+            get {
+                return ResourceManager.GetString("send", resourceCulture);
             }
         }
         
@@ -1686,6 +1740,15 @@ namespace BadBee.Core.MyResources {
         public static string width {
             get {
                 return ResourceManager.GetString("width", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Write to us.
+        /// </summary>
+        public static string write_to_us {
+            get {
+                return ResourceManager.GetString("write_to_us", resourceCulture);
             }
         }
         

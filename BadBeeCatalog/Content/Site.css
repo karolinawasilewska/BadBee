@@ -1118,13 +1118,14 @@ table.translation-table {
     color:#ffffff;
     margin-top:5px;
 }
-.footer-search input{
+.footer-search input,
+.contact{
     margin-top:20px;
     background: #181818;
     border-width: 1px;
     border-style: solid;
     border-radius: 3px;
-    width: 195px;
+    width: 300px;
     height: 44px;
     border-color: rgb(255, 255, 255);
     font-size: 12px;
@@ -1139,7 +1140,7 @@ table.translation-table {
 .footer-search button{
         background-color: #badbee;
         margin-top:20px;
-    width: 195px;
+    width: 300px;
     height: 44px;
     font-size: 12px;
     font-family:Open Sans, sans-serif ; 
@@ -1148,7 +1149,7 @@ table.translation-table {
     border: none;
     border-radius: 3px;
     font-weight: bold;
-    color:rgb(255, 255, 255);
+    color:black;
 }
 .vcenter {
     display: inline-block;
@@ -1714,4 +1715,40 @@ body {
 
 .multiselect-container div.checkbox {
     padding: 5px 15px 5px 35px;
+}
+.contact {
+    margin-top: 3px;
+    background: #181818;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 3px;
+    width: 300px;
+    height: 44px;
+    border-color: rgb(255, 255, 255);
+    font-size: 12px;
+    font-family: Open Sans, sans-serif;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    line-height: 2.143;
+    text-align: center;
+    display: inline-block;
+}
+.contactContent{
+    height: 70px;
+}
+
+.buttonMessage {
+    background-color: #badbee;
+    width: 144px;
+    height: 44px;
+    font-size: 12px;
+    font-family: Open Sans, sans-serif;
+    line-height: 2.143;
+    text-align: center;
+    border: none;
+    border-radius: 3px;
+    font-weight: bold;
+    color: black;
+    margin-right: 10px;
+    margin-top:7px;
 }

@@ -683,4 +683,22 @@
   <data name="rights" xml:space="preserve">
     <value>Wszelkie prawa zastrzeżone. Wykonane przez</value>
   </data>
+  <data name="clear" xml:space="preserve">
+    <value>Wyczyść</value>
+  </data>
+  <data name="content" xml:space="preserve">
+    <value>Treść wiadomości</value>
+  </data>
+  <data name="email" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="name" xml:space="preserve">
+    <value>Imię i nazwisko</value>
+  </data>
+  <data name="send" xml:space="preserve">
+    <value>Wyślij</value>
+  </data>
+  <data name="write_to_us" xml:space="preserve">
+    <value>Napisz do nas</value>
+  </data>
 </root>

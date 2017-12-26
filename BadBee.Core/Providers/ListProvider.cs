@@ -33,227 +33,171 @@ namespace BadBee.Core.Providers
 
             var query = db.Item.AsQueryable();
 
-            //if (filter.PhraseFilter != null)
-            //{
-            //if (GetChList<Brands>().Any(row => row.Name.ToLower().StartsWith(filter.PhraseFilter.ToLower())))
-            //{
-            //    List<Brands> br = GetChList<Brands>().Where(q => q.Name.ToLower().StartsWith(filter.PhraseFilter.ToLower())).ToList();
-            //    List<string> brandIds = br.Select(x => x.Id.ToString()).ToList();
-            //    query = query.Where(q => brandIds.Contains(q.BrandId.ToString()));
-            //    filter.BrandsList = brandIds;
-            //}
-            //else if (GetChList<Series>().Any(row => row.Name.ToLower().StartsWith(filter.PhraseFilter.ToLower())))
-            //{
-            //    List<Series> ser = GetChList<Series>().Where(q => q.Name.ToLower().StartsWith(filter.PhraseFilter.ToLower())).ToList();
-            //    List<string> serieIds = ser.Select(x => x.Id.ToString()).ToList();
-            //    query = query.Where(q => serieIds.Contains(q.SerieId.ToString()));
-            //    filter.SeriesList = serieIds;
-            //}
-            //else if (GetChList<DAL.Models>().Any(row => row.Name.ToLower().StartsWith(filter.PhraseFilter.ToLower())))
-            //{
-            //    List<DAL.Models> mod = GetChList<DAL.Models>().Where(q => q.Name.ToLower().StartsWith(filter.PhraseFilter.ToLower())).ToList();
-            //    List<string> modelIds = mod.Select(x => x.Id.ToString()).ToList();
-            //    query = query.Where(q => modelIds.Contains(q.ModelId.ToString()));
-            //    filter.ModelsList = modelIds;
-            //}
-            //else
-            //     if (GetChList<DAL.BadBeeNumbers>().Any(q => 
-            //    (q.BadBeeNumber.Replace(" ", "").Replace(".", "").Replace(",", "").Replace("-", "")
-            //    .StartsWith(filter.PhraseFilter.Replace(" ", "").Replace(".", "").Replace(",", "").Replace("-", "")))))
-            //    {
-            //        List<BadBeeNumbers> lum = GetChList<BadBeeNumbers>().Where(q => (q.BadBeeNumber.Replace(" ", "").Replace(".", "").Replace(",", "").Replace("-", "")
-            //            .StartsWith(filter.PhraseFilter.Replace(" ", "").Replace(".", "").Replace(",", "").Replace("-", "")))).ToList();
-
-            //        List<string> badBeeIds = lum.Select(x => x.BadBeeNumberId.ToString()).ToList();
-            //        query = query.Where(q => badBeeIds.Contains(q.BadBeeNumberId.ToString()));
-            //        if (lum != null)
-            //        {
-            //            filter.BadBeeNumbersList = badBeeIds;
-            //        }
-            //    }
-            //    else if (GetChList<Wva>().Any(q => q.Name.StartsWith(filter.PhraseFilter.Replace(" ", ""))))
-            //    {
-            //        List<Wva> wva = GetChList<Wva>().Where(q => q.Name.Replace(" ", "").StartsWith(filter.PhraseFilter.Replace(" ", ""))).ToList();
-
-            //        List<string> wvaIds = wva.Select(x => x.Id.ToString()).ToList();
-            //        query = query.Where(q => wvaIds.Contains(q.WvaId.ToString()));
-            //        if (wva != null)
-            //        {
-            //            filter.WvasList = wvaIds;
-            //        }
-            //    }
-            //    else if (GetChList<WvaDetails>().Any(q => q.Name.StartsWith(filter.PhraseFilter.Replace(" ",""))))
-            //    {
-
-            //        List<WvaDetails> wvadetails = GetChList<WvaDetails>().Where(q => q.Name.Replace(" ", "").StartsWith(filter.PhraseFilter.Replace(" ", ""))).ToList();
-            //        List<string> wvaIds = wvadetails.Select(x => x.WvaId.ToString()).ToList();
-
-            //        query = query.Where(q => wvaIds.Contains(q.WvaId.ToString()));
-            //        if (wvadetails != null)
-            //        {
-            //            filter.WvasList = wvaIds;
-            //        }
-            //    }
-            //    else {
-            //        List<Crosses> cross = new List<Crosses>();
-
-            //        cross = GetChList<Crosses>().Where(q => (q.CrossBrandNumber.Replace(" ", "").Replace(".", "").Replace(",", "").Replace("-", "")
-            //            .StartsWith(filter.PhraseFilter.Replace(" ", "").Replace(".", "").Replace(",", "").Replace("-", "")))).ToList();
-
-            //        if (cross.Count()==0 && filter.PhraseFilter.StartsWith("0"))
-            //        {
-            //            cross= GetChList<Crosses>().Where(q => (q.CrossBrandNumber.Replace(" ", "").Replace(".", "").Replace(",", "").Replace("-", "")
-            //            .StartsWith(filter.PhraseFilter.Remove(0, 1).Replace(" ", "").Replace(".", "").Replace(",", "").Replace("-", "")))).ToList();
-            //        }
-            //        else if(cross.Count() == 0 && GetChList<Crosses>().Any(row => row.CrossBrandNumber.ToLower().Replace(" ","").StartsWith("0"+filter.PhraseFilter.Replace(" ", "").ToLower())))
-            //        {
-            //            cross= GetChList<Crosses>().Where(q=>(q.CrossBrandNumber).Replace(" ", "").Replace(".", "").Replace(",", "").Replace("-", "")
-            //            .StartsWith("0" + filter.PhraseFilter.Replace(" ", "").Replace(".", "").Replace(",", "").Replace("-", ""))).ToList();
-            //        }
-
-            //        List <string> crossIds = cross.Select(x => x.BadBeeNumberId.ToString()).ToList();
-            //        if (cross!=null)
-            //        {
-            //            filter.BadBeeNumbersList = crossIds;
-            //            query = query.Where(q => crossIds.Contains(q.BadBeeNumberId.ToString()));
-            //        }
-
-            //        else
-            //    {
-            //            return results;
-            //        }
-            //    }
-
-
-            //    filter.PhraseFilter = null;
-            //}
-
-            //if (filter != null && filter.PhraseFilter==null)
-            //{
-            //    if (!string.IsNullOrEmpty(filter.CrossNumbers))
-            //    {
-            //        query = query.Where(q => filter.CrossList.Contains(q.BadBeeNumberId.ToString()));
-            //    }
-            //    if (!string.IsNullOrEmpty(filter.Models))
-            //    {
-            //        query = query.Where(q => filter.ModelsList.Contains(q.ModelId.ToString()));
-            //    }
-
-            //    else if (!string.IsNullOrEmpty(filter.Series))
-            //    {
-            //        query = query.Where(q => filter.SeriesList.Contains(q.SerieId.ToString()));
-            //    }
-            //    else if (!string.IsNullOrEmpty(filter.Brands))
-            //    {
-            //        query = query.Where(q => filter.BrandsList.Contains(q.BrandId.ToString()));
-            //    }
-            //    if (string.IsNullOrEmpty(filter.Brands))
-            //    {
-            //        filter.Series = null;
-            //        filter.Models = null;
-            //    }
-            //    if (!string.IsNullOrEmpty(filter.BadBeeNumbers))
-            //    {
-            //        query = query.Where(q => filter.BadBeeNumbersList.Contains(q.BadBeeNumberId.ToString()));
-            //    }
-            //    //if (filter.DateYear.HasValue)
-            //    //{
-            //    //    DateTime date = new DateTime();
-            //    //    date = date.AddYears(filter.DateYear.Value - 1);
-
-            //    //    query = query.Where(q => (q.DateFrom <= date && q.DateTo >= date) || (q.DateFrom <= date && q.DateTo == null) || (q.DateFrom == null && q.DateTo >= date));
-            //    //}
-            //    if (!string.IsNullOrEmpty(filter.DateYears))
-            //    {
-            //        // DateTime date = new DateTime();
-            //        List<int> yslist = filter.DateYearsList.Select(int.Parse).ToList();
-
-            //        query = query.Where(q => yslist.Contains(q.DateFrom.Value.Year) || yslist.Contains(q.DateTo.Value.Year));
-            //    }
-            //    if (!string.IsNullOrEmpty(filter.Wvas))
-            //    {
-            //        query = query.Where(q => filter.WvasList.Contains(q.WvaId.ToString()));
-            //    }
-            //    if (!string.IsNullOrEmpty(filter.WvaDetails2))
-            //    {
-            //        query = query.Where(q => filter.WvasDetailsList.Contains(q.WvaDetailsId.ToString()));
-            //    }
-            //    if (!string.IsNullOrEmpty(filter.Widths))
-            //    {
-            //        query = query.Where(q => filter.WidthsList.Contains(q.WidthId.ToString()));
-            //    }
-            //    if (!string.IsNullOrEmpty(filter.Heights))
-            //    {
-            //        query = query.Where(q => filter.HeightsList.Contains(q.HeightId.ToString()));
-            //    }
-            //    if (!string.IsNullOrEmpty(filter.Thicknesses))
-            //    {
-            //        query = query.Where(q => filter.ThicknessesList.Contains(q.ThicknessId.ToString()));
-            //    }
-            //    if (!string.IsNullOrEmpty(filter.DrumDiameters))
-            //    {
-            //        query = query.Where(q => filter.DrumDiametersList.Contains(q.DrumDiameterId.ToString()));
-            //    }
-            //    if (!string.IsNullOrEmpty(filter.Systems))
-            //    {
-            //        query = query.Where(q => filter.SystemsList.Contains(q.SystemId.ToString()));
-            //    }
-            //    if (!string.IsNullOrEmpty(filter.Rivets))
-            //    {
-            //        query = query.Where(q => filter.RivetsList.Contains(q.RivetTypeId.ToString()));
-            //    }
-            //}
-            query = query.OrderBy(q => q.Model.Serie.Brand.Name).ThenBy(q => q.Model.Serie.Name).ThenBy(q => q.Model.Name).ThenBy(q => q.Id);
-            results.ItemsCount = query.Count();
-            query = query.Skip((page - 1) * itemsPerPage).Take(itemsPerPage);
-            var list = query.ToList();
-            filter.PhraseFilter = null;
-
-            foreach (Item item in list)
+            if (filter.PhraseFilter != null)
             {
-                string sYears = "";
-
-                if (item.Model.Year.DateFrom.HasValue)
+                if (GetChList<Brand>().Any(row => row.Name.ToLower().StartsWith(filter.PhraseFilter.ToLower())))
                 {
-                    sYears += item.Model.Year.DateFrom.Value.ToString("MM/yy", CultureInfo.InvariantCulture);
+                    List<Brand> br = GetChList<Brand>().Where(q => q.Name.ToLower().StartsWith(filter.PhraseFilter.ToLower())).ToList();
+                    List<string> brandIds = br.Select(x => x.BrandId.ToString()).ToList();
+                    query = query.Where(q => brandIds.Contains(q.Model.Serie.Brand.BrandId.ToString()));
+                    filter.BrandsList = brandIds;
+                }
+                else if (GetChList<Serie>().Any(row => row.Name.ToLower().StartsWith(filter.PhraseFilter.ToLower())))
+                {
+                    List<Serie> ser = GetChList<Serie>().Where(q => q.Name.ToLower().StartsWith(filter.PhraseFilter.ToLower())).ToList();
+                    List<string> serieIds = ser.Select(x => x.SerieId.ToString()).ToList();
+                    query = query.Where(q => serieIds.Contains(q.Model.Serie.SerieId.ToString()));
+                    filter.SeriesList = serieIds;
+                }
+                else if (GetChList<Model>().Any(row => row.Name.ToLower().StartsWith(filter.PhraseFilter.ToLower())))
+                {
+                    List<Model> mod = GetChList<Model>().Where(q => q.Name.ToLower().StartsWith(filter.PhraseFilter.ToLower())).ToList();
+                    List<string> modelIds = mod.Select(x => x.ModelId.ToString()).ToList();
+                    query = query.Where(q => modelIds.Contains(q.ModelId.ToString()));
+                    filter.ModelsList = modelIds;
+                }
+                else
+                     if (GetChList<DAL.BadBee>().Any(q =>
+                    (q.BadBeeNo.Replace(" ", "").Replace(".", "").Replace(",", "").Replace("-", "")
+                    .StartsWith(filter.PhraseFilter.Replace(" ", "").Replace(".", "").Replace(",", "").Replace("-", "")))))
+                {
+                    List<DAL.BadBee> lum = GetChList<DAL.BadBee>().Where(q => (q.BadBeeNo.Replace(" ", "").Replace(".", "").Replace(",", "").Replace("-", "")
+                        .StartsWith(filter.PhraseFilter.Replace(" ", "").Replace(".", "").Replace(",", "").Replace("-", "")))).ToList();
 
-                    if (item.Model.Year.DateTo.HasValue)
+                    List<string> badBeeIds = lum.Select(x => x.BadBeeId.ToString()).ToList();
+                    query = query.Where(q => badBeeIds.Contains(q.BadBeeId.ToString()));
+                    if (lum != null)
                     {
-                        sYears += " - " + item.Model.Year.DateTo.Value.ToString("MM/yy", CultureInfo.InvariantCulture);
+                        filter.BadBeeNumbersList = badBeeIds;
+                    }
+                }
+                else if (GetChList<Wva>().Any(q => q.WvaNo.StartsWith(filter.PhraseFilter.Replace(" ", ""))))
+                {
+                    List<Wva> wva = GetChList<Wva>().Where(q => q.WvaNo.Replace(" ", "").StartsWith(filter.PhraseFilter.Replace(" ", ""))).ToList();
+
+                    List<string> wvaIds = wva.Select(x => x.WvaId.ToString()).ToList();
+                    query = query.Where(q => wvaIds.Contains(q.BadBee.WvaId.ToString()));
+                    if (wva != null)
+                    {
+                        filter.WvasList = wvaIds;
+                    }
+                }
+                filter.PhraseFilter = null;
+                return results;
+            }
+
+            if (filter != null && filter.PhraseFilter == null)
+            {
+                if (!string.IsNullOrEmpty(filter.Models))
+                {
+                    query = query.Where(q => filter.ModelsList.Contains(q.ModelId.ToString()));
+                }
+
+                else if (!string.IsNullOrEmpty(filter.Series))
+                {
+                    query = query.Where(q => filter.SeriesList.Contains(q.Model.Serie.SerieId.ToString()));
+                }
+                else if (!string.IsNullOrEmpty(filter.Brands))
+                {
+                    query = query.Where(q => filter.BrandsList.Contains(q.Model.Serie.Brand.BrandId.ToString()));
+                }
+                if (string.IsNullOrEmpty(filter.Brands))
+                {
+                    filter.Series = null;
+                    filter.Models = null;
+                }
+                if (!string.IsNullOrEmpty(filter.BadBeeNumbers))
+                {
+                    query = query.Where(q => filter.BadBeeNumbersList.Contains(q.BadBee.BadBeeId.ToString()));
+                }
+                //if (filter.DateYear.HasValue)
+                //{
+                //    DateTime date = new DateTime();
+                //    date = date.AddYears(filter.DateYear.Value - 1);
+
+                //    query = query.Where(q => (q.DateFrom <= date && q.DateTo >= date) || (q.DateFrom <= date && q.DateTo == null) || (q.DateFrom == null && q.DateTo >= date));
+                //}
+                if (!string.IsNullOrEmpty(filter.DateYears))
+                {
+                    // DateTime date = new DateTime();
+                    List<int> yslist = filter.DateYearsList.Select(int.Parse).ToList();
+
+                    query = query.Where(q => yslist.Contains(q.Model.Year.DateFrom.Value.Year) || yslist.Contains(q.Model.Year.DateTo.Value.Year));
+                }
+                if (!string.IsNullOrEmpty(filter.Wvas))
+                {
+                    query = query.Where(q => filter.WvasList.Contains(q.BadBee.Wva.WvaId.ToString()));
+                }
+                if (!string.IsNullOrEmpty(filter.Widths))
+                {
+                    query = query.Where(q => filter.WidthsList.Contains(q.BadBee.Dimension.Width.WidthId.ToString()));
+                }
+                if (!string.IsNullOrEmpty(filter.Heights))
+                {
+                    query = query.Where(q => filter.HeightsList.Contains(q.BadBee.Dimension.Height.HeightId.ToString()));
+                }
+                if (!string.IsNullOrEmpty(filter.Thicknesses))
+                {
+                    query = query.Where(q => filter.ThicknessesList.Contains(q.BadBee.Dimension.Thickness.ThicknessId.ToString()));
+                }
+                if (!string.IsNullOrEmpty(filter.Systems))
+                {
+                    query = query.Where(q => filter.SystemsList.Contains(q.BadBee.Systems.SystemId.ToString()));
+                }
+
+                query = query.OrderBy(q => q.Model.Serie.Brand.Name).ThenBy(q => q.Model.Serie.Name).ThenBy(q => q.Model.Name).ThenBy(q => q.Id);
+                results.ItemsCount = query.Count();
+                query = query.Skip((page - 1) * itemsPerPage).Take(itemsPerPage);
+                var list = query.ToList();
+                filter.PhraseFilter = null;
+
+                foreach (Item item in list)
+                {
+                    string sYears = "";
+
+                    if (item.Model.Year.DateFrom.HasValue)
+                    {
+                        sYears += item.Model.Year.DateFrom.Value.ToString("MM/yy", CultureInfo.InvariantCulture);
+
+                        if (item.Model.Year.DateTo.HasValue)
+                        {
+                            sYears += " - " + item.Model.Year.DateTo.Value.ToString("MM/yy", CultureInfo.InvariantCulture);
+                        }
+                        else
+                        {
+                            sYears += " ->";
+                        }
                     }
                     else
                     {
-                        sYears += " ->";
+                        if (item.Model.Year.DateTo.HasValue)
+                        {
+                            sYears += "<- " + item.Model.Year.DateTo.Value.ToString("MM/yy", CultureInfo.InvariantCulture);
+                        }
                     }
-                }
-                else
-                {
-                    if (item.Model.Year.DateTo.HasValue)
+
+
+                    CvlItem newItem = new CvlItem()
                     {
-                        sYears += "<- " + item.Model.Year.DateTo.Value.ToString("MM/yy", CultureInfo.InvariantCulture);
-                    }
+                        Id = item.Id,
+                        BadBeeNumber = item.BadBee.BadBeeNo.TrimEnd(),
+                        Brand = item.Model.Serie.Brand.Name.TrimEnd(),
+                        Serie = item.Model.Serie.Name.TrimEnd(),
+                        Model = item.Model.Name.TrimEnd(),
+                        Years = sYears.TrimEnd(),
+                        Fr = item.BadBee.FR.TrimEnd(),
+                        WvaDesc = item.BadBee.Wva.Description.TrimEnd(),
+                        Wva = item.BadBee.Wva.WvaNo.TrimEnd(),
+                        Width = item.BadBee.Dimension.Width.Width1.ToString(),
+                        Height = item.BadBee.Dimension.Height.Height1.ToString(),
+                        Thickness = item.BadBee.Dimension.Thickness.Thickness1.ToString(),
+                        BrakeSystem = item.BadBee.Systems.Abbreviation.TrimEnd()
+                    };
+                    results.Items.Add(newItem);
                 }
-
-
-                CvlItem newItem = new CvlItem()
-                {
-                    Id = item.Id,
-                    BadBeeNumber = item.BadBee.BadBeeNo.TrimEnd(),
-                    Brand = item.Model.Serie.Brand.Name.TrimEnd(),
-                    Serie = item.Model.Serie.Name.TrimEnd(),
-                    Model = item.Model.Name.TrimEnd(),
-                    Years = sYears.TrimEnd(),
-                    Fr = item.BadBee.FR.TrimEnd(),
-                    WvaDesc = item.BadBee.Wva.Description.TrimEnd(),
-                    Wva = item.BadBee.Wva.WvaNo.TrimEnd(),
-                    Width = item.BadBee.Dimension.Width.ToString(),
-                    Height = item.BadBee.Dimension.Height.ToString(),
-                    Thickness = item.BadBee.Dimension.Thickness.ToString(),
-                    BrakeSystem = item.BadBee.Systems.Abbreviation.TrimEnd()
-                };
-                results.Items.Add(newItem);
             }
             return results;
+            
         }
 
         public static void FillDictionaryCache()
@@ -319,7 +263,7 @@ namespace BadBee.Core.Providers
         }
        
 
-        public List<ItemsDb> GetList(BadBeeFilter filter, bool brand, bool serie, bool model, bool drum, bool height, bool width, 
+        public List<Item> GetList(BadBeeFilter filter, bool brand, bool serie, bool model, bool drum, bool height, bool width, 
             bool thick, bool system, bool rivet, bool wva, bool wvad, bool lum, bool year)
         {
             if (string.IsNullOrEmpty(GlobalVars.SearchCache.SearchKey) == false && GlobalVars.SearchCache.SearchKey.Equals(filter.SearchKey))
@@ -628,23 +572,23 @@ namespace BadBee.Core.Providers
             //}
             public List<Serie> GetSeriesList(BadBeeFilter filter)
         {
-            //if (string.IsNullOrEmpty(filter.CrossNumbers) && string.IsNullOrEmpty(filter.Brands) /*&& string.IsNullOrEmpty(filter.Series)*/ && string.IsNullOrEmpty(filter.Models)
-            //        && string.IsNullOrEmpty(filter.DateYears) && string.IsNullOrEmpty(filter.BadBeeNumbers) && string.IsNullOrEmpty(filter.Wvas)
-            //        && string.IsNullOrEmpty(filter.WvaDetails2) && string.IsNullOrEmpty(filter.DrumDiameters) && string.IsNullOrEmpty(filter.Rivets)
-            //        && string.IsNullOrEmpty(filter.Widths) && string.IsNullOrEmpty(filter.Heights) && string.IsNullOrEmpty(filter.Thicknesses)
-            //        && string.IsNullOrEmpty(filter.Systems) /*&& string.IsNullOrEmpty(filter.PhraseFilter)*/)
-            //{
+            if (string.IsNullOrEmpty(filter.CrossNumbers) && string.IsNullOrEmpty(filter.Brands) /*&& string.IsNullOrEmpty(filter.Series)*/ && string.IsNullOrEmpty(filter.Models)
+                    && string.IsNullOrEmpty(filter.DateYears) && string.IsNullOrEmpty(filter.BadBeeNumbers) && string.IsNullOrEmpty(filter.Wvas)
+                    && string.IsNullOrEmpty(filter.WvaDetails2) && string.IsNullOrEmpty(filter.DrumDiameters) && string.IsNullOrEmpty(filter.Rivets)
+                    && string.IsNullOrEmpty(filter.Widths) && string.IsNullOrEmpty(filter.Heights) && string.IsNullOrEmpty(filter.Thicknesses)
+                    && string.IsNullOrEmpty(filter.Systems) /*&& string.IsNullOrEmpty(filter.PhraseFilter)*/)
+            {
                 return GetChList<Serie>().OrderBy(q => q.Name).ToList();
-            //}
-            //else
-            //{
-            //    var items = GetList(filter, false, true, false, false, false, false, false, false, false, false, false, false, false);
-            //    var list = items.ToList();
-            //    var lum = list.Select(item => new Series { Id = item.SerieId ?? default(int), Name = item.Serie.TrimEnd() }).ToList();
-            //    var distinctRowsById = lum.Select(i => i.Id).Distinct().Select(i => lum.First(o => o.Id == i)).ToList();
+            }
+            else
+            {
+                var items = GetList(filter, false, true, false, false, false, false, false, false, false, false, false, false, false);
+            var list = items.ToList();
+            var bb = list.Select(x => new Serie() { SerieId = x.Model.Serie.SerieId, Name=x.Model.Serie.Name.TrimEnd() }).ToList();
+            var distinctRowsById = bb.Select(i => i.SerieId).Distinct().Select(i => bb.First(o => o.SerieId == i)).ToList();
 
-            //    return distinctRowsById.OrderBy(q => q.Name).ToList();
-            //}
+            return distinctRowsById.OrderBy(q => q.Name).ToList();
+            }
         }
         public List<Model> GetModelsList(BadBeeFilter filter)
         {
