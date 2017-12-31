@@ -38,6 +38,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="DAL\AspNetUsers.cs">
+      <DependentUpon>BadBeeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\BadBee.cs">
       <DependentUpon>BadBeeModel.tt</DependentUpon>
     </Compile>
@@ -102,6 +105,11 @@
     <Compile Include="Models\MessageMetadata.cs" />
     <Compile Include="Models\ModalFilters.cs" />
     <Compile Include="Models\SearchCache.cs" />
+    <Compile Include="MyResources\PDFResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PDFResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="MyResources\Resources.pl1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -117,6 +125,12 @@
     <Compile Include="Providers\CatalogContentTableHeadersProvider.cs" />
     <Compile Include="Providers\ExcelProvider.cs" />
     <Compile Include="Providers\ListProvider.cs" />
+    <Compile Include="Providers\PDFProvider.cs" />
+    <Compile Include="Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config">
@@ -162,10 +176,17 @@
     <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="PdfSharp, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.Charting.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IO.FileSystem.Primitives.4.0.1\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
     </Reference>
@@ -215,8 +236,19 @@
       <DependentUpon>BadBeeModel.edmx</DependentUpon>
       <LastGenOutput>BadBeeModel.cs</LastGenOutput>
     </Content>
+    <Content Include="MyResources\BadBeeCover.png" />
+    <Content Include="MyResources\Brand_row.png" />
+    <None Include="MyResources\Header.png" />
+    <Content Include="MyResources\Page3_applications.png" />
+    <Content Include="MyResources\Page_drawing.png" />
+    <Content Include="MyResources\Page_number_row_left.png" />
+    <Content Include="MyResources\Page_number_row_right.png" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="MyResources\PDFResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>PDFResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="MyResources\Resources.pl.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.pl1.Designer.cs</LastGenOutput>
@@ -224,6 +256,10 @@
     <EmbeddedResource Include="MyResources\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

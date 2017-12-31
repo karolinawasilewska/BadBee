@@ -1,0 +1,71 @@
+﻿@using BadBee.Core.MyResources;
+@using PagedList.Mvc;
+@using PagedList;
+
+@model  BadBeeAdminPanel.Models.PicturesModel
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div style="margin-top:70px;">
+
+    <h2>@Resources.list_of_pictures</h2>
+
+
+    <button class="btn" id="upload" style="float: left"
+            onclick="location.href='@Url.Action("Index","Pictures")'">@Resources.add_new_photo
+        
+    </button>
+
+    <table id="list_of_pictures_table" >
+        @foreach (var item in Model.Items)
+        {
+            <tr class="picture_in_list">
+                <th class="schema">
+
+                    <img src="@item" alt="" />
+                </th>
+                <th class="desc">
+                        @{
+                            string[] tab = item.Split('/');
+                            string name = tab[tab.Length - 1];
+                            string[] tab2 = name.Split('.');
+                            string[] caption = tab2[0].Split('_');
+                            string product_no = caption[0].Substring(0,15);
+                            string type = "";
+                            if (name.Contains("_1"))
+                            {
+                                type = Resources.pict_of_components_with_box;
+                            }
+                            else if (name.Contains("_2"))
+                            {
+                                type = Resources.pict_of_components;
+                            }
+                            else
+                            {
+                                type = Resources.schema;
+                            }
+                        }
+                    
+                    <p>@name</p>
+                    <p>@type</p>
+                    <p>@product_no</p>
+                   
+                </th>
+                <th class="upload">
+                    <button class="btn" id="upload">
+                        @Html.ActionLink(@Resources.upload, "Upload", "Pictures", new { serverPath = item }, null)
+                    </button>
+                    <button class="btn btn-danger" id="delete"> @Html.ActionLink(Resources.delete, "Delete", new { picturesModel = name, badbeeNo = product_no })</button>
+                </th>
+            </tr>
+                            }
+       
+    </table>
+
+    <div style="text-align:center">
+        @Html.PagedListPager(Model.Items, page => Url.Action("List", new { page }))
+    </div>
+
+</div>

@@ -1,0 +1,18 @@
+﻿@using BadBee.Core.MyResources;
+
+@{
+    ViewBag.Title = "ImportProducts";
+}
+
+<h2>Import Products</h2>
+@using (Html.BeginForm("CreateTable", "Product", FormMethod.Post,
+                                                                new { enctype = "multipart/form-data", type="product" }))
+{
+
+    <input type="file" name="file" id="file" @*disabled="disabled"*@ />
+    <input type="submit" id="submit_pict" value="@Resources.upload" class="submit" />
+
+
+}
+
+

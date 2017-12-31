@@ -1,0 +1,54 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@using BadBee.Core.Models;
+@using BadBee.Core.MyResources;
+
+@model BadBeeAdminPanel.Models.CatalogContent
+
+<div class="table-container" style="width:100%">
+    <table class="table">
+        <thead>
+            <tr class="header-grey" style="white-space: nowrap">
+                @for (int i = 0; i < Model.TopHeaderItems.Count; i++)
+                {
+                    Model.TopHeaderItems[i].Index = i;
+                    Html.RenderPartial("CatalogContentTableHeader", Model.TopHeaderItems[i]);
+                }
+            </tr>
+            <tr class="header-dark" style="white-space: nowrap">
+                @foreach (var item in Model.DetailsHeaderItems)
+                {
+                    Html.RenderPartial("CatalogContentTableHeader", item);
+                }
+            </tr>
+        </thead>
+        <tbody id="catalogTable" class="catalog_table">
+            @foreach (CvlItem item in Model.Items)
+            {
+                <tr>
+                    <td class="badbeenr" id="badbeenr">@Html.Raw(item.BadBeeNumber)</td>
+                    <td class="brand">@Html.Raw(item.Brand)</td>
+                    <td class="serie">@Html.Raw(item.Serie)</td>
+                    <td class="model">@Html.Raw(item.Model)</td>
+                    <td class="years" id="years">@Html.Raw(item.Years)</td>
+                    <td class="fr">@Html.Raw(item.Fr)</td>
+                    <td class="wvadesc">@Html.Raw(item.WvaDesc)</td>
+                    <td class="wva">@Html.Raw(item.Wva)</td>
+                    <td class="height">@Html.Raw(item.Height)</td>
+                    <td class="width">@Html.Raw(item.Width)</td>
+                    <td class="thickness">@Html.Raw(item.Thickness)</td>
+                    <td class="system">@Html.Raw(item.BrakeSystem)</td>
+                    <td id="options">
+                        @Html.ActionLink(Resources.edit, "Edit", new { id = item.Id })
+                        @Html.ActionLink(Resources.details, "Details", new { id = item.Id })
+                        @Html.ActionLink(Resources.delete, "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="page-nav" id="page-nav">
+        @Html.PagedListPager(Model.Items, page => "#" + page.ToString())
+    </div>
+</div>
+

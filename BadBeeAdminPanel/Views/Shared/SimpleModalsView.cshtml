@@ -1,0 +1,316 @@
+﻿@using BadBee.Core.MyResources;
+
+<!-- Modal BadBeeNumbers-->
+<div class="modal fade" id="badbeeFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*   <img src="/Images/buttons/button1.png">*@
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.BadBee_no</p>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control filter" id="badbeeFilter" style="max-width:none;" placeholder="@Resources.enter_filter">
+                        <select size="5" id="badbee" class="form-control" ondblclick="applyBadBeeFilter()"></select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default btn-apply" onclick="applyBadBeeFilter()">@Resources.filter</a>
+                <a class="btn btn-default btn-remove" onclick="removeBadBeeFilter()">@Resources.remove</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Brands-->
+<div class="modal fade" id="brandFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*   <img src="/Images/buttons/button1.png">*@
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.brand</p>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control filter" id="brandFilter" style="max-width:none;" placeholder="@Resources.enter_filter">
+                        <select size="5" id="brand" class="form-control" ondblclick="applyBrandFilter()"></select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default btn-apply" onclick="applyBrandFilter()">@Resources.filter</a>
+                <a class="btn btn-default btn-remove" onclick="removeBrandFilter()">@Resources.remove</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Series-->
+<div class="modal fade" id="serieFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*   <img src="/Images/buttons/button1.png">*@
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.serie</p>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control filter" id="serieFilter" style="max-width:none;" placeholder="@Resources.enter_filter">
+                        <select size="5" id="serie" class="form-control" ondblclick="applySerieFilter()"></select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default btn-apply" onclick="applySerieFilter()">@Resources.filter</a>
+                <a class="btn btn-default btn-remove" onclick="removeSerieFilter()">@Resources.remove</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Models-->
+<div class="modal fade" id="modelFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*   <img src="/Images/buttons/button1.png">*@
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.model</p>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control filter" id="modelFilter" style="max-width:none;" placeholder="@Resources.enter_filter">
+                        <select size="5" id="model" class="form-control" ondblclick="applyModelFilter()"></select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default btn-apply" onclick="applyModelFilter()">@Resources.filter</a>
+                <a class="btn btn-default btn-remove" onclick="removeModelFilter()">@Resources.remove</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Years-->
+<div class="modal fade" id="yearsFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*   <img src="/Images/buttons/button1.png">*@
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.year</p>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control filter" id="yearFilter" style="max-width:none;" placeholder="@Resources.enter_filter">
+                        <select size="5" id="years" class="form-control" ondblclick="applyYearsFilter()"></select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default btn-apply" onclick="applyYearsFilter()">@Resources.filter</a>
+                <a class="btn btn-default btn-remove" onclick="removeYearsFilter()">@Resources.remove</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal WVAS-->
+<div class="modal fade" id="wvaFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*   <img src="/Images/buttons/button1.png">*@
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.wva</p>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control filter" id="wvaFilter" style="max-width:none;" placeholder="@Resources.enter_filter">
+                        <select size="5" id="wva" class="form-control" ondblclick="applyWvaFilter()"></select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default btn-apply" onclick="applyWvaFilter()">@Resources.filter</a>
+                <a class="btn btn-default btn-remove" onclick="removeWvaFilter()">@Resources.remove</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal WvaDetails-->
+<div class="modal fade" id="wvaDetFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*   <img src="/Images/buttons/button1.png">*@
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.wva_det</p>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control filter" id="wvadetailsFilter" style="max-width:none;" placeholder="@Resources.enter_filter">
+                        <select size="5" id="wvadetails" class="form-control" ondblclick="applyWvaDetailsFilter()"></select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default btn-apply" onclick="applyWvaDetailsFilter()">@Resources.filter</a>
+                <a class="btn btn-default btn-remove" onclick="removeWvaDetailsFilter()">@Resources.remove</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Height-->
+<div class="modal fade" id="heightFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*   <img src="/Images/buttons/button1.png">*@
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.height</p>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control filter" id="heightsFilter" style="max-width:none;" placeholder="@Resources.enter_filter">
+                        <select size="5" id="height" class="form-control" ondblclick="applyHeightsFilter()"></select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default btn-apply" onclick="applyHeightsFilter()">@Resources.filter</a>
+                <a class="btn btn-default btn-remove" onclick="removeHeightsFilter()">@Resources.remove</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Width-->
+<div class="modal fade" id="widthFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*   <img src="/Images/buttons/button1.png">*@
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.width</p>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control filter" id="widthsFilter" style="max-width:none;" placeholder="@Resources.enter_filter">
+                        <select size="5" id="width" class="form-control" ondblclick="applyWidthsFilter()"></select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default btn-apply" onclick="applyWidthsFilter()">@Resources.filter</a>
+                <a class="btn btn-default btn-remove" onclick="removeWidthsFilter()">@Resources.remove</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Thickness-->
+<div class="modal fade" id="thicknessFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*   <img src="/Images/buttons/button1.png">*@
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.thickness</p>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control filter" id="thicknessesFilter" style="max-width:none;" placeholder="@Resources.enter_filter">
+                        <select size="5" id="thickness" class="form-control" ondblclick="applyThicknessesFilter()"></select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default btn-apply" onclick="applyThicknessesFilter()">@Resources.filter</a>
+                <a class="btn btn-default btn-remove" onclick="removeThicknessesFilter()">@Resources.remove</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal DrumDiameter-->
+<div class="modal fade" id="diameterFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*   <img src="/Images/buttons/button1.png">*@
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.drumdiameter</p>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control filter" id="drumFilter" style="max-width:none;" placeholder="@Resources.enter_filter">
+                        <select size="5" id="drum" class="form-control" ondblclick="applyDrumDiameterFilter()"></select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default btn-apply" onclick="applyDrumDiameterFilter()">@Resources.filter</a>
+                <a class="btn btn-default btn-remove" onclick="removeDrumDiameterFilter()">@Resources.remove</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal System-->
+<div class="modal fade" id="systemFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*   <img src="/Images/buttons/button1.png">*@
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.system</p>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control filter" id="systemsFilter" style="max-width:none;" placeholder="@Resources.enter_filter">
+                        <select size="5" id="sys" class="form-control" ondblclick="applySystemsFilter()"></select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default btn-apply" onclick="applySystemsFilter()">@Resources.filter</a>
+                <a class="btn btn-default btn-remove" onclick="removeSystemsFilter()">@Resources.remove</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Rivets-->
+<div class="modal fade" id="rivetFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*   <img src="/Images/buttons/button1.png">*@
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.rivets</p>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control filter" id="rivetsFilter" style="max-width:none;" placeholder="@Resources.enter_filter">
+                        <select size="5" id="riv" class="form-control" ondblclick="applyRivetsFilter()"></select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default btn-apply" onclick="applyRivetsFilter()">@Resources.filter</a>
+                <a class="btn btn-default btn-remove" onclick="removeRivetsFilter()">@Resources.remove</a>
+            </div>
+        </div>
+    </div>
+</div>

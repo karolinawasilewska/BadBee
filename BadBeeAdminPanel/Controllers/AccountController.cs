@@ -8,13 +8,42 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using System.Threading;
+using log4net;
+using System.Collections.Generic;
+using PagedList;
 using BadBeeAdminPanel.Models;
+using BadBee.Core.Models;
+using BadBee.Core.DAL;
+using BadBeeAdminPanel;
 
 namespace BadBeeAdminPanel.Controllers
 {
+
     [Authorize]
     public class AccountController : Controller
     {
+        private static log4net.ILog Log { get; set; }
+        ILog log = log4net.LogManager.GetLogger(typeof(AccountController));
+
+        protected override void Initialize(System.Web.Routing.RequestContext requestContext)
+        {
+            try
+            {
+                // HttpCookie languageCookie = System.Web.HttpContext.Current.Request.Cookies["Language"];
+                // if (languageCookie != null)
+                //  {
+                Thread.CurrentThread.CurrentCulture = new CultureInfo("pl-PL");
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo("pl-PL");
+                //  }
+                base.Initialize(requestContext);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                throw ex;
+            }
+        }
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -22,7 +51,7 @@ namespace BadBeeAdminPanel.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -34,9 +63,9 @@ namespace BadBeeAdminPanel.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -60,7 +89,7 @@ namespace BadBeeAdminPanel.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
-
+        private BadBeeEntities db = new BadBeeEntities();
         //
         // POST: /Account/Login
         [HttpPost]
@@ -68,6 +97,12 @@ namespace BadBeeAdminPanel.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+            AspNetUsers user = db.AspNetUsers.FirstOrDefault(q => q.Email == model.Email);
+            if (user.Removed == true)
+            {
+                ModelState.AddModelError("", "Invalid login attempt.");
+                return View(model);
+            }
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -75,10 +110,20 @@ namespace BadBeeAdminPanel.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
+
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
+                    GlobalVars.AdvSession = true;
+                    if (GlobalVars.SearchCaches != null && GlobalVars.SearchCaches.Count >= 10)
+                    {
+                        GlobalVars.SearchCaches = new Dictionary<string, SearchCache>();
+                    }
+                    if (GlobalVars.Filters != null && GlobalVars.Filters.Count >= 10)
+                    {
+                        GlobalVars.Filters = new Dictionary<string, BadBeeFilter>();
+                    }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -120,7 +165,7 @@ namespace BadBeeAdminPanel.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -136,7 +181,6 @@ namespace BadBeeAdminPanel.Controllers
 
         //
         // GET: /Account/Register
-        [AllowAnonymous]
         public ActionResult Register()
         {
             return View();
@@ -145,7 +189,6 @@ namespace BadBeeAdminPanel.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
@@ -155,15 +198,16 @@ namespace BadBeeAdminPanel.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+
+                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+
+                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "AspNetUsers");
                 }
                 AddErrors(result);
             }
@@ -209,7 +253,7 @@ namespace BadBeeAdminPanel.Controllers
                     return View("ForgotPasswordConfirmation");
                 }
 
-                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
                 // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
@@ -392,7 +436,7 @@ namespace BadBeeAdminPanel.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
         //
@@ -449,7 +493,7 @@ namespace BadBeeAdminPanel.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Product");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

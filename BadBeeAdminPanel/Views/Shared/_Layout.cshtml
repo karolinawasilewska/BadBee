@@ -1,12 +1,33 @@
-﻿<!DOCTYPE html>
+﻿@using BadBee.Core.MyResources;
+@using Microsoft.AspNet.Identity;
+@using System.Web;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - BadBee - Admin Panel</title>
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&subset=latin,latin-ext" rel="stylesheet">
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    
+    
+     @*@Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+@*    <script type="text/javascript" src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>*@
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -17,28 +38,79 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
+               
+
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a class="navbar-brand" style="padding:10px;" href="/Product/Index"><img src="~/Images/logoBadBee.png" alt="" style="height:30px;"/></a></li> 
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="export_import">
+                                @Html.ActionLink(Resources.products, "Index", "Product")
+                            <ul>
+                                <li style="width:160px">@Html.ActionLink(Resources.brand, "Index", "Brands")</li>
+                                <li style="width:160px">@Html.ActionLink(Resources.BadBee_no, "Index", "BadBeeNumbers")</li>
+                                <li style="width:160px">@Html.ActionLink(Resources.wva, "Index", "Wvas")</li>
+                                <li style="width:160px">@Html.ActionLink(Resources.dimensions, "Index", "Dimensions")</li>
+                                @*<li style="width:160px">@Html.ActionLink(Resources.height, "Index", "Heights")</li>
+                                <li style="width:160px">@Html.ActionLink(Resources.width, "Index", "Widths")</li>
+                                <li style="width:160px">@Html.ActionLink(Resources.thickness, "Index", "Thicknesses")</li>*@
+                                <li style="width:160px">@Html.ActionLink(Resources.system, "Index", "Systems")</li>
+                            </ul>
+                        </li>
+                            <li>@Html.ActionLink(Resources.pictures, "List", "Pictures")</li>
+                            @*<li>@Html.ActionLink(Resources.download_xls_products, "DownloadCSVProducts", "Product")</li>
+                            <li>@Html.ActionLink(Resources.download_xls_cross, "DownloadCSVCross", "Product")</li>*@
+                            <li class="export_import">
+                                <a href="">Export</a>
+                                <ul>
+                                    <li style="width:160px">@Html.ActionLink(Resources.products, "DownloadCSVProducts", "Product")</li>
+                                    <li style="width:160px">@Html.ActionLink(Resources.products + " do importu", "DownloadCSVProductsWithIds", "Product")</li>
+                                </ul>
+                            </li>
+                            <li class="export_import">
+                                <a href="">Import</a>
+                                <ul>
+                                    <li style="width:110px">@Html.ActionLink(Resources.products, "ImportProducts", "Product")</li>
+                                </ul>
+                            </li>
+                            <li>@Html.ActionLink("Katalog PDF", "GeneratePDF",  "Product")</li>
+                        }
+
+                    </ul>
+                        
+
+
+                    <ul class="nav navbar-nav" id="navbar-users">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Odśwież", "RefreshData", "Product")</li>
+                    }
+
+                    @if (User.Identity.GetUserName() == "admin@badbee.pl")
+                    {
+                         <li>@Html.ActionLink(Resources.users, "Index", "AspNetUsers")</li> 
+                    }
+                         <li>@Html.Partial("_LoginPartial")</li>
+                    </ul>
+                    
+                   
+                </div>
             </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-1.10.2.js"></script>
+    @*<script type="text/javascript" src="~/Scripts/jquery.printElement.js"></script>
+    <script type="text/javascript" src="~/Scripts/badbee_catalog.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>*@
+    
+
+
 </body>
 </html>

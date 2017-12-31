@@ -1,0 +1,64 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@using BadBee.Core.MyResources
+
+@model IPagedList<BadBee.Core.DAL.ItemsDb>
+
+
+@{
+    ViewBag.Title = @Resources.products;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Resources.products</h2>
+
+
+@*<button class="btn" id="upload" style="float: left">
+    @Html.ActionLink(Resources.add_new_photo, "Index", "Pictures")
+</button>*@
+@*<div style="width:100%">
+    <button class="btn" id="refresh_btn">
+        @Html.ActionLink(Resources.go_website, "Odśwież i przejdź do katalogu")
+    </button>
+</div>*@
+<div class="table_content">
+    
+  
+        <button class="btn" id="add_btn" style="float:left"
+                onclick="location.href='@Url.Action("Create", "Product")'">
+            @Resources.create_new_prod
+        </button>
+    
+    
+
+    <button class="btn" id="clearfilters"
+            onclick="cleanBadBeeFilter('@Url.Action("Index", "Product")');" href="#" title="@Resources.cleanFilters">
+        @Resources.cleanFilters
+        </button>
+
+
+        @{
+            Html.RenderPartial("ModalFilters", new BadBee.Core.Models.ModalFilters() { Type = BadBee.Core.Models.CatalogContentTableHeaderType.DetailsEmpty });
+        }
+        <div id="catalogContent" class="row">
+
+        </div>
+    </div>
+@*<div style="text-align:center">
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>*@
+
+<script>
+    $(function () {
+
+
+        if (window.location.search == '?completed=1') {
+            alert("Produkty zaimportowano pomyślnie!");
+        }
+        if (window.location.search == '?completed=0') {
+            alert("Przy importowaniu wystąpił bład.");
+        }
+    })
+</script>

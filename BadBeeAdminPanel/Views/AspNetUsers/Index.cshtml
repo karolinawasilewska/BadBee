@@ -1,0 +1,76 @@
+﻿@using BadBee.Core.MyResources;
+@model IEnumerable<BadBee.Core.DAL.AspNetUsers>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Resources.users</h2>
+
+<button class="btn" id="add_btn" style="float:left; margin-left:0" 
+        onclick="location.href='@Url.Action("Register","Account")'">@Resources.create_user
+</button>
+    <table class="table" id="table_users">
+        <tr class="table-header">
+            <th id="users_email">
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>*@
+            @*<th>
+                    @Html.DisplayNameFor(model => model.PasswordHash)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SecurityStamp)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LockoutEndDateUtc)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Pin)
+                </th>*@
+            <th id="users_delete"></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            if (item.Email != "admin@badbee.pl" && item.Removed == false)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>*@
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.PasswordHash)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SecurityStamp)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PhoneNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LockoutEndDateUtc)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Pin)
+                        </td>*@
+                    <td>
+                        @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                            @Html.ActionLink("Details", "Details", new { id=item.Id }) |*@
+                        @Html.ActionLink(Resources.delete, "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>

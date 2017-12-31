@@ -46,10 +46,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -190,20 +199,34 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BrandsController.cs" />
+    <Compile Include="Controllers\DimensionsController.cs" />
+    <Compile Include="Controllers\HeightsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\BadBeeNumbersController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PicturesController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\SystemsController.cs" />
+    <Compile Include="Controllers\ThicknessesController.cs" />
+    <Compile Include="Controllers\WidthsController.cs" />
+    <Compile Include="Controllers\WvasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CatalogContent.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PicturesModel.cs" />
+    <Compile Include="Models\ProductModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -262,9 +285,51 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Product\CatalogContent.cshtml" />
+    <Content Include="Views\Product\CatalogContentTableHeader.cshtml" />
+    <Content Include="Views\Product\Create.cshtml" />
+    <Content Include="Views\Product\Delete.cshtml" />
+    <Content Include="Views\Product\Details.cshtml" />
+    <Content Include="Views\Product\Edit.cshtml" />
+    <Content Include="Views\Product\ImportProducts.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\ModalFilters.cshtml" />
+    <Content Include="Views\AspNetUsers\Create.cshtml" />
+    <Content Include="Views\AspNetUsers\Delete.cshtml" />
+    <Content Include="Views\AspNetUsers\Index.cshtml" />
+    <Content Include="Views\BadBeeNumbers\Delete.cshtml" />
+    <Content Include="Views\BadBeeNumbers\Edit.cshtml" />
+    <Content Include="Views\BadBeeNumbers\Index.cshtml" />
+    <Content Include="Views\Brands\Delete.cshtml" />
+    <Content Include="Views\Brands\Edit.cshtml" />
+    <Content Include="Views\Brands\Index.cshtml" />
+    <Content Include="Views\Heights\Delete.cshtml" />
+    <Content Include="Views\Heights\Edit.cshtml" />
+    <Content Include="Views\Heights\Index.cshtml" />
+    <Content Include="Views\Pictures\Index.cshtml" />
+    <Content Include="Views\Pictures\List.cshtml" />
+    <Content Include="Views\Systems\Delete.cshtml" />
+    <Content Include="Views\Systems\Edit.cshtml" />
+    <Content Include="Views\Systems\Index.cshtml" />
+    <Content Include="Views\Thicknesses\Delete.cshtml" />
+    <Content Include="Views\Thicknesses\Edit.cshtml" />
+    <Content Include="Views\Thicknesses\Index.cshtml" />
+    <Content Include="Views\Widths\Delete.cshtml" />
+    <Content Include="Views\Widths\Edit.cshtml" />
+    <Content Include="Views\Widths\Index.cshtml" />
+    <Content Include="Views\Wvas\Delete.cshtml" />
+    <Content Include="Views\Wvas\Edit.cshtml" />
+    <Content Include="Views\Wvas\Index.cshtml" />
+    <Content Include="Views\Shared\ModalsView.cshtml" />
+    <Content Include="Views\Shared\SimpleModalsView.cshtml" />
+    <Content Include="Views\Dimensions\Delete.cshtml" />
+    <Content Include="Views\Dimensions\Edit.cshtml" />
+    <Content Include="Views\Dimensions\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\Pictures\" />
+    <Folder Include="Views\PDFCatalog\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -278,6 +343,12 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BadBee.Core\BadBee.Core.csproj">
+      <Project>{1f74aea8-830b-442a-a56e-8718b3e6219a}</Project>
+      <Name>BadBee.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

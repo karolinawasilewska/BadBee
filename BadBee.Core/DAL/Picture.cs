@@ -21,9 +21,10 @@ namespace BadBee.Core.DAL
         }
     
         public int PictureId { get; set; }
-        public string Picure1 { get; set; }
+        public string Picture1 { get; set; }
         public string Picture2 { get; set; }
         public string Picture3 { get; set; }
+        public string BadBeeNo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BadBee> BadBee { get; set; }

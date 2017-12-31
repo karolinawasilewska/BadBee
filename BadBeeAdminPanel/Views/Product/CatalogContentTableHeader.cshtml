@@ -1,0 +1,57 @@
+﻿@model BadBee.Core.Models.CatalogContentTableHeader
+
+@if (Model.HasAnyElements == false && string.IsNullOrEmpty(Model.CssStyle) == false)
+{
+    Model.CssStyle = Model.CssStyle.Replace("cursor: pointer", "cursor: default");
+    Model.DataToggle = null;
+}
+
+@if (Model.Type == BadBee.Core.Models.CatalogContentTableHeaderType.TopFilter)
+{
+    <th id="@Model.ID" @if (string.IsNullOrEmpty(Model.DataToggle) == false) { @Html.Raw(string.Format(@"data-toggle=""{0}""", Model.DataToggle)) } data-target="@if (Model.HasAnyElements) { @Model.DataTarget }" onclick="@if (Model.HasAnyElements) { @Model.OnClickMethod }" style="@if (Model.IsFilterSelected) { @Html.Raw(string.Format(@"color: rgb(213, 32, 39);{0}", Model.CssStyle)); } else { @Model.CssStyle} ">
+       
+        @if (@Model.PictureSrc != null)
+        {
+            <img src="@Model.PictureSrc"> <br />
+        }@Model.Description
+        @if (Model.HasAnyElements)
+        {
+            if (Model.IsFilterSelected)
+            {
+                <img src="~/Images/arrow_red.png" />
+            }
+            else
+            {
+                <img src="~/Images/arrow_black.png" />
+            }
+        }
+    </th>
+}
+else if (Model.Type == BadBee.Core.Models.CatalogContentTableHeaderType.TopEmpty)
+{
+    <th style="@Model.CssStyle" class="@Model.CssClass" @if (string.IsNullOrEmpty(Model.Colspan) == false) { @Html.Raw(string.Format(@"colspan=""{0}""", Model.Colspan)) }>
+        @if (@Model.PictureSrc != null)
+        {
+            <img src="@Model.PictureSrc"><br />
+        }
+       @Model.Description
+    </th>
+}
+else if (Model.Type == BadBee.Core.Models.CatalogContentTableHeaderType.DetailsFilter)
+{
+    <th id="@Model.ID" @if (string.IsNullOrEmpty(Model.DataToggle) == false) { @Html.Raw(string.Format(@"data-toggle=""{0}""", Model.DataToggle))  } data-target="@Model.DataTarget" onclick="@if (Model.HasAnyElements) { @Model.OnClickMethod }" style="@Model.CssStyle">
+        <span style="@if (Model.IsFilterSelected) { @Html.Raw(@"text-decoration: underline;"); }">@Model.Description</span>
+        @if (Model.HasAnyElements)
+        {
+            <img src="~/Images/arrow_white.png" />
+        }
+    </th>
+}
+else if (Model.Type == BadBee.Core.Models.CatalogContentTableHeaderType.DetailsEmpty)
+{
+    <th style="@Model.CssStyle" @if (string.IsNullOrEmpty(Model.Colspan) == false) { @Html.Raw(string.Format(@"colspan=""{0}""", Model.Colspan)) }>@Model.Description</th>
+}
+@if (Model.Index == 0)
+{
+    <img id="carsImage" style="position:absolute;top:14px;left:122px;z-index:500; " src="~/Images/head_brand_serie_model_kw.png" />
+}

@@ -43,7 +43,7 @@ namespace BadBee.Core.Providers
                 DataToggle = "modal",
                 Type = CatalogContentTableHeaderType.TopFilter,
                 DataTarget = "#brandFilterModal",
-                Description = @Resources.brand,
+                Description = MyResources.Resources.brand,
                 ID = "brand",
                 OnClickMethod = "showBrands()",
               //  PictureSrc = "../../Images/nothing_head.png",
@@ -56,7 +56,7 @@ namespace BadBee.Core.Providers
             {                
                 Type = CatalogContentTableHeaderType.TopFilter,
                 DataTarget = "#serieFilterModal",
-                Description = @Resources.serie,
+                Description = MyResources.Resources.serie,
                 ID = "seriesmod",
                 OnClickMethod = "showSeries()",
              //   PictureSrc = "../../Images/nothing_head.png",
@@ -69,7 +69,7 @@ namespace BadBee.Core.Providers
             {
                 Type = CatalogContentTableHeaderType.TopFilter,
                 DataTarget = "#modelFilterModal",
-                Description = @Resources.model,
+                Description = MyResources.Resources.model,
                 ID = "modelsmod",
                 OnClickMethod = "showModels()",
                // PictureSrc = "../../Images/nothing_head.png",
@@ -84,7 +84,7 @@ namespace BadBee.Core.Providers
                 DataToggle = "modal",
                 Type = CatalogContentTableHeaderType.TopFilter,
                 DataTarget = "#yearsFilterModal",
-                Description = @Resources.year,
+                Description = MyResources.Resources.year,
                 ID = "years",
                 OnClickMethod = "showYears()",
              //   PictureSrc = "../../Images/year_head_tran.png",
@@ -97,7 +97,7 @@ namespace BadBee.Core.Providers
             {
                 Type = CatalogContentTableHeaderType.TopEmpty,
                 CssClass = "fr",
-                Description = @Resources.front_rear,
+                Description = MyResources.Resources.front_rear,
               //  PictureSrc = "../../Images/fr_head_tran.png"
             });
 
@@ -105,7 +105,7 @@ namespace BadBee.Core.Providers
             {
                 Type = CatalogContentTableHeaderType.TopEmpty,
                 CssClass = "wva",
-                Description = @Resources.wva,
+                Description = MyResources.Resources.wva,
             //    PictureSrc = "../../Images/wva_head_tran.png",
                 Colspan = "2"
             });
@@ -114,7 +114,7 @@ namespace BadBee.Core.Providers
                 DataToggle = "modal",
                 Type = CatalogContentTableHeaderType.TopFilter,
                 DataTarget = "#BadBeeFilterModal",
-                Description = @Resources.BadBee_no,
+                Description = MyResources.Resources.BadBee_no,
                 ID = "BadBeenumber",
                 OnClickMethod = "showBadBee()",
             //    PictureSrc = "../../Images/BadBee_head_tran.png",
@@ -127,7 +127,7 @@ namespace BadBee.Core.Providers
             {
                 Type = CatalogContentTableHeaderType.TopEmpty,
                 CssClass = "size",
-                Description = @Resources.size,
+                Description = MyResources.Resources.size,
             //    PictureSrc = "../../Images/size_head_tran.png",
                 Colspan = "3"
             });
@@ -138,7 +138,7 @@ namespace BadBee.Core.Providers
                 DataToggle = "modal",
                 Type = CatalogContentTableHeaderType.TopFilter,
                 DataTarget = "#systemFilterModal",
-                Description = @Resources.system,
+                Description = MyResources.Resources.system,
                 ID = "sys",
                 OnClickMethod = "showSystems()",
             //    PictureSrc = "../../Images/brake_head_tran.png",
@@ -174,7 +174,7 @@ namespace BadBee.Core.Providers
             items.Add(new CatalogContentTableHeader()
             {
                 Type = CatalogContentTableHeaderType.DetailsEmpty,
-                Description = Resources.description
+                Description = MyResources.Resources.description
             });
 
             items.Add(new CatalogContentTableHeader()
@@ -182,7 +182,7 @@ namespace BadBee.Core.Providers
                 DataToggle = "modal",
                 Type = CatalogContentTableHeaderType.DetailsFilter,
                 DataTarget = "#wvaFilterModal",
-                Description = @Resources.wva,
+                Description = MyResources.Resources.wva,
                 ID = "wva",
                 OnClickMethod = "showWva()",
                 IsFilterSelected = GlobalVars.BadBeeFilter.WvasSelected,
@@ -201,7 +201,7 @@ namespace BadBee.Core.Providers
                 DataToggle = "modal",
                 Type = CatalogContentTableHeaderType.DetailsFilter,
                 DataTarget = "#heightFilterModal",
-                Description = @Resources.h,
+                Description = MyResources.Resources.h,
                 ID = "height",
                 OnClickMethod = "showHeights()",
                 IsFilterSelected = GlobalVars.BadBeeFilter.HeightsSelected,
@@ -214,7 +214,7 @@ namespace BadBee.Core.Providers
                 DataToggle = "modal",
                 Type = CatalogContentTableHeaderType.DetailsFilter,
                 DataTarget = "#widthFilterModal",
-                Description = @Resources.w,
+                Description = MyResources.Resources.w,
                 ID = "width",
                 OnClickMethod = "showWidths()",
                 IsFilterSelected = GlobalVars.BadBeeFilter.WidthsSelected,
@@ -227,7 +227,7 @@ namespace BadBee.Core.Providers
                 DataToggle = "modal",
                 Type = CatalogContentTableHeaderType.DetailsFilter,
                 DataTarget = "#thicknessFilterModal",
-                Description = @Resources.t,
+                Description = MyResources.Resources.t,
                 ID = "thickness",
                 OnClickMethod = "showThicknesses()",
                 IsFilterSelected = GlobalVars.BadBeeFilter.ThicknessesSelected,

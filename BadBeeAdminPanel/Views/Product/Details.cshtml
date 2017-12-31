@@ -1,0 +1,324 @@
+﻿@using BadBee.Core.MyResources;
+@model BadBee.Core.DAL.ItemsDb
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Resources.details</h2>
+
+<div>
+  @*  <h4>ItemsDb</h4>*@
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Brand)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Brand)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Serie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Serie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Model)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Model)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Kw)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kw)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Km)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Km)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateFrom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateFrom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateTo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateTo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WvaDesc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WvaDesc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Wva)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Wva)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WvaDetailsQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WvaDetailsQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WvaDetails)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WvaDetails)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BadBeeNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BadBeeNumber)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.Size)
+        </dt>*@
+
+        @*<dd>
+            @Html.DisplayFor(model => model.Size)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Height)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Height)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Width)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Width)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Thickness)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Thickness)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Wedge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Wedge)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DrumDiameter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DrumDiameter)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BrakeSystem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BrakeSystem)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RivetsQuantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RivetsQuantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RivetsType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RivetsType)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.Product)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BrandId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BrandId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SerieId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SerieId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModelId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModelId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KwId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KwId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KmId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KmId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WvaId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WvaId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WvaDetailsId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WvaDetailsId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BadBeeNumberId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BadBeeNumberId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ThicknessId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThicknessId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RivetTypeId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RivetTypeId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WidthId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WidthId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HeightId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HeightId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SystemId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SystemId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DrumDiameterId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DrumDiameterId)
+        </dd>*@
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink(Resources.edit, "Edit", new { id = Model.Id }) |
+    @Html.ActionLink(Resources.back_to_list, "Index")
+</p>

@@ -29,10 +29,10 @@ namespace BadBee.Core.DAL
         public Nullable<int> PictureId { get; set; }
     
         public virtual Dimension Dimension { get; set; }
-        public virtual Picture Picture { get; set; }
         public virtual Systems Systems { get; set; }
         public virtual Wva Wva { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Item> Item { get; set; }
+        public virtual Picture Picture { get; set; }
     }
 }

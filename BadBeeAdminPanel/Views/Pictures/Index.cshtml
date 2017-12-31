@@ -1,0 +1,62 @@
+﻿@using BadBee.Core.MyResources;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("FileUpload", "Pictures", FormMethod.Post,
+                                        new { enctype = "multipart/form-data" }))
+{
+    <label for="caption" style="margin-top:150px;">@Resources.add_photo</label>
+
+    <select  name="type" id="type" class="form-control">
+    <option selected disabled hidden> @Resources.choose_type </option>
+    <option value="schema1">@Resources.schema 1</option>
+    <option value="schema2">@Resources.schema 2</option>
+    <option value="picture1">@Resources.photo_of_kit</option>
+    <option value="picture2">@Resources.photo_of_components</option>
+    </select>
+
+    @*<label for="wvas" style="margin-top:50px;">Wva</label>
+    <select disabled name="wvas" id="wvas" class="form-control" >
+    </select>*@
+
+    <label for="badbees" style="margin-top:50px;">BadBee No.</label>
+    <select disabled name="badbees" id="badbees" class="form-control">
+
+    </select>
+
+
+    <input type="file" name="file" id="file" @*disabled="disabled"*@/>
+    <input disabled type="submit" id="submit_pict" value="@Resources.upload" class="submit"/>
+
+
+}
+<script>
+    $(function () {
+      
+     
+        $.post('@Url.Action("GetBadBeePadsList", "Pictures")', function (data) {
+            var items = [];
+            items.push("<option selected disabled hidden> @Resources.choose_BadBee </option>");
+            for (var i = 0; i < data.length; i++) {
+                items.push("<option value=" + "'" + data[i] + "'" + ">" + data[i] + "</option>");
+            }
+            $("#badbees").html(items.join(' '));
+        });
+
+        $('#type').on('change', function () {
+            $('#wvas').prop('disabled', false)
+            $('#badbees').prop('disabled', false)
+        });
+        $('#file').on('change', function () {
+            $('#submit_pict').prop('disabled', false)
+        });
+
+     
+    })
+
+</script>
+

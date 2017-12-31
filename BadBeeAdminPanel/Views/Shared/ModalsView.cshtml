@@ -1,0 +1,1315 @@
+﻿@using BadBee.Core.MyResources;
+<!-- Modal Brand -->
+<div class="modal fade" id="brandFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.filterby <b>@Resources.brand</b></p>
+            </div>
+            <div class="modal-input">
+                <table>
+                    <tr>
+                        <td><input type="text" class="form-control filter" id="brandFilter" placeholder="@Resources.modalsearch"></td>
+                        <td><img src="~/Images/LUPA.png" alt="" /></td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="modal-body">
+                <div class="modal-forms" @*style="height:300px;"*@>
+                    <form role="form" style="width:45%; display:inline-block; float:left">
+                        <div class="form-group">
+                            <p>@Resources.options</p>
+                            <select size="9" id="brand" class="form-control"></select>
+                            @*<select size="9" id="brands" class="form-control" ondblclick="applyBrandFilter()"></select>*@
+                        </div>
+                    </form>
+                    <div class="arrows" style="">
+                        <img src="~/Images/toRight.png" onclick="toRight('brand', 'brands2', '#brand', '#brands2')" />
+                        <img src="~/Images/toLeft.png" onclick="toLeft('brand', 'brands2', '#brand', '#brands2', brandsFilter)" />
+                    </div>
+                    <form role="form" style="width:45%;  display:inline-block; float:right">
+                        <div class="form-group">
+                            <p>@Resources.filterby</p>
+                            <select size="9" id="brands2" class="form-control"></select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <a class="btn btn-default btn-apply" onclick="applyBrandFilter2()">@Resources.filter</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Serie -->
+<div class="modal fade" id="serieFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.filterby <b>@Resources.serie</b></p>
+            </div>
+            <div class="modal-input">
+                <table>
+                    <tr>
+                        <td><input type="text" class="form-control filter" id="serieFilter" placeholder="@Resources.modalsearch"></td>
+                        <td><img src="~/Images/LUPA.png" alt="" /></td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="modal-body">
+                <div class="modal-forms" @*style="height:300px;"*@>
+                    <form role="form" style="width:45%; display:inline-block; float:left">
+                        <div class="form-group">
+                            <p>@Resources.options</p>
+                            <select size="9" id="serie" class="form-control"></select>
+                            @*<select size="9" id="serie" class="form-control" ondblclick="applySerieFilter()"></select>*@
+                        </div>
+                    </form>
+                    <div class="arrows" style="">
+                        <img src="~/Images/toRight.png" onclick="toRight('serie', 'serie2', '#serie', '#serie2')" />
+                        <img src="~/Images/toLeft.png" onclick="toLeft('serie', 'serie2', '#serie', '#serie2', seriesFilter)" />
+                    </div>
+                    <form role="form" style="width:45%;  display:inline-block; float:right">
+                        <div class="form-group">
+                            <p>@Resources.filterby</p>
+                            <select size="9" id="serie2" class="form-control"></select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <a class="btn btn-default btn-apply" onclick="applySerieFilter2()">@Resources.filter</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Model -->
+<div class="modal fade" id="modelFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.filterby <b>@Resources.model</b></p>
+            </div>
+            <div class="modal-input">
+                <table>
+                    <tr>
+                        <td><input type="text" class="form-control filter" id="modelFilter" placeholder="@Resources.modalsearch"></td>
+                        <td><img src="~/Images/LUPA.png" alt="" /></td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="modal-body">
+                <div class="modal-forms" @*style="height:300px;"*@>
+                    <form role="form" style="width:45%; display:inline-block; float:left">
+                        <div class="form-group">
+                            <p>@Resources.options</p>
+
+                            <select size="9" id="model" class="form-control" @*ondblclick="applyModelFilter()"*@></select>
+                            @*<div class="load"></div>*@
+                        </div>
+                    </form>
+                    <div class="arrows" style="">
+                        <img src="~/Images/toRight.png" onclick="toRight('model', 'model2', '#model', '#model2')" />
+                        <img src="~/Images/toLeft.png" onclick="toLeft('model', 'model2', '#model', '#model2', modelsFilter)" />
+                    </div>
+                    <form role="form" style="width:45%;  display:inline-block; float:right">
+                        <div class="form-group">
+                            <p>@Resources.filterby</p>
+                            <select size="9" id="model2" class="form-control"></select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <a class="btn btn-default btn-apply" onclick="applyModelFilter2()">@Resources.filter</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal YEARS -->
+<div class="modal fade" id="yearsFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.filterby <b>@Resources.year</b></p>
+            </div>
+            <div class="modal-input">
+                <table>
+                    <tr>
+                        <td><input type="text" class="form-control filter" id="yearsFilter" placeholder="@Resources.modalsearch"></td>
+                        <td><img src="~/Images/LUPA.png" alt="" /></td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="modal-body">
+                <div class="modal-forms" @*style="height:300px;"*@>
+                    <form role="form" style="width:45%; display:inline-block; float:left">
+                        <div class="form-group">
+                            <p>@Resources.options</p>
+
+                            <select size="8" id="years" class="form-control" @*ondblclick="applyYearsFilter()"*@></select>
+
+                        </div>
+                    </form>
+                    <div class="arrows" style="">
+                        <img src="/Images/toRight.png" onclick="toRight('years', 'year2', '#years', '#year2')" />
+                        <img src="~/Images/toLeft.png" onclick="toLeft('years', 'year2', '#years', '#year2', yearsFilter)" />
+                    </div>
+                    <form role="form" style="width:45%;  display:inline-block; float:right">
+                        <div class="form-group">
+                            <p>@Resources.filterby</p>
+                            <select size="9" id="year2" class="form-control"></select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <a class="btn btn-default btn-apply" onclick="applyYearsFilter2()">@Resources.filter</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal BADBEE NB/ID -->
+<div class="modal fade" id="badbeeFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.filterby <b>@Resources.BadBee_no</b></p>
+            </div>
+            <div class="modal-input">
+                <table>
+                    <tr>
+                        <td><input type="text" class="form-control filter" id="badbeeFilter" placeholder="@Resources.modalsearch"></td>
+                        <td><img src="~/Images/LUPA.png" alt="" /></td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="modal-body">
+                <div class="modal-forms" @*style="height:300px;"*@>
+                    <form role="form" style="width:45%; display:inline-block; float:left">
+                        <div class="form-group">
+                            <p>@Resources.options</p>
+
+                            <select size="9" id="badbee" class="form-control" @*ondblclick="applyBadBeeFilter()"*@></select>
+                        </div>
+                    </form>
+                    <div class="arrows" style="">
+                        <img src="~/Images/toRight.png" onclick="toRight('badbee', 'badbee2', '#badbee', '#badbee2')" />
+                        <img src="~/Images/toLeft.png" onclick="toLeft('badbee', 'badbee2', '#badbee', '#badbee2', badbeesFilter)" />
+                    </div>
+                    <form role="form" style="width:45%;  display:inline-block; float:right">
+                        <div class="form-group">
+                            <p>@Resources.filterby</p>
+                            <select size="9" id="badbee2" class="form-control"></select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <a class="btn btn-default btn-apply" onclick="applyBadBeeFilter2()">@Resources.filter</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal WVA -->
+<div class="modal fade" id="wvaFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.filterby <b>@Resources.wva</b></p>
+            </div>
+            <div class="modal-input">
+                <table>
+                    <tr>
+                        <td><input type="text" class="form-control filter" id="wvaFilter" placeholder="@Resources.modalsearch"></td>
+                        <td><img src="~/Images/LUPA.png" alt="" /></td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="modal-body">
+                <div class="modal-forms" @*style="height:300px;"*@>
+                    <form role="form" style="width:45%; display:inline-block; float:left">
+                        <div class="form-group">
+                            <p>@Resources.options</p>
+
+                            <select size="9" id="wva" class="form-control" @*ondblclick="applyWvaFilter()"*@></select>
+                        </div>
+                    </form>
+                    <div class="arrows" style="">
+                        <img src="~/Images/toRight.png" onclick="toRight('wva', 'wvas2', '#wva', '#wvas2')" />
+                        <img src="~/Images/toLeft.png" onclick="toLeft('wva', 'wvas2', '#wva', '#wvas2', wvasFilter)" />
+                    </div>
+                    <form role="form" style="width:45%;  display:inline-block; float:right">
+                        <div class="form-group">
+                            <p>@Resources.filterby</p>
+                            <select size="9" id="wvas2" class="form-control"></select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <a class="btn btn-default btn-apply" onclick="applyWvaFilter2()">@Resources.filter</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal WVA Details-->
+<div class="modal fade" id="wvaDetFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.filterby <b>@Resources.wva</b></p>
+            </div>
+            <div class="modal-input">
+                <table>
+                    <tr>
+                        <td><input type="text" class="form-control filter" id="wvadetFilter" placeholder="@Resources.modalsearch"></td>
+                        <td><img src="~/Images/LUPA.png" alt="" /></td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="modal-body">
+                <div class="modal-forms" @*style="height:300px;"*@>
+                    <form role="form" style="width:45%; display:inline-block; float:left">
+                        <div class="form-group">
+                            <p>@Resources.options</p>
+
+                            <select size="9" id="wvadetails" class="form-control" @*ondblclick="applyWvaDetailsFilter()"*@></select>
+                        </div>
+                    </form>
+                    <div class="arrows" style="">
+                        <img src="~/Images/toRight.png" onclick="toRight('wvadetails', 'wvadet2', '#wvadetails', '#wvadet2')" />
+                        <img src="~/Images/toLeft.png" onclick="toLeft('wvadetails', 'wvadet2', '#wvadetails', '#wvadet2', wvaDetsFilter)" />
+                    </div>
+                    <form role="form" style="width:45%;  display:inline-block; float:right">
+                        <div class="form-group">
+                            <p>@Resources.filterby</p>
+                            <select size="9" id="wvadet2" class="form-control"></select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <a class="btn btn-default btn-apply" onclick="applyWvaDetFilter2()">@Resources.filter</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Height-->
+<div class="modal fade" id="heightFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.filterby <b>@Resources.height</b></p>
+            </div>
+            <div class="modal-input">
+                <table>
+                    <tr>
+                        <td><input type="text" class="form-control filter" id="heightFilter" placeholder="@Resources.modalsearch"></td>
+                        <td><img src="~/Images/LUPA.png" alt="" /></td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="modal-body">
+                <div class="modal-forms" @*style="height:300px;"*@>
+                    <form role="form" style="width:45%; display:inline-block; float:left">
+                        <div class="form-group">
+                            <p>@Resources.options</p>
+                            <select size="8" id="height" class="form-control" @*ondblclick="applyHeightFilter()"*@></select>
+                        </div>
+                    </form>
+                    <div class="arrows" style="">
+                        <img src="/Images/toRight.png" onclick="toRight('height', 'heights2', '#height', '#heights2')" />
+                        <img src="~/Images/toLeft.png" onclick="toLeft('height', 'heights2', '#height', '#heights2', heightsFilter)" />
+                    </div>
+                    <form role="form" style="width:45%;  display:inline-block; float:right">
+                        <div class="form-group">
+                            <p>@Resources.filterby</p>
+                            <select size="9" id="heights2" class="form-control"></select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <a class="btn btn-default btn-apply" onclick="applyHeightFilter2()">@Resources.filter</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Width -->
+<div class="modal fade" id="widthFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.filterby <b>@Resources.width</b></p>
+            </div>
+            <div class="modal-input">
+                <table>
+                    <tr>
+                        <td><input type="text" class="form-control filter" id="widthFilter" placeholder="@Resources.modalsearch"></td>
+                        <td><img src="~/Images/LUPA.png" alt="" /></td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="modal-body">
+                <div class="modal-forms" @*style="height:300px;"*@>
+                    <form role="form" style="width:45%; display:inline-block; float:left">
+                        <div class="form-group">
+                            <p>@Resources.options</p>
+
+                            <select size="8" id="width" class="form-control" @*ondblclick="applyWidthFilter()"*@></select>
+
+
+                        </div>
+                    </form>
+                    <div class="arrows" style="">
+                        <img src="~/Images/toRight.png" onclick="toRight('width', 'width2', '#width', '#width2')" />
+                        <img src="~/Images/toLeft.png" onclick="toLeft('width', 'width2', '#width', '#width2', widthsFilter)" />
+                    </div>
+                    <form role="form" style="width:45%;  display:inline-block; float:right">
+                        <div class="form-group">
+                            <p>@Resources.filterby</p>
+                            <select size="9" id="width2" class="form-control"></select>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <a class="btn btn-default btn-apply" onclick="applyWidthFilter2()">@Resources.filter</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Thickness -->
+<div class="modal fade" id="thicknessFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.filterby <b>@Resources.thickness</b></p>
+            </div>
+            <div class="modal-input">
+                <table>
+                    <tr>
+                        <td><input type="text" class="form-control filter" id="thicknessFilter" placeholder="@Resources.modalsearch"></td>
+                        <td><img src="~/Images/LUPA.png" alt="" /></td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="modal-body">
+                <div class="modal-forms" @*style="height:300px;"*@>
+                    <form role="form" style="width:45%; display:inline-block; float:left">
+                        <div class="form-group">
+                            <p>@Resources.options</p>
+                            <select size="8" id="thickness" class="form-control" @*ondblclick="applyThicknessFilter()"*@></select>
+                        </div>
+                    </form>
+                    <div class="arrows" style="">
+                        <img src="/Images/toRight.png" onclick="toRight('thickness', 'thickness2', '#thickness', '#thickness2')" />
+                        <img src="~/Images/toLeft.png" onclick="toLeft('thickness', 'thickness2', '#thickness', '#thickness2', thicknessesFilter)" />
+                    </div>
+                    <form role="form" style="width:45%;  display:inline-block; float:right">
+                        <div class="form-group">
+                            <p>@Resources.filterby</p>
+                            <select size="9" id="thickness2" class="form-control"></select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <a class="btn btn-default btn-apply" onclick="applyThicknessFilter2()">@Resources.filter</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Diameter -->
+<div class="modal fade" id="diameterFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.filterby <b>@Resources.diameter</b></p>
+            </div>
+            <div class="modal-input">
+                <table>
+                    <tr>
+                        <td><input type="text" class="form-control filter" id="diameterFilter" placeholder="@Resources.modalsearch"></td>
+                        <td><img src="~/Images/LUPA.png" alt="" /></td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="modal-body">
+                <div class="modal-forms" @*style="height:300px;"*@>
+                    <form role="form" style="width:45%; display:inline-block; float:left">
+                        <div class="form-group">
+                            <p>@Resources.options</p>
+                            <select size="8" id="drum" class="form-control" @*ondblclick="applyDiameterFilter()"*@></select>
+                        </div>
+                    </form>
+                    <div class="arrows" style="">
+                        <img src="/Images/toRight.png" onclick="toRight('drum', 'diameter2', '#drum', '#diameter2')" />
+                        <img src="~/Images/toLeft.png" onclick="toLeft('drum', 'diameter2', '#drum', '#diameter2', diametersFilter)" />
+                    </div>
+                    <form role="form" style="width:45%;  display:inline-block; float:right">
+                        <div class="form-group">
+                            <p>@Resources.filterby</p>
+                            <select size="9" id="diameter2" class="form-control"></select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <a class="btn btn-default btn-apply" onclick="applyDiameterFilter2()">@Resources.filter</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal System -->
+<div class="modal fade" id="systemFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.filterby <b>@Resources.system</b></p>
+            </div>
+            <div class="modal-input">
+                <table>
+                    <tr>
+                        <td><input type="text" class="form-control filter" id="systemFilter" placeholder="@Resources.modalsearch"></td>
+                        <td><img src="~/Images/LUPA.png" alt="" /></td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="modal-body">
+                <div class="modal-forms" @*style="height:300px;"*@>
+                    <form role="form" style="width:45%; display:inline-block; float:left">
+                        <div class="form-group">
+                            <p>@Resources.options</p>
+                            <select size="8" id="sys" class="form-control" @*ondblclick="applySystemFilter()"*@></select>
+                        </div>
+                    </form>
+                    <div class="arrows" style="">
+                        <img src="~/Images/toRight.png" onclick="toRight('sys', 'system2', '#sys', '#system2')" />
+                        <img src="~/Images/toLeft.png" onclick="toLeft('sys', 'system2', '#sys', '#system2', systemsFilter)" />
+                    </div>
+                    <form role="form" style="width:45%;  display:inline-block; float:right">
+                        <div class="form-group">
+                            <p>@Resources.filterby</p>
+                            <select size="9" id="system2" class="form-control"></select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <a class="btn btn-default btn-apply" onclick="applySystemFilter2()">@Resources.filter</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Rivet -->
+<div class="modal fade" id="rivetFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.filterby <b>@Resources.rivets</b></p>
+            </div>
+            <div class="modal-input">
+                <table>
+                    <tr>
+                        <td><input type="text" class="form-control filter" id="rivetsFilter" placeholder="@Resources.modalsearch"></td>
+                        <td><img src="~/Images/LUPA.png" alt="" /></td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="modal-body">
+                <div class="modal-forms" @*style="height:300px;"*@>
+                    <form role="form" style="width:45%; display:inline-block; float:left">
+                        <div class="form-group">
+                            <p>@Resources.options</p>
+
+                            <select size="8" id="riv" class="form-control" @*ondblclick="applyRivetFilter()"*@></select>
+                        </div>
+                    </form>
+                    <div class="arrows" style="">
+                        <img src="~/Images/toRight.png" onclick="toRight('riv', 'rivet2', '#riv', '#rivet2')" />
+                        <img src="~/Images/toLeft.png" onclick="toLeft('riv', 'rivet2', '#riv', '#rivet2', rivetsFilter)" />
+                    </div>
+                    <form role="form" style="width:45%;  display:inline-block; float:right">
+                        <div class="form-group">
+                            <p>@Resources.filterby</p>
+                            <select size="9" id="rivet2" class="form-control"></select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <a class="btn btn-default btn-apply" onclick="applyRivetFilter2()">@Resources.filter</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Cross -->
+<div class="modal fade" id="crossFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
+                <p>@Resources.filterby <b>@Resources.cross</b></p>
+            </div>
+            <div class="modal-input">
+                <table>
+                    <tr>
+                        <td><input type="text" class="form-control filter" id="crossFilter" placeholder="@Resources.modalsearch"></td>
+                        <td><img src="~/Images/LUPA.png" alt="" /></td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="modal-body">
+                <div class="modal-forms" @*style="height:300px;"*@>
+                    <form role="form" style="width:45%; display:inline-block; float:left">
+                        <div class="form-group">
+                            <p>@Resources.options</p>
+
+                            <select size="8" id="cross" class="form-control" @*ondblclick="applyRivetFilter()"*@></select>
+                        </div>
+                    </form>
+                    <div class="arrows" style="">
+                        <img src="~/Images/toRight.png" onclick="toRight('cross', 'cross2', '#cross', '#cross2', 'cross')" />
+                        <img src="~/Images/toLeft.png" onclick="toLeft('cross', 'cross2', '#cross', '#cross2', crossNameFilter, 'cross')" />
+                    </div>
+                    <form role="form" style="width:45%;  display:inline-block; float:right">
+                        <div class="form-group">
+                            <p>@Resources.filterby</p>
+                            <select size="9" id="cross2" class="form-control"></select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <a class="btn btn-default btn-apply" onclick="applyCrossFilter()">@Resources.filter</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toRight(list1, list2, id1, id2, filtername) {
+        var e = document.getElementById(list1);
+        if (e.options[e.selectedIndex]) {
+
+            // e = document.getElementById(list1);
+            var valUser = e.options[e.selectedIndex].value;
+            var txtUser = e.options[e.selectedIndex].text;
+
+
+            var select = document.getElementById(list2);
+            var option = document.createElement("option");
+            option.value = valUser;
+            option.text = txtUser;
+            select.appendChild(option);
+
+            $(id1 + " option:selected").remove();
+            sortList(id2);
+            //$(id2).html($(id2 + " option").sort(function (a, b) {
+            //    if (isNaN(parseFloat(a.text.replace(',', '.')) - parseFloat(b.text.replace(',', '.')))) { return a.text == b.text ? 0 : a.text < b.text ? -1 : 1; }
+            //    return parseFloat(a.text.replace(',', '.')) - parseFloat(b.text.replace(',', '.'));
+            //}));
+            if (filtername != "cross") {
+                $(id2 + " option").each(function () {
+                    $(this).prevAll('option[value="' + this.value + '"]').remove();
+                });
+            }
+
+        }
+    }
+
+    function toLeft(list1, list2, id1, id2, filter, filtername) {
+        var e = document.getElementById(list2);
+        if (e.options[e.selectedIndex]) {
+            var valUser = e.options[e.selectedIndex].value;
+            var txtUser = e.options[e.selectedIndex].text;
+
+
+            var select = document.getElementById(list1);
+            var option = document.createElement("option");
+            option.value = valUser;
+            option.text = txtUser;
+            if (filter != null)
+            { select.appendChild(option); }
+            var usedNames = {};
+
+            select.appendChild(option);
+            $(id2 + " option:selected").remove();
+
+            sortList(id1);
+            //$(id1).html($(id1 + " option").sort(function (a, b) {
+
+            //    if (isNaN(parseFloat(a.text.replace(',', '.')) - parseFloat(b.text.replace(',', '.')))) { return a.text == b.text ? 0 : a.text < b.text ? -1 : 1; }
+            //    return parseFloat(a.text.replace(',', '.')) - parseFloat(b.text.replace(',', '.'));
+            //}));
+
+            if (filtername != "cross") {
+                $(id1 + " option").each(function () {
+                    $(this).prevAll('option[value="' + this.value + '"]').remove();
+                });
+            }
+
+        }
+    }
+
+    function applyYearsFilter2() {
+        var list = new Array;
+
+        $("#year2 option").each(function () {
+            list.push($(this).val());
+        });
+        yearsFilter = list.join('|');
+        page = "1";
+        status = "filter";
+        reloadContent();
+        $('#yearsFilter').val('');
+        $("#year option").remove();
+        $("#yearsFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#yearsFilterModal').modal('hide');
+    }
+    function applyBadBeeFilter2() {
+        var list = new Array;
+
+        $("#badbee2 option").each(function () {
+            list.push($(this).val());
+        });
+        badbeesFilter = list.join('|');
+        page = "1";
+        status = "filter";
+        reloadContent();
+        $('#badbeeFilter').val('');
+        $("#badbee option").remove();
+        $("#badbeeFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#badbeeFilterModal').modal('hide');
+    }
+    function applyModelFilter2() {
+        var list = new Array;
+
+        $("#model2 option").each(function () {
+            list.push($(this).val());
+        });
+        modelsFilter = list.join('|');
+        page = "1";
+        status = "filter";
+        reloadContent();
+        removeSerieModelFilter()
+        $('#modelFilter').val('');
+        $("#model option").remove();
+        $("#modelFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#modelFilterModal').modal('hide');
+    }
+    function applyModelFilter3() {
+        var list = new Array;
+
+        $("#model2 option").each(function () {
+            list.push($(this).val());
+        });
+        modelsFilter = list.join('|');
+        page = "1";
+        status = "filter";
+        $("#modelFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#modelFilterModal').modal('hide');
+    }
+    function applySerieFilter2() {
+        var list = new Array;
+
+        $("#serie2 option").each(function () {
+            list.push($(this).val());
+        });
+        seriesFilter = list.join('|');
+        page = "1";
+        modelsFilter = null;
+
+        $("#seriesFilter").val("");
+        $("#modelsFilter").val("");
+
+        $("#model2 option").remove();
+        applyModelFilter3();
+        status = "filter";
+        reloadContent();
+        $('#serieFilter').val('');
+        $("#serie option").remove();
+        $("#serieFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#serieFilterModal').modal('hide');
+    }
+    function applySerieFilter3() {
+        var list = new Array;
+
+        $("#serie2 option").each(function () {
+            list.push($(this).val());
+        });
+        seriesFilter = list.join('|');
+        page = "1";
+        status = "filter";
+        $("#serieFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#serieFilterModal').modal('hide');
+    }
+   
+    function applyBrandFilter2() {
+        var list = new Array;
+
+        $("#brands2 option").each(function () {
+            list.push($(this).val());
+        });
+        brandsFilter = list.join('|');
+        page = "1";
+
+        $('#emptyCat').hide();
+        serieFilter = null;
+        modelFilter = null;
+
+        var items = [];
+        seriesFilter = null;
+        modelsFilter = null;
+        $("#brandsFilter").val("");
+        $("#seriesFilter").val("");
+        $("#modelsFilter").val("");
+
+        $("#serie2 option").remove();
+        $("#model2 option").remove();
+        $("#brands option").remove();
+        applySerieFilter3();
+        applyModelFilter3();
+        status = "filter";
+        reloadContent();
+        $('#brandFilter').val('');
+        $("#brandFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#brandFilterModal').modal('hide');
+
+    }
+
+    function removeSerieModelFilter() {
+        if ($.isEmptyObject(brandsFilter)) {
+            seriesFilter = null;
+            modelsFilter = null;
+            $("#brandsFilter").val("");
+            $("#seriesFilter").val("");
+            $("#modelsFilter").val("");
+
+            $("#serie2 option").remove();
+            $("#model2 option").remove();
+            applySerieFilter3();
+            applyModelFilter3();
+        }
+        else if (seriesFilter == null) {
+            modelsFilter = null;
+        }
+    }
+
+    function applyWvaFilter2() {
+        var list = new Array;
+
+        $("#wvas2 option").each(function () {
+            list.push($(this).val());
+        });
+        wvasFilter = list.join('|');
+        page = "1";
+        status = "filter";
+        reloadContent();
+        $('#wvaFilter').val('');
+        $("#wvas option").remove();
+        $("#wvaFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#wvaFilterModal').modal('hide');
+    }
+    function applyWvaDetFilter2() {
+        var list = new Array;
+
+        $("#wvadet2 option").each(function () {
+            list.push($(this).val());
+        });
+        wvaDetsFilter = list.join('|');
+        page = "1";
+        status = "filter";
+        reloadContent();
+        $('#wvadetFilter').val('');
+        $("#wvadet option").remove();
+        $("#wvaDetFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#wvaDetFilterModal').modal('hide');
+    }
+    function applyWidthFilter2() {
+        var list = new Array;
+
+        $("#width2 option").each(function () {
+            list.push($(this).val());
+        });
+        widthsFilter = list.join('|');
+        if (widthsFilter == "") {
+            widthsFilter = null;
+        }
+        page = "1";
+        status = "filter";
+        reloadContent();
+        $('#widthFilter').val('');
+        $("#width1 option").remove();
+        $("#widthFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#widthFilterModal').modal('hide');
+    }
+
+    function applyHeightFilter2() {
+        var list = new Array;
+
+        $("#heights2 option").each(function () {
+            list.push($(this).val());
+        });
+        heightsFilter = list.join('|');
+        page = "1";
+        status = "filter";
+        reloadContent();
+        $('#heightFilter').val('');
+        $("#heights option").remove();
+        $("#heightFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#heightFilterModal').modal('hide');
+    }
+    function applyThicknessFilter2() {
+        var list = new Array;
+
+        $("#thickness2 option").each(function () {
+            list.push($(this).val());
+        });
+        thicknessesFilter = list.join('|');
+        page = "1";
+        status = "filter";
+        reloadContent();
+        $('#thicknessFilter').val('');
+        $("#thickness1 option").remove();
+        $("#thicknessFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#thicknessFilterModal').modal('hide');
+    }
+
+    function applyDiameterFilter2() {
+        var list = new Array;
+
+        $("#diameter2 option").each(function () {
+            list.push($(this).val());
+        });
+        diametersFilter = list.join('|');
+        page = "1";
+        status = "filter";
+        reloadContent();
+        $('#diameterFilter').val('');
+        $("#diameter option").remove();
+        $("#diameterFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#diameterFilterModal').modal('hide');
+    }
+
+    function applySystemFilter2() {
+        var list = new Array;
+
+        $("#system2 option").each(function () {
+            list.push($(this).val());
+        });
+        systemsFilter = list.join('|');
+        page = "1";
+        status = "filter";
+        reloadContent();
+        $('#systemFilter').val('');
+        $("#system option").remove();
+        $("#systemFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#systemFilterModal').modal('hide');
+    }
+    function applyRivetFilter2() {
+        var list = new Array;
+
+        $("#rivet2 option").each(function () {
+            list.push($(this).val());
+        });
+        rivetsFilter = list.join('|');
+        page = "1";
+        status = "filter";
+        reloadContent();
+        $('#rivetsFilter').val('');
+        $("#rivet option").remove();
+        $("#rivetFilterModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $('#rivetFilterModal').modal('hide');
+    }
+    function showBrands() {
+        $.post('@Url.Action("GetBrandsListCh", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text == "--") {
+                    data[i].Text = "others"
+                }
+                items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+            }
+            $("#brands2").html(items.join(' '));
+        });
+        $.post('@Url.Action("GetBrandsList", "Default")', function (data) {
+            var items = [];
+            items.push("<option selected disabled hidden> @Resources.choose </option>");
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text == "--") {
+                    data[i].Text = "others"
+                }
+                items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+            }
+            $("#brands").html(items.join(' '));
+            // sortList("#brands");
+            removeDuplicates("brands", "brands2");
+        });
+    }
+    function showSeries() {
+        $.post('@Url.Action("GetSeriesListCh", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text == "--") {
+                    data[i].Text = "others"
+                }
+                items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+            }
+            $("#serie2").html(items.join(' '));
+        })
+        $.post('@Url.Action("GetSeriesList", "Default")', function (data) {
+            var items = [];
+            items.push("<option selected disabled hidden> @Resources.choose </option>");
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text == "--") {
+                    data[i].Text = "others"
+                }
+                if (data[i].Text != "") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#serie").html(items.join(' '));
+
+            removeDuplicates("serie", "serie2")
+            //sortList("#serie");
+        })
+
+    }
+
+    function showModels() {
+        $.post('@Url.Action("GetModelsListCh", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text == "") {
+                    data[i].Text = "others"
+                }
+                items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+            }
+            $("#model2").html(items.join(' '));
+        })
+        $.post('@Url.Action("GetModelsList", "Default")', function (data) {
+            var items = [];
+            items.push("<option selected disabled hidden> @Resources.choose </option>");
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Text == "") {
+                    data[i].Text = "others"
+                }
+                if (data[i].Text != "          ") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#model").html(items.join(' '));
+
+            removeDuplicates("model", "model2")
+            // sortList("#model");
+        })
+
+    }
+    function showBadBee() {
+        $.post('@Url.Action("GetBadBeeListCh", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+
+                items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+            }
+
+            $("#badbee2").html(items.join(' '));
+        })
+        $.post('@Url.Action("GetBadBeesList", "Default")', function (data) {
+            var items = [];
+            items.push("<option selected disabled hidden> @Resources.choose </option>");
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Value != "0") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+
+            $("#badbee").html(items.join(' '));
+
+            //  sortList("#badbee");
+
+            removeDuplicates("badbee", "badbee2")
+        })
+    }
+    function showWva() {
+        $.post('@Url.Action("GetWvaListCh", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+
+                items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+            }
+            $("#wvas2").html(items.join(' '));
+        })
+        $.post('@Url.Action("GetWvaList", "Default")', function (data) {
+            var items = [];
+            items.push("<option selected disabled hidden> @Resources.choose </option>");
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Value != "0") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#wvas").html(items.join(' '));
+            //    sortList("#wvas");
+            removeDuplicates("wvas", "wvas2")
+        })
+
+    }
+    function showWvaDet() {
+        $.post('@Url.Action("GetWvaDetListCh", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+
+                items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+            }
+            $("#wvadet2").html(items.join(' '));
+        })
+        $.post('@Url.Action("GetWvaDetList", "Default")', function (data) {
+            var items = [];
+            items.push("<option selected disabled hidden> @Resources.choose </option>");
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Value != "0") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#wvadet").html(items.join(' '));
+            //   sortList("#wvadet");
+            removeDuplicates("wvadet", "wvadet2")
+        })
+    }
+
+    function showYears() {
+
+        $.post('@Url.Action("GetYearsListCh", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+
+                items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+            }
+            $("#year2").html(items.join(' '));
+        })
+        $.post('@Url.Action("GetYearsList", "Default")', function (data) {
+            var items = [];
+            items.push("<option selected disabled hidden> @Resources.choose </option>");
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Value != "0") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#year").html(items.join(' '));
+            //  sortList("#year");
+            removeDuplicates("year", "year2")
+        })
+    }
+    function showHeights() {
+        $.post('@Url.Action("GetHeightsListCh", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+
+                items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+
+            }
+            $("#heights2").html(items.join(' '));
+        })
+        $.post('@Url.Action("GetHeightsList", "Default")', function (data) {
+            var items = [];
+            items.push("<option selected disabled hidden> @Resources.choose </option>");
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Value != "0") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#heights").html(items.join(' '));
+            sortList("#heights");
+            removeDuplicates("heights", "heights2")
+        })
+    }
+
+    function showWidths() {
+        $.post('@Url.Action("GetWidthsListCh", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+
+                items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+            }
+            $("#width2").html(items.join(' '));
+        })
+        $.post('@Url.Action("GetWidthsList", "Default")', function (data) {
+            var items = [];
+            items.push("<option selected disabled hidden> @Resources.choose </option>");
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Value != "0") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#width1").html(items.join(' '));
+            sortList("#width1");
+            removeDuplicates("width1", "width2")
+        })
+    }
+    function showThicknesses() {
+        $.post('@Url.Action("GetThicknessesListCh", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+
+                items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+            }
+            $("#thickness2").html(items.join(' '));
+        })
+        $.post('@Url.Action("GetThicknessesList", "Default")', function (data) {
+            var items = [];
+            items.push("<option selected disabled hidden> @Resources.choose </option>");
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Value != "0") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#thickness1").html(items.join(' '));
+            sortList("#thickness1");
+            removeDuplicates("thickness1", "thickness2")
+        })
+    }
+    function showDrumDiameters() {
+        $.post('@Url.Action("GetDrumDiametersListCh", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+
+                items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+            }
+            $("#diameter2").html(items.join(' '));
+        })
+        $.post('@Url.Action("GetDrumDiametersList", "Default")', function (data) {
+            var items = [];
+            items.push("<option selected disabled hidden> @Resources.choose </option>");
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Value != "0") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#diameter").html(items.join(' '));
+            //   sortList("#diameter");
+            removeDuplicates("diameter", "diameter2")
+        })
+    }
+    function showSystems() {
+        $.post('@Url.Action("GetSystemsListCh", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+
+                items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+            }
+            $("#system2").html(items.join(' '));
+        })
+        $.post('@Url.Action("GetSystemsList", "Default")', function (data) {
+            var items = [];
+            items.push("<option selected disabled hidden> @Resources.choose </option>");
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Value != "0") {
+                    items.push("<option value=" + data[i].Value + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#system").html(items.join(' '));
+            removeDuplicates("system", "system2")
+        })
+    }
+    function showRivetTypes() {
+        $.post('@Url.Action("GetRivetListCh", "Default")', function (data) {
+            var items = [];
+            for (var i = 0; i < data.length; i++) {
+
+                items.push("<option value=" + data[i].Value.replace("               ", "") + ">" + data[i].Text + "</option>");
+            }
+            $("#rivet2").html(items.join(' '));
+        })
+        $.post('@Url.Action("GetRivetTypesList", "Default")', function (data) {
+            var items = [];
+            items.push("<option selected disabled hidden> @Resources.choose </option>");
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Value != "0") {
+                    items.push("<option value=" + data[i].Value.replace(/ /g, "") + ">" + data[i].Text + "</option>");
+                }
+            }
+            $("#rivet").html(items.join(' '));
+            //   sortList("#rivet");
+            removeDuplicates("rivet", "rivet2");
+        })
+    }
+</script>

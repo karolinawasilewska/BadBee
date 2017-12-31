@@ -5,6 +5,24 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="BadBeeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Removed" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="BadBee">
           <Key>
             <PropertyRef Name="BadBeeId" />
@@ -75,9 +93,10 @@
             <PropertyRef Name="PictureId" />
           </Key>
           <Property Name="PictureId" Type="int" Nullable="false" />
-          <Property Name="Picure1" Type="nvarchar" MaxLength="20" />
+          <Property Name="Picture1" Type="nvarchar" MaxLength="20" />
           <Property Name="Picture2" Type="nvarchar" MaxLength="20" />
           <Property Name="Picture3" Type="nvarchar" MaxLength="20" />
+          <Property Name="BadBeeNo" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="Serie">
           <Key>
@@ -209,7 +228,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Item_BadBee">
-          <End Role="BadBee" Type="Self.BadBee" Multiplicity="1" />
+          <End Role="BadBee" Type="Self.BadBee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Item" Type="Self.Item" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BadBee">
@@ -221,7 +242,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Item_Model">
-          <End Role="Model" Type="Self.Model" Multiplicity="1" />
+          <End Role="Model" Type="Self.Model" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Item" Type="Self.Item" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Model">
@@ -233,7 +256,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Model_Serie">
-          <End Role="Serie" Type="Self.Serie" Multiplicity="1" />
+          <End Role="Serie" Type="Self.Serie" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Model" Type="Self.Model" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Serie">
@@ -257,7 +282,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Serie_Brand">
-          <End Role="Brand" Type="Self.Brand" Multiplicity="0..1" />
+          <End Role="Brand" Type="Self.Brand" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Serie" Type="Self.Serie" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Brand">
@@ -272,6 +299,7 @@
           <Parameter Name="KeywordPart" Type="nvarchar" Mode="In" />
         </Function>
         <EntityContainer Name="BadBeeModelStoreContainer">
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BadBee" EntityType="Self.BadBee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dimension" EntityType="Self.Dimension" Schema="dbo" store:Type="Tables" />
@@ -349,7 +377,6 @@
           <EntitySet Name="Height" EntityType="BadBeeModel.Height" />
           <EntitySet Name="Item" EntityType="BadBeeModel.Item" />
           <EntitySet Name="Model" EntityType="BadBeeModel.Model" />
-          <EntitySet Name="Picture" EntityType="BadBeeModel.Picture" />
           <EntitySet Name="Serie" EntityType="BadBeeModel.Serie" />
           <EntitySet Name="Systems" EntityType="BadBeeModel.Systems" />
           <EntitySet Name="Thickness" EntityType="BadBeeModel.Thickness" />
@@ -358,10 +385,6 @@
           <EntitySet Name="Year" EntityType="BadBeeModel.Year" />
           <AssociationSet Name="FK_BadBee_Dimension" Association="BadBeeModel.FK_BadBee_Dimension">
             <End Role="Dimension" EntitySet="Dimension" />
-            <End Role="BadBee" EntitySet="BadBee" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BadBee_Picture" Association="BadBeeModel.FK_BadBee_Picture">
-            <End Role="Picture" EntitySet="Picture" />
             <End Role="BadBee" EntitySet="BadBee" />
           </AssociationSet>
           <AssociationSet Name="FK_BadBee_System" Association="BadBeeModel.FK_BadBee_System">
@@ -405,6 +428,12 @@
             <End Role="Model" EntitySet="Model" />
           </AssociationSet>
           <EntitySet Name="Message" EntityType="BadBeeModel.Message" />
+          <EntitySet Name="Picture" EntityType="BadBeeModel.Picture" />
+          <AssociationSet Name="FK_BadBee_Picture" Association="BadBeeModel.FK_BadBee_Picture">
+            <End Role="Picture" EntitySet="Picture" />
+            <End Role="BadBee" EntitySet="BadBee" />
+          </AssociationSet>
+          <EntitySet Name="AspNetUsers" EntityType="BadBeeModel.AspNetUsers" />
           </EntityContainer>
         <EntityType Name="BadBee">
           <Key>
@@ -418,10 +447,10 @@
           <Property Name="FR" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
           <Property Name="PictureId" Type="Int32" />
           <NavigationProperty Name="Dimension" Relationship="BadBeeModel.FK_BadBee_Dimension" FromRole="BadBee" ToRole="Dimension" />
-          <NavigationProperty Name="Picture" Relationship="BadBeeModel.FK_BadBee_Picture" FromRole="BadBee" ToRole="Picture" />
           <NavigationProperty Name="Systems" Relationship="BadBeeModel.FK_BadBee_System" FromRole="BadBee" ToRole="Systems" />
           <NavigationProperty Name="Wva" Relationship="BadBeeModel.FK_BadBee_Wva" FromRole="BadBee" ToRole="Wva" />
           <NavigationProperty Name="Item" Relationship="BadBeeModel.FK_Item_BadBee" FromRole="BadBee" ToRole="Item" />
+          <NavigationProperty Name="Picture" Relationship="BadBeeModel.FK_BadBee_Picture" FromRole="BadBee" ToRole="Picture" />
         </EntityType>
         <EntityType Name="Brand">
           <Key>
@@ -475,16 +504,6 @@
           <NavigationProperty Name="Item" Relationship="BadBeeModel.FK_Item_Model" FromRole="Model" ToRole="Item" />
           <NavigationProperty Name="Serie" Relationship="BadBeeModel.FK_Model_Serie" FromRole="Model" ToRole="Serie" />
           <NavigationProperty Name="Year" Relationship="BadBeeModel.FK_Model_Year" FromRole="Model" ToRole="Year" />
-        </EntityType>
-        <EntityType Name="Picture">
-          <Key>
-            <PropertyRef Name="PictureId" />
-          </Key>
-          <Property Name="PictureId" Type="Int32" Nullable="false" />
-          <Property Name="Picure1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Picture2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Picture3" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="BadBee" Relationship="BadBeeModel.FK_BadBee_Picture" FromRole="Picture" ToRole="BadBee" />
         </EntityType>
         <EntityType Name="Serie">
           <Key>
@@ -547,18 +566,6 @@
             </Principal>
             <Dependent Role="BadBee">
               <PropertyRef Name="DimensionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BadBee_Picture">
-          <End Type="BadBeeModel.Picture" Role="Picture" Multiplicity="0..1" />
-          <End Type="BadBeeModel.BadBee" Role="BadBee" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Picture">
-              <PropertyRef Name="PictureId" />
-            </Principal>
-            <Dependent Role="BadBee">
-              <PropertyRef Name="PictureId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -693,6 +700,47 @@
           <Property Name="InsertDate" Type="DateTime" Precision="3" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Picture">
+          <Key>
+            <PropertyRef Name="PictureId" />
+          </Key>
+          <Property Name="PictureId" Type="Int32" Nullable="false" />
+          <Property Name="Picture1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Picture2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Picture3" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="BadBeeNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BadBee" Relationship="BadBeeModel.FK_BadBee_Picture" FromRole="Picture" ToRole="BadBee" />
+        </EntityType>
+        <Association Name="FK_BadBee_Picture">
+          <End Type="BadBeeModel.Picture" Role="Picture" Multiplicity="0..1" />
+          <End Type="BadBeeModel.BadBee" Role="BadBee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Picture">
+              <PropertyRef Name="PictureId" />
+            </Principal>
+            <Dependent Role="BadBee">
+              <PropertyRef Name="PictureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Removed" Type="Boolean" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -758,16 +806,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Picture">
-            <EntityTypeMapping TypeName="BadBeeModel.Picture">
-              <MappingFragment StoreEntitySet="Picture">
-                <ScalarProperty Name="Picture3" ColumnName="Picture3" />
-                <ScalarProperty Name="Picture2" ColumnName="Picture2" />
-                <ScalarProperty Name="Picure1" ColumnName="Picure1" />
-                <ScalarProperty Name="PictureId" ColumnName="PictureId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Serie">
             <EntityTypeMapping TypeName="BadBeeModel.Serie">
               <MappingFragment StoreEntitySet="Serie">
@@ -827,6 +865,36 @@
                 <ScalarProperty Name="IsRead" ColumnName="IsRead" />
                 <ScalarProperty Name="Content" ColumnName="Content" />
                 <ScalarProperty Name="MessageFrom" ColumnName="MessageFrom" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Picture">
+            <EntityTypeMapping TypeName="BadBeeModel.Picture">
+              <MappingFragment StoreEntitySet="Picture">
+                <ScalarProperty Name="BadBeeNo" ColumnName="BadBeeNo" />
+                <ScalarProperty Name="Picture3" ColumnName="Picture3" />
+                <ScalarProperty Name="Picture2" ColumnName="Picture2" />
+                <ScalarProperty Name="Picture1" ColumnName="Picture1" />
+                <ScalarProperty Name="PictureId" ColumnName="PictureId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="BadBeeModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Removed" ColumnName="Removed" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

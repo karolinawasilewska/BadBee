@@ -1,0 +1,41 @@
+﻿@model IEnumerable<BadBee.Core.DAL.Dimension>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Height.Height1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Thickness.Thickness1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Width.Width1)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Height.Height1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Thickness.Thickness1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Width.Width1)
+        </td>
+        <td>
+            @Html.ActionLink("Delete", "Delete", new { id=item.DimensionId })
+        </td>
+    </tr>
+}
+
+</table>

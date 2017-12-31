@@ -1,0 +1,203 @@
+﻿@using BadBee.Core.MyResources;
+@model BadBee.Core.DAL.ItemsDb
+
+<h3 style="margin-top:150px;">@Resources.want_delete</h3>
+<div>
+    @*<h4>ItemsDb</h4>*@
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Brand)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Brand)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Serie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Serie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Model)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Model)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Kw)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kw)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Km)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Km)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateFrom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateFrom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateTo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateTo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WvaDesc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WvaDesc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Wva)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Wva)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WvaDetailsQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WvaDetailsQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WvaDetails)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WvaDetails)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BadBeeNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BadBeeNumber)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.Size)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Size)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Height)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Height)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Width)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Width)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Thickness)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Thickness)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Wedge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Wedge)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DrumDiameter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DrumDiameter)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BrakeSystem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BrakeSystem)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RivetsQuantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RivetsQuantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RivetsType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RivetsType)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value=@Resources.delete class="btn btn-default btn-confirm" /> 
+            <p>@Html.ActionLink(Resources.back_to_list, "Index")</p>
+        </div>
+    }
+</div>

@@ -11,12 +11,7 @@ namespace BadBee.Core.DAL
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    [MetadataType(typeof(MessageMetadata))]
-    public partial class Message
-    {
-    }
+    
     public partial class Message
     {
         public int Id { get; set; }

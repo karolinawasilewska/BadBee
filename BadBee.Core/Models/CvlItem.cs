@@ -13,17 +13,10 @@ namespace BadBee.Core.Models
         public int Id { get; set; }
         [Display(Name = "brand", ResourceType = typeof(Resources))]
         public string Brand { get; set; }
-        [Display(Name = "type", ResourceType = typeof(Resources))]
-        public string Type { get; set; }
         [Display(Name = "serie", ResourceType = typeof(Resources))]
         public string Serie { get; set; }
         [Display(Name = "model", ResourceType = typeof(Resources))]
         public string Model { get; set; }
-        [Display(Name = "kw", ResourceType = typeof(Resources))]
-        public string Kw { get; set; }
-        [Display(Name = "km", ResourceType = typeof(Resources))]
-        public string Km { get; set; }
-
         [Display(Name = "year", ResourceType = typeof(Resources))]
         public string Years { get; set; }
 
@@ -37,10 +30,6 @@ namespace BadBee.Core.Models
         public string WvaDesc { get; set; }
         [Display(Name = "wva", ResourceType = typeof(Resources))]
         public string Wva { get; set; }
-        [Display(Name = "wva_det_qty", ResourceType = typeof(Resources))]
-        public string WvaDetailsQty { get; set; }
-        [Display(Name = "wva_det", ResourceType = typeof(Resources))]
-        public string WvaDetails { get; set; }
         [Display(Name = "BadBee_no", ResourceType = typeof(Resources))]
         public string BadBeeNumber { get; set; }
         [Display(Name = "size", ResourceType = typeof(Resources))]
@@ -51,18 +40,8 @@ namespace BadBee.Core.Models
         public string Width { get; set; }
         [Display(Name = "thickness", ResourceType = typeof(Resources))]
         public string Thickness { get; set; }
-        [Display(Name = "wedge", ResourceType = typeof(Resources))]
-        public string Wedge { get; set; }
-        [Display(Name = "drumdiameter", ResourceType = typeof(Resources))]
-        public string DrumDiameter { get; set; }
         [Display(Name = "brakesystem", ResourceType = typeof(Resources))]
         public string BrakeSystem { get; set; }
-        [Display(Name = "rivets_qtt", ResourceType = typeof(Resources))]
-        public string RivetsQuantity { get; set; }
-        [Display(Name = "rivets", ResourceType = typeof(Resources))]
-        public string RivetsType { get; set; }
-        public string Product { get; set; }
-       // public string RivetsQuantity { get; set; }
     }
 
 

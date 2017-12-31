@@ -33,7 +33,6 @@ namespace BadBee.Core.DAL
         public virtual DbSet<Height> Height { get; set; }
         public virtual DbSet<Item> Item { get; set; }
         public virtual DbSet<Model> Model { get; set; }
-        public virtual DbSet<Picture> Picture { get; set; }
         public virtual DbSet<Serie> Serie { get; set; }
         public virtual DbSet<Systems> Systems { get; set; }
         public virtual DbSet<Thickness> Thickness { get; set; }
@@ -41,6 +40,8 @@ namespace BadBee.Core.DAL
         public virtual DbSet<Wva> Wva { get; set; }
         public virtual DbSet<Year> Year { get; set; }
         public virtual DbSet<Message> Message { get; set; }
+        public virtual DbSet<Picture> Picture { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
     
         public virtual ObjectResult<string> GetKeywords(string keywordPart)
         {
