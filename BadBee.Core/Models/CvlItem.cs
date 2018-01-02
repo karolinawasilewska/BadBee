@@ -19,11 +19,10 @@ namespace BadBee.Core.Models
         public string Model { get; set; }
         [Display(Name = "year", ResourceType = typeof(Resources))]
         public string Years { get; set; }
-
         [Display(Name = "date_from", ResourceType = typeof(Resources))]
-        public Nullable<System.DateTime> DateFrom { get; set; }
+        public string DateFrom { get; set; }
         [Display(Name = "date_to", ResourceType = typeof(Resources))]
-        public Nullable<System.DateTime> DateTo { get; set; }
+        public string DateTo { get; set; }
         [Display(Name = "front_rear", ResourceType = typeof(Resources))]
         public string Fr { get; set; }
         [Display(Name = "wva_desc", ResourceType = typeof(Resources))]

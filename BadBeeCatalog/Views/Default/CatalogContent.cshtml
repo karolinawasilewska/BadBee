@@ -55,14 +55,13 @@
                     if (!String.IsNullOrEmpty(item.BadBeeNumber) || !String.IsNullOrEmpty(item.Wva)|| !String.IsNullOrEmpty(item.BrakeSystem))
                     {
 
-                        if (!prevSet.Equals(item.Brand + item.Serie + item.Model + item.Kw + item.Km + item.Fr /*+ item.Years */+ item.WvaDesc + item.Wva))
+                        if (!prevSet.Equals(item.Brand + item.Serie + item.Model + item.Fr+ item.WvaDesc + item.Wva))
                         {
-                            prevSet = item.Brand + item.Serie + item.Model + item.Kw + item.Km + item.Fr /*+ item.Years*/ + item.WvaDesc + item.Wva;
+                            prevSet = item.Brand + item.Serie + item.Model + item.Fr + item.WvaDesc + item.Wva;
                         }
                         else
                         {
-                            ifEmpty = item.WvaDetailsQty + item.WvaDetails + item.Height + item.Width + item.Wedge + item.DrumDiameter +
-                     item.RivetsQuantity + item.RivetsType;
+                            ifEmpty = item.Height + item.Width;
                             if (!string.IsNullOrEmpty(ifEmpty)) {
                                 item.BadBeeNumber = "";
                                 item.Wva = "";
@@ -70,8 +69,6 @@
                                 item.Brand = "";
                                 item.Serie = "";
                                 item.Model = "";
-                                item.Km = "";
-                                item.Kw = "";
                                 item.Fr = "";
                                 item.Years = "";
                                 item.WvaDesc = "";

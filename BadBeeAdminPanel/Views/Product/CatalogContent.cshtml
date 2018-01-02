@@ -26,7 +26,7 @@
             @foreach (CvlItem item in Model.Items)
             {
                 <tr>
-                    <td class="badbeenr" id="badbeenr">@Html.Raw(item.BadBeeNumber)</td>
+                    
                     <td class="brand">@Html.Raw(item.Brand)</td>
                     <td class="serie">@Html.Raw(item.Serie)</td>
                     <td class="model">@Html.Raw(item.Model)</td>
@@ -34,6 +34,7 @@
                     <td class="fr">@Html.Raw(item.Fr)</td>
                     <td class="wvadesc">@Html.Raw(item.WvaDesc)</td>
                     <td class="wva">@Html.Raw(item.Wva)</td>
+                    <td class="badbeenr" id="badbeenr">@Html.Raw(item.BadBeeNumber)</td>
                     <td class="height">@Html.Raw(item.Height)</td>
                     <td class="width">@Html.Raw(item.Width)</td>
                     <td class="thickness">@Html.Raw(item.Thickness)</td>

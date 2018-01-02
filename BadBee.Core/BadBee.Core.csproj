@@ -62,6 +62,9 @@
     <Compile Include="DAL\Brand.cs">
       <DependentUpon>BadBeeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\Date.cs">
+      <DependentUpon>BadBeeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\Dimension.cs">
       <DependentUpon>BadBeeModel.tt</DependentUpon>
     </Compile>
@@ -102,7 +105,6 @@
     <Compile Include="Models\CvlItem.cs" />
     <Compile Include="Models\GlobalVars.cs" />
     <Compile Include="Models\BadBeeFilter.cs" />
-    <Compile Include="Models\MessageMetadata.cs" />
     <Compile Include="Models\ModalFilters.cs" />
     <Compile Include="Models\SearchCache.cs" />
     <Compile Include="MyResources\PDFResources.Designer.cs">
@@ -120,7 +122,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Partials\ItemsDb.cs" />
+    <Compile Include="Partials\Systems.cs" />
+    <Compile Include="Partials\Wva.cs" />
+    <Compile Include="Partials\Height.cs" />
+    <Compile Include="Partials\Thickness.cs" />
+    <Compile Include="Partials\Width.cs" />
+    <Compile Include="Partials\Model.cs" />
+    <Compile Include="Partials\Serie.cs" />
+    <Compile Include="Partials\Message.cs" />
+    <Compile Include="Partials\Brand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\CatalogContentTableHeadersProvider.cs" />
     <Compile Include="Providers\ExcelProvider.cs" />

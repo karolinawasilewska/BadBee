@@ -282,7 +282,7 @@ namespace BadBeeAdminPanel.Controllers
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                Item item = db.Item.Find(id);
+                Item item = db.Item.Where(q=>q.Id==id).FirstOrDefault();
                 if (item == null)
                 {
                     return HttpNotFound();
@@ -303,118 +303,10 @@ namespace BadBeeAdminPanel.Controllers
             try
             {
 
-            Item item = db.Item.Find(id);
+            Item item = db.Item.Where(q=>q.Id==id).FirstOrDefault();
             db.Item.Remove(item);
            db.SaveChanges();
  
-            if (!db.Item.Any(row => row.Model.Serie.Brand.BrandId == item.Model.Serie.Brand.BrandId))
-            {
-                Brand toRemove = db.Brand.Where(q => q.BrandId == item.Model.Serie.Brand.BrandId).SingleOrDefault();
-                using (var dbCtx = new BadBeeEntities())
-                {
-                    var entry = dbCtx.Entry(toRemove);
-                    if (entry.State == EntityState.Detached)
-                        dbCtx.Brand.Attach(toRemove);
-                    dbCtx.Brand.Remove(toRemove);
-                    dbCtx.SaveChanges();
-                }
-            }
-            if (!db.Item.Any(row => row.Model.Serie.SerieId == item.Model.Serie.SerieId))
-            {
-                Serie toRemove = db.Serie.Where(q => q.SerieId == item.Model.Serie.SerieId).SingleOrDefault();
-                using (var dbCtx = new BadBeeEntities())
-                {
-                    var entry = dbCtx.Entry(toRemove);
-                    if (entry.State == EntityState.Detached)
-                        dbCtx.Serie.Attach(toRemove);
-                    dbCtx.Serie.Remove(toRemove);
-                    dbCtx.SaveChanges();
-                }
-            }
-            if (!db.Item.Any(row => row.Model.ModelId == item.ModelId))
-            {
-                Model toRemove = db.Model.Where(q => q.ModelId == item.ModelId).SingleOrDefault();
-                using (var dbCtx = new BadBeeEntities())
-                {
-                    var entry = dbCtx.Entry(toRemove);
-                    if (entry.State == EntityState.Detached)
-                        dbCtx.Model.Attach(toRemove);
-                    dbCtx.Model.Remove(toRemove);
-                    dbCtx.SaveChanges();
-                }
-            }
-            if (item.BadBee.WvaId!=0 && !db.Item.Any(row => row.BadBee.WvaId == item.BadBee.WvaId)&& item.BadBee.Wva!=null)
-            {
-                Wva toRemove = db.Wva.Where(q => q.WvaId == item.BadBee.WvaId).SingleOrDefault();
-                using (var dbCtx = new BadBeeEntities())
-                {
-                    var entry = dbCtx.Entry(toRemove);
-                    if (entry.State == EntityState.Detached)
-                        dbCtx.Wva.Attach(toRemove);
-                    dbCtx.Wva.Remove(toRemove);
-                    dbCtx.SaveChanges();
-                }
-            }
-            if (item.BadBeeId != 0 && !db.Item.Any(row => row.BadBeeId == item.BadBeeId))
-            {
-                BadBee.Core.DAL.BadBee toRemove = db.BadBee.Where(q => q.BadBeeId == item.BadBeeId).SingleOrDefault();
-                using (var dbCtx = new BadBeeEntities())
-                {
-                    var entry = dbCtx.Entry(toRemove);
-                    if (entry.State == EntityState.Detached)
-                        dbCtx.BadBee.Attach(toRemove);
-                    dbCtx.BadBee.Remove(toRemove);
-                    dbCtx.SaveChanges();
-                }
-            }
-            if (item.BadBee.Dimension.HeightId != 0 && !db.Item.Any(row => row.BadBee.Dimension.HeightId == item.BadBee.Dimension.HeightId))
-            {
-                Height toRemove = db.Height.Where(q => q.HeightId == item.BadBee.Dimension.HeightId).SingleOrDefault();
-                using (var dbCtx = new BadBeeEntities())
-                {
-                    var entry = dbCtx.Entry(toRemove);
-                    if (entry.State == EntityState.Detached)
-                        dbCtx.Height.Attach(toRemove);
-                    dbCtx.Height.Remove(toRemove);
-                    dbCtx.SaveChanges();
-                }
-            }
-            if (item.BadBee.Dimension.WidthId != 0 && !db.Item.Any(row => row.BadBee.Dimension.WidthId == item.BadBee.Dimension.WidthId))
-            {
-                Width toRemove = db.Width.Where(q => q.WidthId == item.BadBee.Dimension.WidthId).SingleOrDefault();
-                using (var dbCtx = new BadBeeEntities())
-                {
-                    var entry = dbCtx.Entry(toRemove);
-                    if (entry.State == EntityState.Detached)
-                        dbCtx.Width.Attach(toRemove);
-                    dbCtx.Width.Remove(toRemove);
-                    dbCtx.SaveChanges();
-                }
-            }
-            if (item.BadBee.Dimension.ThicknessId != 0 && !db.Item.Any(row => row.BadBee.Dimension.ThicknessId == item.BadBee.Dimension.ThicknessId))
-            {
-                Thickness toRemove = db.Thickness.Where(q => q.ThicknessId == item.BadBee.Dimension.ThicknessId).SingleOrDefault();
-                using (var dbCtx = new BadBeeEntities())
-                {
-                    var entry = dbCtx.Entry(toRemove);
-                    if (entry.State == EntityState.Detached)
-                        dbCtx.Thickness.Attach(toRemove);
-                    dbCtx.Thickness.Remove(toRemove);
-                    dbCtx.SaveChanges();
-                }
-            }
-            if (item.BadBee.SystemId != 0 && !db.Item.Any(row => row.BadBee.Systems.SystemId== item.BadBee.Systems.SystemId))
-            {
-                Systems toRemove = db.Systems.Where(q => q.SystemId == item.BadBee.SystemId).SingleOrDefault();
-                using (var dbCtx = new BadBeeEntities())
-                {
-                    var entry = dbCtx.Entry(toRemove);
-                    if (entry.State == EntityState.Detached)
-                        dbCtx.Systems.Attach(toRemove);
-                    dbCtx.Systems.Remove(toRemove);
-                    dbCtx.SaveChanges();
-                }
-            }
             GlobalVars.DictionaryCache = new Dictionary<Type, object>();
             ListProvider.FillDictionaryCache();
 
@@ -436,7 +328,7 @@ namespace BadBeeAdminPanel.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var product = db.Item.Find(id);
+                var product = db.Item.Where(q => q.Id == id).FirstOrDefault();
             if (product == null)
             {
                 return HttpNotFound();
@@ -459,7 +351,7 @@ namespace BadBeeAdminPanel.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var product = db.Item.Find(id);
+            var product = db.Item.Where(q=>q.Id==id).FirstOrDefault();
             if (product == null)
             {
                 return HttpNotFound();
@@ -1060,7 +952,7 @@ namespace BadBeeAdminPanel.Controllers
                 string logoPath = "";
                 string logoRelativePath = "";
                
-                ItemsDb newProd = new ItemsDb();
+                Item newProd = new Item();
 
             //    var newProductId = db.ItemsDb.OrderByDescending(q => q.Id).Select(q => q).FirstOrDefault();
             //    newProd.Id = newProductId.Id + 1;
@@ -1590,13 +1482,13 @@ namespace BadBeeAdminPanel.Controllers
         {
             try
             {
-                List<Year> years = new List<Year>();
+                List<Date> years = new List<Date>();
                 using (ListProvider provider = new ListProvider())
                 {
                     years = provider.GetYearsList(GlobalVars.BadBeeFilter);
                 }
 
-                return Json(new SelectList(years, "Id", "Name"), JsonRequestBehavior.AllowGet);
+                return Json(new SelectList(years, "DateId", "Date"), JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {

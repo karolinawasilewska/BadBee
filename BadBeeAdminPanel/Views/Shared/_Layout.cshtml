@@ -85,6 +85,7 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("Odśwież", "RefreshData", "Product")</li>
+                        <li>@Html.ActionLink("Wiadomości", "Index", "Messages")</li>
                     }
 
                     @if (User.Identity.GetUserName() == "admin@badbee.pl")

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BadBee.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +17,11 @@ namespace BadBeeAdminPanel
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            log4net.Config.XmlConfigurator.Configure();
+
+            GlobalVars.DictionaryCache = new Dictionary<Type, object>();
+            BadBee.Core.Providers.ListProvider.FillDictionaryCache();
         }
     }
 }

@@ -42,6 +42,13 @@
           <Property Name="BrandId" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Date">
+          <Key>
+            <PropertyRef Name="DateId" />
+          </Key>
+          <Property Name="DateId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="nvarchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="Dimension">
           <Key>
             <PropertyRef Name="DimensionId" />
@@ -140,11 +147,13 @@
             <PropertyRef Name="YearId" />
           </Key>
           <Property Name="YearId" Type="int" Nullable="false" />
-          <Property Name="DateFrom" Type="date" />
-          <Property Name="DateTo" Type="date" />
+          <Property Name="DateFromId" Type="int" />
+          <Property Name="DateToId" Type="int" />
         </EntityType>
         <Association Name="FK_BadBee_Dimension">
-          <End Role="Dimension" Type="Self.Dimension" Multiplicity="0..1" />
+          <End Role="Dimension" Type="Self.Dimension" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="BadBee" Type="Self.BadBee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Dimension">
@@ -168,7 +177,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BadBee_System">
-          <End Role="Systems" Type="Self.Systems" Multiplicity="0..1" />
+          <End Role="Systems" Type="Self.Systems" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="BadBee" Type="Self.BadBee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Systems">
@@ -180,7 +191,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BadBee_Wva">
-          <End Role="Wva" Type="Self.Wva" Multiplicity="0..1" />
+          <End Role="Wva" Type="Self.Wva" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="BadBee" Type="Self.BadBee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Wva">
@@ -192,7 +205,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Dimension_Height">
-          <End Role="Height" Type="Self.Height" Multiplicity="0..1" />
+          <End Role="Height" Type="Self.Height" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Dimension" Type="Self.Dimension" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Height">
@@ -204,7 +219,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Dimension_Thickness">
-          <End Role="Thickness" Type="Self.Thickness" Multiplicity="0..1" />
+          <End Role="Thickness" Type="Self.Thickness" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Dimension" Type="Self.Dimension" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Thickness">
@@ -216,7 +233,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Dimension_Width">
-          <End Role="Width" Type="Self.Width" Multiplicity="0..1" />
+          <End Role="Width" Type="Self.Width" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Dimension" Type="Self.Dimension" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Width">
@@ -295,6 +314,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Year_Date">
+          <End Role="Date" Type="Self.Date" Multiplicity="0..1" />
+          <End Role="Year" Type="Self.Year" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Date">
+              <PropertyRef Name="DateId" />
+            </Principal>
+            <Dependent Role="Year">
+              <PropertyRef Name="DateFromId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Year_Date1">
+          <End Role="Date" Type="Self.Date" Multiplicity="0..1" />
+          <End Role="Year" Type="Self.Year" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Date">
+              <PropertyRef Name="DateId" />
+            </Principal>
+            <Dependent Role="Year">
+              <PropertyRef Name="DateToId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="GetKeywords" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="KeywordPart" Type="nvarchar" Mode="In" />
         </Function>
@@ -302,6 +345,7 @@
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BadBee" EntityType="Self.BadBee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Date" EntityType="Self.Date" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dimension" EntityType="Self.Dimension" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Height" EntityType="Self.Height" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Item" EntityType="Self.Item" Schema="dbo" store:Type="Tables" />
@@ -362,6 +406,14 @@
             <End Role="Brand" EntitySet="Brand" />
             <End Role="Serie" EntitySet="Serie" />
           </AssociationSet>
+          <AssociationSet Name="FK_Year_Date" Association="Self.FK_Year_Date">
+            <End Role="Date" EntitySet="Date" />
+            <End Role="Year" EntitySet="Year" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Year_Date1" Association="Self.FK_Year_Date1">
+            <End Role="Date" EntitySet="Date" />
+            <End Role="Year" EntitySet="Year" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -371,12 +423,16 @@
           <FunctionImport Name="GetKeywords" ReturnType="Collection(String)">
           <Parameter Name="KeywordPart" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="AspNetUsers" EntityType="BadBeeModel.AspNetUsers" />
           <EntitySet Name="BadBee" EntityType="BadBeeModel.BadBee" />
           <EntitySet Name="Brand" EntityType="BadBeeModel.Brand" />
+          <EntitySet Name="Date" EntityType="BadBeeModel.Date" />
           <EntitySet Name="Dimension" EntityType="BadBeeModel.Dimension" />
           <EntitySet Name="Height" EntityType="BadBeeModel.Height" />
           <EntitySet Name="Item" EntityType="BadBeeModel.Item" />
+          <EntitySet Name="Message" EntityType="BadBeeModel.Message" />
           <EntitySet Name="Model" EntityType="BadBeeModel.Model" />
+          <EntitySet Name="Picture" EntityType="BadBeeModel.Picture" />
           <EntitySet Name="Serie" EntityType="BadBeeModel.Serie" />
           <EntitySet Name="Systems" EntityType="BadBeeModel.Systems" />
           <EntitySet Name="Thickness" EntityType="BadBeeModel.Thickness" />
@@ -385,6 +441,10 @@
           <EntitySet Name="Year" EntityType="BadBeeModel.Year" />
           <AssociationSet Name="FK_BadBee_Dimension" Association="BadBeeModel.FK_BadBee_Dimension">
             <End Role="Dimension" EntitySet="Dimension" />
+            <End Role="BadBee" EntitySet="BadBee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BadBee_Picture" Association="BadBeeModel.FK_BadBee_Picture">
+            <End Role="Picture" EntitySet="Picture" />
             <End Role="BadBee" EntitySet="BadBee" />
           </AssociationSet>
           <AssociationSet Name="FK_BadBee_System" Association="BadBeeModel.FK_BadBee_System">
@@ -402,6 +462,14 @@
           <AssociationSet Name="FK_Serie_Brand" Association="BadBeeModel.FK_Serie_Brand">
             <End Role="Brand" EntitySet="Brand" />
             <End Role="Serie" EntitySet="Serie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Year_Date" Association="BadBeeModel.FK_Year_Date">
+            <End Role="Date" EntitySet="Date" />
+            <End Role="Year" EntitySet="Year" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Year_Date1" Association="BadBeeModel.FK_Year_Date1">
+            <End Role="Date" EntitySet="Date" />
+            <End Role="Year" EntitySet="Year" />
           </AssociationSet>
           <AssociationSet Name="FK_Dimension_Height" Association="BadBeeModel.FK_Dimension_Height">
             <End Role="Height" EntitySet="Height" />
@@ -427,14 +495,25 @@
             <End Role="Year" EntitySet="Year" />
             <End Role="Model" EntitySet="Model" />
           </AssociationSet>
-          <EntitySet Name="Message" EntityType="BadBeeModel.Message" />
-          <EntitySet Name="Picture" EntityType="BadBeeModel.Picture" />
-          <AssociationSet Name="FK_BadBee_Picture" Association="BadBeeModel.FK_BadBee_Picture">
-            <End Role="Picture" EntitySet="Picture" />
-            <End Role="BadBee" EntitySet="BadBee" />
-          </AssociationSet>
-          <EntitySet Name="AspNetUsers" EntityType="BadBeeModel.AspNetUsers" />
           </EntityContainer>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Removed" Type="Boolean" Nullable="false" />
+        </EntityType>
         <EntityType Name="BadBee">
           <Key>
             <PropertyRef Name="BadBeeId" />
@@ -447,10 +526,10 @@
           <Property Name="FR" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
           <Property Name="PictureId" Type="Int32" />
           <NavigationProperty Name="Dimension" Relationship="BadBeeModel.FK_BadBee_Dimension" FromRole="BadBee" ToRole="Dimension" />
+          <NavigationProperty Name="Picture" Relationship="BadBeeModel.FK_BadBee_Picture" FromRole="BadBee" ToRole="Picture" />
           <NavigationProperty Name="Systems" Relationship="BadBeeModel.FK_BadBee_System" FromRole="BadBee" ToRole="Systems" />
           <NavigationProperty Name="Wva" Relationship="BadBeeModel.FK_BadBee_Wva" FromRole="BadBee" ToRole="Wva" />
           <NavigationProperty Name="Item" Relationship="BadBeeModel.FK_Item_BadBee" FromRole="BadBee" ToRole="Item" />
-          <NavigationProperty Name="Picture" Relationship="BadBeeModel.FK_BadBee_Picture" FromRole="BadBee" ToRole="Picture" />
         </EntityType>
         <EntityType Name="Brand">
           <Key>
@@ -459,6 +538,15 @@
           <Property Name="BrandId" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Serie" Relationship="BadBeeModel.FK_Serie_Brand" FromRole="Brand" ToRole="Serie" />
+        </EntityType>
+        <EntityType Name="Date">
+          <Key>
+            <PropertyRef Name="DateId" />
+          </Key>
+          <Property Name="DateId" Type="Int32" Nullable="false" />
+          <Property Name="Date1" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="YearFromFK" Relationship="BadBeeModel.FK_Year_Date" FromRole="Date" ToRole="Year" />
+          <NavigationProperty Name="YearToFK" Relationship="BadBeeModel.FK_Year_Date1" FromRole="Date" ToRole="Year" />
         </EntityType>
         <EntityType Name="Dimension">
           <Key>
@@ -493,6 +581,17 @@
           <NavigationProperty Name="BadBee" Relationship="BadBeeModel.FK_Item_BadBee" FromRole="Item" ToRole="BadBee" />
           <NavigationProperty Name="Model" Relationship="BadBeeModel.FK_Item_Model" FromRole="Item" ToRole="Model" />
         </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MessageFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsRead" Type="Boolean" />
+          <Property Name="InsertDate" Type="DateTime" Precision="3" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="Model">
           <Key>
             <PropertyRef Name="ModelId" />
@@ -504,6 +603,17 @@
           <NavigationProperty Name="Item" Relationship="BadBeeModel.FK_Item_Model" FromRole="Model" ToRole="Item" />
           <NavigationProperty Name="Serie" Relationship="BadBeeModel.FK_Model_Serie" FromRole="Model" ToRole="Serie" />
           <NavigationProperty Name="Year" Relationship="BadBeeModel.FK_Model_Year" FromRole="Model" ToRole="Year" />
+        </EntityType>
+        <EntityType Name="Picture">
+          <Key>
+            <PropertyRef Name="PictureId" />
+          </Key>
+          <Property Name="PictureId" Type="Int32" Nullable="false" />
+          <Property Name="Picture1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Picture2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Picture3" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="BadBeeNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BadBee" Relationship="BadBeeModel.FK_BadBee_Picture" FromRole="Picture" ToRole="BadBee" />
         </EntityType>
         <EntityType Name="Serie">
           <Key>
@@ -553,12 +663,16 @@
             <PropertyRef Name="YearId" />
           </Key>
           <Property Name="YearId" Type="Int32" Nullable="false" />
-          <Property Name="DateFrom" Type="DateTime" Precision="0" />
-          <Property Name="DateTo" Type="DateTime" Precision="0" />
+          <Property Name="DateFromId" Type="Int32" />
+          <Property Name="DateToId" Type="Int32" />
+          <NavigationProperty Name="DateFromFK" Relationship="BadBeeModel.FK_Year_Date" FromRole="Year" ToRole="Date" />
+          <NavigationProperty Name="DateToFK" Relationship="BadBeeModel.FK_Year_Date1" FromRole="Year" ToRole="Date" />
           <NavigationProperty Name="Model" Relationship="BadBeeModel.FK_Model_Year" FromRole="Year" ToRole="Model" />
         </EntityType>
         <Association Name="FK_BadBee_Dimension">
-          <End Type="BadBeeModel.Dimension" Role="Dimension" Multiplicity="0..1" />
+          <End Type="BadBeeModel.Dimension" Role="Dimension" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="BadBeeModel.BadBee" Role="BadBee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Dimension">
@@ -569,8 +683,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_BadBee_Picture">
+          <End Type="BadBeeModel.Picture" Role="Picture" Multiplicity="0..1" />
+          <End Type="BadBeeModel.BadBee" Role="BadBee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Picture">
+              <PropertyRef Name="PictureId" />
+            </Principal>
+            <Dependent Role="BadBee">
+              <PropertyRef Name="PictureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_BadBee_System">
-          <End Type="BadBeeModel.Systems" Role="Systems" Multiplicity="0..1" />
+          <End Type="BadBeeModel.Systems" Role="Systems" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="BadBeeModel.BadBee" Role="BadBee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Systems">
@@ -582,7 +710,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BadBee_Wva">
-          <End Type="BadBeeModel.Wva" Role="Wva" Multiplicity="0..1" />
+          <End Type="BadBeeModel.Wva" Role="Wva" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="BadBeeModel.BadBee" Role="BadBee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Wva">
@@ -594,7 +724,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Item_BadBee">
-          <End Type="BadBeeModel.BadBee" Role="BadBee" Multiplicity="1" />
+          <End Type="BadBeeModel.BadBee" Role="BadBee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="BadBeeModel.Item" Role="Item" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BadBee">
@@ -606,7 +738,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Serie_Brand">
-          <End Type="BadBeeModel.Brand" Role="Brand" Multiplicity="0..1" />
+          <End Type="BadBeeModel.Brand" Role="Brand" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="BadBeeModel.Serie" Role="Serie" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Brand">
@@ -617,8 +751,34 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Year_Date">
+          <End Type="BadBeeModel.Date" Role="Date" Multiplicity="0..1" />
+          <End Type="BadBeeModel.Year" Role="Year" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Date">
+              <PropertyRef Name="DateId" />
+            </Principal>
+            <Dependent Role="Year">
+              <PropertyRef Name="DateFromId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Year_Date1">
+          <End Type="BadBeeModel.Date" Role="Date" Multiplicity="0..1" />
+          <End Type="BadBeeModel.Year" Role="Year" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Date">
+              <PropertyRef Name="DateId" />
+            </Principal>
+            <Dependent Role="Year">
+              <PropertyRef Name="DateToId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Dimension_Height">
-          <End Type="BadBeeModel.Height" Role="Height" Multiplicity="0..1" />
+          <End Type="BadBeeModel.Height" Role="Height" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="BadBeeModel.Dimension" Role="Dimension" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Height">
@@ -630,7 +790,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Dimension_Thickness">
-          <End Type="BadBeeModel.Thickness" Role="Thickness" Multiplicity="0..1" />
+          <End Type="BadBeeModel.Thickness" Role="Thickness" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="BadBeeModel.Dimension" Role="Dimension" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Thickness">
@@ -642,7 +804,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Dimension_Width">
-          <End Type="BadBeeModel.Width" Role="Width" Multiplicity="0..1" />
+          <End Type="BadBeeModel.Width" Role="Width" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="BadBeeModel.Dimension" Role="Dimension" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Width">
@@ -654,7 +818,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Item_Model">
-          <End Type="BadBeeModel.Model" Role="Model" Multiplicity="1" />
+          <End Type="BadBeeModel.Model" Role="Model" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="BadBeeModel.Item" Role="Item" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Model">
@@ -666,7 +832,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Model_Serie">
-          <End Type="BadBeeModel.Serie" Role="Serie" Multiplicity="1" />
+          <End Type="BadBeeModel.Serie" Role="Serie" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="BadBeeModel.Model" Role="Model" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Serie">
@@ -689,58 +857,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Message">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MessageFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsRead" Type="Boolean" />
-          <Property Name="InsertDate" Type="DateTime" Precision="3" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Picture">
-          <Key>
-            <PropertyRef Name="PictureId" />
-          </Key>
-          <Property Name="PictureId" Type="Int32" Nullable="false" />
-          <Property Name="Picture1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Picture2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Picture3" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="BadBeeNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="BadBee" Relationship="BadBeeModel.FK_BadBee_Picture" FromRole="Picture" ToRole="BadBee" />
-        </EntityType>
-        <Association Name="FK_BadBee_Picture">
-          <End Type="BadBeeModel.Picture" Role="Picture" Multiplicity="0..1" />
-          <End Type="BadBeeModel.BadBee" Role="BadBee" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Picture">
-              <PropertyRef Name="PictureId" />
-            </Principal>
-            <Dependent Role="BadBee">
-              <PropertyRef Name="PictureId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="AspNetUsers">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
-          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="Removed" Type="Boolean" Nullable="false" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -748,6 +864,25 @@
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="BadBeeModelStoreContainer" CdmEntityContainer="BadBeeEntities">
           <FunctionImportMapping FunctionImportName="GetKeywords" FunctionName="BadBeeModel.Store.GetKeywords" />
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="BadBeeModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Removed" ColumnName="Removed" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="BadBee">
             <EntityTypeMapping TypeName="BadBeeModel.BadBee">
               <MappingFragment StoreEntitySet="BadBee">
@@ -766,6 +901,14 @@
               <MappingFragment StoreEntitySet="Brand">
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="BrandId" ColumnName="BrandId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Date">
+            <EntityTypeMapping TypeName="BadBeeModel.Date">
+              <MappingFragment StoreEntitySet="Date">
+                <ScalarProperty Name="Date1" ColumnName="Date" />
+                <ScalarProperty Name="DateId" ColumnName="DateId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -796,6 +939,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Message">
+            <EntityTypeMapping TypeName="BadBeeModel.Message">
+              <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="MessageFrom" ColumnName="MessageFrom" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Model">
             <EntityTypeMapping TypeName="BadBeeModel.Model">
               <MappingFragment StoreEntitySet="Model">
@@ -803,6 +958,17 @@
                 <ScalarProperty Name="SerieId" ColumnName="SerieId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ModelId" ColumnName="ModelId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Picture">
+            <EntityTypeMapping TypeName="BadBeeModel.Picture">
+              <MappingFragment StoreEntitySet="Picture">
+                <ScalarProperty Name="BadBeeNo" ColumnName="BadBeeNo" />
+                <ScalarProperty Name="Picture3" ColumnName="Picture3" />
+                <ScalarProperty Name="Picture2" ColumnName="Picture2" />
+                <ScalarProperty Name="Picture1" ColumnName="Picture1" />
+                <ScalarProperty Name="PictureId" ColumnName="PictureId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -851,51 +1017,9 @@
           <EntitySetMapping Name="Year">
             <EntityTypeMapping TypeName="BadBeeModel.Year">
               <MappingFragment StoreEntitySet="Year">
-                <ScalarProperty Name="DateTo" ColumnName="DateTo" />
-                <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
+                <ScalarProperty Name="DateToId" ColumnName="DateToId" />
+                <ScalarProperty Name="DateFromId" ColumnName="DateFromId" />
                 <ScalarProperty Name="YearId" ColumnName="YearId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Message">
-            <EntityTypeMapping TypeName="BadBeeModel.Message">
-              <MappingFragment StoreEntitySet="Message">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
-                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="MessageFrom" ColumnName="MessageFrom" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Picture">
-            <EntityTypeMapping TypeName="BadBeeModel.Picture">
-              <MappingFragment StoreEntitySet="Picture">
-                <ScalarProperty Name="BadBeeNo" ColumnName="BadBeeNo" />
-                <ScalarProperty Name="Picture3" ColumnName="Picture3" />
-                <ScalarProperty Name="Picture2" ColumnName="Picture2" />
-                <ScalarProperty Name="Picture1" ColumnName="Picture1" />
-                <ScalarProperty Name="PictureId" ColumnName="PictureId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="BadBeeModel.AspNetUsers">
-              <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="Removed" ColumnName="Removed" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

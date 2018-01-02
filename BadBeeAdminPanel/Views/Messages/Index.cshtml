@@ -1,0 +1,85 @@
+﻿@model IEnumerable<BadBee.Core.DAL.Message>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Wiadomości</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MessageFrom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Content)
+        </th>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.InsertDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsRead)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    if (item.IsRead == false)
+    {
+        <tr style="background-color:lime">     
+            <td>
+                @Html.DisplayFor(modelItem => item.MessageFrom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.InsertDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsRead)
+            </td>
+            <td>
+                @Html.ActionLink("Szczegóły", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Usuń", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+    if (item.IsRead == true)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MessageFrom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+          
+            <td>
+                @Html.DisplayFor(modelItem => item.InsertDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsRead)
+            </td>
+            <td>
+                @Html.ActionLink("Szczegóły", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Usuń", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+}
+
+</table>

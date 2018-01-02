@@ -133,15 +133,6 @@ namespace BadBee.Core.MyResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Back to table.
-        /// </summary>
-        public static string back_to_indicators {
-            get {
-                return ResourceManager.GetString("back_to_indicators", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Back to List.
         /// </summary>
         public static string back_to_list {
@@ -205,15 +196,6 @@ namespace BadBee.Core.MyResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Career.
-        /// </summary>
-        public static string career {
-            get {
-                return ResourceManager.GetString("career", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to catalogue.
         /// </summary>
         public static string catalog {
@@ -232,7 +214,7 @@ namespace BadBee.Core.MyResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CATALOGUE OF BRAKE LININGS AND BRAKE PADS FOR COMMERCIAL VEHICLES.
+        ///   Looks up a localized string similar to CATALOGUE OF BRAKE PADS FOR COMMERCIAL VEHICLES.
         /// </summary>
         public static string catalog_title_cv {
             get {
@@ -358,33 +340,6 @@ namespace BadBee.Core.MyResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Collaboration with FEMFM and TUV.
-        /// </summary>
-        public static string coll {
-            get {
-                return ResourceManager.GetString("coll", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Career.
-        /// </summary>
-        public static string collandcareer {
-            get {
-                return ResourceManager.GetString("collandcareer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Company.
-        /// </summary>
-        public static string company {
-            get {
-                return ResourceManager.GetString("company", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Confirm password.
         /// </summary>
         public static string confirm_password {
@@ -462,60 +417,6 @@ namespace BadBee.Core.MyResources {
         public static string create_user {
             get {
                 return ResourceManager.GetString("create_user", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Number from another manufacturer.
-        /// </summary>
-        public static string cross {
-            get {
-                return ResourceManager.GetString("cross", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cross brand name.
-        /// </summary>
-        public static string cross_brand_name {
-            get {
-                return ResourceManager.GetString("cross_brand_name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cross brand number.
-        /// </summary>
-        public static string cross_brand_number {
-            get {
-                return ResourceManager.GetString("cross_brand_number", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cross number.
-        /// </summary>
-        public static string cross_number {
-            get {
-                return ResourceManager.GetString("cross_number", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Crosses.
-        /// </summary>
-        public static string crosses {
-            get {
-                return ResourceManager.GetString("crosses", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to CSR.
-        /// </summary>
-        public static string csr {
-            get {
-                return ResourceManager.GetString("csr", resourceCulture);
             }
         }
         
@@ -619,15 +520,6 @@ namespace BadBee.Core.MyResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ⌀.
-        /// </summary>
-        public static string diameter {
-            get {
-                return ResourceManager.GetString("diameter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Dimensions.
         /// </summary>
         public static string dimensions {
@@ -651,33 +543,6 @@ namespace BadBee.Core.MyResources {
         public static string disc_no {
             get {
                 return ResourceManager.GetString("disc_no", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Download application for Android.
-        /// </summary>
-        public static string download_for_android {
-            get {
-                return ResourceManager.GetString("download_for_android", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Download application for  iOS.
-        /// </summary>
-        public static string download_for_ios {
-            get {
-                return ResourceManager.GetString("download_for_ios", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Download application for Windows Phone.
-        /// </summary>
-        public static string download_for_wp {
-            get {
-                return ResourceManager.GetString("download_for_wp", resourceCulture);
             }
         }
         
@@ -835,15 +700,6 @@ namespace BadBee.Core.MyResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EU funds.
-        /// </summary>
-        public static string eu {
-            get {
-                return ResourceManager.GetString("eu", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Export to CSV.
         /// </summary>
         public static string exportToCSV {
@@ -952,24 +808,6 @@ namespace BadBee.Core.MyResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Indicators.
-        /// </summary>
-        public static string indicators {
-            get {
-                return ResourceManager.GetString("indicators", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Shoe.
-        /// </summary>
-        public static string jaw {
-            get {
-                return ResourceManager.GetString("jaw", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to KM.
         /// </summary>
         public static string km {
@@ -1024,15 +862,6 @@ namespace BadBee.Core.MyResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Management methods.
-        /// </summary>
-        public static string methods {
-            get {
-                return ResourceManager.GetString("methods", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to online catalogs available in your phone.
         /// </summary>
         public static string mobile_catalog {
@@ -1056,15 +885,6 @@ namespace BadBee.Core.MyResources {
         public static string model {
             get {
                 return ResourceManager.GetString("model", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to * Mounting kit 01TK540001 must be installed.
-        /// </summary>
-        public static string mounting_kit_instruction {
-            get {
-                return ResourceManager.GetString("mounting_kit_instruction", resourceCulture);
             }
         }
         
@@ -1510,15 +1330,6 @@ namespace BadBee.Core.MyResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cross reference search.
-        /// </summary>
-        public static string searchByCrosses {
-            get {
-                return ResourceManager.GetString("searchByCrosses", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Search by details.
         /// </summary>
         public static string searchdet {
@@ -1627,29 +1438,11 @@ namespace BadBee.Core.MyResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to TRAILER, SEMITRAILER.
-        /// </summary>
-        public static string trailer {
-            get {
-                return ResourceManager.GetString("trailer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Type.
         /// </summary>
         public static string type {
             get {
                 return ResourceManager.GetString("type", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to United Kingdom.
-        /// </summary>
-        public static string uk {
-            get {
-                return ResourceManager.GetString("uk", resourceCulture);
             }
         }
         

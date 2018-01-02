@@ -204,12 +204,12 @@ namespace BadBeeCatalog.Controllers
             {
                 filter = GlobalVars.BadBeeFilter;
             }
-            List<Year> year = new List<Year>();
+            List<Date> year = new List<Date>();
             using (ListProvider provider = new ListProvider())
             {
                 year = provider.GetYearsListCh(filter);
             }
-            return Json(new SelectList(year, "Id", "Name"), JsonRequestBehavior.AllowGet);
+            return Json(new SelectList(year, "DateId", "Date"), JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -222,7 +222,7 @@ namespace BadBeeCatalog.Controllers
         public JsonResult GetYearsList()
         {
             try { 
-            List<Year> years = new List<Year>();
+            List<Date> years = new List<Date>();
             using (ListProvider provider = new ListProvider())
             {
                 years = provider.GetYearsList(GlobalVars.BadBeeFilter);
@@ -230,8 +230,8 @@ namespace BadBeeCatalog.Controllers
                 //List<string> yearsFrom = years.Select(q => q.DateFrom.Value.Year.ToString()).ToList();
                 //List<string> yearsTo = years.Select(q => q.DateTo.Value.Year.ToString()).ToList();
                 //List<string> yarsList = yearsFrom.Union(yearsTo).ToList();
-                var yearsList = years.Select(q => q.DateFrom).ToList().Union(years.Select(q => q.DateTo)).Distinct();
-            return Json(new SelectList(yearsList, "Id", "Name"), JsonRequestBehavior.AllowGet);
+                var yearsList = years.Select(q => q.Date1).ToList();
+            return Json(new SelectList(yearsList, "DateId", "Date"), JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -670,7 +670,7 @@ namespace BadBeeCatalog.Controllers
                     series = provider.GetSeriesList(GlobalVars.BadBeeFilter);
                 }
 
-                return Json(new SelectList(series, "SerieIdId", "Name"), JsonRequestBehavior.AllowGet);
+                return Json(new SelectList(series, "SerieId", "Name"), JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {

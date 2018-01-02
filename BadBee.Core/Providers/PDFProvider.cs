@@ -19,8 +19,26 @@ namespace BadBee.Core.Providers
             return string.Format("{0}\\{1}", System.Web.HttpContext.Current.Server.MapPath("~/Images/Pictures"), "BadBeeCatalog.pdf");
            
         }
-        
-     
+        public string GetYears(string dateFrom, string dateTo)
+        {
+            if (dateFrom == "0" && dateTo == "0") 
+            {
+                return string.Empty;
+            }
+            else if (dateFrom != "0" && dateTo == "0")
+            {
+                return string.Format(dateFrom + "->");
+            }
+            else if (dateFrom == "0" && dateTo != "0")
+            { 
+                return string.Format("->" + dateTo);
+            }
+            else
+            {
+                return string.Format(dateFrom + "->" + dateTo);
+            }
+           
+        }
         public void GeneratePDFCatalog()
         {
             List<CvlItem> data = new List<CvlItem>();
@@ -37,6 +55,10 @@ namespace BadBee.Core.Providers
                                 on serie.BrandId equals brand.BrandId
                             join year in bbe.Year
                                 on model.YearId equals year.YearId
+                            join datefrom in bbe.Date
+                                on year.DateFromFK.DateId equals datefrom.DateId
+                            join dateto in bbe.Date
+                                on year.DateToFK.DateId equals dateto.DateId
                             join badbee in bbe.BadBee
                                 on item.BadBeeId equals badbee.BadBeeId
                             join wva in bbe.Wva
@@ -57,8 +79,8 @@ namespace BadBee.Core.Providers
                                  Brand = brand.Name,
                                  Serie = serie.Name,
                                  Model=model.Name,
-                                 DateFrom=year.DateFrom,
-                                 DateTo=year.DateTo,
+                                 DateFrom=year.DateFromFK.Date1,
+                                 DateTo=year.DateToFK.Date1,
                                  BadBeeNumber = badbee.BadBeeNo,
                                  Fr=badbee.FR,
                                  Wva = wva.WvaNo,
@@ -68,7 +90,7 @@ namespace BadBee.Core.Providers
                                  Height =height.Height1.ToString(),
                                  Thickness =thickness.Thickness1.ToString(),
                                  Width =width.Width1.ToString(),
-                                 Years =year.DateFrom +" - "+year.DateTo
+                                 
                              }).OrderBy(q=>q.Brand).ThenBy(q=>q.Serie).ThenBy(q=>q.Model).ThenBy(q=>q.Fr).ToList();
 
             }
@@ -184,18 +206,8 @@ namespace BadBee.Core.Providers
                 gfx.DrawString(dataLine.Model.Replace(",5\"", ",5''").Replace(".5\"", ".5''").Replace("\"", ""), font6, XBrushes.Black, new System.Drawing.PointF((float)XUnit.FromMillimeter(startX + 15).Point, (float)XUnit.FromMillimeter(31 + heightSum + ((rowCount * 5) / 2)).Point));
 
             }
-            //if (!string.IsNullOrEmpty(dataLine[3]) && !string.IsNullOrEmpty(dataLine[4]) && dataLine[4] != " " && dataLine[3] != " ")
-            //{
-            //    if ((dataLine[3].Count() + dataLine[4].Count()) > 43)
-            //    {
-            //        gfx.DrawString((dataLine[3] + "•" + dataLine[4]).Replace("10\"", "10''").Replace(".5\"", ".5''").Replace("\"", ""), font6Regular, XBrushes.Black, new System.Drawing.PointF((float)XUnit.FromMillimeter(startX + 65).Point, (float)XUnit.FromMillimeter(31 + heightSum + ((rowCount * 5) / 2)).Point));
-
-            //    }
-            //    else
-            //    {
-            //        gfx.DrawString((dataLine[3] + " • " + dataLine[4]).Replace("10\"", "10''").Replace(".5\"", ".5''").Replace("\"", ""), font6Regular, XBrushes.Black, new System.Drawing.PointF((float)XUnit.FromMillimeter(startX + 65).Point, (float)XUnit.FromMillimeter(31 + heightSum + ((rowCount * 5) / 2)).Point));
-            //    }
-            //}
+            gfx.DrawString(dataLine.WvaDesc, font6Regular, XBrushes.Black, new System.Drawing.PointF((float)XUnit.FromMillimeter(startX + 65).Point, (float)XUnit.FromMillimeter(31 + heightSum + ((rowCount * 5) / 2)).Point));
+            
             //else if (!string.IsNullOrEmpty(dataLine[3]) && string.IsNullOrEmpty(dataLine[4]) || dataLine[4] == " ")
             //{
             //    gfx.DrawString(dataLine[3].Replace("10\"", "10''").Replace(".5\"", ".5''").Replace("\"", ""), font6Regular, XBrushes.Black, new System.Drawing.PointF((float)XUnit.FromMillimeter(startX + 65).Point, (float)XUnit.FromMillimeter(31 + heightSum + ((rowCount * 5) / 2)).Point));
@@ -204,15 +216,15 @@ namespace BadBee.Core.Providers
             //{
             //    gfx.DrawString(dataLine[4].Replace("10\"", "10''").Replace(".5\"", ".5''").Replace("\"", ""), font6Regular, XBrushes.Black, new System.Drawing.PointF((float)XUnit.FromMillimeter(startX + 65).Point, (float)XUnit.FromMillimeter(31 + heightSum + ((rowCount * 5) / 2)).Point));
             //}
-            gfx.DrawString(dataLine.Years, font6Regular, XBrushes.Black, new System.Drawing.PointF((float)XUnit.FromMillimeter(startX + 128).Point, (float)XUnit.FromMillimeter(31 + heightSum + ((rowCount * 5) / 2)).Point));
+            gfx.DrawString(GetYears(dataLine.DateFrom, dataLine.DateTo), font6Regular, XBrushes.Black, new System.Drawing.PointF((float)XUnit.FromMillimeter(startX + 128).Point, (float)XUnit.FromMillimeter(31 + heightSum + ((rowCount * 5) / 2)).Point));
         }
         void DrawLineTextForModels(XGraphics gfx, int startX, int startY, CvlItem dataLine, int heightSum, int rowCount, int brandNumber, int serieNumber)
         {
             gfx.DrawString(dataLine.Fr, font5Regular, XBrushes.Black, new System.Drawing.PointF((float)XUnit.FromMillimeter(startX + 146.5).Point, (float)XUnit.FromMillimeter(51 + startY + serieNumber * 10 + brandNumber * 20).Point));
             gfx.DrawString(dataLine.BadBeeNumber, font5, XBrushes.Black, new System.Drawing.PointF((float)XUnit.FromMillimeter(startX + 151.5).Point, (float)XUnit.FromMillimeter(51 + startY + serieNumber * 10 + brandNumber * 20).Point));
+            gfx.DrawString(dataLine.BrakeSystem, font5Regular, XBrushes.Black, new System.Drawing.PointF((float)XUnit.FromMillimeter(startX + 166).Point, (float)XUnit.FromMillimeter(51 + startY + serieNumber * 10 + brandNumber * 20).Point));
             gfx.DrawString(dataLine.Wva, font5Regular, XBrushes.Black, new System.Drawing.PointF((float)XUnit.FromMillimeter(startX + 171).Point, (float)XUnit.FromMillimeter(51 + startY + serieNumber * 10 + brandNumber * 20).Point));
-            gfx.DrawString(dataLine.Size, font5Regular, XBrushes.Black, new System.Drawing.PointF((float)XUnit.FromMillimeter(startX + 171).Point, (float)XUnit.FromMillimeter(51 + startY + serieNumber * 10 + brandNumber * 20).Point));
-            gfx.DrawString(dataLine.BrakeSystem, font5Regular, XBrushes.Black, new System.Drawing.PointF((float)XUnit.FromMillimeter(startX + 181).Point, (float)XUnit.FromMillimeter(51 + startY + serieNumber * 10 + brandNumber * 20).Point));
+            gfx.DrawString(dataLine.Size, font5Regular, XBrushes.Black, new System.Drawing.PointF((float)XUnit.FromMillimeter(startX + 181).Point, (float)XUnit.FromMillimeter(51 + startY + serieNumber * 10 + brandNumber * 20).Point));
 
         }
         void DrawImage(XGraphics gfx, string path, int x, int y, int width, int height)
@@ -227,7 +239,7 @@ namespace BadBee.Core.Providers
         }
         int AddDataPages(XGraphics gfx, List<CvlItem> data, PdfPage page, PdfDocument document, int maxHeight, int maxWidth)
         {
-            for (int pageNo = 1; pageNo < 119; pageNo++)
+            for (int pageNo = 1; pageNo < data.Count()/30; pageNo++)
             {
                 page = document.AddPage();
                 gfx = XGraphics.FromPdfPage(page);
@@ -248,50 +260,50 @@ namespace BadBee.Core.Providers
 
                 
 
-                if (pageNo == 34)
-                {
-                    testData = data.Skip((pageNo - 1) * 30).Take(27).ToList();
-                }
-                else if (pageNo == 35)
-                {
-                    testData = data.Skip(((pageNo - 1) * 30) - 3).Take(33).ToList();
-                }
-                else if (pageNo == 83)
-                {
-                    testData = data.Skip(((pageNo - 1) * 30)).Take(24).ToList();
-                }
-                else if (pageNo == 84)
-                {
-                    testData = data.Skip(((pageNo - 1) * 30 - 6)).Take(36).ToList();
-                }
-                else if (pageNo == 104)
-                {
-                    testData = data.Skip(((pageNo - 1) * 30)).Take(20).ToList();
-                }
-                else if (pageNo == 105)
-                {
-                    testData = data.Skip(((pageNo - 1) * 30 - 10)).Take(30).ToList();
-                }
-                else if (pageNo == 107)
-                {
-                    testData = data.Skip(((pageNo - 1) * 30)).Take(20).ToList();
-                }
-                else if (pageNo == 108)
-                {
-                    testData = data.Skip(((pageNo - 1) * 30 - 10)).Take(35).ToList();
-                }
-                else if (pageNo == 109)
-                {
-                    testData = data.Skip(((pageNo - 1) * 30 - 5)).Take(35).ToList();
-                }
-                else if (pageNo == 118)
-                {
-                    testData = data.Skip(((pageNo - 1) * 30)).Take(31).ToList();
-                }
-                else
-                {
-                    testData = data.Skip((pageNo - 1) * 30).Take(30).ToList();
-                }
+                //if (pageNo == 34)
+                //{
+                //    testData = data.Skip((pageNo - 1) * 30).Take(27).ToList();
+                //}
+                //else if (pageNo == 35)
+                //{
+                //    testData = data.Skip(((pageNo - 1) * 30) - 3).Take(33).ToList();
+                //}
+                //else if (pageNo == 83)
+                //{
+                //    testData = data.Skip(((pageNo - 1) * 30)).Take(24).ToList();
+                //}
+                //else if (pageNo == 84)
+                //{
+                //    testData = data.Skip(((pageNo - 1) * 30 - 6)).Take(36).ToList();
+                //}
+                //else if (pageNo == 104)
+                //{
+                //    testData = data.Skip(((pageNo - 1) * 30)).Take(20).ToList();
+                //}
+                //else if (pageNo == 105)
+                //{
+                //    testData = data.Skip(((pageNo - 1) * 30 - 10)).Take(30).ToList();
+                //}
+                //else if (pageNo == 107)
+                //{
+                //    testData = data.Skip(((pageNo - 1) * 30)).Take(20).ToList();
+                //}
+                //else if (pageNo == 108)
+                //{
+                //    testData = data.Skip(((pageNo - 1) * 30 - 10)).Take(35).ToList();
+                //}
+                //else if (pageNo == 109)
+                //{
+                //    testData = data.Skip(((pageNo - 1) * 30 - 5)).Take(35).ToList();
+                //}
+                //else if (pageNo == 118)
+                //{
+                //    testData = data.Skip(((pageNo - 1) * 30)).Take(31).ToList();
+                //}
+                //else
+                //{
+                testData = data.Skip((pageNo - 1) * 30).Take(30).ToList();
+                //}
                 var brands = testData.GroupBy(q => q.Brand).Select(q => q.First()).ToList();
 
 
@@ -316,7 +328,7 @@ namespace BadBee.Core.Providers
                     for (int k = 0; k < series.Count(); k++)
                     {
                         serie = series.ElementAt(k).Serie;
-                        var models = testData.Where(q => q.Serie == serie).Where(q => q.Brand == brand).GroupBy(q => new { Column1 = q.Model, Column2 = q.Years, Column3 = q.Fr, Column4 = q.BadBeeNumber }).Select(q => q.First()).ToList();
+                        var models = testData.Where(q => q.Serie == serie).Where(q => q.Brand == brand).GroupBy(q => new { Column1 = q.Model, Column2 = q.Years}).Select(q => q.First()).ToList();
 
                         if (serie == "")
                         {

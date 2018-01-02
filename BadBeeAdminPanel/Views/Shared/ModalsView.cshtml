@@ -279,52 +279,6 @@
         </div>
     </div>
 </div>
-<!-- Modal WVA Details-->
-<div class="modal fade" id="wvaDetFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
-                <p>@Resources.filterby <b>@Resources.wva</b></p>
-            </div>
-            <div class="modal-input">
-                <table>
-                    <tr>
-                        <td><input type="text" class="form-control filter" id="wvadetFilter" placeholder="@Resources.modalsearch"></td>
-                        <td><img src="~/Images/LUPA.png" alt="" /></td>
-                    </tr>
-                </table>
-
-            </div>
-            <div class="modal-body">
-                <div class="modal-forms" @*style="height:300px;"*@>
-                    <form role="form" style="width:45%; display:inline-block; float:left">
-                        <div class="form-group">
-                            <p>@Resources.options</p>
-
-                            <select size="9" id="wvadetails" class="form-control" @*ondblclick="applyWvaDetailsFilter()"*@></select>
-                        </div>
-                    </form>
-                    <div class="arrows" style="">
-                        <img src="~/Images/toRight.png" onclick="toRight('wvadetails', 'wvadet2', '#wvadetails', '#wvadet2')" />
-                        <img src="~/Images/toLeft.png" onclick="toLeft('wvadetails', 'wvadet2', '#wvadetails', '#wvadet2', wvaDetsFilter)" />
-                    </div>
-                    <form role="form" style="width:45%;  display:inline-block; float:right">
-                        <div class="form-group">
-                            <p>@Resources.filterby</p>
-                            <select size="9" id="wvadet2" class="form-control"></select>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="modal-footer">
-
-                <a class="btn btn-default btn-apply" onclick="applyWvaDetFilter2()">@Resources.filter</a>
-            </div>
-        </div>
-    </div>
-</div>
 <!-- Modal Height-->
 <div class="modal fade" id="heightFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
@@ -464,53 +418,6 @@
         </div>
     </div>
 </div>
-
-<!-- Modal Diameter -->
-<div class="modal fade" id="diameterFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
-                <p>@Resources.filterby <b>@Resources.diameter</b></p>
-            </div>
-            <div class="modal-input">
-                <table>
-                    <tr>
-                        <td><input type="text" class="form-control filter" id="diameterFilter" placeholder="@Resources.modalsearch"></td>
-                        <td><img src="~/Images/LUPA.png" alt="" /></td>
-                    </tr>
-                </table>
-
-            </div>
-            <div class="modal-body">
-                <div class="modal-forms" @*style="height:300px;"*@>
-                    <form role="form" style="width:45%; display:inline-block; float:left">
-                        <div class="form-group">
-                            <p>@Resources.options</p>
-                            <select size="8" id="drum" class="form-control" @*ondblclick="applyDiameterFilter()"*@></select>
-                        </div>
-                    </form>
-                    <div class="arrows" style="">
-                        <img src="/Images/toRight.png" onclick="toRight('drum', 'diameter2', '#drum', '#diameter2')" />
-                        <img src="~/Images/toLeft.png" onclick="toLeft('drum', 'diameter2', '#drum', '#diameter2', diametersFilter)" />
-                    </div>
-                    <form role="form" style="width:45%;  display:inline-block; float:right">
-                        <div class="form-group">
-                            <p>@Resources.filterby</p>
-                            <select size="9" id="diameter2" class="form-control"></select>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="modal-footer">
-
-                <a class="btn btn-default btn-apply" onclick="applyDiameterFilter2()">@Resources.filter</a>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- Modal System -->
 <div class="modal fade" id="systemFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
@@ -556,100 +463,6 @@
         </div>
     </div>
 </div>
-<!-- Modal Rivet -->
-<div class="modal fade" id="rivetFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
-                <p>@Resources.filterby <b>@Resources.rivets</b></p>
-            </div>
-            <div class="modal-input">
-                <table>
-                    <tr>
-                        <td><input type="text" class="form-control filter" id="rivetsFilter" placeholder="@Resources.modalsearch"></td>
-                        <td><img src="~/Images/LUPA.png" alt="" /></td>
-                    </tr>
-                </table>
-
-            </div>
-            <div class="modal-body">
-                <div class="modal-forms" @*style="height:300px;"*@>
-                    <form role="form" style="width:45%; display:inline-block; float:left">
-                        <div class="form-group">
-                            <p>@Resources.options</p>
-
-                            <select size="8" id="riv" class="form-control" @*ondblclick="applyRivetFilter()"*@></select>
-                        </div>
-                    </form>
-                    <div class="arrows" style="">
-                        <img src="~/Images/toRight.png" onclick="toRight('riv', 'rivet2', '#riv', '#rivet2')" />
-                        <img src="~/Images/toLeft.png" onclick="toLeft('riv', 'rivet2', '#riv', '#rivet2', rivetsFilter)" />
-                    </div>
-                    <form role="form" style="width:45%;  display:inline-block; float:right">
-                        <div class="form-group">
-                            <p>@Resources.filterby</p>
-                            <select size="9" id="rivet2" class="form-control"></select>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="modal-footer">
-
-                <a class="btn btn-default btn-apply" onclick="applyRivetFilter2()">@Resources.filter</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Cross -->
-<div class="modal fade" id="crossFilterModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resources.close</span></button>
-                <p>@Resources.filterby <b>@Resources.cross</b></p>
-            </div>
-            <div class="modal-input">
-                <table>
-                    <tr>
-                        <td><input type="text" class="form-control filter" id="crossFilter" placeholder="@Resources.modalsearch"></td>
-                        <td><img src="~/Images/LUPA.png" alt="" /></td>
-                    </tr>
-                </table>
-
-            </div>
-            <div class="modal-body">
-                <div class="modal-forms" @*style="height:300px;"*@>
-                    <form role="form" style="width:45%; display:inline-block; float:left">
-                        <div class="form-group">
-                            <p>@Resources.options</p>
-
-                            <select size="8" id="cross" class="form-control" @*ondblclick="applyRivetFilter()"*@></select>
-                        </div>
-                    </form>
-                    <div class="arrows" style="">
-                        <img src="~/Images/toRight.png" onclick="toRight('cross', 'cross2', '#cross', '#cross2', 'cross')" />
-                        <img src="~/Images/toLeft.png" onclick="toLeft('cross', 'cross2', '#cross', '#cross2', crossNameFilter, 'cross')" />
-                    </div>
-                    <form role="form" style="width:45%;  display:inline-block; float:right">
-                        <div class="form-group">
-                            <p>@Resources.filterby</p>
-                            <select size="9" id="cross2" class="form-control"></select>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="modal-footer">
-
-                <a class="btn btn-default btn-apply" onclick="applyCrossFilter()">@Resources.filter</a>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script>
     function toRight(list1, list2, id1, id2, filtername) {
         var e = document.getElementById(list1);

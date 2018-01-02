@@ -205,6 +205,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\BadBeeNumbersController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\PicturesController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SystemsController.cs" />
@@ -325,6 +326,9 @@
     <Content Include="Views\Dimensions\Delete.cshtml" />
     <Content Include="Views\Dimensions\Edit.cshtml" />
     <Content Include="Views\Dimensions\Index.cshtml" />
+    <Content Include="Views\Messages\Delete.cshtml" />
+    <Content Include="Views\Messages\Details.cshtml" />
+    <Content Include="Views\Messages\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

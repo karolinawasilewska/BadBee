@@ -187,7 +187,7 @@ namespace BadBee.Core.Providers
                 OnClickMethod = "showWva()",
                 IsFilterSelected = GlobalVars.BadBeeFilter.WvasSelected,
                 CssStyle = "cursor: pointer;",
-             //   HasAnyElements = HasWvaFilterAnyElements()
+                HasAnyElements = HasWvaFilterAnyElements()
             });
 
 
@@ -246,13 +246,13 @@ namespace BadBee.Core.Providers
 
         public bool HasYearsFilterAnyElements()
         {
-            List<Year> year = new List<Year>();
+            List<Date> year = new List<Date>();
             using (ListProvider provider = new ListProvider())
             {
                 year = provider.GetYearsListCh(GlobalVars.BadBeeFilter);
                 year.AddRange(provider.GetYearsList(GlobalVars.BadBeeFilter));
             }
-            return year.Where(q => q.YearId != 0).Count() > 0;
+            return year.Where(q => q.DateId != 0).Count() > 0;
         }
 
         public bool HasHeightsFilterAnyElements()

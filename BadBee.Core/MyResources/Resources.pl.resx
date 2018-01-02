@@ -130,16 +130,13 @@
     <value>Katalog BadBee</value>
   </data>
   <data name="catalog_title_cv" xml:space="preserve">
-    <value>KATALOG OKŁADZIN I KLOCKÓW HAMULCOWYCH DLA SAMOCHODÓW CIĘŻAROWYCH</value>
+    <value>KATALOG KLOCKÓW HAMULCOWYCH DLA SAMOCHODÓW CIĘŻAROWYCH</value>
   </data>
   <data name="close" xml:space="preserve">
     <value>Zamknij</value>
   </data>
   <data name="copyright" xml:space="preserve">
     <value>Wszelkie prawa zastrzeżone.</value>
-  </data>
-  <data name="cross_number" xml:space="preserve">
-    <value>Nazwa innej firmy</value>
   </data>
   <data name="description" xml:space="preserve">
     <value>Opis</value>
@@ -149,9 +146,6 @@
   </data>
   <data name="details" xml:space="preserve">
     <value>Szczegóły</value>
-  </data>
-  <data name="diameter" xml:space="preserve">
-    <value>⌀</value>
   </data>
   <data name="dimensions" xml:space="preserve">
     <value>Wymiary</value>
@@ -165,20 +159,8 @@
   <data name="downloadpdf" xml:space="preserve">
     <value>Pobierz katalog PDF</value>
   </data>
-  <data name="download_for_android" xml:space="preserve">
-    <value>Pobierz aplikacje dla systemu Android</value>
-  </data>
-  <data name="download_for_ios" xml:space="preserve">
-    <value>Pobierz aplikacje dla systemu iOS</value>
-  </data>
-  <data name="download_for_wp" xml:space="preserve">
-    <value>Pobierz aplikacje dla systemu Windows Phone</value>
-  </data>
   <data name="enter_brand" xml:space="preserve">
     <value>Marka</value>
-  </data>
-  <data name="enter_diameter" xml:space="preserve">
-    <value>Średnica</value>
   </data>
   <data name="enter_filter" xml:space="preserve">
     <value>Wprowadź filtr</value>
@@ -188,9 +170,6 @@
   </data>
   <data name="enter_model" xml:space="preserve">
     <value>Model</value>
-  </data>
-  <data name="enter_rivets" xml:space="preserve">
-    <value>Nity</value>
   </data>
   <data name="enter_serie" xml:space="preserve">
     <value>Seria</value>
@@ -222,29 +201,14 @@
   <data name="jaw" xml:space="preserve">
     <value>Szczęka</value>
   </data>
-  <data name="km" xml:space="preserve">
-    <value>KM</value>
-  </data>
-  <data name="kw" xml:space="preserve">
-    <value>KW</value>
-  </data>
   <data name="BadBee_no" xml:space="preserve">
     <value>BadBee No.</value>
-  </data>
-  <data name="mobile_catalog" xml:space="preserve">
-    <value>Katalogi online dostępne w Twoim telefonie</value>
   </data>
   <data name="model" xml:space="preserve">
     <value>Model</value>
   </data>
-  <data name="mounting_kit_instruction" xml:space="preserve">
-    <value>* Zestaw montażowy 01TK540001 musi być zainstalowany</value>
-  </data>
   <data name="oe" xml:space="preserve">
     <value>OE</value>
-  </data>
-  <data name="of" xml:space="preserve">
-    <value>z</value>
   </data>
   <data name="pad" xml:space="preserve">
     <value>Klocek hamulcowy</value>
@@ -294,12 +258,6 @@
   <data name="set_no" xml:space="preserve">
     <value>Numer zestawu</value>
   </data>
-  <data name="size" xml:space="preserve">
-    <value>Rozmiar</value>
-  </data>
-  <data name="stroke" xml:space="preserve">
-    <value>Pojemność</value>
-  </data>
   <data name="system" xml:space="preserve">
     <value>System</value>
   </data>
@@ -311,9 +269,6 @@
   </data>
   <data name="w" xml:space="preserve">
     <value>S</value>
-  </data>
-  <data name="wedge" xml:space="preserve">
-    <value>Klin</value>
   </data>
   <data name="width" xml:space="preserve">
     <value>Szerokość</value>
@@ -342,35 +297,17 @@
   <data name="catalog" xml:space="preserve">
     <value>Katalog</value>
   </data>
-  <data name="coll" xml:space="preserve">
-    <value>Współpraca z FEMFM i TUV</value>
-  </data>
-  <data name="collandcareer" xml:space="preserve">
-    <value>Współpraca i kariera</value>
-  </data>
-  <data name="company" xml:space="preserve">
-    <value>Firma</value>
-  </data>
   <data name="contact" xml:space="preserve">
     <value>Kontakt</value>
   </data>
-  <data name="csr" xml:space="preserve">
-    <value>Społeczna odpowiedzialność biznesu</value>
-  </data>
   <data name="customer" xml:space="preserve">
     <value>Dział obsługi klienta</value>
-  </data>
-  <data name="eu" xml:space="preserve">
-    <value>Dotacje UE</value>
   </data>
   <data name="goback" xml:space="preserve">
     <value>Powrót do wyników wyszukiwania</value>
   </data>
   <data name="history" xml:space="preserve">
     <value>Historia</value>
-  </data>
-  <data name="methods" xml:space="preserve">
-    <value>Metoda zarządzania</value>
   </data>
   <data name="news" xml:space="preserve">
     <value>Aktualności</value>
@@ -399,17 +336,8 @@
   <data name="searching" xml:space="preserve">
     <value>Wyszukiwanie</value>
   </data>
-  <data name="supp" xml:space="preserve">
-    <value>Dostawcy</value>
-  </data>
-  <data name="tech" xml:space="preserve">
-    <value>Technologia i rozwój</value>
-  </data>
   <data name="thickness" xml:space="preserve">
     <value>Grubość</value>
-  </data>
-  <data name="uk" xml:space="preserve">
-    <value>Wielka Brytania</value>
   </data>
   <data name="values" xml:space="preserve">
     <value>Nasze wartości</value>
@@ -435,9 +363,6 @@
   <data name="options" xml:space="preserve">
     <value>Możliwe opcje</value>
   </data>
-  <data name="trailer" xml:space="preserve">
-    <value>PRZYCZEPA, NACZEPA</value>
-  </data>
   <data name="modalsearch" xml:space="preserve">
     <value>Przeszukaj poniższą listę wpisując</value>
   </data>
@@ -459,9 +384,6 @@
   <data name="cleanFilters" xml:space="preserve">
     <value>Wyczyść filtry</value>
   </data>
-  <data name="cross" xml:space="preserve">
-    <value>Numer innego producenta</value>
-  </data>
   <data name="drumdiameter" xml:space="preserve">
     <value>Średnica </value>
   </data>
@@ -477,20 +399,8 @@
   <data name="change_password_button" xml:space="preserve">
     <value>Zmień hasło</value>
   </data>
-  <data name="create_new_cross" xml:space="preserve">
-    <value>Dodaj nowy cross</value>
-  </data>
   <data name="create_new_prod" xml:space="preserve">
     <value>Dodaj nowy produkt</value>
-  </data>
-  <data name="crosses" xml:space="preserve">
-    <value>Crossy</value>
-  </data>
-  <data name="cross_brand_name" xml:space="preserve">
-    <value>Nazwa firmy</value>
-  </data>
-  <data name="cross_brand_number" xml:space="preserve">
-    <value>Numer crossa</value>
   </data>
   <data name="date_from" xml:space="preserve">
     <value>Data rozpoczęcia produkcji</value>
@@ -700,5 +610,8 @@
   </data>
   <data name="write_to_us" xml:space="preserve">
     <value>Napisz do nas</value>
+  </data>
+  <data name="of" xml:space="preserve">
+    <value>z</value>
   </data>
 </root>

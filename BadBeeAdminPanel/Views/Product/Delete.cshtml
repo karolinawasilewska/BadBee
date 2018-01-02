@@ -1,5 +1,5 @@
 ﻿@using BadBee.Core.MyResources;
-@model BadBee.Core.DAL.ItemsDb
+@model BadBee.Core.DAL.Item
 
 <h3 style="margin-top:150px;">@Resources.want_delete</h3>
 <div>
@@ -7,187 +7,105 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Brand)
+            @Html.DisplayNameFor(model => model.Model.Serie.Brand.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Brand)
+            @Html.DisplayFor(model => model.Model.Serie.Brand.Name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Type)
+            @Html.DisplayNameFor(model => model.Model.Serie.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Type)
+            @Html.DisplayFor(model => model.Model.Serie.Name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Serie)
+            @Html.DisplayNameFor(model => model.Model.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Serie)
+            @Html.DisplayFor(model => model.Model.Name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Model)
+            @Html.DisplayNameFor(model => model.Model.Year.DateFromFK.Date1)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Model)
+            @Html.DisplayFor(model => model.Model.Year.DateFromFK.Date1)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Kw)
+            @Html.DisplayNameFor(model => model.Model.Year.DateToFK.Date1)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Kw)
+            @Html.DisplayFor(model => model.Model.Year.DateToFK.Date1)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Km)
+            @Html.DisplayNameFor(model => model.BadBee.FR)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Km)
+            @Html.DisplayFor(model => model.BadBee.FR)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DateFrom)
+            @Html.DisplayNameFor(model => model.BadBee.Wva.Description)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DateFrom)
+            @Html.DisplayFor(model => model.BadBee.Wva.Description)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DateTo)
+            @Html.DisplayNameFor(model => model.BadBee.Wva.WvaNo)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DateTo)
+            @Html.DisplayFor(model => model.BadBee.Wva.WvaNo)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Fr)
+            @Html.DisplayNameFor(model => model.BadBee.BadBeeNo)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Fr)
+            @Html.DisplayFor(model => model.BadBee.BadBeeNo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BadBee.Dimension.Height.Height1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BadBee.Dimension.Height.Height1)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.WvaDesc)
+            @Html.DisplayNameFor(model => model.BadBee.Dimension.Width.Width1)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.WvaDesc)
+            @Html.DisplayFor(model => model.BadBee.Dimension.Width.Width1)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Wva)
+            @Html.DisplayNameFor(model => model.BadBee.Dimension.Thickness.Thickness1)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Wva)
+            @Html.DisplayFor(model => model.BadBee.Dimension.Thickness.Thickness1)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.WvaDetailsQty)
+            @Html.DisplayNameFor(model => model.BadBee.Systems.Abbreviation)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.WvaDetailsQty)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.WvaDetails)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.WvaDetails)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BadBeeNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BadBeeNumber)
-        </dd>
-
-        @*<dt>
-            @Html.DisplayNameFor(model => model.Size)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Size)
-        </dd>*@
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Height)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Height)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Width)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Width)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Thickness)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Thickness)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Wedge)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Wedge)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DrumDiameter)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DrumDiameter)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BrakeSystem)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BrakeSystem)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RivetsQuantity)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RivetsQuantity)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RivetsType)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RivetsType)
+            @Html.DisplayFor(model => model.BadBee.Systems.Abbreviation)
         </dd>
 
     </dl>
