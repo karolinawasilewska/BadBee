@@ -17,6 +17,7 @@ namespace BadBee.Core.DAL
     internal class WidthMetadata
     {
         [Display(Name = "width", ResourceType = typeof(MyResources.Resources))]
+        [Required]
         public string Width1 { get; set; }
       
     }

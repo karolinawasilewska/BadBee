@@ -1021,13 +1021,13 @@ ul > li a {
     color: #ffffff;
     /*border-top: 1px solid #ffffff;*/
     padding: 5px 15px 5px 15px;
-    background: #d52027;
+    background: #000;
     margin-left: 1px;
     white-space: nowrap;
 }
 
 ul li a:hover {
-    background: #d52027;
+    background: #000;
 }
 
 .export_import:hover ul {
@@ -1041,11 +1041,11 @@ li:hover .export_import {
 }
 
 li:hover a {
-    background: #d52027;
+    background: #000;
 }
 
 li:hover li a:hover {
-    background: #d52027;
+    background: #000;
     text-decoration: none;
     color: white;
 }

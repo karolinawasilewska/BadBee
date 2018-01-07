@@ -231,7 +231,7 @@ namespace BadBeeCatalog.Controllers
                 //List<string> yearsTo = years.Select(q => q.DateTo.Value.Year.ToString()).ToList();
                 //List<string> yarsList = yearsFrom.Union(yearsTo).ToList();
                 var yearsList = years.Select(q => q.Date1).ToList();
-            return Json(new SelectList(yearsList, "DateId", "Date"), JsonRequestBehavior.AllowGet);
+            return Json(new SelectList(years, "DateId", "Date1"), JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -239,362 +239,259 @@ namespace BadBeeCatalog.Controllers
                 throw ex;
             }
         }
-        //POST: /Default/GetHeightsListCh
-        //public JsonResult GetHeightsListCh(BadBeeFilter filter)
-        //{
-        //    try { 
-        //    if (filter == null || filter.IsFilterEmpty)
-        //    {
-        //        filter = GlobalVars.BadBeeFilter;
-        //    }
-        //    List<Heights> hei = new List<Heights>();
-        //    using (ListProvider provider = new ListProvider())
-        //    {
-        //        hei = provider.GetHeightsListCh(filter);
-        //    }
-        //    return Json(new SelectList(hei, "Id", "Name"), JsonRequestBehavior.AllowGet);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        log.Info(filter);
-        //        log.Error(ex);
-        //        throw ex;
-        //    }
-        //}
-        ////POST: /Default/GetHeightsList
-        //public JsonResult GetHeightsList()
-        //{
-        //    try { 
-        //    List<Heights> heights = new List<Heights>();
-        //    using (ListProvider provider = new ListProvider())
-        //    {
-        //        heights = provider.GetHeightsList(GlobalVars.BadBeeFilter);
-        //    }
-        //    return Json(new SelectList(heights, "Id", "Name"), JsonRequestBehavior.AllowGet);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        log.Error(ex);
-        //        throw ex;
-        //    }
-        //}
-        ////POST: /Default/GetWidthsListCh
-        //public JsonResult GetWidthsListCh(BadBeeFilter filter)
-        //{
-        //    try { 
-        //    if (filter == null || filter.IsFilterEmpty)
-        //    {
-        //        filter = GlobalVars.BadBeeFilter;
-        //    }
-        //    List<Widths> wid = new List<Widths>();
-        //    using (ListProvider provider = new ListProvider())
-        //    {
-        //        wid = provider.GetWidthsListCh(filter);
-        //    }
-        //    return Json(new SelectList(wid, "Id", "Name"), JsonRequestBehavior.AllowGet);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        log.Info(filter);
-        //        log.Error(ex);
-        //        throw ex;
-        //    }
-        //}
-        ////POST: /Default/GetWidthsList
-        //public JsonResult GetWidthsList()
-        //{
-        //    try { 
-        //    List<Widths> widths = new List<Widths>();
-        //    using (ListProvider provider = new ListProvider())
-        //    {
-        //        widths = provider.GetWidthsList(GlobalVars.BadBeeFilter);
-        //    }
-        //    return Json(new SelectList(widths, "Id", "Name"), JsonRequestBehavior.AllowGet);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        log.Error(ex);
-        //        throw ex;
-        //    }
-        //}
-        ////POST: /Default/GetThicknessesListCh
-        //public JsonResult GetThicknessesListCh(BadBeeFilter filter)
-        //{
-        //    try { 
-        //    if (filter == null || filter.IsFilterEmpty)
-        //    {
-        //        filter = GlobalVars.BadBeeFilter;
-        //    }
-        //    List<Thicknesses> thick = new List<Thicknesses>();
-        //    using (ListProvider provider = new ListProvider())
-        //    {
-        //        thick = provider.GetThicknessesListCh(filter);
-        //    }
-        //    return Json(new SelectList(thick, "Id", "Name"), JsonRequestBehavior.AllowGet);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        log.Info(filter);
-        //        log.Error(ex);
-        //        throw ex;
-        //    }
-        //}
+       // POST: /Default/GetHeightsListCh
+        public JsonResult GetHeightsListCh(BadBeeFilter filter)
+        {
+            try
+            {
+                if (filter == null || filter.IsFilterEmpty)
+                {
+                    filter = GlobalVars.BadBeeFilter;
+                }
+                List<Height> hei = new List<Height>();
+                using (ListProvider provider = new ListProvider())
+                {
+                    hei = provider.GetHeightsListCh(filter);
+                }
+                return Json(new SelectList(hei, "HeightId", "Height1"), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                log.Info(filter);
+                log.Error(ex);
+                throw ex;
+            }
+        }
+        //POST: /Default/GetHeightsList
+        public JsonResult GetHeightsList()
+        {
+            try
+            {
+                List<Height> heights = new List<Height>();
+                using (ListProvider provider = new ListProvider())
+                {
+                    heights = provider.GetHeightsList(GlobalVars.BadBeeFilter);
+                }
+                return Json(new SelectList(heights, "HeightId", "Height1"), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                throw ex;
+            }
+        }
+        //POST: /Default/GetWidthsListCh
+        public JsonResult GetWidthsListCh(BadBeeFilter filter)
+        {
+            try
+            {
+                if (filter == null || filter.IsFilterEmpty)
+                {
+                    filter = GlobalVars.BadBeeFilter;
+                }
+                List<Width> wid = new List<Width>();
+                using (ListProvider provider = new ListProvider())
+                {
+                    wid = provider.GetWidthsListCh(filter);
+                }
+                return Json(new SelectList(wid, "WidthId", "Width1"), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                log.Info(filter);
+                log.Error(ex);
+                throw ex;
+            }
+        }
+        //POST: /Default/GetWidthsList
+        public JsonResult GetWidthsList()
+        {
+            try
+            {
+                List<Width> widths = new List<Width>();
+                using (ListProvider provider = new ListProvider())
+                {
+                    widths = provider.GetWidthsList(GlobalVars.BadBeeFilter);
+                }
+                return Json(new SelectList(widths, "WidthId", "Width1"), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                throw ex;
+            }
+        }
+        //POST: /Default/GetThicknessesListCh
+        public JsonResult GetThicknessesListCh(BadBeeFilter filter)
+        {
+            try
+            {
+                if (filter == null || filter.IsFilterEmpty)
+                {
+                    filter = GlobalVars.BadBeeFilter;
+                }
+                List<Thickness> thick = new List<Thickness>();
+                using (ListProvider provider = new ListProvider())
+                {
+                    thick = provider.GetThicknessesListCh(filter);
+                }
+                return Json(new SelectList(thick, "ThicknessId", "Thickness1"), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                log.Info(filter);
+                log.Error(ex);
+                throw ex;
+            }
+        }
 
-        ////POST: /Default/GetThicknessesList
-        //public JsonResult GetThicknessesList()
-        //{
-        //    try { 
-        //    List<Thicknesses> thicknesses = new List<Thicknesses>();
-        //    using (ListProvider provider = new ListProvider())
-        //    {
-        //        thicknesses = provider.GetThicknessesList(GlobalVars.BadBeeFilter);
-        //    }
-        //    return Json(new SelectList(thicknesses, "Id", "Name"), JsonRequestBehavior.AllowGet);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        log.Error(ex);
-        //        throw ex;
-        //    }
-        //}
-        ////POST: /Default/GetDrumDiametersListCh
-        //public JsonResult GetDrumDiametersListCh(BadBeeFilter filter)
-        //{
-        //    try { 
-        //    if (filter == null || filter.IsFilterEmpty)
-        //    {
-        //        filter = GlobalVars.BadBeeFilter;
-        //    }
-        //    List<DrumDiameters> drums = new List<DrumDiameters>();
-        //    using (ListProvider provider = new ListProvider())
-        //    {
-        //        drums = provider.GetDrumDiametersListCh(filter);
-        //    }
-        //    return Json(new SelectList(drums, "Id", "Name"), JsonRequestBehavior.AllowGet);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        log.Info(filter);
-        //        log.Error(ex);
-        //        throw ex;
-        //    }
-        //}
-        ////POST: /Default/GetDrumDiamteresList
-        //public JsonResult GetDrumDiametersList()
-        //{
-        //    try { 
-        //    List<DrumDiameters> drumDiameters = new List<DrumDiameters>();
-        //    using (ListProvider provider = new ListProvider())
-        //    {
-        //        drumDiameters = provider.GetDrumDiametersList(GlobalVars.BadBeeFilter);
-        //    }
-        //    return Json(new SelectList(drumDiameters, "Id", "Name"), JsonRequestBehavior.AllowGet);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        log.Error(ex);
-        //        throw ex;
-        //    }
-        //}
-        ////POST: /Default/GetSystemsListCh
-        //public JsonResult GetSystemsListCh(BadBeeFilter filter)
-        //{
-        //    try { 
-        //    if (filter == null || filter.IsFilterEmpty)
-        //    {
-        //        filter = GlobalVars.BadBeeFilter;
-        //    }
-        //    List<Systems> system = new List<Systems>();
-        //    using (ListProvider provider = new ListProvider())
-        //    {
-        //        system = provider.GetSystemsListCh(filter);
-        //    }
-        //    return Json(new SelectList(system, "Id", "Name"), JsonRequestBehavior.AllowGet);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        log.Info(filter);
-        //        log.Error(ex);
-        //        throw ex;
-        //    }
-        //}
-        ////POST: /Default/GetSystemsList
-        //public JsonResult GetSystemsList()
-        //{
-        //    try { 
-        //    List<Systems> systems = new List<Systems>();
-        //    using (ListProvider provider = new ListProvider())
-        //    {
-        //        systems = provider.GetSystemsList(GlobalVars.BadBeeFilter);
-        //    }
-        //    return Json(new SelectList(systems, "Id", "Name"), JsonRequestBehavior.AllowGet);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        log.Error(ex);
-        //        throw ex;
-        //    }
-        //}
-        ////POST: /Default/GetRivetListCh
-        //public JsonResult GetRivetListCh(BadBeeFilter filter)
-        //{
-        //    try { 
-        //    if (filter == null || filter.IsFilterEmpty)
-        //    {
-        //        filter = GlobalVars.BadBeeFilter;
-        //    }
-        //    List<RivetTypes> rivets = new List<RivetTypes>();
-        //    using (ListProvider provider = new ListProvider())
-        //    {
-        //        rivets = provider.GetRivetListCh(filter);
-        //    }
-        //    return Json(new SelectList(rivets, "Id", "Name"), JsonRequestBehavior.AllowGet);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        log.Info(filter);
-        //        log.Error(ex);
-        //        throw ex;
-        //    }
-        //}
-        ////POST: /Default/GetRivetTypesList
-        //public JsonResult GetRivetTypesList()
-        //{
-        //    try { 
-        //    List<RivetTypes> rivetTypes = new List<RivetTypes>();
-        //    using (ListProvider provider = new ListProvider())
-        //    {
-        //        rivetTypes = provider.GetRivetTypesList(GlobalVars.BadBeeFilter);
-        //    }
-        //    return Json(new SelectList(rivetTypes, "Id", "Name"), JsonRequestBehavior.AllowGet);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        log.Error(ex);
-        //        throw ex;
-        //    }
-        //}
-        ////POST: /Default/GetWvaChList
-        //public JsonResult GetWvaListCh(BadBeeFilter filter)
-        //{
-        //    try {
-        //    if (filter == null || filter.IsFilterEmpty)
-        //    {
-        //        filter = GlobalVars.BadBeeFilter;
-        //    }
-        //    List<Wva> wva = new List<Wva>();
-        //    using (ListProvider provider = new ListProvider())
-        //    {
-        //        wva = provider.GetWvaChList(filter);
-        //    }
-        //    return Json(new SelectList(wva, "Id", "Name"), JsonRequestBehavior.AllowGet);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        log.Info(filter);
-        //        log.Error(ex);
-        //        throw ex;
-        //    }
-        //}
-        ////POST: /Default/GetWvaList
-        //public JsonResult GetWvaList()
-        //{
-        //    try {
-        //    List<Wva> wva = new List<Wva>();
-        //    using (ListProvider provider = new ListProvider())
-        //    {
-        //        wva = provider.GetWvaList(GlobalVars.BadBeeFilter);
-        //    }
-        //    return Json(new SelectList(wva, "Id", "Name"), JsonRequestBehavior.AllowGet);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        log.Error(ex);
-        //        throw ex;
-        //    }
-        //}
+        //POST: /Default/GetThicknessesList
+        public JsonResult GetThicknessesList()
+        {
+            try
+            {
+                List<Thickness> thicknesses = new List<Thickness>();
+                using (ListProvider provider = new ListProvider())
+                {
+                    thicknesses = provider.GetThicknessesList(GlobalVars.BadBeeFilter);
+                }
+                return Json(new SelectList(thicknesses, "ThicknessId", "Thickness1"), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                throw ex;
+            }
+        }
 
-        ////POST: /Default/GetWvaDetChList
-        //public JsonResult GetWvaDetListCh(BadBeeFilter filter)
-        //{
-        //    try { 
-        //    if (filter == null || filter.IsFilterEmpty)
-        //    {
-        //        filter = GlobalVars.BadBeeFilter;
-        //    }
-        //    List<WvaDetails> wvadet = new List<WvaDetails>();
-        //    using (ListProvider provider = new ListProvider())
-        //    {
-        //        wvadet = provider.GetWvaDetailsChList(filter);
-        //    }
-        //    return Json(new SelectList(wvadet, "Id", "Name"), JsonRequestBehavior.AllowGet);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        log.Info(filter);
-        //        log.Error(ex);
-        //        throw ex;
-        //    }
-        //}
+        //POST: /Default/GetSystemsListCh
+        public JsonResult GetSystemsListCh(BadBeeFilter filter)
+        {
+            try
+            {
+                if (filter == null || filter.IsFilterEmpty)
+                {
+                    filter = GlobalVars.BadBeeFilter;
+                }
+                List<Systems> system = new List<Systems>();
+                using (ListProvider provider = new ListProvider())
+                {
+                    system = provider.GetSystemsListCh(filter);
+                }
+                return Json(new SelectList(system, "SystemId", "Abbreviation"), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                log.Info(filter);
+                log.Error(ex);
+                throw ex;
+            }
+        }
+        //POST: /Default/GetSystemsList
+        public JsonResult GetSystemsList()
+        {
+            try
+            {
+                List<Systems> systems = new List<Systems>();
+                using (ListProvider provider = new ListProvider())
+                {
+                    systems = provider.GetSystemsList(GlobalVars.BadBeeFilter);
+                }
+                return Json(new SelectList(systems, "SystemId", "Abbreviation"), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                throw ex;
+            }
+        }
 
-        ////POST: /Default/GetWvaDetList
-        //public JsonResult GetWvaDetList()
-        //{
-        //    try { 
-        //    List<WvaDetails> wvadet = new List<WvaDetails>();
-        //    using (ListProvider provider = new ListProvider())
-        //    {
-        //        wvadet = provider.GetWvaDetList(GlobalVars.BadBeeFilter);
-        //    }
-        //    return Json(new SelectList(wvadet, "Id", "Name"), JsonRequestBehavior.AllowGet);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        log.Error(ex);
-        //        throw ex;
-        //    }
-        //}
-        ////POST: /Default/GetBadBeeChList
-        //public JsonResult GetBadBeeListCh(BadBeeFilter filter)
-        //{
-        //    try {
-        //        if (filter == null || filter.IsFilterEmpty)
-        //        {
-        //            filter = GlobalVars.BadBeeFilter;
-        //        }
-        //        List<BadBeeNumbers> BadBees = new List<BadBeeNumbers>();
-        //    using (ListProvider provider = new ListProvider())
-        //    {
-        //        BadBees = provider.GetBadBeeChList(GlobalVars.BadBeeFilter);
-        //    }
-        //    return Json(new SelectList(BadBees, "BadBeeNumberId", "BadBeeNumber"), JsonRequestBehavior.AllowGet);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        log.Info(filter);
-        //        log.Error(ex);
-        //        throw ex;
-        //    }
-        //}
+        //POST: /Default/GetWvaChList
+        public JsonResult GetWvaListCh(BadBeeFilter filter)
+        {
+            try
+            {
+                if (filter == null || filter.IsFilterEmpty)
+                {
+                    filter = GlobalVars.BadBeeFilter;
+                }
+                List<Wva> wva = new List<Wva>();
+                using (ListProvider provider = new ListProvider())
+                {
+                    wva = provider.GetWvaChList(filter);
+                }
+                return Json(new SelectList(wva, "WvaId", "WvaNo"), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                log.Info(filter);
+                log.Error(ex);
+                throw ex;
+            }
+        }
+        //POST: /Default/GetWvaList
+        public JsonResult GetWvaList()
+        {
+            try
+            {
+                List<Wva> wva = new List<Wva>();
+                using (ListProvider provider = new ListProvider())
+                {
+                    wva = provider.GetWvaList(GlobalVars.BadBeeFilter);
+                }
+                return Json(new SelectList(wva, "WvaId", "WvaNo"), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                throw ex;
+            }
+        }
 
-        ////POST: /Default/GetBadBeesList
-        //public JsonResult GetBadBeesList()
-        //{
-        //    try { 
-        //    List<BadBeeNumbers> BadBees = new List<BadBeeNumbers>();
-        //    using (ListProvider provider = new ListProvider())
-        //    {
-        //         BadBees = provider.GetBadBeeList(GlobalVars.BadBeeFilter);
-        //    }
 
-        //    return Json(new SelectList(BadBees, "BadBeeNumberId", "BadBeeNumber"), JsonRequestBehavior.AllowGet);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        log.Error(ex);
-        //        throw ex;
-        //    }
-        //}
+        //POST: /Default/GetBadBeeChList
+        public JsonResult GetBadBeeListCh(BadBeeFilter filter)
+        {
+            try
+            {
+                if (filter == null || filter.IsFilterEmpty)
+                {
+                    filter = GlobalVars.BadBeeFilter;
+                }
+                List<BadBee.Core.DAL.BadBee> BadBees = new List<BadBee.Core.DAL.BadBee>();
+                using (ListProvider provider = new ListProvider())
+                {
+                    BadBees = provider.GetBadBeeChList(GlobalVars.BadBeeFilter);
+                }
+                return Json(new SelectList(BadBees, "BadBeeId", "BadBeeNo"), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                log.Info(filter);
+                log.Error(ex);
+                throw ex;
+            }
+        }
+
+        //POST: /Default/GetBadBeesList
+        public JsonResult GetBadBeesList()
+        {
+            try
+            {
+                List<BadBee.Core.DAL.BadBee> BadBees = new List<BadBee.Core.DAL.BadBee>();
+                using (ListProvider provider = new ListProvider())
+                {
+                    BadBees = provider.GetBadBeeList(GlobalVars.BadBeeFilter);
+                }
+
+                return Json(new SelectList(BadBees, "BadBeeId", "BadBeeNo"), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                throw ex;
+            }
+        }
         //POST: /Default/GetBrandsListCh
         public JsonResult GetBrandsListCh(BadBeeFilter filter)
         {
@@ -741,6 +638,7 @@ namespace BadBeeCatalog.Controllers
                         entity.Message.Add(mes);
                         entity.SaveChanges();
                     }
+                    return RedirectToAction("Index");
                 }
             }
             catch (Exception ex)
@@ -749,7 +647,7 @@ namespace BadBeeCatalog.Controllers
                 throw ex;
             }
 
-            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+            return RedirectToAction("Index");
         }
     }
 }

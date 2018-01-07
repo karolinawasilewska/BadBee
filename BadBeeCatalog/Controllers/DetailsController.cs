@@ -56,11 +56,11 @@ namespace BadBeeCatalog.Controllers
 
 
         // GET: Details
-        public ActionResult Index(string id, string date)
+        public ActionResult Index(int? id)
         {
             try
             {
-                if (string.IsNullOrEmpty(id))
+                if (id == null)
                 {
                     return RedirectToAction("Index", "Default");
                 }
@@ -68,69 +68,55 @@ namespace BadBeeCatalog.Controllers
 
                 using (BadBeeEntities db = new BadBeeEntities())
                 {
-                //    ItemsDb item = db.Item.Where(q => (q.Id == id)).FirstOrDefault();
+                    Item item = db.Item.Where(q => q.Id == id).FirstOrDefault();
 
-
-                    DetailsModel model = new DetailsModel();
-                    //model.BadBeeNumber = item.BadBeeNumber;
-                    //model.Wva = item.Wva;
-                    //model.Brand = item.Brand;
-                    //model.Serie = item.Serie;
-                    //model.Models = item.Model;
-                    //model.Km = item.Km;
-                    //model.Kw = item.Kw;
-                    //model.Years = date;
-                    //model.Fr = item.Fr;
-                    //model.WvaDesc = item.WvaDesc;
-                    //model.WvaDetailsQty = item.WvaDetailsQty;
-                    //model.WvaDetails = item.WvaDetails;
-                    //model.Wedge = item.Wedge;
-                    //model.DrumDiameter = item.DrumDiameter;
-                    //model.RivetsQuantity = item.RivetsQuantity;
-                    //model.RivetsType = item.RivetsType;
-                    //model.System = item.BrakeSystem;
-                    //model.Width = item.Width;
-                    //model.Height = item.Height;
-                    //model.Thickness = item.Thickness;
-                    ////model.Schema1 = item.Schema1;
-                    ////model.Schema2 = item.Schema2;
-                    ////model.Schema3 = item.Schema3;
-                    ////model.Picture1 = item.Picture1;
-                    ////model.Picture2 = item.Picture2;
-                    //model.PictureId = item.PictureId;
-                    //model.Type = item.ProductType;
-
-                    String path = Server.MapPath(@"Images/Pictures/");
-
-                    if (path.Contains("\\Details\\Index"))
+                    if (item != null)
                     {
-                        path = path.Replace("\\Details\\Index", "");
-                    }
-                    List<string> pictures = new List<string>();
-                    List<string> badBeeNoList = new List<string>();
-                    List<string> wvaFromBadBeeNoList = new List<string>();
-                    List<string> wvaList = new List<string>();
+                        DetailsModel model = new DetailsModel();
+                        model.BadBeeNumber = item.BadBee.BadBeeNo;
+                        model.Wva = item.BadBee.Wva.WvaNo;
+                        model.Brand = item.Model.Serie.Brand.Name;
+                        model.Serie = item.Model.Serie.Name;
+                        model.Models = item.Model.Name;
+                        model.Years = GetYears(item.Model.Year.DateFromFK.Date1, item.Model.Year.DateToFK.Date1);
+                        model.Fr = item.BadBee.FR;
+                        model.WvaDesc = item.BadBee.Wva.Description;
+                        model.System = item.BadBee.Systems.Abbreviation;
+                        model.Width = item.BadBee.Dimension.Width.Width1.ToString();
+                        model.Height = item.BadBee.Dimension.Height.Height1.ToString();
+                        model.Thickness = item.BadBee.Dimension.Thickness.Thickness1.ToString();
+                        model.PictureId = item.BadBee.PictureId;
 
-                    if (model.Schema1=="lining.bmp"|| model.Type=="Brake lining") //okładzina
-                    {
-                        pictures.Add("559 A.jpg");
-                    }
-                    else //klocek
-                    {
-                        if (model.Wva!="ND")
+                        String path = Server.MapPath(@"Image/Pictures/");
+
+                        if (path.Contains("\\Details\\Index"))
                         {
-                            pictures = FindPicture(model, path);
+                            path = path.Replace("\\Details\\Index", "");
                         }
-                        if (pictures.Count==0 || model.Wva=="ND")
+                        List<string> pictures = new List<string>();
+                        List<string> badBeeNoList = new List<string>();
+                        List<string> wvaFromBadBeeNoList = new List<string>();
+                        List<string> wvaList = new List<string>();
+
+
+                        if (model.PictureId == 0)
                         {
                             pictures.Add("noimg.jpg");
                         }
-
+                        else
+                        {
+                            pictures = FindPicture(model, path);
+                        }
+                        model.Pictures = pictures.ToArray();
+                        model.Picture = model.Pictures.First();
+                        return View(model);
                     }
-                    model.Pictures = pictures.ToArray();
-                    model.Picture = model.Pictures.First();
-                    return View(model);
+                    else
+                    {
+                        return RedirectToAction("Index", "Default");
+                    }
                 }
+                
             }
             catch (Exception ex)
             {
@@ -144,30 +130,45 @@ namespace BadBeeCatalog.Controllers
 
             using (BadBeeEntities db = new BadBeeEntities())
             {
-                // Pictures pict = db.Pictures.Where(q => q.BadBeeNo == model.BadBeeNumber).FirstOrDefault();
-                //if (pict != null)
-                //{
+                Picture pict = db.Picture.Where(q => q.BadBeeNo == model.BadBeeNumber).FirstOrDefault();
+                if (pict != null)
+                {
 
-                //    if (!string.IsNullOrEmpty(pict.Schema1) && System.IO.File.Exists(path + pict.Schema1))
-                //    {
-                //        pictures.Add(pict.Schema1);
-                //    }
-                //    if (!string.IsNullOrEmpty(pict.Schema2) && System.IO.File.Exists(path + pict.Schema2))
-                //    {
-                //        pictures.Add(pict.Schema2);
-                //    }
-                //    if (!string.IsNullOrEmpty(pict.Picture2) && System.IO.File.Exists(path + pict.Picture2))
-                //    {
-                //        pictures.Add(pict.Picture2);
-                //    }
-                //    if (!string.IsNullOrEmpty(pict.Picture1) && System.IO.File.Exists(path + pict.Picture1))
-                //    {
-                //        pictures.Add(pict.Picture1);
-                //    }
-                //}
-                //return pictures.Distinct().ToList();
-                return null;
+                    if (!string.IsNullOrEmpty(pict.Picture1) && System.IO.File.Exists(path + pict.Picture1))
+                    {
+                        pictures.Add(pict.Picture1);
+                    }
+                    if (!string.IsNullOrEmpty(pict.Picture2) && System.IO.File.Exists(path + pict.Picture2))
+                    {
+                        pictures.Add(pict.Picture2);
+                    }
+                    if (!string.IsNullOrEmpty(pict.Picture3) && System.IO.File.Exists(path + pict.Picture3))
+                    {
+                        pictures.Add(pict.Picture3);
+                    }
+                                   }
+                return pictures.Distinct().ToList();
             }
+        }
+        public string GetYears(string dateFrom, string dateTo)
+        {
+            if (dateFrom == "0" && dateTo == "0")
+            {
+                return string.Empty;
+            }
+            else if (dateFrom != "0" && dateTo == "0")
+            {
+                return string.Format(dateFrom + "->");
+            }
+            else if (dateFrom == "0" && dateTo != "0")
+            {
+                return string.Format("->" + dateTo);
+            }
+            else
+            {
+                return string.Format(dateFrom + "->" + dateTo);
+            }
+
         }
     }
 

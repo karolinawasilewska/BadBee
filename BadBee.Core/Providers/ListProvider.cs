@@ -38,22 +38,22 @@ namespace BadBee.Core.Providers
                 if (GetChList<Brand>().Any(row => row.Name.ToLower().StartsWith(filter.PhraseFilter.ToLower())))
                 {
                     List<Brand> br = GetChList<Brand>().Where(q => q.Name.ToLower().StartsWith(filter.PhraseFilter.ToLower())).ToList();
-                    List<string> brandIds = br.Select(x => x.BrandId.ToString()).ToList();
-                    query = query.Where(q => brandIds.Contains(q.Model.Serie.Brand.BrandId.ToString()));
+                    List<int> brandIds = br.Select(x => x.BrandId).ToList();
+                    query = query.Where(q => brandIds.Contains(q.Model.Serie.Brand.BrandId));
                     filter.BrandsList = brandIds;
                 }
                 else if (GetChList<Serie>().Any(row => row.Name.ToLower().StartsWith(filter.PhraseFilter.ToLower())))
                 {
                     List<Serie> ser = GetChList<Serie>().Where(q => q.Name.ToLower().StartsWith(filter.PhraseFilter.ToLower())).ToList();
-                    List<string> serieIds = ser.Select(x => x.SerieId.ToString()).ToList();
-                    query = query.Where(q => serieIds.Contains(q.Model.Serie.SerieId.ToString()));
+                    List<int> serieIds = ser.Select(x => x.SerieId).ToList();
+                    query = query.Where(q => serieIds.Contains(q.Model.Serie.SerieId));
                     filter.SeriesList = serieIds;
                 }
                 else if (GetChList<Model>().Any(row => row.Name.ToLower().StartsWith(filter.PhraseFilter.ToLower())))
                 {
                     List<Model> mod = GetChList<Model>().Where(q => q.Name.ToLower().StartsWith(filter.PhraseFilter.ToLower())).ToList();
-                    List<string> modelIds = mod.Select(x => x.ModelId.ToString()).ToList();
-                    query = query.Where(q => modelIds.Contains(q.ModelId.ToString()));
+                    List<int> modelIds = mod.Select(x => x.ModelId).ToList();
+                    query = query.Where(q => modelIds.Contains(q.Model.ModelId));
                     filter.ModelsList = modelIds;
                 }
                 else
@@ -64,8 +64,8 @@ namespace BadBee.Core.Providers
                     List<DAL.BadBee> bb = GetChList<DAL.BadBee>().Where(q => (q.BadBeeNo.Replace(" ", "").Replace(".", "").Replace(",", "").Replace("-", "")
                         .StartsWith(filter.PhraseFilter.Replace(" ", "").Replace(".", "").Replace(",", "").Replace("-", "")))).ToList();
 
-                    List<string> badBeeIds = bb.Select(x => x.BadBeeId.ToString()).ToList();
-                    query = query.Where(q => badBeeIds.Contains(q.BadBeeId.ToString()));
+                    List<int> badBeeIds = bb.Select(x => x.BadBeeId).ToList();
+                    query = query.Where(q => badBeeIds.Contains(q.BadBee.BadBeeId));
                     if (bb != null)
                     {
                         filter.BadBeeNumbersList = badBeeIds;
@@ -75,8 +75,8 @@ namespace BadBee.Core.Providers
                 {
                     List<Wva> wva = GetChList<Wva>().Where(q => q.WvaNo.Replace(" ", "").StartsWith(filter.PhraseFilter.Replace(" ", ""))).ToList();
 
-                    List<string> wvaIds = wva.Select(x => x.WvaId.ToString()).ToList();
-                    query = query.Where(q => wvaIds.Contains(q.BadBee.WvaId.ToString()));
+                    List<int> wvaIds = wva.Select(x => x.WvaId).ToList();
+                    query = query.Where(q => wvaIds.Contains(q.BadBee.Wva.WvaId));
                     if (wva != null)
                     {
                         filter.WvasList = wvaIds;
@@ -90,16 +90,16 @@ namespace BadBee.Core.Providers
             {
                 if (!string.IsNullOrEmpty(filter.Models))
                 {
-                    query = query.Where(q => filter.ModelsList.Contains(q.ModelId.ToString()));
+                    query = query.Where(q => filter.ModelsList.Contains(q.ModelId));
                 }
 
                 else if (!string.IsNullOrEmpty(filter.Series))
                 {
-                    query = query.Where(q => filter.SeriesList.Contains(q.Model.Serie.SerieId.ToString()));
+                    query = query.Where(q => filter.SeriesList.Contains(q.Model.Serie.SerieId));
                 }
                 else if (!string.IsNullOrEmpty(filter.Brands))
                 {
-                    query = query.Where(q => filter.BrandsList.Contains(q.Model.Serie.Brand.BrandId.ToString()));
+                    query = query.Where(q => filter.BrandsList.Contains(q.Model.Serie.Brand.BrandId));
                 }
                 if (string.IsNullOrEmpty(filter.Brands))
                 {
@@ -108,7 +108,7 @@ namespace BadBee.Core.Providers
                 }
                 if (!string.IsNullOrEmpty(filter.BadBeeNumbers))
                 {
-                    query = query.Where(q => filter.BadBeeNumbersList.Contains(q.BadBee.BadBeeId.ToString()));
+                    query = query.Where(q => filter.BadBeeNumbersList.Contains(q.BadBee.BadBeeId));
                 }
                 //if (filter.DateYear.HasValue)
                 //{
@@ -120,29 +120,29 @@ namespace BadBee.Core.Providers
                 if (!string.IsNullOrEmpty(filter.DateYears))
                 {
                     // DateTime date = new DateTime();
-                    List<int> yslist = filter.DateYearsList.Select(int.Parse).ToList();
+                    List<int> yslist = filter.DateYearsList.ToList();
 
-                    query = query.Where(q => yslist.Contains(int.Parse(q.Model.Year.DateFromFK.Date1)) || yslist.Contains(int.Parse(q.Model.Year.DateToFK.Date1)));
+                    query = query.Where(q => yslist.Contains(q.Model.Year.DateFromFK.DateId) || yslist.Contains(q.Model.Year.DateToFK.DateId));
                 }
                 if (!string.IsNullOrEmpty(filter.Wvas))
                 {
-                    query = query.Where(q => filter.WvasList.Contains(q.BadBee.Wva.WvaId.ToString()));
+                    query = query.Where(q => filter.WvasList.Contains(q.BadBee.Wva.WvaId));
                 }
                 if (!string.IsNullOrEmpty(filter.Widths))
                 {
-                    query = query.Where(q => filter.WidthsList.Contains(q.BadBee.Dimension.Width.WidthId.ToString()));
+                    query = query.Where(q => filter.WidthsList.Contains(q.BadBee.Dimension.Width.WidthId));
                 }
                 if (!string.IsNullOrEmpty(filter.Heights))
                 {
-                    query = query.Where(q => filter.HeightsList.Contains(q.BadBee.Dimension.Height.HeightId.ToString()));
+                    query = query.Where(q => filter.HeightsList.Contains(q.BadBee.Dimension.Height.HeightId));
                 }
                 if (!string.IsNullOrEmpty(filter.Thicknesses))
                 {
-                    query = query.Where(q => filter.ThicknessesList.Contains(q.BadBee.Dimension.Thickness.ThicknessId.ToString()));
+                    query = query.Where(q => filter.ThicknessesList.Contains(q.BadBee.Dimension.Thickness.ThicknessId));
                 }
                 if (!string.IsNullOrEmpty(filter.Systems))
                 {
-                    query = query.Where(q => filter.SystemsList.Contains(q.BadBee.Systems.SystemId.ToString()));
+                    query = query.Where(q => filter.SystemsList.Contains(q.BadBee.Systems.SystemId));
                 }
 
                 query = query.OrderBy(q => q.Model.Serie.Brand.Name).ThenBy(q => q.Model.Serie.Name).ThenBy(q => q.Model.Name).ThenBy(q => q.Id);
@@ -223,43 +223,43 @@ namespace BadBee.Core.Providers
         }
         public List<Brand> GetBrandsChList(BadBeeFilter filter)
         {
-            return GetChList<Brand>().Where(q => filter.BrandsList.Contains(q.BrandId.ToString())).OrderBy(q => q.Name).ToList();
+            return GetChList<Brand>().Where(q => filter.BrandsList.Contains(q.BrandId)).OrderBy(q => q.Name).ToList();
         }
         public List<Serie> GetSeriesChList(BadBeeFilter filter)
         {
-            return GetChList<Serie>().Where(q => filter.SeriesList.Contains(q.SerieId.ToString())).ToList();
+            return GetChList<Serie>().Where(q => filter.SeriesList.Contains(q.SerieId)).ToList();
         }
         public List<Model> GetModelsChList(BadBeeFilter filter)
         {
-            return GetChList<Model>().Where(q => filter.ModelsList.Contains(q.ModelId.ToString())).ToList();
+            return GetChList<Model>().Where(q => filter.ModelsList.Contains(q.ModelId)).ToList();
         }
         public List<DAL.BadBee> GetBadBeeChList(BadBeeFilter filter)
         {
-            return GetChList<DAL.BadBee>().Where(q => (filter.BadBeeNumbersList.Contains(q.BadBeeId.ToString()))).ToList();
+            return GetChList<DAL.BadBee>().Where(q => (filter.BadBeeNumbersList.Contains(q.BadBeeId))).ToList();
          }
         public List<Wva> GetWvaChList(BadBeeFilter filter)
         {
-            return GetChList<Wva>().Where(q => filter.WvasList.Contains(q.WvaId.ToString())).ToList();
+            return GetChList<Wva>().Where(q => filter.WvasList.Contains(q.WvaId)).ToList();
         }
         public List<Systems> GetSystemsListCh(BadBeeFilter filter)
         {
-            return GetChList<Systems>().Where(q => filter.SystemsList.Contains(q.SystemId.ToString())).ToList();
+            return GetChList<Systems>().Where(q => filter.SystemsList.Contains(q.SystemId)).ToList();
         }
         public List<Width> GetWidthsListCh(BadBeeFilter filter)
         {
-            return GetChList<Width>().Where(q => filter.WidthsList.Contains(q.WidthId.ToString())).ToList();
+            return GetChList<Width>().Where(q => filter.WidthsList.Contains(q.WidthId)).ToList();
         }
         public List<Thickness> GetThicknessesListCh(BadBeeFilter filter)
         {
-            return GetChList<Thickness>().Where(q => filter.ThicknessesList.Contains(q.ThicknessId.ToString())).ToList();
+            return GetChList<Thickness>().Where(q => filter.ThicknessesList.Contains(q.ThicknessId)).ToList();
         }
         public List<Height> GetHeightsListCh(BadBeeFilter filter)
         {
-            return GetChList<Height>().Where(q => filter.HeightsList.Contains(q.HeightId.ToString())).ToList();
+            return GetChList<Height>().Where(q => filter.HeightsList.Contains(q.HeightId)).ToList();
         }
         public List<Date> GetYearsListCh(BadBeeFilter filter)
         {
-            return GetChList<Date>().Where(q => filter.DateYearsList.Contains(q.DateId.ToString())).ToList();
+            return GetChList<Date>().Where(q => filter.DateYearsList.Contains(q.DateId)).ToList();
         }
        
 
@@ -274,47 +274,49 @@ namespace BadBee.Core.Providers
             }
             else
             {
-                var items = db.Item.AsQueryable();
+                var items = db.Item.Include("Model").Include("Model.Serie").Include("Model.Serie.Brand").Include("Model.Year").Include("Model.Year.DateFromFK")
+                    .Include("Model.Year.DateToFK").Include("BadBee").Include("BadBee.Wva").Include("BadBee.Systems").Include("BadBee.Dimension")
+                    .Include("BadBee.Dimension.Width").Include("BadBee.Dimension.Height").Include("BadBee.Dimension.Thickness").AsQueryable();
 
                 if (!string.IsNullOrEmpty(filter.Models) && !model)
                 {
-                    items = items.Where(q => filter.ModelsList.Contains(q.ModelId.ToString()));
+                    items = items.Where(q => filter.ModelsList.Contains(q.Model.ModelId));
                 }
                 if (!string.IsNullOrEmpty(filter.Series) && !serie)
                 {
-                    items = items.Where(q => filter.SeriesList.Contains(q.Model.SerieId.ToString()));
+                    items = items.Where(q => filter.SeriesList.Contains(q.Model.Serie.SerieId));
                 }
                 if (!string.IsNullOrEmpty(filter.Brands) && !brand)
                 {
-                    items = items.Where(q => filter.BrandsList.Contains(q.Model.Serie.BrandId.ToString()));
+                    items = items.Where(q => filter.BrandsList.Contains(q.Model.Serie.Brand.BrandId));
                 }
                 if (!string.IsNullOrEmpty(filter.Heights) && !height)
                 {
-                    items = items.Where(q => filter.HeightsList.Contains(q.BadBee.Dimension.Height.ToString()));
+                    items = items.Where(q => filter.HeightsList.Contains(q.BadBee.Dimension.Height.HeightId));
                 }
                 if (!string.IsNullOrEmpty(filter.Widths) && !width)
                 {
-                    items = items.Where(q => filter.WidthsList.Contains(q.BadBee.Dimension.Width.ToString()));
+                    items = items.Where(q => filter.WidthsList.Contains(q.BadBee.Dimension.Width.WidthId));
                 }
                 if (!string.IsNullOrEmpty(filter.Thicknesses) && !thick)
                 {
-                    items = items.Where(q => filter.ThicknessesList.Contains(q.BadBee.Dimension.Thickness.ToString()));
+                    items = items.Where(q => filter.ThicknessesList.Contains(q.BadBee.Dimension.Thickness.ThicknessId));
                 }
                 if (!string.IsNullOrEmpty(filter.Systems) && !system)
                 {
-                    items = items.Where(q => filter.SystemsList.Contains(q.BadBee.SystemId.ToString()));
+                    items = items.Where(q => filter.SystemsList.Contains(q.BadBee.Systems.SystemId));
                 }
                 if (!string.IsNullOrEmpty(filter.Wvas) && !wva)
                 {
-                    items = items.Where(q => filter.WvasList.Contains(q.BadBee.WvaId.ToString()));
+                    items = items.Where(q => filter.WvasList.Contains(q.BadBee.Wva.WvaId));
                 }
                 if (!string.IsNullOrEmpty(filter.BadBeeNumbers) && !bb)
                 {
-                    items = items.Where(q => filter.BadBeeNumbersList.Contains(q.BadBeeId.ToString()));
+                    items = items.Where(q => filter.BadBeeNumbersList.Contains(q.BadBeeId));
                 }
                 if (!string.IsNullOrEmpty(filter.DateYears) && !year)
                 {
-                    items = items.Where(q => filter.DateYearsList.Contains(q.Model.Year.DateFromFK.Date1) || filter.DateYearsList.Contains(q.Model.Year.DateToFK.Date1));
+                    items = items.Where(q => filter.DateYearsList.Contains(q.Model.Year.DateFromFK.DateId) || filter.DateYearsList.Contains(q.Model.Year.DateToFK.DateId));
                 }
 
                 var searchCache = new SearchCache();
@@ -330,9 +332,8 @@ namespace BadBee.Core.Providers
         }
         public List<Brand> GetBrandsList(BadBeeFilter filter)
         {
-            if (string.IsNullOrEmpty(filter.CrossNumbers) && /*string.IsNullOrEmpty(filter.Brands) && */string.IsNullOrEmpty(filter.Series) && string.IsNullOrEmpty(filter.Models)
+            if (/*string.IsNullOrEmpty(filter.Brands) && */string.IsNullOrEmpty(filter.Series) && string.IsNullOrEmpty(filter.Models)
                     && string.IsNullOrEmpty(filter.DateYears) && string.IsNullOrEmpty(filter.BadBeeNumbers) && string.IsNullOrEmpty(filter.Wvas)
-                    && string.IsNullOrEmpty(filter.WvaDetails2) && string.IsNullOrEmpty(filter.DrumDiameters) && string.IsNullOrEmpty(filter.Rivets)
                     && string.IsNullOrEmpty(filter.Widths) && string.IsNullOrEmpty(filter.Heights) && string.IsNullOrEmpty(filter.Thicknesses)
                     && string.IsNullOrEmpty(filter.Systems)/* && string.IsNullOrEmpty(filter.PhraseFilter)*/)
             {
@@ -352,10 +353,9 @@ namespace BadBee.Core.Providers
         }
         public List<DAL.BadBee> GetBadBeeList(BadBeeFilter filter)
         {
-            if (string.IsNullOrEmpty(filter.CrossNumbers) && string.IsNullOrEmpty(filter.Brands) && string.IsNullOrEmpty(filter.Series) && string.IsNullOrEmpty(filter.Models)
+            if ( string.IsNullOrEmpty(filter.Brands) && string.IsNullOrEmpty(filter.Series) && string.IsNullOrEmpty(filter.Models)
                     && string.IsNullOrEmpty(filter.DateYears) /*&& string.IsNullOrEmpty(filter.BadBeeNumbers)*/ && string.IsNullOrEmpty(filter.Wvas)
-                    && string.IsNullOrEmpty(filter.WvaDetails2) && string.IsNullOrEmpty(filter.DrumDiameters) && string.IsNullOrEmpty(filter.Rivets)
-                    && string.IsNullOrEmpty(filter.Widths) && string.IsNullOrEmpty(filter.Heights) && string.IsNullOrEmpty(filter.Thicknesses)
+                     && string.IsNullOrEmpty(filter.Widths) && string.IsNullOrEmpty(filter.Heights) && string.IsNullOrEmpty(filter.Thicknesses)
                     && string.IsNullOrEmpty(filter.Systems) /*&& string.IsNullOrEmpty(filter.PhraseFilter)*/)
             {
                 return GetChList<DAL.BadBee>();
@@ -388,9 +388,8 @@ namespace BadBee.Core.Providers
         //}
         public List<Wva> GetWvaList(BadBeeFilter filter)
         {
-            if (string.IsNullOrEmpty(filter.CrossNumbers) && string.IsNullOrEmpty(filter.Brands) && string.IsNullOrEmpty(filter.Series) && string.IsNullOrEmpty(filter.Models)
+            if ( string.IsNullOrEmpty(filter.Brands) && string.IsNullOrEmpty(filter.Series) && string.IsNullOrEmpty(filter.Models)
                     && string.IsNullOrEmpty(filter.DateYears) && string.IsNullOrEmpty(filter.BadBeeNumbers) /*&& string.IsNullOrEmpty(filter.Wvas)*/
-                    && string.IsNullOrEmpty(filter.WvaDetails2) && string.IsNullOrEmpty(filter.DrumDiameters) && string.IsNullOrEmpty(filter.Rivets)
                     && string.IsNullOrEmpty(filter.Widths) && string.IsNullOrEmpty(filter.Heights) && string.IsNullOrEmpty(filter.Thicknesses)
                     && string.IsNullOrEmpty(filter.Systems) /*&& string.IsNullOrEmpty(filter.PhraseFilter)*/)
             {
@@ -409,10 +408,9 @@ namespace BadBee.Core.Providers
         }
         public List<Date> GetYearsList(BadBeeFilter filter)
         {
-            if (string.IsNullOrEmpty(filter.CrossNumbers) && string.IsNullOrEmpty(filter.Brands) && string.IsNullOrEmpty(filter.Series) && string.IsNullOrEmpty(filter.Models)
+            if (string.IsNullOrEmpty(filter.Brands) && string.IsNullOrEmpty(filter.Series) && string.IsNullOrEmpty(filter.Models)
                     /*&& string.IsNullOrEmpty(filter.DateYears)*/ && string.IsNullOrEmpty(filter.BadBeeNumbers) && string.IsNullOrEmpty(filter.Wvas)
-                    && string.IsNullOrEmpty(filter.WvaDetails2) && string.IsNullOrEmpty(filter.DrumDiameters) && string.IsNullOrEmpty(filter.Rivets)
-                    && string.IsNullOrEmpty(filter.Widths) && string.IsNullOrEmpty(filter.Heights) && string.IsNullOrEmpty(filter.Thicknesses)
+                     && string.IsNullOrEmpty(filter.Widths) && string.IsNullOrEmpty(filter.Heights) && string.IsNullOrEmpty(filter.Thicknesses)
                     && string.IsNullOrEmpty(filter.Systems)/* && string.IsNullOrEmpty(filter.PhraseFilter)*/)
             {
                 return GetChList<Date>();
@@ -429,10 +427,9 @@ namespace BadBee.Core.Providers
         }
         public List<Height> GetHeightsList(BadBeeFilter filter)
         {
-            if (string.IsNullOrEmpty(filter.CrossNumbers) && string.IsNullOrEmpty(filter.Brands) && string.IsNullOrEmpty(filter.Series) && string.IsNullOrEmpty(filter.Models)
+            if ( string.IsNullOrEmpty(filter.Brands) && string.IsNullOrEmpty(filter.Series) && string.IsNullOrEmpty(filter.Models)
                     && string.IsNullOrEmpty(filter.DateYears) && string.IsNullOrEmpty(filter.BadBeeNumbers) && string.IsNullOrEmpty(filter.Wvas)
-                    && string.IsNullOrEmpty(filter.WvaDetails2) && string.IsNullOrEmpty(filter.DrumDiameters) && string.IsNullOrEmpty(filter.Rivets)
-                    && string.IsNullOrEmpty(filter.Widths)/* && string.IsNullOrEmpty(filter.Heights) */&& string.IsNullOrEmpty(filter.Thicknesses)
+                     && string.IsNullOrEmpty(filter.Widths)/* && string.IsNullOrEmpty(filter.Heights) */&& string.IsNullOrEmpty(filter.Thicknesses)
                     && string.IsNullOrEmpty(filter.Systems) /*&& string.IsNullOrEmpty(filter.PhraseFilter)*/)
             {
                 return GetChList<Height>();
@@ -449,10 +446,9 @@ namespace BadBee.Core.Providers
         }
         public List<Width> GetWidthsList(BadBeeFilter filter)
         {
-            if (string.IsNullOrEmpty(filter.CrossNumbers) && string.IsNullOrEmpty(filter.Brands) && string.IsNullOrEmpty(filter.Series) && string.IsNullOrEmpty(filter.Models)
+            if (string.IsNullOrEmpty(filter.Brands) && string.IsNullOrEmpty(filter.Series) && string.IsNullOrEmpty(filter.Models)
                     && string.IsNullOrEmpty(filter.DateYears) && string.IsNullOrEmpty(filter.BadBeeNumbers) && string.IsNullOrEmpty(filter.Wvas)
-                    && string.IsNullOrEmpty(filter.WvaDetails2) && string.IsNullOrEmpty(filter.DrumDiameters) && string.IsNullOrEmpty(filter.Rivets)
-                    /*&& string.IsNullOrEmpty(filter.Widths)*/ && string.IsNullOrEmpty(filter.Heights) && string.IsNullOrEmpty(filter.Thicknesses)
+                     /*&& string.IsNullOrEmpty(filter.Widths)*/ && string.IsNullOrEmpty(filter.Heights) && string.IsNullOrEmpty(filter.Thicknesses)
                     && string.IsNullOrEmpty(filter.Systems) /*&& string.IsNullOrEmpty(filter.PhraseFilter)*/)
             {
                 return GetChList<Width>();
@@ -469,9 +465,8 @@ namespace BadBee.Core.Providers
         }
         public List<Thickness> GetThicknessesList(BadBeeFilter filter)
         {
-            if (string.IsNullOrEmpty(filter.CrossNumbers) && string.IsNullOrEmpty(filter.Brands) && string.IsNullOrEmpty(filter.Series) && string.IsNullOrEmpty(filter.Models)
+            if ( string.IsNullOrEmpty(filter.Brands) && string.IsNullOrEmpty(filter.Series) && string.IsNullOrEmpty(filter.Models)
                     && string.IsNullOrEmpty(filter.DateYears) && string.IsNullOrEmpty(filter.BadBeeNumbers) && string.IsNullOrEmpty(filter.Wvas)
-                    && string.IsNullOrEmpty(filter.WvaDetails2) && string.IsNullOrEmpty(filter.DrumDiameters) && string.IsNullOrEmpty(filter.Rivets)
                     && string.IsNullOrEmpty(filter.Widths) && string.IsNullOrEmpty(filter.Heights) /*&& string.IsNullOrEmpty(filter.Thicknesses)*/
                     && string.IsNullOrEmpty(filter.Systems) /*&& string.IsNullOrEmpty(filter.PhraseFilter)*/)
             {
@@ -489,9 +484,8 @@ namespace BadBee.Core.Providers
         }
         public List<Systems> GetSystemsList(BadBeeFilter filter)
             {
-            if (string.IsNullOrEmpty(filter.CrossNumbers) && string.IsNullOrEmpty(filter.Brands) && string.IsNullOrEmpty(filter.Series) && string.IsNullOrEmpty(filter.Models)
+            if (string.IsNullOrEmpty(filter.Brands) && string.IsNullOrEmpty(filter.Series) && string.IsNullOrEmpty(filter.Models)
                     && string.IsNullOrEmpty(filter.DateYears) && string.IsNullOrEmpty(filter.BadBeeNumbers) && string.IsNullOrEmpty(filter.Wvas)
-                    && string.IsNullOrEmpty(filter.WvaDetails2) && string.IsNullOrEmpty(filter.DrumDiameters) && string.IsNullOrEmpty(filter.Rivets)
                     && string.IsNullOrEmpty(filter.Widths) && string.IsNullOrEmpty(filter.Heights) && string.IsNullOrEmpty(filter.Thicknesses)
                     /*&& string.IsNullOrEmpty(filter.Systems)*/ /*&& string.IsNullOrEmpty(filter.PhraseFilter)*/)
             {
@@ -509,10 +503,9 @@ namespace BadBee.Core.Providers
         }
             public List<Serie> GetSeriesList(BadBeeFilter filter)
         {
-            if (string.IsNullOrEmpty(filter.CrossNumbers) && string.IsNullOrEmpty(filter.Brands) /*&& string.IsNullOrEmpty(filter.Series)*/ && string.IsNullOrEmpty(filter.Models)
+            if (string.IsNullOrEmpty(filter.Brands) /*&& string.IsNullOrEmpty(filter.Series)*/ && string.IsNullOrEmpty(filter.Models)
                     && string.IsNullOrEmpty(filter.DateYears) && string.IsNullOrEmpty(filter.BadBeeNumbers) && string.IsNullOrEmpty(filter.Wvas)
-                    && string.IsNullOrEmpty(filter.WvaDetails2) && string.IsNullOrEmpty(filter.DrumDiameters) && string.IsNullOrEmpty(filter.Rivets)
-                    && string.IsNullOrEmpty(filter.Widths) && string.IsNullOrEmpty(filter.Heights) && string.IsNullOrEmpty(filter.Thicknesses)
+                     && string.IsNullOrEmpty(filter.Widths) && string.IsNullOrEmpty(filter.Heights) && string.IsNullOrEmpty(filter.Thicknesses)
                     && string.IsNullOrEmpty(filter.Systems) /*&& string.IsNullOrEmpty(filter.PhraseFilter)*/)
             {
                 return GetChList<Serie>().OrderBy(q => q.Name).ToList();
@@ -529,10 +522,9 @@ namespace BadBee.Core.Providers
         }
         public List<Model> GetModelsList(BadBeeFilter filter)
         {
-            if (string.IsNullOrEmpty(filter.CrossNumbers) && string.IsNullOrEmpty(filter.Brands) && string.IsNullOrEmpty(filter.Series)/* && string.IsNullOrEmpty(filter.Models)*/
+            if (string.IsNullOrEmpty(filter.Brands) && string.IsNullOrEmpty(filter.Series)/* && string.IsNullOrEmpty(filter.Models)*/
                     && string.IsNullOrEmpty(filter.DateYears) && string.IsNullOrEmpty(filter.BadBeeNumbers) && string.IsNullOrEmpty(filter.Wvas)
-                    && string.IsNullOrEmpty(filter.WvaDetails2) && string.IsNullOrEmpty(filter.DrumDiameters) && string.IsNullOrEmpty(filter.Rivets)
-                    && string.IsNullOrEmpty(filter.Widths) && string.IsNullOrEmpty(filter.Heights) && string.IsNullOrEmpty(filter.Thicknesses)
+                     && string.IsNullOrEmpty(filter.Widths) && string.IsNullOrEmpty(filter.Heights) && string.IsNullOrEmpty(filter.Thicknesses)
                     && string.IsNullOrEmpty(filter.Systems) /*&& string.IsNullOrEmpty(filter.PhraseFilter)*/)
             {
                 return GetChList<Model>();

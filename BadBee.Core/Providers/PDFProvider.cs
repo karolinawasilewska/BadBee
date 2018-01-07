@@ -106,11 +106,20 @@ namespace BadBee.Core.Providers
             XGraphics gfx = XGraphics.FromPdfPage(page);
             DrawImage2(gfx, PDFResources.BadBeeCover, 0, 0, maxWidth, maxHeight);
             gfx.Dispose();
-            
+
+            page = document.AddPage();
+            gfx = XGraphics.FromPdfPage(page);
+            gfx.Dispose();
+
+            page = document.AddPage();
+            gfx = XGraphics.FromPdfPage(page);
+            gfx.Dispose();
+
             page = document.AddPage();
             gfx = XGraphics.FromPdfPage(page);
             DrawImage2(gfx, PDFResources.Page3_applications, 0, 0, maxWidth, maxHeight);
             gfx.Dispose();
+
             
             PageNo = AddDataPages(gfx, data, page, document, maxHeight, maxWidth);
             

@@ -85,6 +85,7 @@
           <Property Name="IsRead" Type="bit" />
           <Property Name="InsertDate" Type="datetime" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Reader" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Model">
           <Key>
@@ -430,7 +431,6 @@
           <EntitySet Name="Dimension" EntityType="BadBeeModel.Dimension" />
           <EntitySet Name="Height" EntityType="BadBeeModel.Height" />
           <EntitySet Name="Item" EntityType="BadBeeModel.Item" />
-          <EntitySet Name="Message" EntityType="BadBeeModel.Message" />
           <EntitySet Name="Model" EntityType="BadBeeModel.Model" />
           <EntitySet Name="Picture" EntityType="BadBeeModel.Picture" />
           <EntitySet Name="Serie" EntityType="BadBeeModel.Serie" />
@@ -495,6 +495,7 @@
             <End Role="Year" EntitySet="Year" />
             <End Role="Model" EntitySet="Model" />
           </AssociationSet>
+          <EntitySet Name="Message" EntityType="BadBeeModel.Message" />
           </EntityContainer>
         <EntityType Name="AspNetUsers">
           <Key>
@@ -580,17 +581,6 @@
           <Property Name="BadBeeId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="BadBee" Relationship="BadBeeModel.FK_Item_BadBee" FromRole="Item" ToRole="BadBee" />
           <NavigationProperty Name="Model" Relationship="BadBeeModel.FK_Item_Model" FromRole="Item" ToRole="Model" />
-        </EntityType>
-        <EntityType Name="Message">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MessageFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsRead" Type="Boolean" />
-          <Property Name="InsertDate" Type="DateTime" Precision="3" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Model">
           <Key>
@@ -857,6 +847,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MessageFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsRead" Type="Boolean" />
+          <Property Name="InsertDate" Type="DateTime" Precision="3" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Reader" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -939,18 +941,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Message">
-            <EntityTypeMapping TypeName="BadBeeModel.Message">
-              <MappingFragment StoreEntitySet="Message">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
-                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="MessageFrom" ColumnName="MessageFrom" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Model">
             <EntityTypeMapping TypeName="BadBeeModel.Model">
               <MappingFragment StoreEntitySet="Model">
@@ -1020,6 +1010,19 @@
                 <ScalarProperty Name="DateToId" ColumnName="DateToId" />
                 <ScalarProperty Name="DateFromId" ColumnName="DateFromId" />
                 <ScalarProperty Name="YearId" ColumnName="YearId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Message">
+            <EntityTypeMapping TypeName="BadBeeModel.Message">
+              <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="Reader" ColumnName="Reader" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="MessageFrom" ColumnName="MessageFrom" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

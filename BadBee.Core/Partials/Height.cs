@@ -17,6 +17,7 @@ namespace BadBee.Core.DAL
     internal class HeightMetadata
     {
         [Display(Name = "height", ResourceType = typeof(MyResources.Resources))]
+        [Required]
         public string Height1 { get; set; }
       
     }

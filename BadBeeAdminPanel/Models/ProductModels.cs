@@ -41,11 +41,11 @@ namespace BadBeeAdminPanel.Models
         //[Display(Name = "size", ResourceType = typeof(Resources))]
         //public string Size { get; set; }
         [Display(Name = "height", ResourceType = typeof(Resources))]
-        public string Height { get; set; }
+        public decimal Height { get; set; }
         [Display(Name = "width", ResourceType = typeof(Resources))]
-        public string Width { get; set; }
+        public decimal Width { get; set; }
         [Display(Name = "thickness", ResourceType = typeof(Resources))]
-        public string Thickness { get; set; }
+        public decimal Thickness { get; set; }
         [Display(Name = "wedge", ResourceType = typeof(Resources))]
         public string Wedge { get; set; }
         [Display(Name = "drumdiameter", ResourceType = typeof(Resources))]

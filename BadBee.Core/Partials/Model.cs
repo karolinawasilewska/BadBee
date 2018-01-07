@@ -16,6 +16,7 @@ namespace BadBee.Core.DAL
     internal class ModelMetadata
     {
         [Display(Name = "model", ResourceType = typeof(MyResources.Resources))]
+        [Required]
         public string Name { get; set; }
       
     }

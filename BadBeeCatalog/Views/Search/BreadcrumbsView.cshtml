@@ -11,14 +11,8 @@
 
             if (!string.IsNullOrEmpty(Request.QueryString["serieName"]))
             {
-                if (Request.QueryString["serieName"] == "Przyczepa, naczepa / Trailer, semitrailer")
-                {
-                    <span class="breadcrumbs-text">@Resources.trailer</span>
-                }
-                else
-                {
-                    <span class="breadcrumbs-text">@Request.QueryString["serieName"]</span>
-                }
+                <span class="breadcrumbs-text">@Request.QueryString["serieName"]</span>
+               
             }
             else
             {

@@ -52,32 +52,7 @@
                     //    item.BrakeSystem + item.RivetsQuantity + item.RivetsType;
 
 
-                    if (!String.IsNullOrEmpty(item.BadBeeNumber) || !String.IsNullOrEmpty(item.Wva)|| !String.IsNullOrEmpty(item.BrakeSystem))
-                    {
-
-                        if (!prevSet.Equals(item.Brand + item.Serie + item.Model + item.Fr+ item.WvaDesc + item.Wva))
-                        {
-                            prevSet = item.Brand + item.Serie + item.Model + item.Fr + item.WvaDesc + item.Wva;
-                        }
-                        else
-                        {
-                            ifEmpty = item.Height + item.Width;
-                            if (!string.IsNullOrEmpty(ifEmpty)) {
-                                item.BadBeeNumber = "";
-                                item.Wva = "";
-                                item.BrakeSystem = "";
-                                item.Brand = "";
-                                item.Serie = "";
-                                item.Model = "";
-                                item.Fr = "";
-                                item.Years = "";
-                                item.WvaDesc = "";
-
-                            }
-                        }
-                        //}
-                    }
-
+                 
                     <tr>
                          <td class="brand">@Html.Raw(item.Brand)</td>
                         <td class="serie">@Html.Raw(item.Serie)</td>
@@ -85,13 +60,9 @@
                         <td class="years" id="years">@Html.Raw(item.Years)</td>
                         <td class="fr">@Html.Raw(item.Fr)</td> 
                         <td class="wvadesc">@Html.Raw(item.WvaDesc)</td>
-                        <td class="wva">
-                            <span onclick="window.location='@Url.Action("Index", "Details", new { id = item.Id, date = item.Years })'" title=""
-                                  style="cursor:pointer; text-decoration:none; color: #badbee">@Html.Raw(item.Wva)
-                            </span>
-                        </td>
+                        <td class="wva"> @Html.Raw(item.Wva)</td>
                         <td class="badBeenr" id="badBeenr">
-                            <span onclick="window.location='@Url.Action("Index", "Details", new { id = item.Id, date = item.Years })'" title=""
+                            <span onclick="window.location='@Url.Action("Index", "Details", new { id = item.Id })'" title=""
                                   style="cursor:pointer; text-decoration:none; color: #badbee">@Html.Raw(item.BadBeeNumber)</span>
                             </td>
 

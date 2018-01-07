@@ -113,7 +113,7 @@ namespace BadBee.Core.Providers
             {
                 DataToggle = "modal",
                 Type = CatalogContentTableHeaderType.TopFilter,
-                DataTarget = "#BadBeeFilterModal",
+                DataTarget = "#badBeeFilterModal",
                 Description = MyResources.Resources.BadBee_no,
                 ID = "BadBeenumber",
                 OnClickMethod = "showBadBee()",
@@ -206,7 +206,7 @@ namespace BadBee.Core.Providers
                 OnClickMethod = "showHeights()",
                 IsFilterSelected = GlobalVars.BadBeeFilter.HeightsSelected,
                 CssStyle = "cursor: pointer;",
-             //   HasAnyElements = HasHeightsFilterAnyElements()
+                HasAnyElements = HasHeightsFilterAnyElements()
             });
 
             items.Add(new CatalogContentTableHeader()
@@ -219,7 +219,7 @@ namespace BadBee.Core.Providers
                 OnClickMethod = "showWidths()",
                 IsFilterSelected = GlobalVars.BadBeeFilter.WidthsSelected,
                 CssStyle = "cursor: pointer;",
-             //   HasAnyElements = HasWidthsFilterAnyElements()
+                HasAnyElements = HasWidthsFilterAnyElements()
             });
 
             items.Add(new CatalogContentTableHeader()
@@ -232,7 +232,7 @@ namespace BadBee.Core.Providers
                 OnClickMethod = "showThicknesses()",
                 IsFilterSelected = GlobalVars.BadBeeFilter.ThicknessesSelected,
                 CssStyle = "cursor: pointer;",
-             //   HasAnyElements = HasThicknessesFilterAnyElements()
+                HasAnyElements = HasThicknessesFilterAnyElements()
             });
 
             items.Add(new CatalogContentTableHeader()

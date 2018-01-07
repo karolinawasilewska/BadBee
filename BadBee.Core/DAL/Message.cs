@@ -11,8 +11,7 @@ namespace BadBee.Core.DAL
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Message
     {
         public int Id { get; set; }
@@ -21,5 +20,6 @@ namespace BadBee.Core.DAL
         public Nullable<bool> IsRead { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }
         public string Name { get; set; }
+        public string Reader { get; set; }
     }
 }

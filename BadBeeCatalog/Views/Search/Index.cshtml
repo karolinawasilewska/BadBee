@@ -26,13 +26,8 @@
                     {
                         if (!string.IsNullOrEmpty(Model.Columns[j].Rows[i].Name))
                         {
-                            if (Model.Columns[j].Rows[i].Name == "Przyczepa, naczepa / Trailer, semitrailer")
-                            {
-                                    <td @if(Request.QueryString["brand"] !=null){ @Html.Raw("style=\"vertical-align:top !important;\"") ; } height="50px" width="25%"><div onclick="window.location='@Url.Action("Index", "Search", @Model.Columns[j].Rows[i].CustomParams)'" title="@Model.Columns[j].Rows[i].Name">@Resources.trailer </div></td>
-                            }
-                            else {
-                                    <td @if(Request.QueryString["brand"] !=null){ @Html.Raw("style=\"vertical-align:top !important;\"") ; } height="50px" width="25%"><div onclick="window.location='@Url.Action("Index", "Search", @Model.Columns[j].Rows[i].CustomParams)'" title="@Model.Columns[j].Rows[i].Name">@Model.Columns[j].Rows[i].Name </div></td>
-                            }
+                                <td @if(Request.QueryString["brand"] !=null){ @Html.Raw("style=\"vertical-align:top !important;\"") ; } height="50px" width="25%"><div onclick="window.location='@Url.Action("Index", "Search", @Model.Columns[j].Rows[i].CustomParams)'" title="@Model.Columns[j].Rows[i].Name">@Model.Columns[j].Rows[i].Name </div></td>
+                          
 
 
                         }

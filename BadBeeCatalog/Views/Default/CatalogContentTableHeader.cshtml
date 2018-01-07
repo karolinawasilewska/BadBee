@@ -51,7 +51,7 @@ else if (Model.Type == BadBee.Core.Models.CatalogContentTableHeaderType.DetailsF
         <span style="@if (Model.IsFilterSelected) { @Html.Raw(@"text-decoration: underline;"); }">@Model.Description</span>
         @if (Model.HasAnyElements)
         {
-            <img src="~/Image/fiter.png" />
+            <img src="~/Image/fiter.png" style="width:25px"/>
         }
     </th>
 }

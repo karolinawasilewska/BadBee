@@ -19,26 +19,26 @@
             </div>
             <div class="details_container">
                 <div class="schema">
-                    <a class="fancybox"  rel="gallery1" href="~/Images/Pictures/@Model.Pictures[0]">
-                            <img id="mainPicture" src="~/Images/Pictures/@Model.Pictures[0]" alt="" />
+                    <a class="fancybox"  rel="gallery1" href="~/Image/Pictures/@Model.Pictures[0]">
+                            <img id="mainPicture" src="~/Image/Pictures/@Model.Pictures[0]" alt="" />
                     </a>
                        
                     @for (int i = 0; i < Model.Pictures.Length; i++)
-                    {
-                        //if (i == 0)
-                       // {
-                          //  <a class="fancybox" rel="gallery1" href="~/Images/Pictures/@Model.Pictures[0]">
-                           //     <img src="~/Images/Pictures/@Model.Pictures[0]" alt="" />
-                         //   </a>
-                       // }
-                      //  else
-                      //  {
-                            <div class="miniatures" onclick="replacePicture('/Images/Pictures/@Model.Pictures[i]')">
-                                <a class="no_fancybox" >
-                                    <img src="~/Images/Pictures/@Model.Pictures[i]" alt="" />
+                            {
+                                if (i == 0)
+                                {
+                            <a class="fancybox" rel="gallery1" href="~/Image/Pictures/@Model.Pictures[0]">
+                                <img src = "~/Image/Pictures/@Model.Pictures[0]" alt="" />
+                            </a>
+                        }
+                        else
+                        {
+                            <div class="miniatures">
+                                <a class="fancybox" rel="gallery1" href="~/Image/Pictures/@Model.Pictures[i]" >
+                                    <img src="~/Image/Pictures/@Model.Pictures[i]" alt="" />
                                 </a>
                             </div>
-                      //  }
+                        }
                     }
                 </div>
                 <div class="desc">
@@ -49,7 +49,7 @@
                         <tbody id="catalogTableDetails">
                             @if (!string.IsNullOrEmpty(Model.BadBeeNumber))
                             {
-                                <tr class="detdesc"><td>@Resources.badBee_no: </td><td class="detval" style="border-right:0 !important;">@Model.BadBeeNumber</td> </tr> }
+                                <tr class="detdesc"><td>@Resources.BadBee_no: </td><td class="detval" style="border-right:0 !important;">@Model.BadBeeNumber</td> </tr> }
                             @if (!string.IsNullOrEmpty(Model.Brand))
                             {
                                 <tr class="detdesc"><td>@Resources.brand: </td><td class="detval" style="border-right:0 !important;">@Model.Brand</td></tr>}
@@ -128,12 +128,6 @@
                 }
             });
         });
-
-        function replacePicture(path) {
-            //alert(path);
-            document.getElementById('mainPicture').src = path;
-            $('.fancybox').attr('href', path);
-        }
 
     </script>
 </body>

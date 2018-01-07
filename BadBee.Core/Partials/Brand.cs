@@ -17,6 +17,7 @@ namespace BadBee.Core.DAL
     internal class BrandDbMetadata
     {
         [Display(Name = "brand", ResourceType = typeof(MyResources.Resources))]
+        [Required]
         public string Name { get; set; }
       
     }

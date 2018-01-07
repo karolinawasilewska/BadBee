@@ -40,6 +40,7 @@
                                 <div class="form-div-1">
                                     <label class="name">
                                         @Html.TextBoxFor(m => m.Name, new { @placeholder = Resources.name, @type = "text", @class="contact"})
+                                        @Html.ValidationMessageFor(model => model.Name)
                                     </label>
                                 </div>
                                 <div class="form-div-2">
@@ -51,6 +52,7 @@
                                 <div class="form-div-3">
                                     <label class="content">
                                         @Html.TextAreaFor(m => m.Content, new { @placeholder = Resources.content, @type = "text", @class = "contactContent contact" })
+                                        @Html.ValidationMessageFor(model => model.Content)
                                     </label>
                                 </div>
                                 <div class="button-wrapper">

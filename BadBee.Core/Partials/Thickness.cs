@@ -17,6 +17,7 @@ namespace BadBee.Core.DAL
     internal class ThicknessMetadata
     {
         [Display(Name = "thickness", ResourceType = typeof(MyResources.Resources))]
+        [Required]
         public string Thickness1 { get; set; }
       
     }

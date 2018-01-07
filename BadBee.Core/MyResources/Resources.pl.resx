@@ -614,4 +614,7 @@
   <data name="of" xml:space="preserve">
     <value>z</value>
   </data>
+  <data name="size" xml:space="preserve">
+    <value>Wymiary</value>
+  </data>
 </root>

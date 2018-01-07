@@ -19,12 +19,12 @@ namespace BadBee.Core.Providers
 {
     public class ExcelProvider
     {
-        //private static log4net.ILog Log { get; set; }
-        //ILog log = log4net.LogManager.GetLogger(typeof(ExcelProvider));
+        private static log4net.ILog Log { get; set; }
+        ILog log = log4net.LogManager.GetLogger(typeof(ExcelProvider));
         public static byte[] ReadFully_ItemsToCSV(string type)
         {
-            //try
-            //{
+            try
+            {
 
                 var input = ItemsToCSV(type);
                 byte[] buffer = new byte[16 * 1024];
@@ -39,12 +39,13 @@ namespace BadBee.Core.Providers
                 }
 
             }
-            //catch (Exception e)
-            //{
-            //    ExcelProvider.Log.Error(e);
-            //    throw;
-            //}
-        public static MemoryStream ItemsToCSV(string type)
+            catch (Exception e)
+            {
+                ExcelProvider.Log.Error(e);
+                throw;
+            }
+        }
+            public static MemoryStream ItemsToCSV(string type)
         {
 
             string connectionstring;
@@ -52,22 +53,47 @@ namespace BadBee.Core.Providers
             connectionstring = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             if (type == "items")
             {
-                query = "SELECT [Brand],[Type],[Serie],[Model],[Kw],[Km],[DateFrom],[DateTo],[Fr],[WvaDesc],[Wva],[WvaDetailsQty],[WvaDetails],[BadBeeNumber],"
-            + "[Height],[Width],[Thickness],[Wedge],[DrumDiameter],[BrakeSystem],[RivetsQuantity],[RivetsType],[ProductType] FROM ItemsDb";
-            }
-            else if (type == "cross")
-            {
-                query = "SELECT [BadBeeNumber],[CrossBrandName],[CrossBrandNumber] FROM Crosses";
+                query = @"SELECT       Brand.Name as Brand, Serie.Name AS Serie, Model.Name AS Model,  BadBee.FR, DateFrom.Date as DateFr, DateTo.Date as DateT, Wva.Description , Wva.WvaNo, BadBee.BadBeeNo, Height.Height,  Width.Width,   Thickness.Thickness, Systems.Abbreviation as System
+                    FROM Item INNER JOIN
+                      BadBee ON Item.BadBeeId = BadBee.BadBeeId INNER JOIN
+                         Dimension ON BadBee.DimensionId = Dimension.DimensionId INNER JOIN
+                         Height ON Dimension.HeightId = Height.HeightId INNER JOIN
+                         Model ON Item.ModelId = Model.ModelId INNER JOIN
+                         Serie ON Model.SerieId = Serie.SerieId INNER JOIN
+                         Brand ON Serie.BrandId = Brand.BrandId INNER JOIN
+                         Systems ON BadBee.SystemId = Systems.SystemId INNER JOIN
+                         Thickness ON Dimension.ThicknessId = Thickness.ThicknessId INNER JOIN
+                         Width ON Dimension.WidthId = Width.WidthId INNER JOIN
+                         Wva ON BadBee.WvaId = Wva.WvaId INNER JOIN
+                         Year ON Model.YearId = Year.YearId INNER JOIN
+                         Date as DateFrom ON DateFrom.DateId = Year.DateFromId inner join
+
+                         Date as DateTo on DateTo.DateId = Year.DateToId
+
+
+                         order by Brand, Serie, Model, FR";
             }
             else if (type == "itemsWithIds")
             {
-                query = "SELECT * FROM ItemsDb";
+                query = @"SELECT      BadBee.BadBeeNo, BadBee.FR, Brand.Name as brand, Date.Date, Height.Height, Model.Name AS model, Serie.Name AS serie, Systems.Abbreviation AS brakeSystem, Thickness.Thickness, Width.Width, Wva.WvaNo, 
+                         Wva.Description, Year.YearId, Date.DateId, Wva.WvaId, Width.WidthId, Thickness.ThicknessId, Serie.SerieId, Model.ModelId, Systems.SystemId AS SystemId, Dimension.DimensionId, Height.HeightId AS HeightId, 
+                         BadBee.BadBeeId, Item.Id, Brand.BrandId
+FROM            Item INNER JOIN
+                         BadBee ON Item.BadBeeId = BadBee.BadBeeId INNER JOIN
+                         Dimension ON BadBee.DimensionId = Dimension.DimensionId INNER JOIN
+                         Height ON Dimension.HeightId = Height.HeightId INNER JOIN
+                         Model ON Item.ModelId = Model.ModelId INNER JOIN
+                         Serie ON Model.SerieId = Serie.SerieId INNER JOIN
+                         Brand ON Serie.BrandId = Brand.BrandId INNER JOIN
+                         Systems ON BadBee.SystemId = Systems.SystemId INNER JOIN
+                         Thickness ON Dimension.ThicknessId = Thickness.ThicknessId INNER JOIN
+                         Width ON Dimension.WidthId = Width.WidthId INNER JOIN
+                         Wva ON BadBee.WvaId = Wva.WvaId INNER JOIN
+                         Year ON Model.YearId = Year.YearId INNER JOIN
+                         Date ON Year.DateToId = Date.DateId AND Year.DateFromId = Date.DateId
+                        
+                            order by Brand, Serie, Model, FR";
             }
-            else if (type == "crossWithIds")
-            {
-                query = "SELECT * From Crosses";
-            }
-
             SqlConnection connection = new SqlConnection(connectionstring);
             connection.Open();
 
@@ -84,18 +110,12 @@ namespace BadBee.Core.Providers
                     {
                         wb.Worksheets.Add(data, "Excel Export Products");
                     }
-                    else if (type == "cross")
-                    {
-                        wb.Worksheets.Add(data, "Excel Export Cross");
-                    }
+                   
                     else if (type == "itemsWithIds")
                     {
                         wb.Worksheets.Add(data, "Excel Export Products to Import");
                     }
-                    else if (type == "crossWithIds")
-                    {
-                        wb.Worksheets.Add(data, "Excel Export Cross to Import");
-                    }
+                    
                     HttpContext.Current.Response.Clear();
                     HttpContext.Current.Response.Buffer = true;
                     HttpContext.Current.Response.Charset = "";
@@ -104,19 +124,12 @@ namespace BadBee.Core.Providers
                     {
                         HttpContext.Current.Response.AddHeader("content-disposition", "attachment;filename=Excel Export Products.xlsx");
                     }
-                    else if (type == "cross")
-                    {
-                        HttpContext.Current.Response.AddHeader("content-disposition", "attachment;filename=Excel Export Cross.xlsx");
-                    }
+                  
                     else if (type == "itemsWithIds")
                     {
                         HttpContext.Current.Response.AddHeader("content-disposition", "attachment;filename=Excel Export Products to Import.xlsx");
                     }
-                    else if (type == "crossWithIds")
-                    {
-                        HttpContext.Current.Response.AddHeader("content-disposition", "attachment;filename=Excel Export Cross to Import.xlsx");
-                    }
-
+                   
                     using (MemoryStream excelMS = new MemoryStream())
                     {
                         wb.SaveAs(excelMS);
