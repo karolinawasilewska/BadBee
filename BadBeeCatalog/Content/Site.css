@@ -68,7 +68,6 @@ body {
   /*color: #232429;*/
     color: #18191B;
     background-color: #f7f7f7;
-    background-image:url(/Images/background.png);
      background-position: right top;
      background-repeat: no-repeat;
      /*background-position-x:*/
@@ -1575,11 +1574,8 @@ font-size: 24px;
  /*margin-top: 10px;*/
      vertical-align: top
 }
-.schema img{
-    /*display: inline-block;*/
-    width: 481px;
-  height: 367px;
-  /*border: 1px solid black;*/
+.schema img {
+    max-width: 481px;
 }
 .schema{
     display: inline-block;
@@ -1700,9 +1696,6 @@ position: relative;
     height:78px;
 }
 
-body {
-    padding: 20px;
-}
 
 .multiselect-container div.checkbox {
     margin: 0;

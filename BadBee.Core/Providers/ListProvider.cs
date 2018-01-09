@@ -83,7 +83,7 @@ namespace BadBee.Core.Providers
                     }
                 }
                 filter.PhraseFilter = null;
-                return results;
+               
             }
 
             if (filter != null && filter.PhraseFilter == null)
@@ -157,7 +157,11 @@ namespace BadBee.Core.Providers
 
                     if (item.Model.Year!=null && item.Model.Year.DateFromId!=0)
                     {
-                        sYears += item.Model.Year.DateToFK.Date1;
+                        if (item.Model.Year.DateFromFK.Date1!="0")
+                        {
+                            sYears += item.Model.Year.DateFromFK.Date1;
+                        }
+                        
 
                         if (item.Model.Year.DateToId!=0)
                         {

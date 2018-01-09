@@ -70,7 +70,14 @@
                         <td class="height">@Html.Raw(item.Height)</td>
                         <td class="width">@Html.Raw(item.Width)</td>
                         <td class="thickness">@Html.Raw(item.Thickness)</td>
-                        <td class="system">@Html.Raw(item.BrakeSystem)</td>
+                        @if (item.BrakeSystem != "0")
+                        {
+                            <td class="system">@Html.Raw(item.BrakeSystem)</td>
+                        }
+                        @if (item.BrakeSystem == "0")
+                        {
+                            <td class="system"></td>
+                        }
                     </tr>
                   
                 }

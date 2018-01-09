@@ -202,7 +202,7 @@ h4 {
 }
 
 .progress-bar {
-    background-color: #d52027;
+    background-color: #badbee;
 }
 
 #button-pl {
@@ -529,7 +529,7 @@ label {
 .modal-header {
     height: 70px;
     padding: 15px 25px;
-    background-color: #d52027;
+    background-color: #badbee;
     border-bottom: none;
 }
 .modal-header p {
@@ -608,7 +608,7 @@ input.filter {
 
 
 .navbar {
-    background-image: url("/Images/RED_BAND.png");
+   
     border: none;
     margin-bottom: 30px;
     border-radius: 0px;
@@ -704,8 +704,8 @@ input.filter {
     z-index: 2;
     color: #f4c7c9;
     cursor: default;
-    background-color: #d52027;
-    border-color: #d52027;
+    background-color: #badbee;
+    border-color: #badbee;
 }
 
 .pagination > li > a, .pagination > li > span {
@@ -865,7 +865,7 @@ input.filter {
 .modal-header {
     height: 70px;
     padding: 15px 25px;
-    background-color: #d52027;
+    background-color: #badbee;
     border-bottom: none;
 }
 
@@ -1051,6 +1051,6 @@ li:hover li a:hover {
 }
 
 #delete {
-    background-color: #d52027;
+    background-color: #badbee;
     margin-top: 15px;
 }

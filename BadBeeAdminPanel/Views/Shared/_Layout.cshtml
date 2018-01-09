@@ -42,8 +42,7 @@
 
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a class="navbar-brand" style="padding:10px;" href="/Product/Index"><img src="~/Images/logoBadBee.png" alt="" style="height:30px;"/></a></li> 
-                        @if (User.Identity.IsAuthenticated)
+                              @if (User.Identity.IsAuthenticated)
                         {
                             <li class="export_import">
                                 @Html.ActionLink(Resources.products, "Index", "Product")

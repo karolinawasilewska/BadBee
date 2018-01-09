@@ -8,8 +8,20 @@
 <!DOCTYPE html>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript" src="~/Scripts/jquery.fancybox.js"></script>
-<link rel="stylesheet" href="~/Scripts/jquery.fancybox.css" type="text/css" media="screen" />
+<!-- Add jQuery library -->
+<script type="text/javascript" src="~/Scripts/jquery-3.2.1.min.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="~/Content/jquery.fancybox.css"  type="text/css" media="screen" />
+<script type="text/javascript" src="~/Scripts/jquery.fancybox.pack.js"></script>
+
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet" href="~/Content/jquery.fancybox-buttons.css" type="text/css" media="screen" />
+<script type="text/javascript" src="~/Scripts/jquery.fancybox-buttons.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery.fancybox-media.js"></script>
+
+<link rel="stylesheet" href="~/Content/jquery.fancybox-thumbs.css" type="text/css" media="screen" />
+<script type="text/javascript" src="~/Scripts/jquery.fancybox-thumbs.js"></script>
+
 <html>
 <body>
     <div class="col-xs-12 colContent">
@@ -19,31 +31,32 @@
             </div>
             <div class="details_container">
                 <div class="schema">
-                    <a class="fancybox"  rel="gallery1" href="~/Image/Pictures/@Model.Pictures[0]">
-                            <img id="mainPicture" src="~/Image/Pictures/@Model.Pictures[0]" alt="" />
+                    <a class="fancybox" rel="group" href="/Image/Pictures/@Model.Pictures[0]">
+                            <img id="mainPicture" src="/Image/Pictures/@Model.Pictures[0]" alt="" />
                     </a>
                        
-                    @for (int i = 0; i < Model.Pictures.Length; i++)
+                    @*@for (int i = 0; i < Model.Pictures.Length; i++)
                             {
                                 if (i == 0)
                                 {
-                            <a class="fancybox" rel="gallery1" href="~/Image/Pictures/@Model.Pictures[0]">
-                                <img src = "~/Image/Pictures/@Model.Pictures[0]" alt="" />
+                            <a class="fancybox" rel="group" href="~/Image/Pictures/@Model.Pictures[i]">
+                                <img src = "~/Image/Pictures/@Model.Pictures[i]" alt="" />
                             </a>
                         }
                         else
                         {
                             <div class="miniatures">
-                                <a class="fancybox" rel="gallery1" href="~/Image/Pictures/@Model.Pictures[i]" >
+                                <a data-fancybox="gallery" href="~/Image/Pictures/@Model.Pictures[i]" >
                                     <img src="~/Image/Pictures/@Model.Pictures[i]" alt="" />
                                 </a>
                             </div>
                         }
-                    }
+                    }*@
                 </div>
                 <div class="desc">
 
-
+                    @*<a data-fancybox="gallery" href="big_1.jpg"><img src="small_1.jpg"></a>
+                    <a data-fancybox="gallery" href="big_2.jpg"><img src="small_2.jpg"></a>*@
 
                     <table class="table table-striped tableDetails">
                         <tbody id="catalogTableDetails">
@@ -116,18 +129,17 @@
     </div>
 
     <script type="text/javascript">
-        jQuery(function ($) { 
+        (function (jQuery) {
 
-            $("a[rel=gallery1]").fancybox({
-                'transitionIn': 'none',
-                'transitionOut': 'none',
-                'titlePosition': 'over',
-                'cyclic': true,
-                'titleFormat': function (title, currentArray, currentIndex, currentOpts) {
-                    return '<span id="fancybox-title-over">Image ' + (currentIndex + 1) + ' / ' + currentArray.length + ' ' + title + '</span>';
-                }
-            });
-        });
+            // Original author's plugin code
+            // ...
+            jQuery("a.fancybox").fancybox({
+                openEffect: 'none',
+                closeEffect: 'none' })
+     // ...
+
+})(jQuery.noConflict());
+
 
     </script>
 </body>
