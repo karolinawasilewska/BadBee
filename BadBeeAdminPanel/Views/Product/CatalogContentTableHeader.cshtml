@@ -8,7 +8,7 @@
 
 @if (Model.Type == BadBee.Core.Models.CatalogContentTableHeaderType.TopFilter)
 {
-    <th id="@Model.ID" @if (string.IsNullOrEmpty(Model.DataToggle) == false) { @Html.Raw(string.Format(@"data-toggle=""{0}""", Model.DataToggle)) } data-target="@if (Model.HasAnyElements) { @Model.DataTarget }" onclick="@if (Model.HasAnyElements) { @Model.OnClickMethod }" style="@if (Model.IsFilterSelected) { @Html.Raw(string.Format(@"color: rgb(213, 32, 39);{0}", Model.CssStyle)); } else { @Model.CssStyle} ">
+    <th id="@Model.ID" @if (string.IsNullOrEmpty(Model.DataToggle) == false) { @Html.Raw(string.Format(@"data-toggle=""{0}""", Model.DataToggle)) } data-target="@if (Model.HasAnyElements) { @Model.DataTarget }" onclick="@if (Model.HasAnyElements) { @Model.OnClickMethod }" style="@if (Model.IsFilterSelected) { @Html.Raw(string.Format(@"color: #badbee;{0}", Model.CssStyle)); } else { @Model.CssStyle} ">
        
         @if (@Model.PictureSrc != null)
         {

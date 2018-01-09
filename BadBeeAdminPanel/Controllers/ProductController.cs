@@ -930,37 +930,39 @@ namespace BadBeeAdminPanel.Controllers
                     var newProductId = db.Item.OrderByDescending(q => q.Id).Select(q => q).FirstOrDefault();
                     newProd.Id = newProductId.Id + 1;
 
-                    //model - wymagany
+                    
                     newProd.Model = new Model();
                     newProd.Model.Serie = new Serie();
                     newProd.Model.Serie.Brand = new Brand();
                     newProd.BadBee = new BadBee.Core.DAL.BadBee();
 
+                    //brand - wymagany
 
-                    newProd.Model.Name = model.ModelName;
-
-                    if (db.Model.Any(row => row.Name == model.ModelName))
+                    if (!string.IsNullOrEmpty(model.Brand))
                     {
-                        Model mod = db.Model.Where(q => q.Name == newProd.Model.Name).SingleOrDefault();
-                        //jest w bazie 
-                        newProd.ModelId = mod.ModelId;
-                    }
-                    else
-                    {
-                        //nie ma w bazie
-                        var newproduct = new Model();
-                        var np = db.Model.OrderByDescending(q => q.ModelId).Select(q => q).FirstOrDefault();
-                        int newid = np.ModelId + 1;
-                        newproduct.Name = model.ModelName;
-                        newproduct.ModelId = newid;
-                        newproduct.SerieId = newProd.Model.SerieId;
+                        newProd.Model.Serie.Brand.Name = model.Brand;
 
-                        newProd.ModelId = newid;
-                        //using (var dbCtx = new BadBeeEntities())
-                        //{
-                        //    dbCtx.Model.Add(newproduct);
-                        //    dbCtx.SaveChanges();
-                        //}
+                        if (db.Brand.Any(row => row.Name == model.Brand))
+                        {
+                            Brand br = db.Brand.Where(q => q.Name == newProd.Model.Serie.Brand.Name).SingleOrDefault();
+                            //jest w bazie 
+                            newProd.Model.Serie.Brand.BrandId = br.BrandId;
+                        }
+                        else
+                        {
+                            //nie ma w bazie
+                            var newBrand = new Brand();
+                            var nb = db.Brand.OrderByDescending(q => q.BrandId).Select(q => q).FirstOrDefault();
+                            int newid = nb.BrandId + 1;
+                            newBrand.Name = model.Brand;
+                            newBrand.BrandId = newid;
+                            newProd.Model.Serie.Brand.BrandId = newid;
+                            //using (var dbCtx = new BadBeeEntities())
+                            //{
+                            //    dbCtx.Brand.Add(newBrand);
+                            //    dbCtx.SaveChanges();
+                            //}
+                        }
                     }
 
                     //seria - niewymagana
@@ -1019,37 +1021,33 @@ namespace BadBeeAdminPanel.Controllers
                         }
                     }
 
-                    //brand - wymagany
+                    //model - wymagany
+                    newProd.Model.Name = model.ModelName;
 
-                    if (!string.IsNullOrEmpty(model.Brand))
+                    if (db.Model.Any(row => row.Name == model.ModelName))
                     {
-                        newProd.Model.Serie.Brand.Name = model.Brand;
-
-                        if (db.Brand.Any(row => row.Name == model.Brand))
-                        {
-                            Brand br = db.Brand.Where(q => q.Name == newProd.Model.Serie.Brand.Name).SingleOrDefault();
-                            //jest w bazie 
-                            newProd.Model.Serie.Brand.BrandId = br.BrandId;
-                        }
-                        else
-                        {
-                            //nie ma w bazie
-                            var newBrand = new Brand();
-                            var nb = db.Brand.OrderByDescending(q => q.BrandId).Select(q => q).FirstOrDefault();
-                            int newid = nb.BrandId + 1;
-                            newBrand.Name = model.Brand;
-                            newBrand.BrandId = newid;
-                            newProd.Model.Serie.Brand.BrandId = newid;
-                            //using (var dbCtx = new BadBeeEntities())
-                            //{
-                            //    dbCtx.Brand.Add(newBrand);
-                            //    dbCtx.SaveChanges();
-                            //}
-                        }
+                        Model mod = db.Model.Where(q => q.Name == newProd.Model.Name).SingleOrDefault();
+                        //jest w bazie 
+                        newProd.ModelId = mod.ModelId;
                     }
-                    
-                   
-                    
+                    else
+                    {
+                        //nie ma w bazie
+                        var newproduct = new Model();
+                        var np = db.Model.OrderByDescending(q => q.ModelId).Select(q => q).FirstOrDefault();
+                        int newid = np.ModelId + 1;
+                        newproduct.Name = model.ModelName;
+                        newproduct.ModelId = newid;
+                        newproduct.SerieId = newProd.Model.SerieId;
+
+                        newProd.ModelId = newid;
+                        //using (var dbCtx = new BadBeeEntities())
+                        //{
+                        //    dbCtx.Model.Add(newproduct);
+                        //    dbCtx.SaveChanges();
+                        //}
+                    }
+
                   
                     if (!string.IsNullOrEmpty(model.Fr)) { newProd.BadBee.FR = model.Fr; } else { newProd.BadBee.FR = ""; }
 
@@ -1193,7 +1191,7 @@ namespace BadBeeAdminPanel.Controllers
                         newProd.BadBee.Dimension.Thickness.Thickness1 = model.Thickness;
                         if (db.Thickness.Any(row => row.Thickness1 == model.Thickness))
                         {
-                            Thickness th = db.Thickness.Where(q => q.Thickness1 == newProd.BadBee.Dimension.Thickness.ThicknessId).SingleOrDefault();
+                            Thickness th = db.Thickness.Where(q => q.Thickness1 == newProd.BadBee.Dimension.Thickness.Thickness1).SingleOrDefault();
                             //jest w bazie 
                             newProd.BadBee.Dimension.ThicknessId = th.ThicknessId;
                         }
@@ -1212,7 +1210,7 @@ namespace BadBeeAdminPanel.Controllers
                             //    dbCtx.SaveChanges();
                             //}
                     }
-
+                    newProd.BadBee.Systems = new Systems();
                     if (!string.IsNullOrEmpty(model.BrakeSystem))
                     {
                         newProd.BadBee.Systems.Abbreviation = model.BrakeSystem;
@@ -1271,7 +1269,7 @@ namespace BadBeeAdminPanel.Controllers
                 {
                     brands = provider.GetBrandsList(GlobalVars.BadBeeFilter);
                 }
-                return Json(new SelectList(brands, "Id", "Name"), JsonRequestBehavior.AllowGet);
+                return Json(new SelectList(brands, "BrandId", "Name"), JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -1291,7 +1289,7 @@ namespace BadBeeAdminPanel.Controllers
                     series = provider.GetSeriesList(GlobalVars.BadBeeFilter);
                 }
 
-                return Json(new SelectList(series, "Id", "Name"), JsonRequestBehavior.AllowGet);
+                return Json(new SelectList(series, "SerieId", "Name"), JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -1311,7 +1309,7 @@ namespace BadBeeAdminPanel.Controllers
                     models = provider.GetModelsList(GlobalVars.BadBeeFilter);
                 }
 
-                return Json(new SelectList(models, "Id", "Name"), JsonRequestBehavior.AllowGet);
+                return Json(new SelectList(models, "ModelId", "Name"), JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -1331,7 +1329,7 @@ namespace BadBeeAdminPanel.Controllers
                     years = provider.GetYearsList(GlobalVars.BadBeeFilter);
                 }
 
-                return Json(new SelectList(years, "DateId", "Date"), JsonRequestBehavior.AllowGet);
+                return Json(new SelectList(years, "DateId", "Date1"), JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -1349,7 +1347,7 @@ namespace BadBeeAdminPanel.Controllers
                 {
                     wva = provider.GetWvaList(GlobalVars.BadBeeFilter);
                 }
-                return Json(new SelectList(wva, "Id", "Name"), JsonRequestBehavior.AllowGet);
+                return Json(new SelectList(wva, "WvaId", "WvaNo"), JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -1368,7 +1366,7 @@ namespace BadBeeAdminPanel.Controllers
                 {
                     widths = provider.GetWidthsList(GlobalVars.BadBeeFilter);
                 }
-                return Json(new SelectList(widths, "Id", "Name"), JsonRequestBehavior.AllowGet);
+                return Json(new SelectList(widths, "WidthId", "Width1"), JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -1386,7 +1384,7 @@ namespace BadBeeAdminPanel.Controllers
                 {
                     heights = provider.GetHeightsList(GlobalVars.BadBeeFilter);
                 }
-                return Json(new SelectList(heights, "Id", "Name"), JsonRequestBehavior.AllowGet);
+                return Json(new SelectList(heights, "HeightId", "Height1"), JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -1404,7 +1402,7 @@ namespace BadBeeAdminPanel.Controllers
                 {
                     thicknesses = provider.GetThicknessesList(GlobalVars.BadBeeFilter);
                 }
-                return Json(new SelectList(thicknesses, "Id", "Name"), JsonRequestBehavior.AllowGet);
+                return Json(new SelectList(thicknesses, "ThicknessId", "Thickness1"), JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -1422,7 +1420,7 @@ namespace BadBeeAdminPanel.Controllers
                 {
                     systems = provider.GetSystemsList(GlobalVars.BadBeeFilter);
                 }
-                return Json(new SelectList(systems, "Id", "Name"), JsonRequestBehavior.AllowGet);
+                return Json(new SelectList(systems, "SystemId", "Abbreviation"), JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -1442,7 +1440,7 @@ namespace BadBeeAdminPanel.Controllers
                     BadBees = provider.GetBadBeeList(GlobalVars.BadBeeFilter);
                 }
 
-                return Json(new SelectList(BadBees, "BadBeeNumberId", "BadBeeNumber"), JsonRequestBehavior.AllowGet);
+                return Json(new SelectList(BadBees, "BadBeeId", "BadBeeNo"), JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {

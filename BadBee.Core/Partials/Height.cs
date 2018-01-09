@@ -18,7 +18,9 @@ namespace BadBee.Core.DAL
     {
         [Display(Name = "height", ResourceType = typeof(MyResources.Resources))]
         [Required]
-        public string Height1 { get; set; }
+        [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString = "{0:N}")]
+        public decimal Height1 { get; set; }
       
     }
 }
