@@ -1,6 +1,6 @@
 ﻿@using BadBee.Core.MyResources;
 
-@model BadBee.Core.DAL.Item
+@model BadBeeAdminPanel.Models.ProductModels
 
 @{
     ViewBag.Title = "Edit";
@@ -16,121 +16,121 @@
 
     <div class="form-horizontal">
       @*  <h4>ItemsDb</h4>*@
-        @Html.HiddenFor(model => model.Model.Serie.Brand.BrandId)
-        @Html.HiddenFor(model => model.Model.Serie.SerieId)
-        @Html.HiddenFor(model => model.Model.ModelId)
-        @Html.HiddenFor(model => model.BadBee.Dimension.Height.HeightId)
-        @Html.HiddenFor(model => model.BadBeeId)
-        @Html.HiddenFor(model => model.BadBee.Systems.SystemId)
-        @Html.HiddenFor(model => model.BadBee.Dimension.Thickness.ThicknessId)
-        @Html.HiddenFor(model => model.BadBee.Dimension.Width.WidthId)
-        @Html.HiddenFor(model => model.BadBee.Wva.WvaId)
+        @Html.HiddenFor(model => model.BrandId)
+        @Html.HiddenFor(model => model.SerieId)
+        @Html.HiddenFor(model => model.ModelId)
+        @Html.HiddenFor(model => model.HeightId)
+        @Html.HiddenFor(model => model.BadBeeNumberId)
+        @Html.HiddenFor(model => model.SystemId)
+        @Html.HiddenFor(model => model.ThicknessId)
+        @Html.HiddenFor(model => model.WidthId)
+        @Html.HiddenFor(model => model.WvaId)
 
         <hr/>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Model.Serie.Brand.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Brand, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Model.Serie.Brand.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Model.Serie.Brand.Name, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Brand, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Brand, "", new { @class = "text-danger" })
             </div>
         </div>
         
         <div class="form-group">
-            @Html.LabelFor(model => model.Model.Serie.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Serie, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Model.Serie.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Model.Serie.Name, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Serie, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Serie, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ModelName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Model.Name, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.ModelName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ModelName, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Model.Year.DateFromFK.Date1, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.DateFrom, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Model.Year.DateFromFK.Date1, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Model.Year.DateFromFK.Date1, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.DateFrom, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DateFrom, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Model.Year.DateToFK.Date1, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.DateTo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Model.Year.DateToFK.Date1, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Model.Year.DateToFK.Date1, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.DateTo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DateTo, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.BadBee.FR, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Fr, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.BadBee.FR, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BadBee.FR, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Fr, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Fr, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.BadBee.Wva.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.WvaDesc, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.BadBee.Wva.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BadBee.Wva.Description, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.WvaDesc, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.WvaDesc, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.BadBee.Wva.WvaNo, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Wva, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.BadBee.Wva.WvaNo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BadBee.Wva.WvaNo, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Wva, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Wva, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.BadBee.BadBeeNo, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.BadBeeNumber, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.BadBee.BadBeeNo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BadBee.BadBeeNo, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.BadBeeNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BadBeeNumber, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.BadBee.Dimension.Height.Height1, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Height, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.BadBee.Dimension.Height.Height1, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BadBee.Dimension.Height.Height1, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Height, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Height, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.BadBee.Dimension.Width.Width1, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Width, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.BadBee.Dimension.Width.Width1, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BadBee.Dimension.Width.Width1, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Width, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Width, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.BadBee.Dimension.Thickness.Thickness1, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Thickness, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.BadBee.Dimension.Thickness.Thickness1, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BadBee.Dimension.Thickness.Thickness1, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Thickness, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Thickness, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.BadBee.Systems.Abbreviation, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.BrakeSystem, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.BadBee.Systems.Abbreviation, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BadBee.Systems.Abbreviation, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.BrakeSystem, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BrakeSystem, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -141,7 +141,22 @@
     </div>
     </div>
 }
+<script>
 
+    $.validator.methods.range = function (value, element, param) {
+        var globalizedValue = value.replace(",", ".");
+        return this.optional(element) || (globalizedValue >= param[0] && globalizedValue <= param[1]);
+    }
+
+    $.validator.methods.number = function (value, element) {
+        return this.optional(element) || /-?(?:\d+|\d{1,3}(?:[\s\.,]\d{3})+)(?:[\.,]\d+)?$/.test(value);
+    }
+    //Date dd/MM/yyyy
+    $.validator.methods.date = function (value, element) {
+        var date = value.split("/");
+        return this.optional(element) || !/Invalid|NaN/.test(new Date(date[2], date[1], date[0]).toString());
+    }
+</script>
 <div>
     @Html.ActionLink(Resources.back_to_list, "Index")
 </div>

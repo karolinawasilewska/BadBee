@@ -574,12 +574,10 @@
     <value>Eksport danych do XLS</value>
   </data>
   <data name="date_from_format" xml:space="preserve">
-    <value>Data rozpoczęcia produkcji 
-(DD-MM-RRRR)</value>
+    <value>Data rozpoczęcia produkcji (rok)</value>
   </data>
   <data name="date_to_format" xml:space="preserve">
-    <value>Data zakończenia produkcji 
-(DD-MM-RRRR)</value>
+    <value>Data zakończenia produkcji (rok)</value>
   </data>
   <data name="download_xls_cross" xml:space="preserve">
     <value>Eksport crossów do XLS</value>

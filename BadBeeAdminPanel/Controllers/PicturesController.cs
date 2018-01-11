@@ -124,25 +124,25 @@ namespace BadBeeAdminPanel.Controllers
                         {
                             List<Item> product = db.Item.Where(q => (q.BadBee.BadBeeNo == obj.BadBeeNo)).ToList();
 
-                            //if (type == "schema1" && obj.Schema1 != pic)
-                            //{
-                            //    obj.Schema1 = pic;
-                            //}
-                            //if (type == "schema2" && obj.Schema2 != pic)
-                            //{
-                            //    obj.Schema2 = pic;
-                            //}
-                            //if (type == "picture2" && obj.Picture2 != pic)
-                            //{
-                            //    obj.Picture2 = pic;
-                            //}
-                            //if (type == "picture1" && obj.Picture1 != pic)
-                            //{
-                            //    obj.Picture1 = pic;
-                            //}
+                            if (type == "schema1" && obj.Picture1 != pic)
+                            {
+                                obj.Picture1 = pic;
+                            }
+                            if (type == "schema2" && obj.Picture2 != pic)
+                            {
+                                obj.Picture2 = pic;
+                            }
+                            if (type == "picture2" && obj.Picture3 != pic)
+                            {
+                                obj.Picture3 = pic;
+                            }
+
+                            Picture newPict = new Picture();
+                            newPict = db.Picture.Where(q => q.PictureId == obj.PictureId).FirstOrDefault() ;
+
                             using (var dbCtx = new BadBeeEntities())
                             {
-                                dbCtx.Entry(obj).State = EntityState.Modified;
+                                dbCtx.Entry(newPict.Picture1).State = EntityState.Modified;
                                 dbCtx.SaveChanges();
                             }
                         }

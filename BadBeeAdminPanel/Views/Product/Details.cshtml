@@ -1,5 +1,6 @@
 ﻿@using BadBee.Core.MyResources;
-@model BadBee.Core.DAL.Item
+
+@model BadBeeAdminPanel.Models.ProductModels
 
 @{
     ViewBag.Title = "Details";
@@ -13,105 +14,105 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Model.Serie.Brand.Name)
+            @Html.DisplayNameFor(model => model.Brand)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Model.Serie.Brand.Name)
+            @Html.DisplayFor(model => model.Brand)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Model.Serie.Name)
+            @Html.DisplayNameFor(model => model.Serie)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Model.Serie.Name)
+            @Html.DisplayFor(model => model.Serie)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Model.Name)
+            @Html.DisplayNameFor(model => model.ModelName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Model.Name)
+            @Html.DisplayFor(model => model.ModelName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Model.Year.DateFromFK.Date1)
+            @Html.DisplayNameFor(model => model.DateFrom)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Model.Year.DateFromFK.Date1)
+            @Html.DisplayFor(model => model.DateFrom)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Model.Year.DateToFK.Date1)
+            @Html.DisplayNameFor(model => model.DateTo)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Model.Year.DateToFK.Date1)
+            @Html.DisplayFor(model => model.DateTo)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.BadBee.FR)
+            @Html.DisplayNameFor(model => model.Fr)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.BadBee.FR)
+            @Html.DisplayFor(model => model.Fr)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.BadBee.Wva.Description)
+            @Html.DisplayNameFor(model => model.WvaDesc)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.BadBee.Wva.Description)
+            @Html.DisplayFor(model => model.WvaDesc)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.BadBee.Wva.WvaNo)
+            @Html.DisplayNameFor(model => model.Wva)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.BadBee.Wva.WvaNo)
+            @Html.DisplayFor(model => model.Wva)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.BadBee.BadBeeNo)
+            @Html.DisplayNameFor(model => model.BadBeeNumber)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.BadBee.BadBeeNo)
+            @Html.DisplayFor(model => model.BadBeeNumber)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.BadBee.Dimension.Height.Height1)
+            @Html.DisplayNameFor(model => model.Height)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.BadBee.Dimension.Height.Height1)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BadBee.Dimension.Width.Width1)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BadBee.Dimension.Width.Width1)
+            @Html.DisplayFor(model => model.Height)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.BadBee.Dimension.Thickness.Thickness1)
+            @Html.DisplayNameFor(model => model.Width)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.BadBee.Dimension.Thickness.Thickness1)
+            @Html.DisplayFor(model => model.Width)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Thickness)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Thickness)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.BadBee.Systems.Abbreviation)
+            @Html.DisplayNameFor(model => model.BrakeSystem)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.BadBee.Systems.Abbreviation)
+            @Html.DisplayFor(model => model.BrakeSystem)
         </dd>
 
     </dl>

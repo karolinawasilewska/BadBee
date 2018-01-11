@@ -235,6 +235,35 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\arrowLeftButton.png" />
     <Content Include="Images\arrowRightButton.png" />
+    <Content Include="Images\Pictures\14045517.jpg" />
+    <Content Include="Images\Pictures\14865818.jpg" />
+    <Content Include="Images\Pictures\15115918.jpg" />
+    <Content Include="Images\Pictures\15696119.jpg" />
+    <Content Include="Images\Pictures\15866219.jpg" />
+    <Content Include="Images\Pictures\16106319.jpg" />
+    <Content Include="Images\Pictures\16526520.jpg" />
+    <Content Include="Images\Pictures\16766620.jpg" />
+    <Content Include="Images\Pictures\16936620.jpg" />
+    <Content Include="Images\Pictures\17116720.jpg" />
+    <Content Include="Images\Pictures\17186720.jpg" />
+    <Content Include="Images\Pictures\17767021.jpg" />
+    <Content Include="Images\Pictures\18097121.jpg" />
+    <Content Include="Images\Pictures\18177122.jpg" />
+    <Content Include="Images\Pictures\19007523.jpg" />
+    <Content Include="Images\Pictures\19827824.jpg" />
+    <Content Include="Images\Pictures\20658125.jpg" />
+    <Content Include="Images\Pictures\21478426.jpg" />
+    <Content Include="Images\Pictures\22308827.jpg" />
+    <Content Include="Images\Pictures\22718927.jpg" />
+    <Content Include="Images\Pictures\23299128.jpg" />
+    <Content Include="Images\Pictures\23959429.jpg" />
+    <Content Include="Images\Pictures\24129529.jpg" />
+    <Content Include="Images\Pictures\24209529.jpg" />
+    <Content Include="Images\Pictures\24619729.jpg" />
+    <Content Include="Images\Pictures\24789730.jpg" />
+    <Content Include="Images\Pictures\24949830.jpg" />
+    <Content Include="Images\Pictures\26431032.jpg" />
+    <Content Include="Images\Pictures\28081134.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -335,8 +364,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images\Pictures\" />
-    <Folder Include="Views\PDFCatalog\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

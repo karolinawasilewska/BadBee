@@ -106,6 +106,10 @@ namespace BadBeeCatalog.Controllers
                         else
                         {
                             pictures = FindPicture(model, path);
+                            if (pictures.Count()==0)
+                            {
+                                pictures.Add("noimg.jpg");
+                            }
                         }
                         model.Pictures = pictures.ToArray();
                         model.Picture = model.Pictures.First();

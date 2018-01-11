@@ -10,16 +10,24 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.FR)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.BadBeeNo)
         </th>
+       
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.FR)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.BadBeeNo)
         </td>
+        
         <td id="products_list_delete">
             @*@Html.ActionLink("Edit", "Edit", new { id=item.BadBeeNumberId }) |*@
             @Html.ActionLink("Delete", "Delete", new { id=item.BadBeeId })
