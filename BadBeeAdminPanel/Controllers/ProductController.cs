@@ -114,26 +114,22 @@ namespace BadBeeAdminPanel.Controllers
 
                 SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
                 conn.Open();
-                string query = "SELECT * FROM [ItemsDb]";
-                SqlCommand cmd = new SqlCommand(query, conn);
-
-
-                dt.Load(cmd.ExecuteReader());
-
-
-
-                db.Database.ExecuteSqlCommand("TRUNCATE TABLE ItemsDb");
-                //throw new NotImplementedException();
+                var items = db.Item.Include("Model").Include("Model.Serie").Include("Model.Serie.Brand").Include("Model.Year").Include("Model.Year.DateFromFK")
+                     .Include("Model.Year.DateToFK").Include("BadBee").Include("BadBee.Wva").Include("BadBee.Systems").Include("BadBee.Dimension")
+                     .Include("BadBee.Dimension.Width").Include("BadBee.Dimension.Height").Include("BadBee.Dimension.Thickness").AsQueryable();
+              
+                
+                db.Database.ExecuteSqlCommand("TRUNCATE TABLE Item");
 
                 DataTable dataTable = ExcelProvider.ReadAsDataTable(path);
 
-                SqlBulkCopy bulkCopy = new SqlBulkCopy(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
 
-                bulkCopy.DestinationTableName = "ItemsDb";
-
-                bulkCopy.WriteToServer(dataTable);
-
-                AddNewIds();
+                foreach (DataRow item in dataTable.Rows)
+                {
+                    ProductModels iitem =  ConvertRowToProductModel(item);
+                    AddNewIds(iitem);
+                }
+                
 
                 GlobalVars.AdvSession = true;
                 if (GlobalVars.SearchCaches != null && GlobalVars.SearchCaches.Count >= 10)
@@ -160,7 +156,7 @@ namespace BadBeeAdminPanel.Controllers
 
                 SqlBulkCopy bulkCopy = new SqlBulkCopy(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
 
-                bulkCopy.DestinationTableName = "ItemsDb";
+                bulkCopy.DestinationTableName = "Item";
 
                 bulkCopy.WriteToServer(dt);
 
@@ -169,11 +165,29 @@ namespace BadBeeAdminPanel.Controllers
                 //throw e;
             }
         }
-      
+        public ProductModels ConvertRowToProductModel(DataRow dr)
+        {
+            ProductModels pm = new ProductModels();
+            pm.BadBeeNumber = dr[0].ToString();
+            pm.Fr = dr[1].ToString();
+            pm.Brand = dr[2].ToString();
+            pm.Height = decimal.Parse(dr[4].ToString());
+            pm.ModelName = dr[5].ToString();
+            pm.Serie = dr[6].ToString();
+            pm.BrakeSystem = dr[7].ToString();
+            pm.Thickness = decimal.Parse(dr[8].ToString());
+            pm.Width = decimal.Parse(dr[9].ToString());
+            pm.Wva = dr[10].ToString();
+            pm.WvaDesc = dr[11].ToString();
+            
+            return pm;
+        }
 
         // GET: Product
         public ActionResult Index(int? page)
         {
+            BadBeeFilter BadBeeFilter = GlobalVars.BadBeeFilter;
+            GlobalVars.BadBeeFilter = BadBeeFilter;
             return View();
         }
 
@@ -205,6 +219,27 @@ namespace BadBeeAdminPanel.Controllers
                 }
 
                 GlobalVars.BadBeeFilter = filter;
+
+                if (GlobalVars.BadBeeFilter.BadBeeNumbersList == null)
+                    GlobalVars.BadBeeFilter.BadBeeNumbersList = new List<int>();
+                if (GlobalVars.BadBeeFilter.BrandsList == null)
+                    GlobalVars.BadBeeFilter.BrandsList = new List<int>();
+                if (GlobalVars.BadBeeFilter.DateYearsList == null)
+                    GlobalVars.BadBeeFilter.DateYearsList = new List<int>();
+                if (GlobalVars.BadBeeFilter.HeightsList == null)
+                    GlobalVars.BadBeeFilter.HeightsList = new List<int>();
+                if (GlobalVars.BadBeeFilter.ModelsList == null)
+                    GlobalVars.BadBeeFilter.ModelsList = new List<int>();
+                if (GlobalVars.BadBeeFilter.SeriesList == null)
+                    GlobalVars.BadBeeFilter.SeriesList = new List<int>();
+                if (GlobalVars.BadBeeFilter.SystemsList == null)
+                    GlobalVars.BadBeeFilter.SystemsList = new List<int>();
+                if (GlobalVars.BadBeeFilter.ThicknessesList == null)
+                    GlobalVars.BadBeeFilter.ThicknessesList = new List<int>();
+                if (GlobalVars.BadBeeFilter.WidthsList == null)
+                    GlobalVars.BadBeeFilter.WidthsList = new List<int>();
+                if (GlobalVars.BadBeeFilter.WvasList == null)
+                    GlobalVars.BadBeeFilter.WvasList = new List<int>();
 
                 var preRenderObject = new CatalogContent()
                 {
@@ -672,7 +707,7 @@ namespace BadBeeAdminPanel.Controllers
 
 
 
-                    BadBee.Core.DAL.BadBee bb = db.BadBee.Where(q => q.BadBeeNo == model.BadBeeNumber).Where(q => q.FR == model.Fr).SingleOrDefault();
+                    BadBee.Core.DAL.BadBee bb = db.BadBee.Where(q => q.BadBeeNo == model.BadBeeNumber).Where(q => q.FR == model.Fr).Where(q => q.DimensionId == dim.DimensionId).Where(q => q.SystemId == sys.SystemId).Where(q => q.WvaId == wva.WvaId).SingleOrDefault();
                     if (bb == null)
                     {
                         bb = new BadBee.Core.DAL.BadBee();
@@ -691,12 +726,33 @@ namespace BadBeeAdminPanel.Controllers
                             dbCtx.SaveChanges();
                         }
                     }
+                    int originalBadBeeId = original.BadBeeId;
 
                     modified.BadBeeId = bb.BadBeeId;
+                    if (original.ModelId!=modified.ModelId|| originalBadBeeId!=modified.BadBeeId)
+                    {
+                        using (var dbCtx = new BadBeeEntities())
+                        {
+                            originalBadBeeId = 53;
+                            Item orig = db.Item.Where(q => q.BadBeeId == originalBadBeeId).SingleOrDefault();
 
+                            int aa = orig.BadBeeId;
+                        
+                            db.Item.Remove(orig);
+                            db.Item.Add(modified);
+                            db.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+
+                    }
                     
-                    db.Entry(modified).State = EntityState.Modified;
-                    db.SaveChanges();
+
+                   
+
+            //        db.Entry(modified).State = EntityState.Modified;
+            //        db.SaveChanges();
                         
 
                // }
@@ -1259,382 +1315,321 @@ namespace BadBeeAdminPanel.Controllers
             }
         }
 
-        public ActionResult AddNewIds()
+        public ActionResult AddNewIds(ProductModels model)
         {
-            //try
-            //{
-            //List<ItemsDb> newItems = db.ItemsDb.Where(q => 
-            //    (q.BrandId == null && q.DrumDiameterId == null && q.HeightId == null && q.BadBeeNumberId == null && q.ModelId == null && 
-            //    q.PictureId == null && q.RivetTypeId == null && q.SerieId == null && q.SystemId == null && q.ThicknessId == null && 
-            //    q.WidthId == null && q.WvaDetailsId == null && q.WvaId == null)).ToList();
+            Item newProd = new Item();
 
-            //foreach (var item in newItems)
-            //{
-            //    //BrandId
-            //    if (db.Brands.Any(row => row.Name == item.Brand))
-            //    {
-            //        Brands brand = db.Brands.Where(q => q.Name == item.Brand).SingleOrDefault();
-            //        item.BrandId = brand.Id;
-            //    }
-            //    else
-            //    {
-            //        var newprod = new Brands();
-            //        var nb = db.Brands.OrderByDescending(q => q.Id).Select(q => q).FirstOrDefault();
-            //        int newid = nb.Id + 1;
-            //        newprod.Name = item.Brand;
-            //        newprod.Id = newid;
-            //        item.BrandId = newid;
-            //        using (var dbCtx = new BadBeeEntities())
-            //        {
-            //            dbCtx.Brands.Add(newprod);
-            //            dbCtx.SaveChanges();
-            //        }
-            //    }
+            var newProductId = db.Item.OrderByDescending(q => q.Id).Select(q => q).FirstOrDefault();
+            newProd.Id = newProductId.Id + 1;
 
-            //    //SerieId
-            //    if (db.Series.Any(row => row.Name == item.Serie && item.BrandId == row.BrandId))
-            //    {
-            //        Series serie = db.Series.Where(q => q.Name == item.Serie && item.BrandId == q.BrandId).SingleOrDefault();
-            //        item.SerieId = serie.Id;
-            //    }
-            //    else
-            //    {
-            //        var newprod = new Series();
-            //        var nb = db.Series.OrderByDescending(q => q.Id).Select(q => q).FirstOrDefault();
-            //        int newid = nb.Id + 1;
-            //        newprod.Name = item.Serie;
-            //        newprod.BrandId = item.BrandId;
-            //        newprod.Id = newid;
 
-            //        item.SerieId = newid;
-            //        using (var dbCtx = new BadBeeEntities())
-            //        {
-            //            dbCtx.Series.Add(newprod);
-            //            dbCtx.SaveChanges();
-            //        }
-            //    }
-            //    //ModelId
-            //    if (db.Models.Any(row => row.Name == item.Model && item.BrandId==row.BrandId && item.SerieId == row.SerieId))
-            //    {
-            //        Core.DAL.Models model = db.Models.Where(q => q.Name == item.Model && item.BrandId==q.BrandId && item.SerieId == q.SerieId).SingleOrDefault();
-            //        item.ModelId = model.Id;
-            //    }
-            //    else
-            //    {
-            //        var newprod = new Core.DAL.Models();
-            //        var nb = db.Models.OrderByDescending(q => q.Id).Select(q => q).FirstOrDefault();
-            //        int newid = nb.Id + 1;
-            //        newprod.Name = item.Model;
-            //        newprod.Id = newid;
-            //        newprod.BrandId = item.BrandId;
-            //        newprod.SerieId = item.SerieId;
+            //brand - wymagany
 
-            //        item.ModelId = newid;
-            //        using (var dbCtx = new BadBeeEntities())
-            //        {
-            //            dbCtx.Models.Add(newprod);
-            //            dbCtx.SaveChanges();
-            //        }
-            //    }
-            //    //WvaId
-            //    if (string.IsNullOrEmpty(item.Wva))
-            //    {
-            //        item.WvaId = 0;
-            //    }
-            //    else
-            //    {
-            //        if (db.Wva.Any(row => row.Name == item.Wva))
-            //        {
-            //            Wva wva = db.Wva.Where(q => q.Name == item.Wva).SingleOrDefault();
-            //            item.WvaId = wva.Id;
-            //        }
-            //        else
-            //        {
-            //            var newprod = new Wva();
-            //            var nb = db.Wva.OrderByDescending(q => q.Id).Select(q => q).FirstOrDefault();
-            //            int newid = nb.Id + 1;
-            //            newprod.Name = item.Wva;
-            //            newprod.Id = newid;
+            if (!string.IsNullOrEmpty(model.Brand))
+            {
+                if (db.Brand.Any(row => row.Name == model.Brand))
+                {
+                    // Brand br = db.Brand.Where(q => q.Name == newProd.Model.Serie.Brand.Name).SingleOrDefault();
+                    //jest w bazie 
+                    // newProd.Model.Serie.Brand.BrandId = br.BrandId;
+                }
+                else
+                {
+                    //nie ma w bazie
+                    var newBrand = new Brand();
+                    var nb = db.Brand.OrderByDescending(q => q.BrandId).Select(q => q).FirstOrDefault();
+                    int newid = nb.BrandId + 1;
+                    newBrand.Name = model.Brand;
+                    newBrand.BrandId = newid;
+                    //  newProd.Model.Serie.Brand.BrandId = newid;
+                    using (var dbCtx = new BadBeeEntities())
+                    {
+                        dbCtx.Brand.Add(newBrand);
+                        dbCtx.SaveChanges();
+                    }
+                }
+            }
 
-            //            item.WvaId = newid;
-            //            using (var dbCtx = new BadBeeEntities())
-            //            {
-            //                dbCtx.Wva.Add(newprod);
-            //                dbCtx.SaveChanges();
-            //            }
-            //        }
-            //    }
-            //    //WvaDetailsId
-            //    if (string.IsNullOrEmpty(item.WvaDetails))
-            //    {
-            //        item.WvaDetailsId = 0;
-            //    }
-            //    else
-            //    {
-            //        if (db.WvaDetails.Any(row => row.Name == item.WvaDetails))
-            //        {
-            //            WvaDetails wva = db.WvaDetails.Where(q => q.Name == item.WvaDetails).SingleOrDefault();
-            //            item.WvaDetailsId = wva.Id;
-            //        }
-            //        else
-            //        {
-            //            var newprod = new WvaDetails();
-            //            var nb = db.WvaDetails.OrderByDescending(q => q.Id).Select(q => q).FirstOrDefault();
-            //            int newid = nb.Id + 1;
-            //            newprod.Name = item.WvaDetails;
-            //            newprod.Id = newid;
+            //seria - niewymagana
+            //       newProd.Model.Serie.Name = model.Serie;
 
-            //            item.WvaDetailsId = newid;
-            //            using (var dbCtx = new BadBeeEntities())
-            //            {
-            //                dbCtx.WvaDetails.Add(newprod);
-            //                dbCtx.SaveChanges();
-            //            }
-            //        }
-            //    }
-            //    //BadBeeNumberId
-            //    if (string.IsNullOrEmpty(item.BadBeeNumber))
-            //    {
-            //        item.BadBeeNumberId = 0;
-            //    }
-            //    else
-            //    {
-            //        if (db.BadBeeNumbers.Any(row => row.BadBeeNumber == item.BadBeeNumber))
-            //        {
-            //            BadBeeNumbers BadBee = db.BadBeeNumbers.Where(q => q.BadBeeNumber == item.BadBeeNumber).SingleOrDefault();
-            //            item.BadBeeNumberId = BadBee.BadBeeNumberId;
-            //        }
-            //        else
-            //        {
-            //            var newprod = new BadBeeNumbers();
-            //            var nb = db.BadBeeNumbers.OrderByDescending(q => q.BadBeeNumberId).Select(q => q).FirstOrDefault();
-            //            int newid = nb.BadBeeNumberId + 1;
-            //            newprod.BadBeeNumber = item.BadBeeNumber;
-            //            newprod.BadBeeNumberId = newid;
+            if (model.Serie == null)
+            {
+                //      newProd.Model.Serie.Name = "";
+                Brand br = db.Brand.Where(q => q.Name == model.Brand).SingleOrDefault();
 
-            //            item.BadBeeNumberId = newid;
-            //            using (var dbCtx = new BadBeeEntities())
-            //            {
-            //                dbCtx.BadBeeNumbers.Add(newprod);
-            //                dbCtx.SaveChanges();
-            //            }
-            //        }
-            //    }
-            //    //ThicknessId
-            //    if (string.IsNullOrEmpty(item.Thickness))
-            //    {
-            //        item.ThicknessId = 0;
-            //    }
-            //    else
-            //    {
-            //        if (db.Thicknesses.Any(row => row.Name == item.Thickness))
-            //        {
-            //            Thicknesses thick = db.Thicknesses.Where(q => q.Name == item.Thickness).SingleOrDefault();
-            //            item.ThicknessId = thick.Id;
-            //        }
-            //        else
-            //        {
-            //            var newprod = new Thicknesses();
-            //            var nb = db.Thicknesses.OrderByDescending(q => q.Id).Select(q => q).FirstOrDefault();
-            //            int newid = nb.Id + 1;
-            //            newprod.Name = item.Thickness;
-            //            newprod.Id = newid;
+                if (db.Serie.Any(row => row.BrandId == br.BrandId && row.Name == ""))
+                {
+                    //seria pusta, brand pustą serią jest już w bazie
+                    //   Serie ser = db.Serie.Where(q => q.BrandId == newProd.Model.Serie.BrandId).SingleOrDefault();
+                    //   newProd.Model.Serie.SerieId = ser.SerieId;
+                }
+                else
+                {
+                    //seria pusta, brandu z pustą serią nie ma w bazie
+                    var newproduct = new Serie();
+                    var np = db.Serie.OrderByDescending(q => q.SerieId).Select(q => q).FirstOrDefault();
+                    int newid = np.SerieId + 1;
+                    newproduct.Name = "";
+                    newproduct.SerieId = newid;
+                    newproduct.BrandId = br.BrandId;
+                    //     newProd.Model.Serie.SerieId = newid;
+                    using (var dbCtx = new BadBeeEntities())
+                    {
+                        dbCtx.Serie.Add(newproduct);
+                        dbCtx.SaveChanges();
+                    }
+                }
+            }
+            else
+            {
+                Brand br = db.Brand.Where(q => q.Name == model.Brand).SingleOrDefault();
 
-            //            item.ThicknessId = newid;
-            //            using (var dbCtx = new BadBeeEntities())
-            //            {
-            //                dbCtx.Thicknesses.Add(newprod);
-            //                dbCtx.SaveChanges();
-            //            }
-            //        }
-            //    }
-            //    //WidthId
-            //    if (string.IsNullOrEmpty(item.Width))
-            //    {
-            //        item.WidthId = 0;
-            //    }
-            //    else
-            //    {
-            //        if (db.Widths.Any(row => row.Name == item.Width))
-            //        {
-            //            Widths width = db.Widths.Where(q => q.Name == item.Width).SingleOrDefault();
-            //            item.WidthId = width.Id;
-            //        }
-            //        else
-            //        {
-            //            var newprod = new Widths();
-            //            var nb = db.Widths.OrderByDescending(q => q.Id).Select(q => q).FirstOrDefault();
-            //            int newid = nb.Id + 1;
-            //            newprod.Name = item.Width;
-            //            newprod.Id = newid;
+                if (db.Serie.Any(row => row.Name == model.Serie))
+                {
+                    //jest w bazie 
+                    //  Serie ser = db.Serie.Where(q => q.Name == newProd.Model.Serie.Name).SingleOrDefault();
+                    //   newProd.Model.Serie.SerieId = ser.SerieId;
 
-            //            item.WidthId = newid;
-            //            using (var dbCtx = new BadBeeEntities())
-            //            {
-            //                dbCtx.Widths.Add(newprod);
-            //                dbCtx.SaveChanges();
-            //            }
-            //        }
-            //    }
-            //    //HeightId
-            //    if (string.IsNullOrEmpty(item.Height))
-            //    {
-            //        item.HeightId = 0;
-            //    }
-            //    else
-            //    {
-            //        if (db.Heights.Any(row => row.Name == item.Height))
-            //        {
-            //            Heights hei = db.Heights.Where(q => q.Name == item.Height).SingleOrDefault();
-            //            item.HeightId = hei.Id;
-            //        }
-            //        else
-            //        {
-            //            var newprod = new Heights();
-            //            var nb = db.Heights.OrderByDescending(q => q.Id).Select(q => q).FirstOrDefault();
-            //            int newid = nb.Id + 1;
-            //            newprod.Name = item.Height;
-            //            newprod.Id = newid;
+                }
+                else
+                {
+                    //nie ma w bazie
+                    var newproduct = new Serie();
+                    var np = db.Serie.OrderByDescending(q => q.SerieId).Select(q => q).FirstOrDefault();
+                    int newid = np.SerieId + 1;
+                    newproduct.Name = model.Serie;
+                    newproduct.SerieId = newid;
+                    newproduct.BrandId = br.BrandId;
+                    //       newProd.Model.Serie.SerieId = newid;
+                    using (var dbCtx = new BadBeeEntities())
+                    {
+                        dbCtx.Serie.Add(newproduct);
+                        dbCtx.SaveChanges();
+                    }
+                }
+            }
 
-            //            item.HeightId = newid;
-            //            using (var dbCtx = new BadBeeEntities())
-            //            {
-            //                dbCtx.Heights.Add(newprod);
-            //                dbCtx.SaveChanges();
-            //            }
-            //        }
-            //    }
-            //    //RivetId
-            //    if (string.IsNullOrEmpty(item.RivetsType))
-            //    {
-            //        item.RivetTypeId = 0;
-            //    }
-            //    else
-            //    {
-            //        if (db.RivetTypes.Any(row => row.Name == item.RivetsType))
-            //        {
-            //            RivetTypes rivet = db.RivetTypes.Where(q => q.Name == item.RivetsType).SingleOrDefault();
-            //            item.RivetTypeId = rivet.Id;
-            //        }
-            //        else
-            //        {
-            //            var newprod = new RivetTypes();
-            //            var nb = db.RivetTypes.OrderByDescending(q => q.Id).Select(q => q).FirstOrDefault();
-            //            int newid = nb.Id + 1;
-            //            newprod.Name = item.RivetsType;
-            //            newprod.Id = newid;
+            //model - wymagany
+            //     newProd.Model.Name = model.ModelName;
 
-            //            item.RivetTypeId = newid;
-            //            using (var dbCtx = new BadBeeEntities())
-            //            {
-            //                dbCtx.RivetTypes.Add(newprod);
-            //                dbCtx.SaveChanges();
-            //            }
-            //        }
-            //    }
-            //    //SystemId
-            //    if (string.IsNullOrEmpty(item.BrakeSystem))
-            //    {
-            //        item.SystemId = 0;
-            //    }
-            //    else
-            //    {
-            //        if (db.Systems.Any(row => row.Name == item.BrakeSystem))
-            //        {
-            //            Systems system = db.Systems.Where(q => q.Name == item.BrakeSystem).SingleOrDefault();
-            //            item.SystemId = system.Id;
-            //        }
-            //        else
-            //        {
-            //            var newprod = new Systems();
-            //            var nb = db.Systems.OrderByDescending(q => q.Id).Select(q => q).FirstOrDefault();
-            //            int newid = nb.Id + 1;
-            //            newprod.Name = item.BrakeSystem;
-            //            newprod.Id = newid;
+            if (db.Model.Any(row => row.Name == model.ModelName))
+            {
+                Model mod = db.Model.Where(q => q.Name == model.ModelName).SingleOrDefault();
+                //jest w bazie 
+                newProd.ModelId = mod.ModelId;
+            }
+            else
+            {
+                Brand br = db.Brand.Where(q => q.Name == model.Brand).SingleOrDefault();
+                Serie serie = db.Serie.Where(q => q.Name == (model.Serie == null ? string.Empty : model.Serie)).Where(q => q.BrandId == br.BrandId).SingleOrDefault();
 
-            //            item.SystemId = newid;
-            //            using (var dbCtx = new BadBeeEntities())
-            //            {
-            //                dbCtx.Systems.Add(newprod);
-            //                dbCtx.SaveChanges();
-            //            }
-            //        }
-            //    }
-            //    //DrumDiameterId
-            //    if (string.IsNullOrEmpty(item.DrumDiameter))
-            //    {
-            //        item.DrumDiameterId = 0;
-            //    }
-            //    else
-            //    {
-            //        if (db.DrumDiameters.Any(row => row.Name == item.DrumDiameter))
-            //        {
-            //            DrumDiameters drum = db.DrumDiameters.Where(q => q.Name == item.DrumDiameter).SingleOrDefault();
-            //            item.DrumDiameterId = drum.Id;
-            //        }
-            //        else
-            //        {
-            //            var newprod = new DrumDiameters();
-            //            var nb = db.DrumDiameters.OrderByDescending(q => q.Id).Select(q => q).FirstOrDefault();
-            //            int newid = nb.Id + 1;
-            //            newprod.Name = item.DrumDiameter;
-            //            newprod.Id = newid;
+                //nie ma w bazie
+                var newproduct = new Model();
+                var np = db.Model.OrderByDescending(q => q.ModelId).Select(q => q).FirstOrDefault();
+                int newid = np.ModelId + 1;
+                newproduct.Name = model.ModelName;
+                newproduct.ModelId = newid;
+                newproduct.SerieId = serie.SerieId;
 
-            //            item.DrumDiameterId = newid;
-            //            using (var dbCtx = new BadBeeEntities())
-            //            {
-            //                dbCtx.DrumDiameters.Add(newprod);
-            //                dbCtx.SaveChanges();
-            //            }
-            //        }
-            //    }
-            //    //PicturesId
-            //    if (string.IsNullOrEmpty(item.BadBeeNumber))
-            //    {
-            //        item.PictureId = 0;
-            //    }
-            //    else
-            //    {
-            //        if (db.Pictures.Any(row => row.BadBeeNo == item.BadBeeNumber))
-            //        {
-            //            Pictures pict = db.Pictures.Where(q => q.BadBeeNo == item.BadBeeNumber).SingleOrDefault();
-            //            item.PictureId = pict.Id;
-            //        }
-            //        else
-            //        {
-            //            var newprod = new Pictures();
-            //            var nb = db.Pictures.OrderByDescending(q => q.Id).Select(q => q).FirstOrDefault();
-            //            int newid = nb.Id + 1;
-            //            newprod.BadBeeNo = item.BadBeeNumber;
-            //            newprod.Picture1 = "";
-            //            newprod.Picture2 = "";
-            //            newprod.Schema1 = "";
-            //            newprod.Schema2 = "";
-            //            newprod.Id = newid;
+                if (model.DateFrom == 0 && model.DateTo == 0)
+                {
+                    newproduct.YearId = 0;
+                }
+                else
+                {
+                    Year year = db.Year.Where(q => q.DateFromFK.Date1 == model.DateFrom.ToString()).Where(q => q.DateToFK.Date1 == model.DateTo.ToString()).SingleOrDefault();
+                    if (year != null)
+                    {
+                        newproduct.YearId = year.YearId;
+                    }
+                    else //dodaje nową datę
+                    {
+                        var newYear = new Year();
+                        Date yf = db.Date.Where(q => q.Date1 == model.DateFrom.ToString()).SingleOrDefault();
+                        Date yt = db.Date.Where(q => q.Date1 == model.DateTo.ToString()).SingleOrDefault();
 
-            //            item.PictureId = newid;
-            //            using (var dbCtx = new BadBeeEntities())
-            //            {
-            //                dbCtx.Pictures.Add(newprod);
-            //                dbCtx.SaveChanges();
-            //            }
-            //        }
-            //    }
+                        if (yf != null)
+                        {
+                            newYear.DateFromId = yf.DateId;
+                        }
+                        else
+                        {
+                            var date = new Date();
+                            var nd = db.Date.OrderByDescending(q => q.DateId).Select(q => q).FirstOrDefault();
+                            int newidDate = nd.DateId + 1;
+                            date.DateId = newidDate;
+                            date.Date1 = model.DateFrom.ToString();
+                        }
+                        if (yt != null)
+                        {
+                            newYear.DateToId = yt.DateId;
+                        }
+                        else
+                        {
+                            var date = new Date();
+                            var nd = db.Date.OrderByDescending(q => q.DateId).Select(q => q).FirstOrDefault();
+                            int newidDate = nd.DateId + 1;
+                            date.DateId = newidDate;
+                            date.Date1 = model.DateTo.ToString();
+                        }
 
-            //    db.Entry(item).State = EntityState.Modified;
-            //   db.SaveChanges();
-            //}
-            
+                    }
+
+
+                }
+
+                newProd.ModelId = newid;
+
+                using (var dbCtx = new BadBeeEntities())
+                {
+                    dbCtx.Model.Add(newproduct);
+                    dbCtx.SaveChanges();
+                }
+            }
+            //height
+            Height he = db.Height.Where(q => q.Height1 == model.Height).SingleOrDefault();
+            if (he == null)
+            {
+                he = new Height();
+                var nh = db.Height.OrderByDescending(q => q.HeightId).Select(q => q).FirstOrDefault();
+                int newidHeight = nh.HeightId + 1;
+                he.Height1 = model.Height;
+                he.HeightId = newidHeight;
+                using (var dbCtx = new BadBeeEntities())
+                {
+                    dbCtx.Height.Add(he);
+                    dbCtx.SaveChanges();
+                }
+            }
+
+            //width
+            Width wi = db.Width.Where(q => q.Width1 == model.Width).SingleOrDefault();
+            if (he == null)
+            {
+                wi = new Width();
+                var nw = db.Width.OrderByDescending(q => q.WidthId).Select(q => q).FirstOrDefault();
+                int newidWidth = nw.WidthId + 1;
+                wi.Width1 = model.Width;
+                wi.WidthId = newidWidth;
+                using (var dbCtx = new BadBeeEntities())
+                {
+                    dbCtx.Width.Add(wi);
+                    dbCtx.SaveChanges();
+                }
+            }
+
+            //thickness
+            Thickness th = db.Thickness.Where(q => q.Thickness1 == model.Thickness).SingleOrDefault();
+            if (th == null)
+            {
+                th = new Thickness();
+                var nw = db.Thickness.OrderByDescending(q => q.ThicknessId).Select(q => q).FirstOrDefault();
+                int newidThickness = nw.ThicknessId + 1;
+                th.Thickness1 = model.Thickness;
+                th.ThicknessId = newidThickness;
+                using (var dbCtx = new BadBeeEntities())
+                {
+                    dbCtx.Thickness.Add(th);
+                    dbCtx.SaveChanges();
+                }
+            }
+
+            //dimension
+
+            Dimension dim = db.Dimension.Where(q => q.HeightId == he.HeightId).Where(q => q.ThicknessId == th.ThicknessId).Where(q => q.WidthId == wi.WidthId).SingleOrDefault();
+            if (dim == null)
+            {
+                dim = new Dimension();
+                var nd = db.Dimension.OrderByDescending(q => q.DimensionId).Select(q => q).FirstOrDefault();
+                int newidDim = nd.DimensionId + 1;
+                dim.DimensionId = newidDim;
+                dim.WidthId = wi.WidthId;
+                dim.HeightId = he.HeightId;
+                dim.ThicknessId = th.ThicknessId;
+
+                using (var dbCtx = new BadBeeEntities())
+                {
+                    dbCtx.Dimension.Add(dim);
+                    dbCtx.SaveChanges();
+                }
+            }
+
+            //systems
+            Systems sys = db.Systems.Where(q => q.Abbreviation == model.BrakeSystem).SingleOrDefault();
+            if (sys == null)
+            {
+                sys = new Systems();
+                var ns = db.Systems.OrderByDescending(q => q.SystemId).Select(q => q).FirstOrDefault();
+                int newidSys = ns.SystemId + 1;
+                sys.SystemId = newidSys;
+                sys.Abbreviation = model.BrakeSystem;
+
+                using (var dbCtx = new BadBeeEntities())
+                {
+                    dbCtx.Systems.Add(sys);
+                    dbCtx.SaveChanges();
+                }
+            }
+
+            Wva wva = db.Wva.Where(q => q.WvaNo == model.Wva).Where(q => q.Description == model.WvaDesc).SingleOrDefault();
+            if (wva == null)
+            {
+                Wva wvaupdate = db.Wva.Where(q => q.WvaNo == model.Wva).SingleOrDefault();
+                if (wvaupdate != null)
+                {
+                    wvaupdate.Description = model.WvaDesc;
+                }
+                else
+                {
+                    wva = new Wva();
+                    var nw = db.Wva.OrderByDescending(q => q.WvaId).Select(q => q).FirstOrDefault();
+                    int newidwva = nw.WvaId + 1;
+                    wva.WvaId = newidwva;
+                    wva.WvaNo = model.Wva;
+                    wva.Description = model.WvaDesc;
+                }
+                using (var dbCtx = new BadBeeEntities())
+                {
+                    dbCtx.Wva.Add(wva);
+                    dbCtx.SaveChanges();
+                }
+            }
+
+
+
+            BadBee.Core.DAL.BadBee bb = db.BadBee.Where(q => q.BadBeeNo == model.BadBeeNumber).Where(q => q.FR == model.Fr).SingleOrDefault();
+            if (bb == null)
+            {
+                bb = new BadBee.Core.DAL.BadBee();
+                var np = db.BadBee.OrderByDescending(q => q.BadBeeId).Select(q => q).FirstOrDefault();
+                int newid = np.BadBeeId + 1;
+                bb.BadBeeId = newid;
+                bb.BadBeeNo = model.BadBeeNumber;
+                bb.DimensionId = dim.DimensionId;
+                bb.FR = model.Fr;
+                bb.SystemId = sys.SystemId;
+                bb.WvaId = wva.WvaId;
+
+                using (var dbCtx = new BadBeeEntities())
+                {
+                    dbCtx.BadBee.Add(bb);
+                    dbCtx.SaveChanges();
+                }
+            }
+
+            newProd.BadBeeId = bb.BadBeeId;
+
+            using (var dbCtx = new BadBeeEntities())
+            {
+                db.Item.Add(newProd);
+                db.SaveChanges();
+            }
+
 
             return RedirectToAction("Index");
-
-
-            //}
-            //catch (Exception e)
-            //{
-            //    log.Error(e);
-            //    throw;
-            //}
+            
+          
         }
         public ActionResult GeneratePDF()
         {

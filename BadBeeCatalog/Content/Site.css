@@ -1585,7 +1585,7 @@ font-size: 24px;
 /*.tableDetails > .catalogTableDetails{
     min-height: 5px;
 }*/
-.miniatures>.no_fancybox img{
+.miniatures>.fancybox img{
      width: 90px;
   height: 75px;
 

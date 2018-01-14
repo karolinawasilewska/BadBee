@@ -649,5 +649,15 @@ namespace BadBeeCatalog.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public ActionResult DownloadCatalog()
+        {
+            Response.ContentType = "application/pdf";
+            Response.AppendHeader("Content-Disposition", "attachment; filename=BadBeeCatalog.pdf");
+            Response.TransmitFile(Server.MapPath("~/Image/BadBeeCatalog.pdf"));
+            Response.End();
+
+            return RedirectToAction("Index");
+        }
     }
 }

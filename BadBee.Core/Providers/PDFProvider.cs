@@ -266,53 +266,7 @@ namespace BadBee.Core.Providers
                 }
 
                 var testData = data.ToList();
-
-                
-
-                //if (pageNo == 34)
-                //{
-                //    testData = data.Skip((pageNo - 1) * 30).Take(27).ToList();
-                //}
-                //else if (pageNo == 35)
-                //{
-                //    testData = data.Skip(((pageNo - 1) * 30) - 3).Take(33).ToList();
-                //}
-                //else if (pageNo == 83)
-                //{
-                //    testData = data.Skip(((pageNo - 1) * 30)).Take(24).ToList();
-                //}
-                //else if (pageNo == 84)
-                //{
-                //    testData = data.Skip(((pageNo - 1) * 30 - 6)).Take(36).ToList();
-                //}
-                //else if (pageNo == 104)
-                //{
-                //    testData = data.Skip(((pageNo - 1) * 30)).Take(20).ToList();
-                //}
-                //else if (pageNo == 105)
-                //{
-                //    testData = data.Skip(((pageNo - 1) * 30 - 10)).Take(30).ToList();
-                //}
-                //else if (pageNo == 107)
-                //{
-                //    testData = data.Skip(((pageNo - 1) * 30)).Take(20).ToList();
-                //}
-                //else if (pageNo == 108)
-                //{
-                //    testData = data.Skip(((pageNo - 1) * 30 - 10)).Take(35).ToList();
-                //}
-                //else if (pageNo == 109)
-                //{
-                //    testData = data.Skip(((pageNo - 1) * 30 - 5)).Take(35).ToList();
-                //}
-                //else if (pageNo == 118)
-                //{
-                //    testData = data.Skip(((pageNo - 1) * 30)).Take(31).ToList();
-                //}
-                //else
-                //{
                 testData = data.Skip((pageNo - 1) * 30).Take(30).ToList();
-                //}
                 var brands = testData.GroupBy(q => q.Brand).Select(q => q.First()).ToList();
 
 
@@ -344,8 +298,6 @@ namespace BadBee.Core.Providers
                             for (int i = 1; i < models.Count + 1; i++)
                             {
                                 model = models.ElementAt(i - 1).Model;
-                                //text1 = models.ElementAt(i - 1)[3];
-                                //text2 = models.ElementAt(i - 1)[4];
                                 date = models.ElementAt(i - 1).Years;
                                 var listOfItemsInModel = testData.Where(q => q.Years == date).Where(q => q.Model == model).Where(q => q.Serie == serie).Where(q => q.Brand == brand).ToList();
                                 int ItemsInModelCount = listOfItemsInModel.Count();

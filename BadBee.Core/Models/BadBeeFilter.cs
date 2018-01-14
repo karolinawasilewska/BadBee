@@ -113,7 +113,7 @@ namespace BadBee.Core.Models
                 DateYearsList = FillList(DateYearsList, value);
             }
         }
-        public List<int> DateYearsList { get; private set; }
+        public List<int> DateYearsList { get; set; }
 
         public string BadBeeNumbers
         {
@@ -152,7 +152,7 @@ namespace BadBee.Core.Models
                 WidthsList = FillList(WidthsList, value);
             }
         }
-        public List<int> WidthsList { get; private set; }
+        public List<int> WidthsList { get; set; }
 
         public string Heights
         {
@@ -165,7 +165,7 @@ namespace BadBee.Core.Models
                 HeightsList = FillList(HeightsList, value);
             }
         }
-        public List<int> HeightsList { get; private set; }
+        public List<int> HeightsList { get; set; }
 
         public string Thicknesses
         {
@@ -178,7 +178,7 @@ namespace BadBee.Core.Models
                 ThicknessesList = FillList(ThicknessesList, value);
             }
         }
-        public List<int> ThicknessesList { get; private set; }
+        public List<int> ThicknessesList { get; set; }
 
      
 
@@ -193,7 +193,7 @@ namespace BadBee.Core.Models
                 SystemsList = FillList(SystemsList, value);
             }
         }
-        public List<int> SystemsList { get; private set; }
+        public List<int> SystemsList { get; set; }
 
         public string PhraseFilter { get; set; }
 

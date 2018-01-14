@@ -127,24 +127,38 @@ namespace BadBeeAdminPanel.Controllers
                             if (type == "schema1" && obj.Picture1 != pic)
                             {
                                 obj.Picture1 = pic;
+                                using (var dbCtx = new BadBeeEntities())
+                                {
+                                    db.Picture.Attach(obj);
+                                    db.Entry(obj).Property(x => x.Picture1).IsModified = true;
+                                    dbCtx.SaveChanges();
+                                }
                             }
                             if (type == "schema2" && obj.Picture2 != pic)
                             {
                                 obj.Picture2 = pic;
+                                using (var dbCtx = new BadBeeEntities())
+                                {
+                                    db.Picture.Attach(obj);
+                                    db.Entry(obj).Property(x => x.Picture2).IsModified = true;
+                                    dbCtx.SaveChanges();
+                                }
                             }
                             if (type == "picture2" && obj.Picture3 != pic)
                             {
                                 obj.Picture3 = pic;
+                                using (var dbCtx = new BadBeeEntities())
+                                {
+                                    db.Picture.Attach(obj);
+                                    db.Entry(obj).Property(x => x.Picture3).IsModified = true;
+                                    dbCtx.SaveChanges();
+                                }
                             }
 
                             Picture newPict = new Picture();
                             newPict = db.Picture.Where(q => q.PictureId == obj.PictureId).FirstOrDefault() ;
 
-                            using (var dbCtx = new BadBeeEntities())
-                            {
-                                dbCtx.Entry(newPict.Picture1).State = EntityState.Modified;
-                                dbCtx.SaveChanges();
-                            }
+                           
                         }
                         else
                         {
